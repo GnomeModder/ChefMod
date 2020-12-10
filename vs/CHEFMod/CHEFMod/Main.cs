@@ -43,6 +43,7 @@ namespace EntityStates.Chef
             //if (Input.GetKeyDown(KeyCode.K))
             //{
             //    characterBody.master.inventory.GiveItem(ItemIndex.SiphonOnLowHealth);
+            //    characterBody.master.inventory.SetEquipmentIndex(EquipmentIndex.Blackhole);
             //}
 
             //this.oilTrail.damagePerSecond = base.characterBody.damage * 1.5f;

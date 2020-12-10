@@ -1,6 +1,7 @@
 ﻿using RoR2;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 namespace ChefMod
@@ -31,6 +32,11 @@ namespace ChefMod
         {
             startTime = Time.fixedTime;
             body = GetComponent<CharacterBody>();
+            if (!body)
+            {
+                Chat.AddMessage("ping gnome. no body");
+                Destroy(this.gameObject);
+            }
             //body.baseMaxHealth = -1f;
             //body.AddBuff(BuffIndex.Immune);
             //body.AddBuff(BuffIndex.HiddenInvincibility);
@@ -39,7 +45,7 @@ namespace ChefMod
 
             goku("Oyl");
 
-            ground = body.characterMotor.isGrounded;
+            //ground = body.characterMotor.isGrounded;
 
             //checkforhomies();
         }
@@ -53,6 +59,7 @@ namespace ChefMod
 
             if (!onFire && !ground && body.characterMotor.isGrounded)
             {
+                ground = true;
                 checkforhomies();
             }
 
@@ -73,6 +80,17 @@ namespace ChefMod
             prefab = Instantiate(Assets.chefAssetBundle.LoadAsset<GameObject>(asset));
             var direction = this.transform.root.GetComponentInChildren<CharacterDirection>();
 
+            if (!direction)
+            {
+                Chat.AddMessage("ping gnome. no direction");
+                Destroy(this.gameObject);
+            }
+            if (!direction.modelAnimator)
+            {
+                Chat.AddMessage("ping gnome. no animator");
+                Destroy(this.gameObject);
+            }
+
             if (!onFire)
             {
                 foreach (var thisItem in direction.modelAnimator.GetComponentsInChildren<SkinnedMeshRenderer>())
@@ -85,9 +103,9 @@ namespace ChefMod
                 }
 
             }
-            prefab.transform.position = direction.modelAnimator.transform.position;
-            prefab.transform.rotation = direction.modelAnimator.transform.rotation;
-            prefab.transform.SetParent(direction.modelAnimator.transform);
+            prefab.transform.position = this.transform.position - Vector3.up;
+            prefab.transform.rotation = this.transform.rotation;
+            prefab.transform.SetParent(this.transform);
         }
 
         private bool shouldDie()
@@ -111,7 +129,7 @@ namespace ChefMod
             Destroy(prefab);
             goku("Fyre");
 
-            //hitmyhomiesup();
+            hitmyhomiesup();
         }
 
         private void esplode()
@@ -200,30 +218,30 @@ namespace ChefMod
                 }
             }
         }
-        //private void hitmyhomiesup()
-        //{
-        //    RaycastHit[] array = Physics.SphereCastAll(body.corePosition, radius, Vector3.up, 5f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
-        //    for (int j = 0; j < array.Length; j++)
-        //    {
-        //        Collider collider = array[j].collider;
-        //        if (collider.gameObject)
-        //        {
-        //            RoR2.HurtBox component = collider.GetComponent<RoR2.HurtBox>();
-        //            if (component)
-        //            {
-        //                RoR2.HealthComponent healthComponent = component.healthComponent;
-        //                if (healthComponent)
-        //                {
-        //                    Fireee fire = healthComponent.body.GetComponent<Fireee>();
-        //                    if (fire)
-        //                    {
-        //                        fire.ignate();
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
+        private void hitmyhomiesup()
+        {
+            RaycastHit[] array = Physics.SphereCastAll(body.corePosition, radius, Vector3.up, 5f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
+            for (int j = 0; j < array.Length; j++)
+            {
+                Collider collider = array[j].collider;
+                if (collider.gameObject)
+                {
+                    RoR2.HurtBox component = collider.GetComponent<RoR2.HurtBox>();
+                    if (component)
+                    {
+                        RoR2.HealthComponent healthComponent = component.healthComponent;
+                        if (healthComponent)
+                        {
+                            Fireee fire = healthComponent.body.GetComponent<Fireee>();
+                            if (fire)
+                            {
+                                fire.ignate();
+                            }
+                        }
+                    }
+                }
+            }
+        }
         private void checkforhomies()
         {
             RaycastHit[] array = Physics.SphereCastAll(body.corePosition, radius, Vector3.up, 5f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
