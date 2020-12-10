@@ -40,10 +40,10 @@ namespace EntityStates.Chef
         {
             base.Update();
 
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                //characterBody.master.inventory.GiveItem(ItemIndex.FireRing);
-            }
+            //if (Input.GetKeyDown(KeyCode.K))
+            //{
+            //    characterBody.master.inventory.GiveItem(ItemIndex.SiphonOnLowHealth);
+            //}
 
             //this.oilTrail.damagePerSecond = base.characterBody.damage * 1.5f;
             //this.oilTrail.active = fieldComponent.active;
@@ -65,9 +65,9 @@ namespace EntityStates.Chef
             if (damage.dotType == DotController.DotIndex.Burn)
             {
                 Vector3 distance = characterBody.corePosition - damage.victimBody.corePosition;
-                if (distance.magnitude < 20f)
+                if (distance.magnitude < 40f)
                 {
-                    characterBody.healthComponent.HealFraction(0.001f, damage.damageInfo.procChainMask);
+                    characterBody.healthComponent.HealFraction(0.003f, damage.damageInfo.procChainMask);
                 }
             }
         }

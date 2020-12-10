@@ -11,6 +11,7 @@ namespace EntityStates.Chef
         public float duration = 0.1f;
         public override void OnEnter()
         {
+            skillLocator.primary.SetBaseSkill(chefPlugin.boostedPrimaryDef);
             if (skillLocator.secondary.baseSkill == chefPlugin.secondaryDef)
             {
                 skillLocator.secondary.SetBaseSkill(chefPlugin.boostedSecondaryDef);

@@ -31,9 +31,11 @@ namespace ChefMod
         {
             startTime = Time.fixedTime;
             body = GetComponent<CharacterBody>();
-            body.baseMaxHealth = -1f;
-            body.AddBuff(BuffIndex.HiddenInvincibility);
+            //body.baseMaxHealth = -1f;
+            //body.AddBuff(BuffIndex.Immune);
+            //body.AddBuff(BuffIndex.HiddenInvincibility);
             //body.AddBuff(BuffIndex.Cloak);
+            body.healthComponent.godMode = true;
 
             goku("Oyl");
 
@@ -109,7 +111,7 @@ namespace ChefMod
             Destroy(prefab);
             goku("Fyre");
 
-            hitmyhomiesup();
+            //hitmyhomiesup();
         }
 
         private void esplode()
@@ -173,7 +175,7 @@ namespace ChefMod
                                     {
                                         healthComponent.TakeDamage(new RoR2.DamageInfo
                                         {
-                                            position = array[j].point,
+                                            position = healthComponent.body.corePosition,
                                             attacker = this.owner,
                                             inflictor = base.gameObject,
                                             crit = false,
@@ -198,30 +200,30 @@ namespace ChefMod
                 }
             }
         }
-        private void hitmyhomiesup()
-        {
-            RaycastHit[] array = Physics.SphereCastAll(body.corePosition, radius, Vector3.up, 5f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
-            for (int j = 0; j < array.Length; j++)
-            {
-                Collider collider = array[j].collider;
-                if (collider.gameObject)
-                {
-                    RoR2.HurtBox component = collider.GetComponent<RoR2.HurtBox>();
-                    if (component)
-                    {
-                        RoR2.HealthComponent healthComponent = component.healthComponent;
-                        if (healthComponent)
-                        {
-                            Fireee fire = healthComponent.body.GetComponent<Fireee>();
-                            if (fire)
-                            {
-                                fire.ignate();
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        //private void hitmyhomiesup()
+        //{
+        //    RaycastHit[] array = Physics.SphereCastAll(body.corePosition, radius, Vector3.up, 5f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
+        //    for (int j = 0; j < array.Length; j++)
+        //    {
+        //        Collider collider = array[j].collider;
+        //        if (collider.gameObject)
+        //        {
+        //            RoR2.HurtBox component = collider.GetComponent<RoR2.HurtBox>();
+        //            if (component)
+        //            {
+        //                RoR2.HealthComponent healthComponent = component.healthComponent;
+        //                if (healthComponent)
+        //                {
+        //                    Fireee fire = healthComponent.body.GetComponent<Fireee>();
+        //                    if (fire)
+        //                    {
+        //                        fire.ignate();
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
         private void checkforhomies()
         {
             RaycastHit[] array = Physics.SphereCastAll(body.corePosition, radius, Vector3.up, 5f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);

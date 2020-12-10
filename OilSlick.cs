@@ -1,6 +1,7 @@
 ﻿using ChefMod;
 using EntityStates;
 using RoR2;
+using RoR2.Projectile;
 using UnityEngine;
 
 namespace EntityStates.Chef
@@ -29,6 +30,11 @@ namespace EntityStates.Chef
 			{
 				base.gameObject.layer = LayerIndex.fakeActor.intVal;
 				base.characterMotor.Motor.RebuildCollidableLayers();
+
+				var fire = chefPlugin.oilPrefab.GetComponent<Fireee>();
+				fire.owner = characterBody.gameObject;
+				fire.teamIndex = characterBody.teamComponent.teamIndex;
+				fire.damagePerFrame = characterBody.damage * 0.5f;
 
 				//trailComponent = base.characterBody.GetComponent<ChefMod.FieldComponent>();
 				//trailComponent.active = true;
@@ -87,12 +93,22 @@ namespace EntityStates.Chef
 
 					//GameObject obj = characterMaster.bodyPrefab;
 
-					GameObject obj = Object.Instantiate(ChefMod.chefPlugin.oilPrefab, characterBody.corePosition, Quaternion.identity);
+					//GameObject obj = Object.Instantiate(ChefMod.chefPlugin.oilPrefab, characterBody.corePosition, Quaternion.identity);
 
-					Fireee fire = obj.GetComponent<Fireee>();
-					fire.owner = characterBody.gameObject;
-					fire.teamIndex = characterBody.teamComponent.teamIndex;
-					fire.damagePerFrame = characterBody.damage * 0.5f;
+					//Fireee fire = obj.GetComponent<Fireee>();
+					//fire.owner = characterBody.gameObject;
+					//fire.teamIndex = characterBody.teamComponent.teamIndex;
+					//fire.damagePerFrame = characterBody.damage * 0.5f;
+
+					FireProjectileInfo info = new FireProjectileInfo()
+					{
+						projectilePrefab = ChefMod.chefPlugin.oilPrefab,
+						position = characterBody.corePosition,
+						rotation = Quaternion.identity,
+						owner = base.gameObject
+					};
+
+					ProjectileManager.instance.FireProjectile(info);
 				}
 				counter++;
 			}

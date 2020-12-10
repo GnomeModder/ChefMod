@@ -133,13 +133,16 @@ namespace ChefMod
 						return;
 				}
 
-				Ray aimRay = fieldComponent.aimRay;
-				Vector3 position = transform.position - fieldComponent.characterBody.corePosition;
+				if (followRet)
+				{
+					Ray aimRay = fieldComponent.aimRay;
+					Vector3 position = transform.position - fieldComponent.characterBody.corePosition;
 
-				Vector3 cross = Vector3.Cross(position, aimRay.direction);
-				Vector3 component2 = Vector3.Cross(position, cross);
-				component2 = component2.normalized * -1f * Vector3.Angle(position, aimRay.direction);
-				this.rigidbody.velocity += component2 / Mathf.Max(2f * (Time.fixedTime - startTime), 1);
+					Vector3 cross = Vector3.Cross(position, aimRay.direction);
+					Vector3 component2 = Vector3.Cross(position, cross);
+					component2 = component2.normalized * -1f * Vector3.Angle(position, aimRay.direction);
+					this.rigidbody.velocity += component2 / Mathf.Max(2f * (Time.fixedTime - startTime), 1);
+				}
 			}
 		}
 
@@ -214,6 +217,7 @@ namespace ChefMod
 			}
 		}
 
+		public bool followRet = true;
 		public FieldComponent fieldComponent;
 		private float startTime;
 		// Token: 0x04002055 RID: 8277

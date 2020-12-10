@@ -70,6 +70,7 @@ namespace EntityStates.Chef
 
         public override void OnExit()
         {
+            skillLocator.primary.SetBaseSkill(chefPlugin.primaryDef);
             skillLocator.secondary.SetBaseSkill(chefPlugin.altSecondaryDef);
             skillLocator.utility.SetBaseSkill(chefPlugin.utilityDef);
 

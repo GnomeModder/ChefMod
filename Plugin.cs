@@ -9,6 +9,7 @@ using RoR2.Skills;
 using RoR2.Projectile;
 using UnityEngine;
 using EntityStates.Chef;
+using UnityEngine.Networking;
 
 namespace ChefMod
 {
@@ -28,13 +29,13 @@ namespace ChefMod
     {
         public GameObject chefPrefab;
         public static GameObject cleaverPrefab;
-        public static GameObject bollPrefab;
         public static GameObject oilPrefab;
-        public static GameObject oilMaster;
         public static GameObject foirballPrefab;
         public static GameObject flamballPrefab;
         public static GameObject drippingPrefab;
 
+        public static SkillDef primaryDef;
+        public static SkillDef boostedPrimaryDef;
         public static SkillDef secondaryDef;
         public static SkillDef boostedSecondaryDef;
         public static SkillDef altSecondaryDef;
@@ -171,7 +172,7 @@ namespace ChefMod
 
         private void registerSkills()
         {
-            var primaryDef = ScriptableObject.CreateInstance<SkillDef>();
+            primaryDef = ScriptableObject.CreateInstance<SkillDef>();
             primaryDef.activationState = new SerializableEntityStateType(typeof(EntityStates.Chef.Cleaver));
             primaryDef.activationStateMachineName = "Weapon";
             primaryDef.baseMaxStock = 1;
@@ -196,6 +197,31 @@ namespace ChefMod
             LanguageAPI.Add("CHEF_PRIMARY", "Dice");
             LoadoutAPI.AddSkillDef(primaryDef);
 
+            boostedPrimaryDef = ScriptableObject.CreateInstance<SkillDef>();
+            boostedPrimaryDef.activationState = new SerializableEntityStateType(typeof(EntityStates.Chef.Mince));
+            boostedPrimaryDef.activationStateMachineName = "Weapon";
+            boostedPrimaryDef.baseMaxStock = 1;
+            boostedPrimaryDef.baseRechargeInterval = 0f;
+            boostedPrimaryDef.beginSkillCooldownOnSkillEnd = false;
+            boostedPrimaryDef.canceledFromSprinting = false;
+            boostedPrimaryDef.fullRestockOnAssign = false;
+            boostedPrimaryDef.interruptPriority = InterruptPriority.Any;
+            boostedPrimaryDef.isBullets = true;
+            boostedPrimaryDef.isCombatSkill = true;
+            boostedPrimaryDef.mustKeyPress = false;
+            boostedPrimaryDef.noSprint = false;
+            boostedPrimaryDef.rechargeStock = 1;
+            boostedPrimaryDef.requiredStock = 1;
+            boostedPrimaryDef.shootDelay = 0.5f;
+            boostedPrimaryDef.stockToConsume = 1;
+            //boostedPrimaryDef.icon = Assets.chefprimaryIconSprite;
+            boostedPrimaryDef.skillDescriptionToken = "Throw a cleaver at every nearby enemy";
+            boostedPrimaryDef.skillName = "BoostedPrimary";
+            boostedPrimaryDef.skillNameToken = "CHEF_BOOSTED_PRIMARY";
+
+            LanguageAPI.Add("CHEF_BOOSTED_PRIMARY", "Mince");
+            LoadoutAPI.AddSkillDef(boostedPrimaryDef);
+
             secondaryDef = ScriptableObject.CreateInstance<SkillDef>();
             secondaryDef.activationState = new SerializableEntityStateType(typeof(EntityStates.Chef.Sear));
             secondaryDef.activationStateMachineName = "Weapon";
@@ -205,7 +231,7 @@ namespace ChefMod
             secondaryDef.canceledFromSprinting = false;
             secondaryDef.fullRestockOnAssign = false;
             secondaryDef.interruptPriority = InterruptPriority.Skill;
-            secondaryDef.isBullets = true;
+            secondaryDef.isBullets = false;
             secondaryDef.isCombatSkill = true;
             secondaryDef.mustKeyPress = false;
             secondaryDef.noSprint = false;
@@ -230,7 +256,7 @@ namespace ChefMod
             boostedSecondaryDef.canceledFromSprinting = false;
             boostedSecondaryDef.fullRestockOnAssign = true;
             boostedSecondaryDef.interruptPriority = InterruptPriority.Skill;
-            boostedSecondaryDef.isBullets = true;
+            boostedSecondaryDef.isBullets = false;
             boostedSecondaryDef.isCombatSkill = true;
             boostedSecondaryDef.mustKeyPress = false;
             boostedSecondaryDef.noSprint = false;
@@ -255,7 +281,7 @@ namespace ChefMod
             altSecondaryDef.canceledFromSprinting = false;
             altSecondaryDef.fullRestockOnAssign = false;
             altSecondaryDef.interruptPriority = InterruptPriority.Skill;
-            altSecondaryDef.isBullets = true;
+            altSecondaryDef.isBullets = false;
             altSecondaryDef.isCombatSkill = true;
             altSecondaryDef.mustKeyPress = true;
             altSecondaryDef.noSprint = false;
@@ -280,7 +306,7 @@ namespace ChefMod
             boostedAltSecondaryDef.canceledFromSprinting = false;
             boostedAltSecondaryDef.fullRestockOnAssign = true;
             boostedAltSecondaryDef.interruptPriority = InterruptPriority.Skill;
-            boostedAltSecondaryDef.isBullets = true;
+            boostedAltSecondaryDef.isBullets = false;
             boostedAltSecondaryDef.isCombatSkill = true;
             boostedAltSecondaryDef.mustKeyPress = false;
             boostedAltSecondaryDef.noSprint = false;
@@ -313,7 +339,7 @@ namespace ChefMod
             utilityDef.requiredStock = 1;
             utilityDef.shootDelay = 0.5f;
             utilityDef.stockToConsume = 1;
-            //primaryDef.icon = Assets.chefprimaryIconSprite;
+            //boostedPrimaryDef.icon = Assets.chefprimaryIconSprite;
             utilityDef.skillDescriptionToken = "Dash forward leaving a trail of oil that slows enemies. Oil can be ignited";
             utilityDef.skillName = "Utility";
             utilityDef.skillNameToken = "CHEF_UTILITY";
@@ -338,7 +364,7 @@ namespace ChefMod
             boostedUtilityDef.requiredStock = 1;
             boostedUtilityDef.shootDelay = 0.5f;
             boostedUtilityDef.stockToConsume = 1;
-            //primaryDef.icon = Assets.chefprimaryIconSprite;
+            //boostedPrimaryDef.icon = Assets.chefprimaryIconSprite;
             boostedUtilityDef.skillDescriptionToken = "cover yourself in oil";
             boostedUtilityDef.skillName = "boostedUtilityDef";
             boostedUtilityDef.skillNameToken = "CHEF_BOOSTED_UTILITY";
@@ -363,7 +389,7 @@ namespace ChefMod
             specialDef.requiredStock = 1;
             specialDef.shootDelay = 0.5f;
             specialDef.stockToConsume = 1;
-            //primaryDef.icon = Assets.chefprimaryIconSprite;
+            //boostedPrimaryDef.icon = Assets.chefprimaryIconSprite;
             specialDef.skillDescriptionToken = "Boost your next skill";
             specialDef.skillName = "Special";
             specialDef.skillNameToken = "CHEF_SPECIAL";
@@ -388,7 +414,7 @@ namespace ChefMod
             altSpecialDef.requiredStock = 1;
             altSpecialDef.shootDelay = 0.5f;
             altSpecialDef.stockToConsume = 1;
-            //primaryDef.icon = Assets.chefprimaryIconSprite;
+            //boostedPrimaryDef.icon = Assets.chefprimaryIconSprite;
             altSpecialDef.skillDescriptionToken = "Remove secondary cooldown for yourself and nearby allies";
             altSpecialDef.skillName = "AltSpecial";
             altSpecialDef.skillNameToken = "CHEF_ALT_SPECIAL";
@@ -474,7 +500,7 @@ namespace ChefMod
 
             cleaverPrefab.layer = LayerIndex.noCollision.intVal;
 
-            GameObject stunGrenadeModel = Assets.chefAssetBundle.LoadAsset<GameObject>("Cleaver").InstantiateClone("CleaverGhost", true);
+            //GameObject stunGrenadeModel = Assets.chefAssetBundle.LoadAsset<GameObject>("Cleaver").InstantiateClone("CleaverGhost", true);
             //stunGrenadeModel.AddComponent<UnityEngine.Networking.NetworkIdentity>();
             //stunGrenadeModel.AddComponent<ProjectileGhostController>();
 
@@ -482,12 +508,15 @@ namespace ChefMod
             //Destroy(bollPrefab.GetComponent<ProjectileSimple>());
             //Destroy(bollPrefab.GetComponent<ProjectileDamage>());
             //Destroy(bollPrefab.GetComponent<ProjectileImpactExplosion>());
+            //Destroy(bollPrefab.GetComponent<ProjectileDirectionalTargetFinder>());
             //Destroy(bollPrefab.GetComponent<ProjectileTargetComponent>());
             //Destroy(bollPrefab.GetComponent<ProjectileSteerTowardTarget>());
+            //Destroy(bollPrefab.GetComponent<AssignTeamFilterToTeamComponent>());
             //Destroy(bollPrefab.GetComponent<TeamFilter>());
             //bollPrefab.GetComponent<TeamFilter>().teamIndex = TeamIndex.Neutral;
             //bollPrefab.GetComponent<HealthComponent>().dontShowHealthbar = false;
-            ////bollPrefab.AddComponent<CharacterMotor>();
+            //bollPrefab.GetComponent<Rigidbody>().useGravity = true;
+            //bollPrefab.AddComponent<CharacterMotor>();
             //bollPrefab.AddComponent<Fireee>();
 
             oilPrefab = Resources.Load<GameObject>("Prefabs/CharacterBodies/BeetleCrystalBody").InstantiateClone("OilSlick", true);
@@ -495,16 +524,21 @@ namespace ChefMod
 
             var hc = oilPrefab.GetComponent<HealthComponent>();
             hc.dontShowHealthbar = true;
+            //hc.godMode = true;
 
-            oilPrefab.GetComponent<TeamComponent>().teamIndex = TeamIndex.Count;
+            oilPrefab.GetComponent<TeamComponent>().teamIndex = TeamIndex.Neutral;
 
             oilPrefab.layer = LayerIndex.fakeActor.intVal;
             oilPrefab.AddComponent<Fireee>();
+
+            oilPrefab.AddComponent<NetworkIdentity>();
+            oilPrefab.AddComponent<ProjectileController>();
 
             //oilMaster = Resources.Load<GameObject>("Prefabs/CharacterMasters/BeetleCrystalMaster").InstantiateClone("OilMaster", true);
             //var mister = oilMaster.GetComponent<CharacterMaster>().bodyPrefab = oilPrefab;
 
             var beegFire = Resources.Load<GameObject>("Prefabs/ProjectileGhosts/FireballGhost").InstantiateClone("FoirBallGhost", true);
+            beegFire.AddComponent<NetworkIdentity>();
             beegFire.transform.localScale *= 5f;
 
             foirballPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/Fireball").InstantiateClone("FoirBall", true);
@@ -520,11 +554,11 @@ namespace ChefMod
             cock.ghostPrefab = beegFire;
             flamballPrefab.GetComponent<ProjectileDamage>().damageType = DamageType.IgniteOnHit;
             flamballPrefab.AddComponent<DripOnImpact>();
-            flamballPrefab.AddComponent<LightOnImpact>();
+            //flamballPrefab.AddComponent<LightOnImpact>();
             flamballPrefab.AddComponent<EsplodeOnImpact>();
 
             drippingPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/MagmaOrbProjectile").InstantiateClone("Dripping", true);
-            drippingPrefab.AddComponent<LightOnImpact>();
+            //drippingPrefab.AddComponent<LightOnImpact>();
             drippingPrefab.AddComponent<EsplodeOnImpact>();
         }
     }

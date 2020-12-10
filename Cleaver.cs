@@ -19,7 +19,9 @@ namespace EntityStates.Chef
             {
                 Ray aimRay = base.GetAimRay();
 
-                chefPlugin.cleaverPrefab.GetComponent<CoomerangProjectile>().fieldComponent = characterBody.GetComponent<FieldComponent>();
+                var coom = chefPlugin.cleaverPrefab.GetComponent<CoomerangProjectile>();
+                coom.fieldComponent = characterBody.GetComponent<FieldComponent>();
+                coom.followRet = true;
 
                 FireProjectileInfo info = new FireProjectileInfo()
                 {

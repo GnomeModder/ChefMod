@@ -46,27 +46,27 @@ namespace ChefMod
                 };
                 blastAttack.Fire();
 
-                RaycastHit[] array = Physics.SphereCastAll(characterBody.corePosition, 2f * radius, Vector3.up, 5f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
-                for (int j = 0; j < array.Length; j++)
-                {
-                    Collider collider = array[j].collider;
-                    if (collider.gameObject)
-                    {
-                        RoR2.HurtBox component = collider.GetComponent<RoR2.HurtBox>();
-                        if (component)
-                        {
-                            RoR2.HealthComponent healthComponent = component.healthComponent;
-                            if (healthComponent)
-                            {
-                                Fireee fire = healthComponent.body.GetComponent<Fireee>();
-                                if (fire)
-                                {
-                                    fire.ignate();
-                                }
-                            }
-                        }
-                    }
-                }
+                //RaycastHit[] array = Physics.SphereCastAll(characterBody.corePosition, 2f * radius, Vector3.up, 5f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
+                //for (int j = 0; j < array.Length; j++)
+                //{
+                //    Collider collider = array[j].collider;
+                //    if (collider.gameObject)
+                //    {
+                //        RoR2.HurtBox component = collider.GetComponent<RoR2.HurtBox>();
+                //        if (component)
+                //        {
+                //            RoR2.HealthComponent healthComponent = component.healthComponent;
+                //            if (healthComponent)
+                //            {
+                //                Fireee fire = healthComponent.body.GetComponent<Fireee>();
+                //                if (fire)
+                //                {
+                //                    fire.ignate();
+                //                }
+                //            }
+                //        }
+                //    }
+                //}
 
                 Destroy(this);
             }

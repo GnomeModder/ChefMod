@@ -94,6 +94,7 @@ namespace EntityStates.Chef
 			//this.oilTrail = null;
 			//this.oilTrail.active = false;
 
+			skillLocator.primary.SetBaseSkill(chefPlugin.primaryDef);
 			if (skillLocator.secondary.baseSkill == chefPlugin.boostedSecondaryDef)
 			{
 				skillLocator.secondary.SetBaseSkill(chefPlugin.secondaryDef);
