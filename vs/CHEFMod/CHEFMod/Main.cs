@@ -33,7 +33,7 @@ namespace EntityStates.Chef
             fieldComponent = base.characterBody.GetComponent<ChefMod.FieldComponent>();
             fieldComponent.characterBody = base.characterBody;
 
-            RoR2.GlobalEventManager.onServerDamageDealt += chefHeal;
+            //RoR2.GlobalEventManager.onServerDamageDealt += chefHeal;
         }
 
         public override void Update()
@@ -42,7 +42,9 @@ namespace EntityStates.Chef
 
             //if (Input.GetKeyDown(KeyCode.K))
             //{
-            //    characterBody.master.inventory.GiveItem(ItemIndex.SiphonOnLowHealth);
+            //    characterBody.master.inventory.GiveItem(ItemIndex.ChainLightning);
+            //    characterBody.master.inventory.GiveItem(ItemIndex.FireRing);
+            //    characterBody.master.inventory.GiveItem(ItemIndex.SlowOnHit);
             //    characterBody.master.inventory.SetEquipmentIndex(EquipmentIndex.Blackhole);
             //}
 
@@ -54,23 +56,23 @@ namespace EntityStates.Chef
 
         public override void OnExit()
         {
-            RoR2.GlobalEventManager.onServerDamageDealt -= chefHeal;
+            //RoR2.GlobalEventManager.onServerDamageDealt -= chefHeal;
 
             //Object.Destroy(this.oilTrail.gameObject);
             //this.oilTrail = null;
             base.OnExit();
         }
 
-        private void chefHeal(DamageReport damage)
-        {
-            if (damage.dotType == DotController.DotIndex.Burn)
-            {
-                Vector3 distance = characterBody.corePosition - damage.victimBody.corePosition;
-                if (distance.magnitude < 40f)
-                {
-                    characterBody.healthComponent.HealFraction(0.003f, damage.damageInfo.procChainMask);
-                }
-            }
-        }
+        //private void chefHeal(DamageReport damage)
+        //{
+        //    if (damage.dotType == DotController.DotIndex.Burn && damage.victimTeamIndex != TeamIndex.Neutral)
+        //    {
+        //        Vector3 distance = characterBody.corePosition - damage.victimBody.corePosition;
+        //        if (distance.magnitude < 40f)
+        //        {
+        //            characterBody.healthComponent.HealFraction(0.003f, damage.damageInfo.procChainMask);
+        //        }
+        //    }
+        //}
     }
 }

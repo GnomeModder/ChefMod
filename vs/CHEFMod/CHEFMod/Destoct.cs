@@ -13,6 +13,7 @@ namespace ChefMod
         private float radius = 10;
         private float startTime;
         private int frameCounter = 0;
+        private BlastAttack checkAttack;
 
         private static List<HurtBox> hurtBoxBuffer = new List<HurtBox>();
         private static SphereSearch sphereSearch = new SphereSearch();
@@ -23,6 +24,20 @@ namespace ChefMod
         {
             characterBody = GetComponent<CharacterBody>();
             startTime = Time.fixedTime;
+
+            checkAttack = new BlastAttack
+            {
+                attacker = damageInfo.attacker,
+                attackerFiltering = AttackerFiltering.NeverHit,
+                baseDamage = 0f,
+                baseForce = 0f,
+                crit = false,
+                damageColorIndex = DamageColorIndex.Default,
+                damageType = DamageType.Generic,
+                falloffModel = BlastAttack.FalloffModel.None,
+                procCoefficient = 0f,
+                radius = 5f
+            };
         }
 
         void FixedUpdate()
@@ -33,7 +48,14 @@ namespace ChefMod
             }
             frameCounter++;
 
-            if (characterBody.characterMotor.isGrounded && Time.fixedTime - startTime > 0.25f)
+            checkAttack.position = transform.position;
+            BlastAttack.Result result = checkAttack.Fire();
+
+            bool enemyCollision = result.hitCount > 1;
+            bool groundCollision = characterBody.characterMotor.isGrounded;
+            bool timeDelay = Time.fixedTime - startTime > 0.25f;
+
+            if ((enemyCollision || groundCollision) && timeDelay)
             {
                 damageInfo.position = transform.position;
                 //characterBody.healthComponent.TakeDamage(damageInfo);

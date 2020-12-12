@@ -10,6 +10,7 @@ using RoR2.Projectile;
 using UnityEngine;
 using EntityStates.Chef;
 using UnityEngine.Networking;
+using EntityStates.BrotherMonster;
 
 namespace ChefMod
 {
@@ -135,8 +136,8 @@ namespace ChefMod
             };
 
             CharacterBody component = chefPrefab.GetComponent<CharacterBody>();
-            component.baseDamage = 12f;
-            component.levelDamage = 2.4f;
+            component.baseDamage = 6f;
+            component.levelDamage = 1.2f;
             component.baseMaxHealth = 80f;
             component.levelMaxHealth = 20f;
             component.baseArmor = 1f;
@@ -475,7 +476,7 @@ namespace ChefMod
 
             skillLocator.passiveSkill.skillNameToken = "Bon Apetit";
             skillLocator.passiveSkill.skillDescriptionToken = "Regen health for each nearby ignited enemy";
-            skillLocator.passiveSkill.enabled = true;
+            skillLocator.passiveSkill.enabled = false;
         }
 
         private void registerProjectiles()
@@ -487,9 +488,11 @@ namespace ChefMod
             //ProjectileController CleaverController = cleaverPrefab.GetComponent<ProjectileController>();
             //CleaverController.ghostPrefab = stunGrenadeModel;
 
+            GameObject effect = Resources.Load<GameObject>("Prefabs/Effects/omnieffect/omniimpactvfxsawmerang");
+
             BoomerangProjectile boo = cleaverPrefab.GetComponent<BoomerangProjectile>();
             CoomerangProjectile cum = cleaverPrefab.AddComponent<CoomerangProjectile>();
-            cum.impactSpark = boo.impactSpark;
+            cum.impactSpark = effect;
             cum.transitionDuration = boo.transitionDuration;
             cum.travelSpeed = boo.travelSpeed;
             cum.charge = boo.charge;
@@ -497,6 +500,10 @@ namespace ChefMod
             cum.canHitWorld = boo.canHitWorld;
             cum.distanceMultiplier = boo.distanceMultiplier;
             Destroy(boo);
+
+            cleaverPrefab.GetComponent<ProjectileController>().procCoefficient = 0.5f;
+            cleaverPrefab.GetComponent<ProjectileOverlapAttack>().impactEffect = effect;
+            cleaverPrefab.GetComponent<ProjectileDotZone>().impactEffect = effect;
 
             cleaverPrefab.layer = LayerIndex.noCollision.intVal;
 
@@ -526,13 +533,59 @@ namespace ChefMod
             hc.dontShowHealthbar = true;
             //hc.godMode = true;
 
+            oilPrefab.GetComponent<CharacterBody>().baseNameToken = "OilBeetle";
             oilPrefab.GetComponent<TeamComponent>().teamIndex = TeamIndex.Neutral;
+            oilPrefab.layer = LayerIndex.debris.intVal;
 
-            oilPrefab.layer = LayerIndex.fakeActor.intVal;
             oilPrefab.AddComponent<Fireee>();
-
-            oilPrefab.AddComponent<NetworkIdentity>();
+            //oilPrefab.AddComponent<NetworkIdentity>();
             oilPrefab.AddComponent<ProjectileController>();
+
+            On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
+            {
+                CharacterBody victimBody = victim.GetComponent<CharacterBody>();
+                if (victimBody && victimBody.baseNameToken == "OilBeetle")
+                {
+                    bool flag5 = (damageInfo.damageType & DamageType.IgniteOnHit) > DamageType.Generic;
+                    bool flag6 = (damageInfo.damageType & DamageType.PercentIgniteOnHit) != DamageType.Generic || damageInfo.attacker.GetComponent<CharacterBody>().HasBuff(BuffIndex.AffixRed);
+                    if (flag5 || flag6)
+                    {
+                        DotController.InflictDot(victim, damageInfo.attacker, flag6 ? DotController.DotIndex.PercentBurn : DotController.DotIndex.Burn, 4f * damageInfo.procCoefficient, 1f);
+                    }
+                    damageInfo.procCoefficient = 0f;
+                }
+
+                orig(self, damageInfo, victim);
+            };
+
+            On.RoR2.CharacterBody.Update += (orig, self) =>
+            {
+                if (self.baseNameToken == "OilBeetle") return;
+                orig(self);
+            };
+
+            //On.RoR2.Orbs.LightningOrb.PickNextTarget += (orig, self, position) =>
+            //{
+            //    HurtBox output = orig(self, position);
+
+            //    while (output)
+            //    {
+            //        Chat.AddMessage("1");
+            //        RoR2.HealthComponent healthComponent = output.healthComponent;
+            //        if (healthComponent)
+            //        {
+            //            Fireee fire = healthComponent.body.GetComponent<Fireee>();
+            //            if (!fire)
+            //            {
+            //                break;
+            //            }
+            //        }
+            //        output = self.PickNextTarget(position);
+            //        Chat.AddMessage("2");
+            //    }
+
+            //    return output;
+            //};
 
             //oilMaster = Resources.Load<GameObject>("Prefabs/CharacterMasters/BeetleCrystalMaster").InstantiateClone("OilMaster", true);
             //var mister = oilMaster.GetComponent<CharacterMaster>().bodyPrefab = oilPrefab;

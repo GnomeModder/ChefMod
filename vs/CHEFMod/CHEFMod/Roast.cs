@@ -12,8 +12,7 @@ namespace EntityStates.Chef
     {
         public float baseDuration = 0.1f;
         private float duration;
-
-        BlastAttack blastAttack;
+        private Vector3 direction;
         Tuple<CharacterBody, float> victim = new Tuple<CharacterBody, float>(null, 100f);
         Ray aimRay;
         public override void OnEnter()
@@ -23,7 +22,7 @@ namespace EntityStates.Chef
             this.duration = this.baseDuration;
             if (base.isAuthority)
             {
-                blastAttack = new BlastAttack();
+                BlastAttack blastAttack = new BlastAttack();
                 blastAttack.radius = 5f;
                 blastAttack.procCoefficient = 1f;
                 blastAttack.position = aimRay.origin + aimRay.direction * 2.5f;
@@ -36,6 +35,10 @@ namespace EntityStates.Chef
                 blastAttack.damageType = DamageType.Stun1s;
                 blastAttack.attackerFiltering = AttackerFiltering.NeverHit;
                 //blastAttack.Fire();
+
+                Vector3 horizontal = new Vector3(aimRay.direction.x, 0, aimRay.direction.z);
+                horizontal = horizontal.normalized;
+                direction = new Vector3(horizontal.x, 2, horizontal.z);
 
                 getVictim(blastAttack);
                 if (victim.Item1)
@@ -53,9 +56,29 @@ namespace EntityStates.Chef
                     };
 
                     launch(victim.Item1);
-                    var fl = victim.Item1.gameObject.AddComponent<Destroct>();
-                    fl.damageInfo = damInfo;
+                    if (victim.Item1.characterMotor)
+                    {
+                        var fl = victim.Item1.gameObject.AddComponent<Destroct>();
+                        fl.damageInfo = damInfo;
+                    }
                 }
+                //else
+                //{
+                //    FireProjectileInfo info = new FireProjectileInfo()
+                //    {
+                //        projectilePrefab = ChefMod.chefPlugin.drippingPrefab,
+                //        position = aimRay.origin + 1.5f * aimRay.direction,
+                //        rotation = Util.QuaternionSafeLookRotation(direction),
+                //        owner = base.gameObject,
+                //        damage = 5 * base.damageStat,
+                //        force = 5f,
+                //        crit = base.RollCrit(),
+                //        damageColorIndex = DamageColorIndex.Default,
+                //        target = null,
+                //        fuseOverride = -1f
+                //    };
+                //    ProjectileManager.instance.FireProjectile(info);
+                //}
             }
         }
         public override void FixedUpdate()

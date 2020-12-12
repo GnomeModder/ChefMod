@@ -27,6 +27,7 @@ namespace ChefMod
         private static List<HurtBox> hurtBoxBuffer = new List<HurtBox>();
         private static SphereSearch sphereSearch = new SphereSearch();
         private static GameObject ExplosionEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/ImpactEffects/IgniteExplosionVFX");
+        private static GameObject FireMaybe = Resources.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXQuick");
 
         void Start()
         {
@@ -42,9 +43,9 @@ namespace ChefMod
             //body.AddBuff(BuffIndex.HiddenInvincibility);
             //body.AddBuff(BuffIndex.Cloak);
             body.healthComponent.godMode = true;
+            body.baseMaxHealth = 99999999f;
 
             goku("Oyl");
-
             //ground = body.characterMotor.isGrounded;
 
             //checkforhomies();
@@ -265,6 +266,11 @@ namespace ChefMod
                     }
                 }
             }
+        }
+
+        private void DestroyFX()
+        {
+
         }
     }
 }
