@@ -34,7 +34,7 @@ namespace EntityStates.Chef
 				var fire = chefPlugin.oilPrefab.GetComponent<Fireee>();
 				fire.owner = characterBody.gameObject;
 				fire.teamIndex = characterBody.teamComponent.teamIndex;
-				fire.damagePerFrame = characterBody.damage * 0.5f;
+				fire.damagePerFrame = characterBody.damage * 0.25f;
 
 				//trailComponent = base.characterBody.GetComponent<ChefMod.FieldComponent>();
 				//trailComponent.active = true;

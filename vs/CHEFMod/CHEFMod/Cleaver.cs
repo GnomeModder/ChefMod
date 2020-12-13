@@ -29,7 +29,7 @@ namespace EntityStates.Chef
                     position = aimRay.origin + 1.5f * aimRay.direction,
                     rotation = Util.QuaternionSafeLookRotation(aimRay.direction) * Quaternion.FromToRotation(Vector3.left, Vector3.up),
                     owner = base.gameObject,
-                    damage = base.characterBody.damage / 5f,
+                    damage = base.characterBody.damage / 10f,
                     force = 50f,
                     crit = base.RollCrit(),
                     damageColorIndex = DamageColorIndex.Default,

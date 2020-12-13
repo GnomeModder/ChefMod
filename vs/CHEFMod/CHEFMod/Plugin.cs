@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using BepInEx;
+﻿using BepInEx;
 using EntityStates;
 using R2API;
 using R2API.Utils;
 using RoR2;
-using RoR2.Skills;
 using RoR2.Projectile;
+using RoR2.Skills;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
-using EntityStates.Chef;
 using UnityEngine.Networking;
-using EntityStates.BrotherMonster;
 
 namespace ChefMod
 {
@@ -136,10 +134,10 @@ namespace ChefMod
             };
 
             CharacterBody component = chefPrefab.GetComponent<CharacterBody>();
-            component.baseDamage = 6f;
-            component.levelDamage = 1.2f;
-            component.baseMaxHealth = 80f;
-            component.levelMaxHealth = 20f;
+            component.baseDamage = 12f;
+            component.levelDamage = 2.4f;
+            component.baseMaxHealth = 100f;
+            component.levelMaxHealth = 25f;
             component.baseArmor = 1f;
             component.baseRegen = 1f;
             component.levelRegen = 0.2f;
@@ -162,13 +160,15 @@ namespace ChefMod
             SurvivorDef survivorDef = new SurvivorDef
             {
                 bodyPrefab = chefPrefab,
-                descriptionToken = "likes to bbq" + "\r\n",
+                descriptionToken = "CHEF_DESCRIPTION",
                 displayPrefab = displayPrefab,
                 primaryColor = new Color(1, 1, 1),
                 name = "CHEF",
                 unlockableName = ""
             };
             SurvivorAPI.AddSurvivor(survivorDef);
+
+            LanguageAPI.Add("CHEF_DESCRIPTION", "Chef a bobbob" + "\r\n");
         }
 
         private void registerSkills()
@@ -190,12 +190,13 @@ namespace ChefMod
             primaryDef.requiredStock = 1;
             primaryDef.shootDelay = 0.5f;
             primaryDef.stockToConsume = 1;
-            //primaryDef.icon = Assets.chefprimaryIconSprite;
-            primaryDef.skillDescriptionToken = "Toss a boomerang cleaver for 20% damage. Agile";
+            primaryDef.icon = Assets.chefDiceIcon;
+            primaryDef.skillDescriptionToken = "CHEF_PRIMARY_DESCRIPTION";
             primaryDef.skillName = "Primary";
-            primaryDef.skillNameToken = "CHEF_PRIMARY";
+            primaryDef.skillNameToken = "CHEF_PRIMARY_NAME";
 
-            LanguageAPI.Add("CHEF_PRIMARY", "Dice");
+            LanguageAPI.Add("CHEF_PRIMARY_NAME", "Dice");
+            LanguageAPI.Add("CHEF_PRIMARY_DESCRIPTION", "Toss a boomerang cleaver for 20% damage. Agile");
             LoadoutAPI.AddSkillDef(primaryDef);
 
             boostedPrimaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -215,12 +216,13 @@ namespace ChefMod
             boostedPrimaryDef.requiredStock = 1;
             boostedPrimaryDef.shootDelay = 0.5f;
             boostedPrimaryDef.stockToConsume = 1;
-            //boostedPrimaryDef.icon = Assets.chefprimaryIconSprite;
-            boostedPrimaryDef.skillDescriptionToken = "Throw a cleaver at every nearby enemy";
+            boostedPrimaryDef.icon = Assets.chefMinceIcon;
+            boostedPrimaryDef.skillDescriptionToken = "CHEF_BOOSTED_PRIMARY_DESCRIPTION";
             boostedPrimaryDef.skillName = "BoostedPrimary";
-            boostedPrimaryDef.skillNameToken = "CHEF_BOOSTED_PRIMARY";
+            boostedPrimaryDef.skillNameToken = "CHEF_BOOSTED_PRIMARY_NAME";
 
-            LanguageAPI.Add("CHEF_BOOSTED_PRIMARY", "Mince");
+            LanguageAPI.Add("CHEF_BOOSTED_PRIMARY_NAME", "Mince");
+            LanguageAPI.Add("CHEF_BOOSTED_PRIMARY_DESCRIPTION", "Throw a cleaver at every nearby enemy");
             LoadoutAPI.AddSkillDef(boostedPrimaryDef);
 
             secondaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -240,12 +242,13 @@ namespace ChefMod
             secondaryDef.requiredStock = 1;
             secondaryDef.shootDelay = 0.5f;
             secondaryDef.stockToConsume = 1;
-            //secondaryDef.icon = Assets.chefsecondaryIconSprite;
-            secondaryDef.skillDescriptionToken = "Shoot a fireball for 500% damage. Agile";
+            secondaryDef.icon = Assets.chefSearIcon;
+            secondaryDef.skillDescriptionToken = "CHEF_SECONDARY_DESCRIPTION";
             secondaryDef.skillName = "Secondary";
-            secondaryDef.skillNameToken = "CHEF_SECONDARY";
+            secondaryDef.skillNameToken = "CHEF_SECONDARY_NAME";
 
-            LanguageAPI.Add("CHEF_SECONDARY", "Sear");
+            LanguageAPI.Add("CHEF_SECONDARY_NAME", "Sear");
+            LanguageAPI.Add("CHEF_SECONDARY_DESCRIPTION", "Shoot a fireball for 500% damage. Agile");
             LoadoutAPI.AddSkillDef(secondaryDef);
 
             boostedSecondaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -265,12 +268,13 @@ namespace ChefMod
             boostedSecondaryDef.requiredStock = 1;
             boostedSecondaryDef.shootDelay = 0.5f;
             boostedSecondaryDef.stockToConsume = 1;
-            // boostedSecondaryDef.icon = Assets.chefsecondaryIconSprite;
-            boostedSecondaryDef.skillDescriptionToken = "be a flaming homosexual for 500% dmage";
+            boostedSecondaryDef.icon = Assets.chefFlambeIcon;
+            boostedSecondaryDef.skillDescriptionToken = "CHEF_BOOSTED_SECONDARY_DESCRIPTION";
             boostedSecondaryDef.skillName = "BoostedSecondary";
-            boostedSecondaryDef.skillNameToken = "CHEF_BOOSTED_SECONDARY";
+            boostedSecondaryDef.skillNameToken = "CHEF_BOOSTED_SECONDARY_NAME";
 
-            LanguageAPI.Add("CHEF_BOOSTED_SECONDARY", "Flambe");
+            LanguageAPI.Add("CHEF_BOOSTED_SECONDARY_NAME", "Flambe");
+            LanguageAPI.Add("CHEF_BOOSTED_SECONDARY_DESCRIPTION", "be a flaming homosexual for 500% dmage");
             LoadoutAPI.AddSkillDef(boostedSecondaryDef);
 
             altSecondaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -290,12 +294,13 @@ namespace ChefMod
             altSecondaryDef.requiredStock = 1;
             altSecondaryDef.shootDelay = 0f;
             altSecondaryDef.stockToConsume = 1;
-            //altSecondaryDef.icon = Assets.chefsecondaryIconSprite;
-            altSecondaryDef.skillDescriptionToken = "Launch small enemies in the air, dealing 500% damage on landing and igniting nearby enemies. Agile";
+            altSecondaryDef.icon = Assets.chefSauteeIcon;
+            altSecondaryDef.skillDescriptionToken = "CHEF_ALTSECONDARY_DESCRIPTION";
             altSecondaryDef.skillName = "AltSecondary";
-            altSecondaryDef.skillNameToken = "CHEF_ALTSECONDARY";
+            altSecondaryDef.skillNameToken = "CHEF_ALTSECONDARY_NAME";
 
-            LanguageAPI.Add("CHEF_ALTSECONDARY", "Sautee");
+            LanguageAPI.Add("CHEF_ALTSECONDARY_NAME", "Sautee");
+            LanguageAPI.Add("CHEF_ALTSECONDARY_DESCRIPTION", "Launch small enemies in the air, dealing 500% damage on landing and igniting nearby enemies. Agile");
             LoadoutAPI.AddSkillDef(altSecondaryDef);
 
             boostedAltSecondaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -315,12 +320,13 @@ namespace ChefMod
             boostedAltSecondaryDef.requiredStock = 1;
             boostedAltSecondaryDef.shootDelay = 0f;
             boostedAltSecondaryDef.stockToConsume = 1;
-            //boostedAltSecondaryDef.icon = Assets.chefsecondaryIconSprite;
-            boostedAltSecondaryDef.skillDescriptionToken = "fcking obliterate";
+            boostedAltSecondaryDef.icon = Assets.chefFryIcon;
+            boostedAltSecondaryDef.skillDescriptionToken = "CHEF_BOOSTED_ALTSECONDARY_DESCRIPTION";
             boostedAltSecondaryDef.skillName = "BoostedAltSecondary";
-            boostedAltSecondaryDef.skillNameToken = "CHEF_BOOSTED_ALTSECONDARY";
+            boostedAltSecondaryDef.skillNameToken = "CHEF_BOOSTED_ALTSECONDARY_NAME";
 
-            LanguageAPI.Add("CHEF_BOOSTED_ALTSECONDARY", "Fry");
+            LanguageAPI.Add("CHEF_BOOSTED_ALTSECONDARY_NAME", "Fry");
+            LanguageAPI.Add("CHEF_BOOSTED_ALTSECONDARY_DESCRIPTION", "fcking obliterate");
             LoadoutAPI.AddSkillDef(boostedAltSecondaryDef);
 
             utilityDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -340,12 +346,13 @@ namespace ChefMod
             utilityDef.requiredStock = 1;
             utilityDef.shootDelay = 0.5f;
             utilityDef.stockToConsume = 1;
-            //boostedPrimaryDef.icon = Assets.chefprimaryIconSprite;
-            utilityDef.skillDescriptionToken = "Dash forward leaving a trail of oil that slows enemies. Oil can be ignited";
+            utilityDef.icon = Assets.chefGlazeIcon;
+            utilityDef.skillDescriptionToken = "CHEF_UTILITY_DESCRIPTION";
             utilityDef.skillName = "Utility";
-            utilityDef.skillNameToken = "CHEF_UTILITY";
+            utilityDef.skillNameToken = "CHEF_UTILITY_NAME";
 
-            LanguageAPI.Add("CHEF_UTILITY", "Glaze");
+            LanguageAPI.Add("CHEF_UTILITY_NAME", "Glaze");
+            LanguageAPI.Add("CHEF_UTILITY_DESCRIPTION", "Dash forward leaving a trail of oil that slows enemies. Oil can be ignited");
             LoadoutAPI.AddSkillDef(utilityDef);
 
             boostedUtilityDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -365,12 +372,13 @@ namespace ChefMod
             boostedUtilityDef.requiredStock = 1;
             boostedUtilityDef.shootDelay = 0.5f;
             boostedUtilityDef.stockToConsume = 1;
-            //boostedPrimaryDef.icon = Assets.chefprimaryIconSprite;
-            boostedUtilityDef.skillDescriptionToken = "cover yourself in oil";
+            boostedUtilityDef.icon = Assets.chefMarinateIcon;
+            boostedUtilityDef.skillDescriptionToken = "CHEF_BOOSTED_UTILITY_DESCRIPTION";
             boostedUtilityDef.skillName = "boostedUtilityDef";
-            boostedUtilityDef.skillNameToken = "CHEF_BOOSTED_UTILITY";
+            boostedUtilityDef.skillNameToken = "CHEF_BOOSTED_UTILITY_NAME";
 
-            LanguageAPI.Add("CHEF_BOOSTED_UTILITY", "Marinate");
+            LanguageAPI.Add("CHEF_BOOSTED_UTILITY_NAME", "Marinate");
+            LanguageAPI.Add("CHEF_BOOSTED_UTILITY_DESCRIPTION", "cover yourself in oil");
             LoadoutAPI.AddSkillDef(boostedUtilityDef);
 
             var specialDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -390,12 +398,13 @@ namespace ChefMod
             specialDef.requiredStock = 1;
             specialDef.shootDelay = 0.5f;
             specialDef.stockToConsume = 1;
-            //boostedPrimaryDef.icon = Assets.chefprimaryIconSprite;
-            specialDef.skillDescriptionToken = "Boost your next skill";
+            specialDef.icon = Assets.chefBHMIcon;
+            specialDef.skillDescriptionToken = "CHEF_SPECIAL_DESCRIPTION";
             specialDef.skillName = "Special";
-            specialDef.skillNameToken = "CHEF_SPECIAL";
+            specialDef.skillNameToken = "CHEF_SPECIAL_NAME";
 
-            LanguageAPI.Add("CHEF_SPECIAL", "Second Helping");
+            LanguageAPI.Add("CHEF_SPECIAL_NAME", "Second Helping");
+            LanguageAPI.Add("CHEF_SPECIAL_DESCRIPTION", "Boost your next skill");
             LoadoutAPI.AddSkillDef(specialDef);
 
             var altSpecialDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -415,12 +424,13 @@ namespace ChefMod
             altSpecialDef.requiredStock = 1;
             altSpecialDef.shootDelay = 0.5f;
             altSpecialDef.stockToConsume = 1;
-            //boostedPrimaryDef.icon = Assets.chefprimaryIconSprite;
-            altSpecialDef.skillDescriptionToken = "Remove secondary cooldown for yourself and nearby allies";
+            altSpecialDef.icon = Assets.chefBuffetIcon;
+            altSpecialDef.skillDescriptionToken = "CHEF_ALT_SPECIAL_DESCRIPTION";
             altSpecialDef.skillName = "AltSpecial";
-            altSpecialDef.skillNameToken = "CHEF_ALT_SPECIAL";
+            altSpecialDef.skillNameToken = "CHEF_ALT_SPECIAL_NAME";
 
-            LanguageAPI.Add("CHEF_ALT_SPECIAL", "Buffet");
+            LanguageAPI.Add("CHEF_ALT_SPECIAL_NAME", "Buffet");
+            LanguageAPI.Add("CHEF_ALT_SPECIAL_DESCRIPTION", "Remove secondary cooldown for yourself and nearby allies");
             LoadoutAPI.AddSkillDef(altSpecialDef);
 
             SkillLocator skillLocator = chefPrefab.GetComponent<SkillLocator>();
@@ -481,6 +491,10 @@ namespace ChefMod
 
         private void registerProjectiles()
         {
+            GameObject cleaverGhost = Assets.chefAssetBundle.LoadAsset<GameObject>("ChefCleaver").InstantiateClone("CleaverGhost", true);
+            cleaverGhost.AddComponent<ProjectileGhostController>();
+            cleaverGhost.AddComponent<Spin>();
+
             cleaverPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/Sawmerang").InstantiateClone("CHEFCleaver", true);
             //cleaverPrefab.AddComponent<CleaverComponent>();
             //cleaverPrefab.GetComponent<CleaverComponent>().fieldComponent = chefPrefab.GetComponent<FieldComponent>();
@@ -488,7 +502,7 @@ namespace ChefMod
             //ProjectileController CleaverController = cleaverPrefab.GetComponent<ProjectileController>();
             //CleaverController.ghostPrefab = stunGrenadeModel;
 
-            GameObject effect = Resources.Load<GameObject>("Prefabs/Effects/omnieffect/omniimpactvfxsawmerang");
+            GameObject effect = null; // Resources.Load<GameObject>("Prefabs/Effects/omnieffect/omniimpactvfxsawmerang");
 
             BoomerangProjectile boo = cleaverPrefab.GetComponent<BoomerangProjectile>();
             CoomerangProjectile cum = cleaverPrefab.AddComponent<CoomerangProjectile>();
@@ -501,7 +515,9 @@ namespace ChefMod
             cum.distanceMultiplier = boo.distanceMultiplier;
             Destroy(boo);
 
-            cleaverPrefab.GetComponent<ProjectileController>().procCoefficient = 0.5f;
+            ProjectileController projcont = cleaverPrefab.GetComponent<ProjectileController>(); 
+            projcont.procCoefficient = 0.5f;
+            projcont.ghostPrefab = cleaverGhost;
             cleaverPrefab.GetComponent<ProjectileOverlapAttack>().impactEffect = effect;
             cleaverPrefab.GetComponent<ProjectileDotZone>().impactEffect = effect;
 
@@ -535,7 +551,19 @@ namespace ChefMod
 
             oilPrefab.GetComponent<CharacterBody>().baseNameToken = "OilBeetle";
             oilPrefab.GetComponent<TeamComponent>().teamIndex = TeamIndex.Neutral;
+            //oilPrefab.GetComponent<HurtBox>().damageModifier = HurtBox.DamageModifier.Barrier;
             oilPrefab.layer = LayerIndex.debris.intVal;
+            oilPrefab.name = "OilBeetle";
+
+            ModelLocator modelLocator = oilPrefab.GetComponent<ModelLocator>();
+            foreach (HurtBox hbox in modelLocator.modelBaseTransform.gameObject.GetComponentsInChildren<HurtBox>())
+            {
+                hbox.damageModifier = HurtBox.DamageModifier.Barrier;
+                foreach (HurtBox hhbox in hbox.hurtBoxGroup.hurtBoxes)
+                {
+                    hhbox.damageModifier = HurtBox.DamageModifier.Barrier;
+                }
+            }
 
             oilPrefab.AddComponent<Fireee>();
             //oilPrefab.AddComponent<NetworkIdentity>();
@@ -543,12 +571,13 @@ namespace ChefMod
 
             On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
             {
-                CharacterBody victimBody = victim.GetComponent<CharacterBody>();
-                if (victimBody && victimBody.baseNameToken == "OilBeetle")
+                if (victim.name == "OilBeetle(Clone)")
                 {
                     bool flag5 = (damageInfo.damageType & DamageType.IgniteOnHit) > DamageType.Generic;
-                    bool flag6 = (damageInfo.damageType & DamageType.PercentIgniteOnHit) != DamageType.Generic || damageInfo.attacker.GetComponent<CharacterBody>().HasBuff(BuffIndex.AffixRed);
-                    if (flag5 || flag6)
+                    bool flag6 = (damageInfo.damageType & DamageType.PercentIgniteOnHit) != DamageType.Generic;
+                    bool flag7 = false;
+                    if (damageInfo.attacker) flag7 = damageInfo.attacker.GetComponent<CharacterBody>().HasBuff(BuffIndex.AffixRed);
+                    if (flag5 || flag6 || flag7)
                     {
                         DotController.InflictDot(victim, damageInfo.attacker, flag6 ? DotController.DotIndex.PercentBurn : DotController.DotIndex.Burn, 4f * damageInfo.procCoefficient, 1f);
                     }
@@ -613,6 +642,15 @@ namespace ChefMod
             drippingPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/MagmaOrbProjectile").InstantiateClone("Dripping", true);
             //drippingPrefab.AddComponent<LightOnImpact>();
             drippingPrefab.AddComponent<EsplodeOnImpact>();
+
+            ProjectileCatalog.getAdditionalEntries += delegate (List<GameObject> list)
+            {
+                list.Add(cleaverPrefab);
+                list.Add(oilPrefab);
+                list.Add(foirballPrefab);
+                list.Add(flamballPrefab);
+                list.Add(drippingPrefab);
+            };
         }
     }
 }
