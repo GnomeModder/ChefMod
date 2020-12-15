@@ -2,10 +2,11 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace ChefMod
 {
-    public class Destroct : MonoBehaviour
+    public class Destroct : NetworkBehaviour
     {
         public DamageInfo damageInfo;
 

@@ -22,6 +22,8 @@ namespace EntityStates.Chef
             this.duration = this.baseDuration;
             if (base.isAuthority)
             {
+                base.StartAimMode(0.2f, false);
+
                 BlastAttack blastAttack = new BlastAttack();
                 blastAttack.radius = 5f;
                 blastAttack.procCoefficient = 1f;
@@ -47,7 +49,7 @@ namespace EntityStates.Chef
                     {
                         attacker = base.gameObject,
                         crit = base.RollCrit(),
-                        damage = 5f * base.damageStat,
+                        damage = 10f * base.damageStat,
                         damageColorIndex = DamageColorIndex.Default,
                         damageType = DamageType.IgniteOnHit,
                         force = Vector3.forward,

@@ -18,6 +18,8 @@ namespace EntityStates.Chef
             if (base.isAuthority)
             {
                 Ray aimRay = base.GetAimRay();
+                Vector3 right = new Vector3(aimRay.direction.z, 0, -1 * aimRay.direction.x).normalized;
+                base.StartAimMode(0.5f, false);
 
                 var coom = chefPlugin.cleaverPrefab.GetComponent<CoomerangProjectile>();
                 coom.fieldComponent = characterBody.GetComponent<FieldComponent>();
@@ -26,7 +28,7 @@ namespace EntityStates.Chef
                 FireProjectileInfo info = new FireProjectileInfo()
                 {
                     projectilePrefab = ChefMod.chefPlugin.cleaverPrefab,
-                    position = aimRay.origin + 1.5f * aimRay.direction,
+                    position = aimRay.origin + 1.5f * aimRay.direction + 1.5f * Vector3.up + 2 * right,
                     rotation = Util.QuaternionSafeLookRotation(aimRay.direction) * Quaternion.FromToRotation(Vector3.left, Vector3.up),
                     owner = base.gameObject,
                     damage = base.characterBody.damage / 10f,
@@ -40,6 +42,8 @@ namespace EntityStates.Chef
 
                 ProjectileManager.instance.FireProjectile(info);
             }
+
+            Util.PlaySound("CleaverThrow", base.gameObject);
         }
 
         public override void FixedUpdate()

@@ -23,6 +23,8 @@ namespace EntityStates.Chef
             this.duration = this.baseDuration;
             if (base.isAuthority)
             {
+                base.StartAimMode(0.2f, false);
+
                 BlastAttack blastAttack = new BlastAttack();
                 blastAttack.radius = 5f;
                 blastAttack.procCoefficient = 1f;
@@ -62,6 +64,7 @@ namespace EntityStates.Chef
                     {
                         var fl = victim.Item1.gameObject.AddComponent<FryLanding>();
                         fl.damageInfo = damInfo;
+                        Util.PlaySound("PanHit", base.gameObject);
                     }
                 }
                 //else

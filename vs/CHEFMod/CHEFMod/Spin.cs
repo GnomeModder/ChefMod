@@ -1,4 +1,5 @@
 ﻿using RoR2;
+using RoR2.Projectile;
 using System;
 using UnityEngine;
 
@@ -11,12 +12,13 @@ namespace ChefMod
         void Start()
         {
             time = Time.fixedTime;
-            transform.localScale *= 20f;
+            transform.localScale *= 10f;
+            transform.rotation = Util.QuaternionSafeLookRotation(Vector3.forward);
         }
 
         void FixedUpdate()
         {
-
+            transform.Rotate(Vector3.right, Time.deltaTime);
         }
     }
 }

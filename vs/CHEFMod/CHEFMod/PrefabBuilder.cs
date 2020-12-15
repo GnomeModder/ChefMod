@@ -1,0 +1,440 @@
+﻿using ChefMod;
+using EntityStates;
+using KinematicCharacterController;
+using R2API;
+using RoR2;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.Networking;
+
+/// <summary>
+/// Assists in the creation of survivors.
+/// </summary>
+/// 
+
+public class PrefabBuilder
+{
+    /// <summary>
+    /// The name by which the game should refer to the character body object.
+    /// </summary>
+    public string prefabName;
+    /// <summary>
+    /// The name of the Unity prefab to load for the character's model.
+    /// </summary>
+    //public string modelName;
+    /// <summary>
+    /// The Unity prefab to load for the character's model.
+    /// </summary>
+    public GameObject model;
+
+    public GameObject modelBase = new GameObject("ModelBase");
+    public GameObject camPivot = new GameObject("CameraPivot");
+    public GameObject aimOrigin = new GameObject("AimOrigin");
+
+    public Sprite defaultSkinIcon;
+    public Sprite masterySkinIcon;
+
+    public string masteryAchievementUnlockable;
+
+    private GameObject prefab;
+
+    private Transform transform;
+    private CharacterDirection dir;
+    private CharacterBody body;
+    private CharacterMotor motor;
+    private CameraTargetParams camParams;
+    private ModelLocator locator;
+    private CharacterModel charModel;
+    private ChildLocator childLoc;
+
+    private TeamComponent teamComponent;
+
+    private HealthComponent health;
+    private CharacterDeathBehavior deathBehavior;
+    private Rigidbody rigidbody;
+    private CapsuleCollider collider;
+    private KinematicCharacterMotor kMotor;
+    private HurtBoxGroup hurtbox;
+    private CapsuleCollider coll1;
+    private HurtBox hb;
+    private FootstepHandler footstep;
+    private AimAnimator aimer;
+
+    /// <summary>
+    /// Create a survivor prefab from a model. Don't register the prefab that it outputs, because the method already does that for you.
+    /// </summary>
+    /// <returns>The prefab created from the model.</returns>
+    public GameObject CreatePrefab()
+    {
+        if (prefabName == "")
+        {
+            Debug.LogWarning("Prefab name has not been set.");
+            prefabName = "RandomAssSurvivorBody";
+        }
+
+        prefab = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody"), prefabName, true);
+        prefab.GetComponent<NetworkIdentity>().localPlayerAuthority = true;
+
+        SetupModelBase();
+        SetupCamera();
+        SetupAim();
+
+        void SetupModelBase()
+        {
+            chefPlugin.Destroy(prefab.transform.Find("ModelBase").gameObject);
+            chefPlugin.Destroy(prefab.transform.Find("CameraPivot").gameObject);
+            chefPlugin.Destroy(prefab.transform.Find("AimOrigin").gameObject);
+
+            modelBase.transform.parent = prefab.transform;
+            modelBase.transform.localPosition = new Vector3(0f, -0.81f, 0f);
+            modelBase.transform.localRotation = Quaternion.identity;
+            //modelBase.transform.localScale = Vector3.one;
+        }
+
+        void SetupCamera()
+        {
+            camPivot.transform.parent = prefab.transform;
+            camPivot.transform.localPosition = new Vector3(0f, -0.81f, 0f);
+            camPivot.transform.rotation = Quaternion.identity;
+            camPivot.transform.localScale = Vector3.one;
+        }
+
+        void SetupAim()
+        {
+            aimOrigin.transform.parent = prefab.transform;
+            aimOrigin.transform.localPosition = new Vector3(0f, 1.4f, 0f);
+            aimOrigin.transform.rotation = Quaternion.identity;
+            aimOrigin.transform.localScale = Vector3.one;
+        }
+
+        if (!model)
+        {
+            Debug.LogError("Character model has not been loaded, returning null. " + prefabName + " will not function properly.");
+            return null;
+        }
+
+        transform = model.transform;
+        dir = prefab.GetComponent<CharacterDirection>();
+        body = prefab.GetComponent<CharacterBody>();
+        motor = prefab.GetComponent<CharacterMotor>();
+        camParams = prefab.GetComponent<CameraTargetParams>();
+        locator = prefab.GetComponent<ModelLocator>();
+        charModel = transform.gameObject.AddComponent<CharacterModel>();
+        childLoc = model.GetComponent<ChildLocator>();
+
+        if (prefab.GetComponent<TeamComponent>() != null) teamComponent = prefab.GetComponent<TeamComponent>();
+        else teamComponent = prefab.GetComponent<TeamComponent>();
+
+        health = prefab.GetComponent<HealthComponent>();
+        deathBehavior = prefab.GetComponent<CharacterDeathBehavior>();
+        rigidbody = prefab.GetComponent<Rigidbody>();
+        collider = prefab.GetComponent<CapsuleCollider>();
+        kMotor = prefab.GetComponent<KinematicCharacterMotor>();
+        hurtbox = model.AddComponent<HurtBoxGroup>();
+        coll1 = model.GetComponentInChildren<CapsuleCollider>(); 
+        hb = coll1.gameObject.AddComponent<HurtBox>(); 
+        footstep = model.AddComponent<FootstepHandler>();
+        aimer = model.AddComponent<AimAnimator>();
+
+        SetupModelTransform();
+        SetupCharacterDirection();
+        SetupCharacterBody();
+        SetupCharacterMotor();
+        SetupCameraParams();
+        SetupModelLocator();
+        SetupModel();
+        SetupSkins();
+        SetupTeamComponent();
+        SetupHealthComponent();
+        SetupInteractors();
+        SetupDeathBehavior();
+        SetupRigidBody();
+        SetupCollider();
+        SetupKCharacterMotor();
+        SetupHurtbox();
+        SetupFootstep();
+        SetupAimAnimator();
+        SetupHitbox();
+
+        RegisterNewBody(prefab);
+
+        return prefab;
+    }
+    void SetupModelTransform()
+    {
+        transform.parent = modelBase.transform;
+        //transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+    }
+
+    void SetupCharacterDirection()
+    {
+        dir.moveVector = Vector3.zero;
+        dir.targetTransform = modelBase.transform;
+        dir.overrideAnimatorForwardTransform = null;
+        dir.rootMotionAccumulator = null;
+        dir.modelAnimator = model.GetComponentInChildren<Animator>();
+        dir.driveFromRootRotation = false;
+        dir.turnSpeed = 720f;
+    }
+
+    void SetupCharacterBody()
+    {
+        body.name = prefabName;
+        body.bodyFlags = CharacterBody.BodyFlags.ImmuneToExecutes;
+        body.rootMotionInMainState = false;
+        body.mainRootSpeed = 0;
+        body.bodyIndex = -1;
+        body.aimOriginTransform = aimOrigin.transform;
+        body.hullClassification = HullClassification.Human;
+    }
+
+    void SetupCharacterMotor()
+    { //CharacterMotor motor = prefab.GetComponent<CharacterMotor>();
+        motor.walkSpeedPenaltyCoefficient = 1f;
+        motor.characterDirection = dir;
+        motor.muteWalkMotion = false;
+        motor.mass = 100f;
+        motor.airControl = 0.25f;
+        motor.disableAirControlUntilCollision = false;
+        motor.generateParametersOnAwake = true;
+    }
+
+    void SetupCameraParams()
+    {
+        camParams.cameraParams = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponent<CameraTargetParams>().cameraParams;
+        camParams.cameraParams.pivotVerticalOffset *= 1.3f;
+        camParams.cameraPivotTransform = null;
+        camParams.aimMode = CameraTargetParams.AimType.Standard;
+        camParams.recoil = Vector2.zero;
+        camParams.idealLocalCameraPos = Vector3.zero;
+        camParams.dontRaycastToPivot = false;
+    }
+
+    void SetupModelLocator()
+    {
+        locator.modelTransform = transform;
+        locator.modelBaseTransform = modelBase.transform;
+        locator.dontReleaseModelOnDeath = false;
+        locator.autoUpdateModelTransform = true;
+        locator.dontDetatchFromParent = false;
+        locator.noCorpse = false;
+        locator.normalizeToFloor = false;
+        locator.preserveModel = false;
+    }
+
+    void SetupTeamComponent()
+    {
+        teamComponent.hideAllyCardDisplay = false;
+        teamComponent.teamIndex = TeamIndex.None;
+    }
+
+    void SetupHealthComponent()
+    {
+        health.body = null;
+        health.dontShowHealthbar = false;
+        health.globalDeathEventChanceCoefficient = 1f;
+    }
+
+    void SetupInteractors()
+    {
+        prefab.GetComponent<Interactor>().maxInteractionDistance = 3f;
+        prefab.GetComponent<InteractionDriver>().highlightInteractor = true;
+    }
+
+    void SetupDeathBehavior()
+    {
+        deathBehavior.deathStateMachine = prefab.GetComponent<EntityStateMachine>();
+        deathBehavior.deathState = new SerializableEntityStateType(typeof(GenericCharacterDeath));
+    }
+
+    void SetupRigidBody()
+    {
+        rigidbody.mass = 100f;
+        rigidbody.drag = 0f;
+        rigidbody.angularDrag = 0f;
+        rigidbody.useGravity = false;
+        rigidbody.isKinematic = true;
+        rigidbody.interpolation = RigidbodyInterpolation.None;
+        rigidbody.collisionDetectionMode = CollisionDetectionMode.Discrete;
+        rigidbody.constraints = RigidbodyConstraints.None;
+    }
+
+    void SetupCollider()
+    {
+        collider.isTrigger = false;
+        collider.material = null;
+        collider.center = Vector3.zero;
+        collider.direction = 1;
+    }
+
+    void SetupModel()
+    {
+        charModel.body = body;
+        charModel.baseRendererInfos = new CharacterModel.RendererInfo[]
+        {
+            new CharacterModel.RendererInfo
+            {
+                defaultMaterial = model.GetComponentInChildren<SkinnedMeshRenderer>().material,
+                renderer = model.GetComponentInChildren<SkinnedMeshRenderer>(),
+                defaultShadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On,
+                ignoreOverlays = false
+            }
+        };
+        charModel.autoPopulateLightInfos = true;
+        charModel.invisibilityCount = 0;
+        charModel.temporaryOverlays = new List<TemporaryOverlay>();
+    }
+
+    void SetupKCharacterMotor()
+    {
+        kMotor.CharacterController = motor;
+        kMotor.Capsule = collider;
+        kMotor.Rigidbody = rigidbody;
+        kMotor.DetectDiscreteCollisions = false;
+        kMotor.GroundDetectionExtraDistance = 0f;
+        kMotor.MaxStepHeight = 0.2f;
+        kMotor.MinRequiredStepDepth = 0.1f;
+        kMotor.MaxStableSlopeAngle = 55f;
+        kMotor.MaxStableDistanceFromLedge = 0.5f;
+        kMotor.PreventSnappingOnLedges = false;
+        kMotor.MaxStableDenivelationAngle = 55f;
+        kMotor.RigidbodyInteractionType = RigidbodyInteractionType.None;
+        kMotor.PreserveAttachedRigidbodyMomentum = true;
+        kMotor.HasPlanarConstraint = false;
+        kMotor.PlanarConstraintAxis = Vector3.up;
+        kMotor.StepHandling = StepHandlingMethod.None;
+        kMotor.LedgeHandling = true;
+        kMotor.InteractiveRigidbodyHandling = true;
+        kMotor.SafeMovement = false;
+    }
+
+    void SetupHurtbox()
+    {
+        hb.gameObject.layer = LayerIndex.entityPrecise.intVal;
+
+        hb.healthComponent = health;
+        hb.isBullseye = true;
+        hb.damageModifier = HurtBox.DamageModifier.Normal;
+        hb.hurtBoxGroup = hurtbox;
+        hb.indexInGroup = 0;
+
+        hurtbox.hurtBoxes = new HurtBox[] { hb };
+        hurtbox.mainHurtBox = hb;
+        hurtbox.bullseyeCount = 1;
+    }
+
+    void SetupFootstep()
+    {
+        footstep.baseFootstepString = "Play_player_footstep";
+        footstep.sprintFootstepOverrideString = "";
+        footstep.enableFootstepDust = true;
+        footstep.footstepDustPrefab = Resources.Load<GameObject>("Prefabs/GenericFootstepDust");
+    }
+    //RagdollController ragdoll = model.GetComponent<RagdollController>();
+    //TODO
+    //ragdoll.bones = null;
+    //ragdoll.componentsToDisableOnRagdoll = null;
+
+    void SetupAimAnimator()
+    {
+        aimer.inputBank = prefab.GetComponent<InputBankTest>();
+        aimer.directionComponent = dir;
+        aimer.pitchRangeMax = 60f;
+        aimer.pitchRangeMin = -60f;
+        aimer.yawRangeMax = 90f;
+        aimer.yawRangeMin = -90f;
+        aimer.pitchGiveupRange = 30f;
+        aimer.yawGiveupRange = 10f;
+        aimer.giveupDuration = 3f;
+    }
+
+    void SetupHitbox()
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.name.Contains("Hitbox"))
+            {
+                var hitBoxGroup = model.AddComponent<HitBoxGroup>();
+                var hitBox = child.gameObject.AddComponent<HitBox>();
+                hitBoxGroup.groupName = child.name;
+                hitBoxGroup.hitBoxes = new HitBox[] { hitBox };
+            }
+        }
+    }
+
+    void SetupSkins()
+    {
+        //LanguageAPI.Add("NEMMANDO_DEFAULT_SKIN_NAME", "Default");
+
+        var obj = transform.gameObject;
+        var mdl = obj.GetComponent<CharacterModel>();
+        var skinController = obj.AddComponent<ModelSkinController>();
+
+        LoadoutAPI.SkinDefInfo skinDefInfo = new LoadoutAPI.SkinDefInfo
+        {
+            Name = "DEFAULT_SKIN",
+            NameToken = "DEFAULT_SKIN",
+            Icon = defaultSkinIcon,
+            RootObject = obj,
+            RendererInfos = mdl.baseRendererInfos,
+            GameObjectActivations = Array.Empty<SkinDef.GameObjectActivation>(),
+            MeshReplacements = Array.Empty<SkinDef.MeshReplacement>(),
+            BaseSkins = Array.Empty<SkinDef>(),
+            MinionSkinReplacements = Array.Empty<SkinDef.MinionSkinReplacement>(),
+            ProjectileGhostReplacements = Array.Empty<SkinDef.ProjectileGhostReplacement>(),
+            UnlockableName = ""
+        };
+
+        Material commandoMat = Resources.Load<GameObject>("Prefabs/CharacterBodies/BrotherGlassBody").GetComponentInChildren<CharacterModel>().baseRendererInfos[0].defaultMaterial;
+
+        CharacterModel.RendererInfo[] rendererInfos = skinDefInfo.RendererInfos;
+        CharacterModel.RendererInfo[] array = new CharacterModel.RendererInfo[rendererInfos.Length];
+        rendererInfos.CopyTo(array, 0);
+
+        array[0].defaultMaterial = commandoMat;
+
+        LoadoutAPI.SkinDefInfo masteryInfo = new LoadoutAPI.SkinDefInfo
+        {
+            Name = "DEFAULT_SKIN",
+            NameToken = "DEFAULT_SKIN",
+            Icon = defaultSkinIcon,
+            RootObject = obj,
+            RendererInfos = array,
+            GameObjectActivations = Array.Empty<SkinDef.GameObjectActivation>(),
+            MeshReplacements = Array.Empty<SkinDef.MeshReplacement>(),
+            BaseSkins = Array.Empty<SkinDef>(),
+            MinionSkinReplacements = Array.Empty<SkinDef.MinionSkinReplacement>(),
+            ProjectileGhostReplacements = Array.Empty<SkinDef.ProjectileGhostReplacement>(),
+            UnlockableName = masteryAchievementUnlockable
+        };
+
+        SkinDef skinDefault = LoadoutAPI.CreateNewSkinDef(skinDefInfo);
+        SkinDef mastery = LoadoutAPI.CreateNewSkinDef(masteryInfo);
+
+        SkinDef[] skinDefs = new SkinDef[2]
+        {
+            skinDefault,
+            mastery
+        };
+
+        skinController.skins = skinDefs;
+    }
+
+    //transform.Find("wyattRIGGED_BROOMfixed/BroomRig/Handle/GyroBall").gameObject.AddComponent<Spinner>();
+    //transform.Find("wyattRIGGED_BROOMfixed/BroomRig/Handle/GyroRing").gameObject.AddComponent<Spinner>();
+
+    public static bool RegisterNewBody(GameObject bodyObject)
+    {
+        if (bodyObject)
+        {
+            BodyCatalog.getAdditionalEntries += list => list.Add(bodyObject);
+            Debug.Log("Registered body " + bodyObject.name + " to the body catalog!");
+            return true;
+        }
+        Debug.LogError("FATAL ERROR:" + bodyObject.name + " failed to register to the body catalog!");
+        return false;
+    }
+}

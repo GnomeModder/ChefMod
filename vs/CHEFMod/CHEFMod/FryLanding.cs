@@ -2,10 +2,11 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace ChefMod
 {
-    public class FryLanding : MonoBehaviour
+    public class FryLanding : NetworkBehaviour
     {
         public DamageInfo damageInfo;
 

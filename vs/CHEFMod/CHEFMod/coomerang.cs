@@ -136,7 +136,7 @@ namespace ChefMod
 				if (followRet)
 				{
 					Ray aimRay = fieldComponent.aimRay;
-					Vector3 position = transform.position - fieldComponent.characterBody.corePosition;
+					Vector3 position = transform.position - fieldComponent.characterBody.corePosition - 2 * Vector3.up;
 
 					Vector3 cross = Vector3.Cross(position, aimRay.direction);
 					Vector3 component2 = Vector3.Cross(position, cross);

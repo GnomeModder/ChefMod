@@ -26,6 +26,7 @@
           "MonoMod.RuntimeDetour": "20.8.3.5",
           "MonoMod.Utils": "20.8.3.5",
           "R2API": "2.0.0.0",
+          "Rewired_Core": "1.0.0.0",
           "UnityEngine.AnimationModule": "0.0.0.0",
           "UnityEngine.AssetBundleModule": "0.0.0.0",
           "UnityEngine.CoreModule": "0.0.0.0",
@@ -173,6 +174,14 @@
           }
         }
       },
+      "Rewired_Core/1.0.0.0": {
+        "runtime": {
+          "Rewired_Core.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "UnityEngine.AnimationModule/0.0.0.0": {
         "runtime": {
           "UnityEngine.AnimationModule.dll": {
@@ -264,14 +273,6 @@
       "UnityEngine.UI/1.0.0.0": {
         "runtime": {
           "UnityEngine.UI.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "Rewired_Core/1.0.0.0": {
-        "runtime": {
-          "Rewired_Core.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -779,6 +780,11 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Rewired_Core/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
     "UnityEngine.AnimationModule/0.0.0.0": {
       "type": "reference",
       "serviceable": false,
@@ -835,11 +841,6 @@
       "sha512": ""
     },
     "UnityEngine.UI/1.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Rewired_Core/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

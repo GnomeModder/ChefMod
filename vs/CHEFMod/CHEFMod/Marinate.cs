@@ -40,6 +40,8 @@ namespace EntityStates.Chef
 
 				//TrailController.Slick slick = new TrailController.Slick(oilTrail);
 				//base.characterBody.GetComponent<TrailController>().slicks.Add(slick);
+
+				//Util.PlaySound("Marinate", base.gameObject);
 			}
 		}
 

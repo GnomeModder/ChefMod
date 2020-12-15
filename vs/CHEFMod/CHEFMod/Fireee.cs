@@ -1,12 +1,12 @@
 ﻿using RoR2;
 using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace ChefMod
 {
-    public class Fireee : MonoBehaviour
+    public class Fireee : NetworkBehaviour
     {
         public GameObject owner;
         public TeamIndex teamIndex;
@@ -18,7 +18,8 @@ namespace ChefMod
         private float oilTime = 30f;
         private float burnTime = 10f;
 
-        private GameObject prefab;
+        private GameObject oilPrefab;
+        private GameObject firePrefab;
         private float startTime;
         private float igniteTime;
         private bool ground = false;
@@ -45,8 +46,18 @@ namespace ChefMod
             body.healthComponent.godMode = true;
             body.baseMaxHealth = 99999999f;
 
-            goku("Oyl");
+            var direction = this.transform.root.GetComponentInChildren<CharacterDirection>();
+            foreach (var thisItem in direction.modelAnimator.GetComponentsInChildren<SkinnedMeshRenderer>())
+            {
+                thisItem.gameObject.SetActive(false);
+            }
+            foreach (var thisItem in direction.modelAnimator.GetComponentsInChildren<MeshRenderer>())
+            {
+                thisItem.gameObject.SetActive(false);
+            }
             //ground = body.characterMotor.isGrounded;
+
+            //oilPrefab = goku("Oyl");
 
             //checkforhomies();
         }
@@ -61,6 +72,7 @@ namespace ChefMod
             if (!onFire && !ground && body.characterMotor.isGrounded)
             {
                 ground = true;
+                oilPrefab = goku("Oyl");
                 checkforhomies();
             }
 
@@ -76,37 +88,16 @@ namespace ChefMod
             framecounter++;
         }
 
-        private void goku(String asset)
+        private GameObject goku(String asset)
         {
+            GameObject prefab;
             prefab = Instantiate(Assets.chefAssetBundle.LoadAsset<GameObject>(asset));
             var direction = this.transform.root.GetComponentInChildren<CharacterDirection>();
-
-            if (!direction)
-            {
-                Chat.AddMessage("ping gnome. no direction");
-                Destroy(this.gameObject);
-            }
-            if (!direction.modelAnimator)
-            {
-                Chat.AddMessage("ping gnome. no animator");
-                Destroy(this.gameObject);
-            }
-
-            if (!onFire)
-            {
-                foreach (var thisItem in direction.modelAnimator.GetComponentsInChildren<SkinnedMeshRenderer>())
-                {
-                    thisItem.gameObject.SetActive(false);
-                }
-                foreach (var thisItem in direction.modelAnimator.GetComponentsInChildren<MeshRenderer>())
-                {
-                    thisItem.gameObject.SetActive(false);
-                }
-
-            }
-            prefab.transform.position = this.transform.position - Vector3.up;
-            prefab.transform.rotation = this.transform.rotation;
+            prefab.transform.position = body.footPosition;
+            Quaternion floorRotation = Quaternion.FromToRotation(Vector3.up, body.characterMotor.estimatedGroundNormal);
+            prefab.transform.rotation = this.transform.rotation * floorRotation;
             prefab.transform.SetParent(this.transform);
+            return prefab;
         }
 
         private bool shouldDie()
@@ -127,10 +118,12 @@ namespace ChefMod
             igniteTime = Time.fixedTime;
             esplode();
 
-            Destroy(prefab);
-            goku("Fyre");
+            Destroy(oilPrefab);
+            firePrefab = goku("Fyre");
 
             hitmyhomiesup();
+
+            //Util.PlaySound("OilFire", base.gameObject);
         }
 
         private void esplode()

@@ -89,8 +89,17 @@ namespace ChefMod
         private void registerCharacter()
         {
             //Load your base character body, from somewhere in the game.
-            chefPrefab = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").InstantiateClone("ChefBody");
-            ///Get the model without any components.
+            //chefPrefab = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").InstantiateClone("ChefBody");
+
+            PrefabBuilder prefabBuilder = new PrefabBuilder();
+            prefabBuilder.prefabName = "ChefBody";
+            prefabBuilder.model = Assets.chefAssetBundle.LoadAsset<GameObject>("chefPrefab");
+            //prefabBuilder.model.transform.localScale *= 1.5f;
+            prefabBuilder.defaultSkinIcon = Assets.defaultSkinIcon;
+            prefabBuilder.masterySkinIcon = Assets.defaultSkinIcon;
+            prefabBuilder.masteryAchievementUnlockable = "";
+            chefPrefab = prefabBuilder.CreatePrefab();
+
             chefPrefab.AddComponent<FieldComponent>();
 
             GameObject gameObject = chefPrefab.GetComponent<ModelLocator>().modelBaseTransform.gameObject;
@@ -128,10 +137,10 @@ namespace ChefMod
             LoadoutAPI.AddSkillFamily(nywFamily);
             skillLocator.special.SetFieldValue("_skillFamily", nywFamily);
 
-            BodyCatalog.getAdditionalEntries += delegate (List<GameObject> list)
-            {
-                list.Add(chefPrefab);
-            };
+            //BodyCatalog.getAdditionalEntries += delegate (List<GameObject> list)
+            //{
+            //    list.Add(chefPrefab);
+            //};
 
             CharacterBody component = chefPrefab.GetComponent<CharacterBody>();
             component.baseDamage = 12f;
@@ -146,7 +155,7 @@ namespace ChefMod
             component.baseAttackSpeed = 1f;
             component.name = "CHEF";
             component.baseNameToken = "CHEF_NAME";
-            //component.portraitIcon = Assets.chefIcon;
+            component.portraitIcon = Assets.chefIcon;
 
             LanguageAPI.Add("CHEF_NAME", "CHEF");
 
@@ -161,7 +170,7 @@ namespace ChefMod
             {
                 bodyPrefab = chefPrefab,
                 descriptionToken = "CHEF_DESCRIPTION",
-                displayPrefab = displayPrefab,
+                displayPrefab = Assets.chefAssetBundle.LoadAsset<GameObject>("chefDisplayPrefab"),
                 primaryColor = new Color(1, 1, 1),
                 name = "CHEF",
                 unlockableName = ""
@@ -196,7 +205,7 @@ namespace ChefMod
             primaryDef.skillNameToken = "CHEF_PRIMARY_NAME";
 
             LanguageAPI.Add("CHEF_PRIMARY_NAME", "Dice");
-            LanguageAPI.Add("CHEF_PRIMARY_DESCRIPTION", "Toss a boomerang cleaver for 20% damage. Agile");
+            LanguageAPI.Add("CHEF_PRIMARY_DESCRIPTION", "Toss a boomerang cleaver for 60% damage per second. Agile");
             LoadoutAPI.AddSkillDef(primaryDef);
 
             boostedPrimaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -492,17 +501,23 @@ namespace ChefMod
         private void registerProjectiles()
         {
             GameObject cleaverGhost = Assets.chefAssetBundle.LoadAsset<GameObject>("ChefCleaver").InstantiateClone("CleaverGhost", true);
-            cleaverGhost.AddComponent<ProjectileGhostController>();
-            cleaverGhost.AddComponent<Spin>();
+            var pog = cleaverGhost.AddComponent<ProjectileGhostController>();
+
+            var spin = cleaverGhost.GetComponentInChildren<MeshRenderer>().gameObject.AddComponent<Spin>();
+
+            //foreach (Component comp in cleaverGhost.GetComponents<Component>()) Debug.Log(comp.GetType().Name);
+
+            //var spin = cleaverGhost.GetComponentInChildren<MeshRenderer>().gameObject.AddComponent<RotateAroundAxis>();
+            //spin.fastRotationSpeed = 10f;
+            //spin.slowRotationSpeed = 5f;
+            //spin.rotateAroundAxis = RotateAroundAxis.RotationAxis.X;
+            //spin.SetSpeed(RotateAroundAxis.Speed.Fast);
 
             cleaverPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/Sawmerang").InstantiateClone("CHEFCleaver", true);
-            //cleaverPrefab.AddComponent<CleaverComponent>();
-            //cleaverPrefab.GetComponent<CleaverComponent>().fieldComponent = chefPrefab.GetComponent<FieldComponent>();
 
-            //ProjectileController CleaverController = cleaverPrefab.GetComponent<ProjectileController>();
-            //CleaverController.ghostPrefab = stunGrenadeModel;
-
-            GameObject effect = null; // Resources.Load<GameObject>("Prefabs/Effects/omnieffect/omniimpactvfxsawmerang");
+            GameObject effect = Resources.Load<GameObject>("Prefabs/Effects/OmniEffect/omniimpactvfx").InstantiateClone("CleaverFX", true);
+            //effect.GetComponent<EffectComponent>().soundName = "CleaverHit";
+            EffectAPI.AddEffect(effect);
 
             BoomerangProjectile boo = cleaverPrefab.GetComponent<BoomerangProjectile>();
             CoomerangProjectile cum = cleaverPrefab.AddComponent<CoomerangProjectile>();
@@ -517,7 +532,8 @@ namespace ChefMod
 
             ProjectileController projcont = cleaverPrefab.GetComponent<ProjectileController>(); 
             projcont.procCoefficient = 0.5f;
-            projcont.ghostPrefab = cleaverGhost;
+
+            //projcont.ghostPrefab = cleaverGhost;
             cleaverPrefab.GetComponent<ProjectileOverlapAttack>().impactEffect = effect;
             cleaverPrefab.GetComponent<ProjectileDotZone>().impactEffect = effect;
 
@@ -542,6 +558,24 @@ namespace ChefMod
             //bollPrefab.AddComponent<CharacterMotor>();
             //bollPrefab.AddComponent<Fireee>();
 
+            //GameObject acid = Resources.Load<GameObject>("Prefabs/Projectiles/CrocoLeapAcid");
+            //cumStain = acid.GetComponentInChildren<ThreeEyedGames.Decal>().gameObject.InstantiateClone("OilCum", true);
+            //Material oilcum = new Material(Resources.Load<Material>("Materials/matClayGooDebuff"));
+            //var decal = cumStain.GetComponent<ThreeEyedGames.Decal>();
+            ////decal.Material = Resources.Load<Material>("Materials/matBeetleJuice");
+            ////Material acidcum = decal.Material;
+            ////oilcum.mainTexture = acidcum.mainTexture;
+            ////oilcum.mainTextureOffset = acidcum.mainTextureOffset;
+            ////oilcum.mainTextureScale = acidcum.mainTextureScale;
+            ////oilcum.shaderKeywords = acidcum.shaderKeywords;
+            ////oilcum.
+            ////oilcum.shader = acidcum.shader;
+            ////decal.Material = oilcum;
+            //cumStain.transform.localScale *= 7f;
+
+            //Debug.Log("------------------------------------------------");
+            //foreach (Component comp in cumStain.GetComponents<Component>()) Debug.Log(comp.GetType().Name);
+
             oilPrefab = Resources.Load<GameObject>("Prefabs/CharacterBodies/BeetleCrystalBody").InstantiateClone("OilSlick", true);
             oilPrefab.transform.localScale *= 3f;
 
@@ -551,7 +585,6 @@ namespace ChefMod
 
             oilPrefab.GetComponent<CharacterBody>().baseNameToken = "OilBeetle";
             oilPrefab.GetComponent<TeamComponent>().teamIndex = TeamIndex.Neutral;
-            //oilPrefab.GetComponent<HurtBox>().damageModifier = HurtBox.DamageModifier.Barrier;
             oilPrefab.layer = LayerIndex.debris.intVal;
             oilPrefab.name = "OilBeetle";
 
