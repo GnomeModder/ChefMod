@@ -93,9 +93,13 @@ namespace ChefMod
             GameObject prefab;
             prefab = Instantiate(Assets.chefAssetBundle.LoadAsset<GameObject>(asset));
             var direction = this.transform.root.GetComponentInChildren<CharacterDirection>();
-            prefab.transform.position = body.footPosition;
+            prefab.transform.position = body.footPosition - 7 * Vector3.up;
+            prefab.transform.localScale *= 2f;
             Quaternion floorRotation = Quaternion.FromToRotation(Vector3.up, body.characterMotor.estimatedGroundNormal);
-            prefab.transform.rotation = this.transform.rotation * floorRotation;
+            Quaternion ninety = Quaternion.FromToRotation(Vector3.up, Vector3.forward);
+            float randomtheta = UnityEngine.Random.Range(0, 2 * Mathf.PI);
+            Quaternion random = Quaternion.FromToRotation(Vector3.forward, new Vector3(Mathf.Cos(randomtheta), 0, Mathf.Sin(randomtheta)));
+            prefab.transform.rotation = this.transform.rotation * ninety * floorRotation;
             prefab.transform.SetParent(this.transform);
             return prefab;
         }
@@ -118,8 +122,10 @@ namespace ChefMod
             igniteTime = Time.fixedTime;
             esplode();
 
-            Destroy(oilPrefab);
-            firePrefab = goku("Fyre");
+            //Destroy(oilPrefab);
+            //firePrefab = goku("Fyre");
+            oilPrefab.GetComponent<MeshRenderer>().material = chefPlugin.segfab.GetComponent<ParticleSystemRenderer>().material;
+            firePrefab = Instantiate(chefPlugin.segfab, this.transform.position, Quaternion.identity);
 
             hitmyhomiesup();
 

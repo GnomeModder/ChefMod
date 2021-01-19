@@ -29,9 +29,9 @@ namespace EntityStates.Chef
                 {
                     projectilePrefab = ChefMod.chefPlugin.cleaverPrefab,
                     position = aimRay.origin + 1.5f * aimRay.direction + 1.5f * Vector3.up + 2 * right,
-                    rotation = Util.QuaternionSafeLookRotation(aimRay.direction) * Quaternion.FromToRotation(Vector3.left, Vector3.up),
+                    rotation = Util.QuaternionSafeLookRotation(aimRay.direction),// * Quaternion.FromToRotation(Vector3.left, Vector3.up),
                     owner = base.gameObject,
-                    damage = base.characterBody.damage / 10f,
+                    damage = base.characterBody.damage * 0.25f,
                     force = 50f,
                     crit = base.RollCrit(),
                     damageColorIndex = DamageColorIndex.Default,

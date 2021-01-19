@@ -33,6 +33,7 @@
           "UnityEngine": "0.0.0.0",
           "UnityEngine.ImageConversionModule": "0.0.0.0",
           "UnityEngine.Networking": "1.0.0.0",
+          "UnityEngine.ParticleSystemModule": "0.0.0.0",
           "UnityEngine.PhysicsModule": "0.0.0.0",
           "Wwise": "0.0.0.0"
         },
@@ -230,6 +231,14 @@
           }
         }
       },
+      "UnityEngine.ParticleSystemModule/0.0.0.0": {
+        "runtime": {
+          "UnityEngine.ParticleSystemModule.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
       "UnityEngine.PhysicsModule/0.0.0.0": {
         "runtime": {
           "UnityEngine.PhysicsModule.dll": {
@@ -241,14 +250,6 @@
       "Wwise/0.0.0.0": {
         "runtime": {
           "Wwise.dll": {
-            "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.0.0.0"
-          }
-        }
-      },
-      "UnityEngine.ParticleSystemModule/0.0.0.0": {
-        "runtime": {
-          "UnityEngine.ParticleSystemModule.dll": {
             "assemblyVersion": "0.0.0.0",
             "fileVersion": "0.0.0.0"
           }
@@ -815,17 +816,17 @@
       "serviceable": false,
       "sha512": ""
     },
+    "UnityEngine.ParticleSystemModule/0.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
     "UnityEngine.PhysicsModule/0.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
     "Wwise/0.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "UnityEngine.ParticleSystemModule/0.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

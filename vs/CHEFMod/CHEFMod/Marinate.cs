@@ -27,6 +27,8 @@ namespace EntityStates.Chef
 
 			if (base.isAuthority)
 			{
+				characterBody.GetComponent<FieldComponent>().oil.enabled = true;
+
 				base.gameObject.layer = LayerIndex.fakeActor.intVal;
 				base.characterMotor.Motor.RebuildCollidableLayers();
 
@@ -75,8 +77,8 @@ namespace EntityStates.Chef
 
 				//this.oilTrail.damagePerSecond = base.characterBody.damage * 1.5f;
 
-				float ratio = characterBody.baseMoveSpeed / characterBody.moveSpeed;
-				int frequency = Mathf.FloorToInt(24f * ratio * 0.5f);
+				float ratio = GetIdealVelocity().magnitude / characterBody.moveSpeed;
+				int frequency = Mathf.FloorToInt(4f * ratio);
 				if (counter % frequency == 0)
 				{
 					GameObject obj = Object.Instantiate(ChefMod.chefPlugin.oilPrefab, characterBody.corePosition, Quaternion.identity);
@@ -114,6 +116,8 @@ namespace EntityStates.Chef
 
 			//trailComponent.active = false;
 
+			characterBody.GetComponent<FieldComponent>().oil.enabled = false;
+
 			base.OnExit();
 		}
 
@@ -137,7 +141,7 @@ namespace EntityStates.Chef
 
 		private Vector3 GetIdealVelocity()
 		{
-			return 2 * base.characterDirection.forward * base.characterBody.moveSpeed * this.speedMultiplier;
+			return base.characterDirection.forward * (10f + Mathf.Sqrt((base.characterBody.moveSpeed * base.characterBody.moveSpeed) + 300f)); //base.characterBody.moveSpeed * this.speedMultiplier;
 		}
 	}
 }

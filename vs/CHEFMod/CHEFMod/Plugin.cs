@@ -19,16 +19,18 @@ namespace ChefMod
     [R2APISubmoduleDependency("SoundAPI")]
     [R2APISubmoduleDependency("AssetAPI")]
     [R2APISubmoduleDependency("BuffAPI")]
+    [R2APISubmoduleDependency("EffectAPI")]
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "0.1.0")]
+        "0.9.0")]
     public class chefPlugin : BaseUnityPlugin
     {
         public GameObject chefPrefab;
         public static GameObject cleaverPrefab;
         public static GameObject oilPrefab;
+        public static GameObject segfab;
         public static GameObject foirballPrefab;
         public static GameObject flamballPrefab;
         public static GameObject drippingPrefab;
@@ -94,13 +96,15 @@ namespace ChefMod
             PrefabBuilder prefabBuilder = new PrefabBuilder();
             prefabBuilder.prefabName = "ChefBody";
             prefabBuilder.model = Assets.chefAssetBundle.LoadAsset<GameObject>("chefPrefab");
-            //prefabBuilder.model.transform.localScale *= 1.5f;
+            prefabBuilder.model.transform.localScale *= 1.25f;
             prefabBuilder.defaultSkinIcon = Assets.defaultSkinIcon;
             prefabBuilder.masterySkinIcon = Assets.defaultSkinIcon;
             prefabBuilder.masteryAchievementUnlockable = "";
             chefPrefab = prefabBuilder.CreatePrefab();
 
-            chefPrefab.AddComponent<FieldComponent>();
+            var fc = chefPrefab.AddComponent<FieldComponent>();
+            var meshs = chefPrefab.GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer mesh in meshs) { if (!mesh.enabled) fc.oil = mesh; }
 
             GameObject gameObject = chefPrefab.GetComponent<ModelLocator>().modelBaseTransform.gameObject;
 
@@ -173,11 +177,13 @@ namespace ChefMod
                 displayPrefab = Assets.chefAssetBundle.LoadAsset<GameObject>("chefDisplayPrefab"),
                 primaryColor = new Color(1, 1, 1),
                 name = "CHEF",
-                unlockableName = ""
+                unlockableName = "",
+                outroFlavorToken = "CHEF_OUTRO"
             };
             SurvivorAPI.AddSurvivor(survivorDef);
 
             LanguageAPI.Add("CHEF_DESCRIPTION", "Chef a bobbob" + "\r\n");
+            LanguageAPI.Add("CHEF_OUTRO", "...and so it left, rock hard");
         }
 
         private void registerSkills()
@@ -205,7 +211,7 @@ namespace ChefMod
             primaryDef.skillNameToken = "CHEF_PRIMARY_NAME";
 
             LanguageAPI.Add("CHEF_PRIMARY_NAME", "Dice");
-            LanguageAPI.Add("CHEF_PRIMARY_DESCRIPTION", "Toss a boomerang cleaver for 60% damage per second. Agile");
+            LanguageAPI.Add("CHEF_PRIMARY_DESCRIPTION", "Toss a boomerang cleaver for 50% damage. Agile");
             LoadoutAPI.AddSkillDef(primaryDef);
 
             boostedPrimaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -500,10 +506,10 @@ namespace ChefMod
 
         private void registerProjectiles()
         {
-            GameObject cleaverGhost = Assets.chefAssetBundle.LoadAsset<GameObject>("ChefCleaver").InstantiateClone("CleaverGhost", true);
+            GameObject cleaverGhost = Assets.chefAssetBundle.LoadAsset<GameObject>("CleaverParent").InstantiateClone("CleaverGhost", true);
             var pog = cleaverGhost.AddComponent<ProjectileGhostController>();
 
-            var spin = cleaverGhost.GetComponentInChildren<MeshRenderer>().gameObject.AddComponent<Spin>();
+            //var spin = cleaverGhost.GetComponentInChildren<MeshRenderer>().gameObject.AddComponent<Spin>();
 
             //foreach (Component comp in cleaverGhost.GetComponents<Component>()) Debug.Log(comp.GetType().Name);
 
@@ -516,7 +522,7 @@ namespace ChefMod
             cleaverPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/Sawmerang").InstantiateClone("CHEFCleaver", true);
 
             GameObject effect = Resources.Load<GameObject>("Prefabs/Effects/OmniEffect/omniimpactvfx").InstantiateClone("CleaverFX", true);
-            //effect.GetComponent<EffectComponent>().soundName = "CleaverHit";
+            effect.GetComponent<EffectComponent>().soundName = "CleaverHit";
             EffectAPI.AddEffect(effect);
 
             BoomerangProjectile boo = cleaverPrefab.GetComponent<BoomerangProjectile>();
@@ -531,11 +537,17 @@ namespace ChefMod
             Destroy(boo);
 
             ProjectileController projcont = cleaverPrefab.GetComponent<ProjectileController>(); 
-            projcont.procCoefficient = 0.5f;
+            projcont.procCoefficient = 1f;
 
-            //projcont.ghostPrefab = cleaverGhost;
-            cleaverPrefab.GetComponent<ProjectileOverlapAttack>().impactEffect = effect;
-            cleaverPrefab.GetComponent<ProjectileDotZone>().impactEffect = effect;
+            projcont.ghostPrefab = cleaverGhost;
+            ProjectileOverlapAttack poa = cleaverPrefab.GetComponent<ProjectileOverlapAttack>();
+            poa.impactEffect = effect;
+            poa.resetInterval = 0.5f;
+
+            Destroy(cleaverPrefab.GetComponent<ProjectileDotZone>());
+            //ProjectileDotZone pdz = cleaverPrefab.GetComponent<ProjectileDotZone>();
+            //pdz.impactEffect = effect;
+            //pdz.resetFrequency *= 0.25f;
 
             cleaverPrefab.layer = LayerIndex.noCollision.intVal;
 
@@ -626,6 +638,14 @@ namespace ChefMod
                 orig(self);
             };
 
+            var firetrail = Resources.Load<GameObject>("Prefabs/FireTrail");
+            segfab = firetrail.GetComponent<DamageTrail>().segmentPrefab;
+            //var ups = segfab.GetComponent<ParticleSystem>();
+            //var man = ups.main;
+            //man.maxParticles *= 10;
+            //man.duration *= 10;
+
+            //fireMat = segfab.GetComponent<LineRenderer>().sharedMaterial;
             //On.RoR2.Orbs.LightningOrb.PickNextTarget += (orig, self, position) =>
             //{
             //    HurtBox output = orig(self, position);

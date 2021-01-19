@@ -28,6 +28,8 @@ namespace EntityStates.Chef
 
 			if (base.isAuthority)
 			{
+				characterBody.GetComponent<FieldComponent>().oil.enabled = true;
+
 				base.gameObject.layer = LayerIndex.fakeActor.intVal;
 				base.characterMotor.Motor.RebuildCollidableLayers();
 
@@ -48,6 +50,8 @@ namespace EntityStates.Chef
 				//base.characterBody.GetComponent<TrailController>().slicks.Add(slick);
 
 				//Util.PlaySound("Glaze", base.gameObject);
+
+				
 			}
 		}
 
@@ -79,8 +83,8 @@ namespace EntityStates.Chef
 					}
 				}
 
-				float ratio = characterBody.baseMoveSpeed / characterBody.moveSpeed;
-				int frequency = Mathf.FloorToInt(24f * ratio);
+				float ratio = GetIdealVelocity().magnitude / characterBody.moveSpeed;
+				int frequency = Mathf.FloorToInt(8f * ratio);
 				if (counter % frequency == 0)
 				{
 					//CharacterMaster characterMaster = new MasterSummon
@@ -127,6 +131,8 @@ namespace EntityStates.Chef
 
 			//trailComponent.active = false;
 
+			characterBody.GetComponent<FieldComponent>().oil.enabled = false;
+
 			base.OnExit();
 		}
 
@@ -150,7 +156,7 @@ namespace EntityStates.Chef
 
 		private Vector3 GetIdealVelocity()
 		{
-			return base.characterDirection.forward * base.characterBody.moveSpeed * this.speedMultiplier;
+			return base.characterDirection.forward * Mathf.Sqrt((base.characterBody.moveSpeed * base.characterBody.moveSpeed) + 300f); //base.characterBody.moveSpeed * this.speedMultiplier;
 		}
 	}
 }
