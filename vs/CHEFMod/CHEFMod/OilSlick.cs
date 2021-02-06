@@ -37,6 +37,8 @@ namespace EntityStates.Chef
 				fire.owner = characterBody.gameObject;
 				fire.teamIndex = characterBody.teamComponent.teamIndex;
 				fire.damagePerFrame = characterBody.damage * 0.25f;
+				fire.critStat = base.critStat;
+				fire.master = characterBody.master;
 
 				//trailComponent = base.characterBody.GetComponent<ChefMod.FieldComponent>();
 				//trailComponent.active = true;

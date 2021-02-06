@@ -32,6 +32,13 @@ namespace EntityStates.Chef
 				base.gameObject.layer = LayerIndex.fakeActor.intVal;
 				base.characterMotor.Motor.RebuildCollidableLayers();
 
+				var fire = chefPlugin.oilPrefab.GetComponent<Fireee>();
+				fire.owner = characterBody.gameObject;
+				fire.teamIndex = characterBody.teamComponent.teamIndex;
+				fire.damagePerFrame = characterBody.damage * 0.25f;
+				fire.critStat = base.critStat;
+				fire.master = characterBody.master;
+
 				//trailComponent = base.characterBody.GetComponent<ChefMod.FieldComponent>();
 				//trailComponent.active = true;
 				//this.oilTrail = UnityEngine.Object.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/FireTrail"), this.transform).GetComponent<DamageTrail>();

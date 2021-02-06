@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using BepInEx.Configuration;
 using EntityStates;
 using R2API;
 using R2API.Utils;
@@ -24,7 +25,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "0.9.0")]
+        "0.10.0")]
     public class chefPlugin : BaseUnityPlugin
     {
         public GameObject chefPrefab;
@@ -44,6 +45,11 @@ namespace ChefMod
         public static SkillDef utilityDef;
         public static SkillDef boostedUtilityDef;
 
+        public static ConfigEntry<bool> classicMince;
+        public static ConfigEntry<int> minceVerticalIntensity;
+        public static ConfigEntry<float> minceHorizontalIntensity;
+        public static ConfigEntry<float> oilProc;
+
         private static BuffDef foodDef = new BuffDef
         {
             name = "Mustard",
@@ -58,10 +64,28 @@ namespace ChefMod
 
         public void Awake()
         {
+            classicMince = base.Config.Bind<bool>(new ConfigDefinition("01 - General Settings", "Classic Mince"), false, new ConfigDescription("Makes Mince work more like ror1", null, Array.Empty<object>()));
+            minceVerticalIntensity = base.Config.Bind<int>(new ConfigDefinition("01 - General Settings", "Mince Vertical Intensity"), 0, new ConfigDescription("controls how much you want mince to lag your game. Doesn't do anything unless you have classic mince as true", null, Array.Empty<object>()));
+            minceHorizontalIntensity = base.Config.Bind<float>(new ConfigDefinition("01 - General Settings", "Mince Horizontal Intensity"), 5, new ConfigDescription("same as above", null, Array.Empty<object>()));
+            oilProc = base.Config.Bind<float>(new ConfigDefinition("01 - General Settings", "Oil Proc"), 0, new ConfigDescription("proc coef on fire oil tick", null, Array.Empty<object>()));
+
             registerCharacter();
             registerSkills();
             registerProjectiles();
             registerBuff();
+
+            On.RoR2.GlobalEventManager.OnTeamLevelUp += (orig, team) =>
+            {
+                if (team != TeamIndex.Neutral)
+                {
+                    orig(team);
+                    return;
+                }
+                var hack = oilPrefab.GetComponent<TeamComponent>();
+                hack.teamIndex = TeamIndex.Player;
+                orig(team);
+                hack.teamIndex = TeamIndex.Neutral;
+            };
         }
 
         private void registerBuff()
@@ -151,7 +175,7 @@ namespace ChefMod
             component.levelDamage = 2.4f;
             component.baseMaxHealth = 100f;
             component.levelMaxHealth = 25f;
-            component.baseArmor = 1f;
+            component.baseArmor = 10f;
             component.baseRegen = 1f;
             component.levelRegen = 0.2f;
             component.baseMoveSpeed = 7f;
@@ -216,6 +240,7 @@ namespace ChefMod
 
             boostedPrimaryDef = ScriptableObject.CreateInstance<SkillDef>();
             boostedPrimaryDef.activationState = new SerializableEntityStateType(typeof(EntityStates.Chef.Mince));
+            if (classicMince.Value) boostedPrimaryDef.activationState = new SerializableEntityStateType(typeof(EntityStates.Chef.Sbince));
             boostedPrimaryDef.activationStateMachineName = "Weapon";
             boostedPrimaryDef.baseMaxStock = 1;
             boostedPrimaryDef.baseRechargeInterval = 0f;
@@ -507,6 +532,7 @@ namespace ChefMod
         private void registerProjectiles()
         {
             GameObject cleaverGhost = Assets.chefAssetBundle.LoadAsset<GameObject>("CleaverParent").InstantiateClone("CleaverGhost", true);
+            cleaverGhost.AddComponent<NetworkIdentity>();
             var pog = cleaverGhost.AddComponent<ProjectileGhostController>();
 
             //var spin = cleaverGhost.GetComponentInChildren<MeshRenderer>().gameObject.AddComponent<Spin>();
@@ -522,6 +548,7 @@ namespace ChefMod
             cleaverPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/Sawmerang").InstantiateClone("CHEFCleaver", true);
 
             GameObject effect = Resources.Load<GameObject>("Prefabs/Effects/OmniEffect/omniimpactvfx").InstantiateClone("CleaverFX", true);
+            effect.AddComponent<NetworkIdentity>();
             effect.GetComponent<EffectComponent>().soundName = "CleaverHit";
             EffectAPI.AddEffect(effect);
 

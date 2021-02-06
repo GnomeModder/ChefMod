@@ -9,8 +9,10 @@ namespace ChefMod
     public class Fireee : NetworkBehaviour
     {
         public GameObject owner;
-        public TeamIndex teamIndex;
+        public TeamIndex teamIndex = TeamIndex.Player;
         public bool onFire = false;
+        public float critStat = 0;
+        public CharacterMaster master = null;
 
         private CharacterBody body;
         private float radius = 10;
@@ -191,18 +193,20 @@ namespace ChefMod
                                 {
                                     if (onFire)
                                     {
+                                        bool crit = false;
+                                        if (master) crit = Util.CheckRoll(critStat, master);
                                         healthComponent.TakeDamage(new RoR2.DamageInfo
                                         {
                                             position = healthComponent.body.corePosition,
                                             attacker = this.owner,
                                             inflictor = base.gameObject,
-                                            crit = false,
+                                            crit = crit,
                                             damage = damage,
                                             damageColorIndex = RoR2.DamageColorIndex.Default,
                                             damageType = RoR2.DamageType.Generic,
                                             force = Vector3.zero,
-                                            procCoefficient = 0f
-                                        });
+                                            procCoefficient = chefPlugin.oilProc.Value
+                                        }) ;
                                     }
                                     else
                                     {

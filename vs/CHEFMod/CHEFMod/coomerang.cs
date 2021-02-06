@@ -217,7 +217,7 @@ namespace ChefMod
 			}
 		}
 
-		public bool followRet = true;
+		public bool followRet = false;
 		public FieldComponent fieldComponent;
 		private float startTime;
 		// Token: 0x04002055 RID: 8277
