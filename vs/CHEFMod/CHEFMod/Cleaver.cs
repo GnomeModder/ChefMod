@@ -25,7 +25,7 @@ namespace EntityStates.Chef
                 coom.fieldComponent = characterBody.GetComponent<FieldComponent>();
                 coom.followRet = true;
 
-                FireProjectileInfo info = new FireProjectileInfo()
+                FireProjectileInfo info = new FireProjectileInfo() 
                 {
                     projectilePrefab = ChefMod.chefPlugin.cleaverPrefab,
                     position = aimRay.origin + 1.5f * aimRay.direction + 1.5f * Vector3.up + 2 * right,
