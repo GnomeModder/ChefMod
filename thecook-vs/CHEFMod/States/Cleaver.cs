@@ -10,7 +10,9 @@ namespace EntityStates.Chef
     class Cleaver : BaseSkillState
     {
         public float baseDuration = 0.5f;
-        public float throwTime = 0.38f;
+        public float throwTime = 0.4f;
+
+        ChildLocator childLocator;
 
         private float duration;
         private bool hasThrown;
@@ -20,6 +22,8 @@ namespace EntityStates.Chef
             duration = baseDuration / base.attackSpeedStat;
 
             base.PlayAnimation("Gesture, Override", "Primary", "PrimaryCleaver.playbackrate", duration);
+
+            childLocator = base.GetModelChildLocator();
 
             base.StartAimMode(2f, false);
         }
@@ -65,6 +69,8 @@ namespace EntityStates.Chef
                     fuseOverride = -1f
                 };
 
+                childLocator.FindChild("Cleaver").gameObject.SetActive(false);
+
                 ProjectileManager.instance.FireProjectile(info);
             }
 
@@ -73,6 +79,8 @@ namespace EntityStates.Chef
 
         public override void OnExit()
         {
+            childLocator.FindChild("Cleaver").gameObject.SetActive(true);
+
             base.OnExit();
         }
 
