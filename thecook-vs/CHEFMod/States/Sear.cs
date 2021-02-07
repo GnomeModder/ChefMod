@@ -20,8 +20,8 @@ namespace EntityStates.Chef
             base.OnEnter();
             duration = baseDuration / base.attackSpeedStat;
 
-            base.PlayAnimation("Gesture, Override", "Secondary", "Secondary.playbackRate", duration);
             base.PlayAnimation("Fullbody, Override", "Secondary", "Secondary.playbackRate", duration);
+            base.PlayAnimation("Gesture, Override", "Secondary", "Secondary.playbackRate", duration);
 
             base.StartAimMode(2f, false);
         }
@@ -74,6 +74,9 @@ namespace EntityStates.Chef
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
+            if (hasThrown)
+                return InterruptPriority.Any;
+
             return InterruptPriority.PrioritySkill;
         }
     }

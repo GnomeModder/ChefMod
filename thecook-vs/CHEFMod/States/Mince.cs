@@ -9,10 +9,10 @@ using System.Runtime.InteropServices;
 
 namespace EntityStates.Chef
 {
-    class Mince : BaseSkillState
+    class Mince : BaseBoostedSkillState
     {
         public float baseDuration = 0.5f;   
-        public float throwTime = 0.38f;
+        public float throwTime = 0.36f;
 
         private float duration;
         private bool hasThrown;
@@ -110,16 +110,16 @@ namespace EntityStates.Chef
 
         public override void OnExit()
         {
-            skillLocator.primary.SetBaseSkill(chefPlugin.primaryDef);
-            if (skillLocator.secondary.baseSkill == chefPlugin.boostedSecondaryDef)
-            {
-                skillLocator.secondary.SetBaseSkill(chefPlugin.secondaryDef);
-            }
-            if (skillLocator.secondary.baseSkill == chefPlugin.boostedAltSecondaryDef)
-            {
-                skillLocator.secondary.SetBaseSkill(chefPlugin.altSecondaryDef);
-            }
-            skillLocator.utility.SetBaseSkill(chefPlugin.utilityDef);
+            //skillLocator.primary.SetBaseSkill(chefPlugin.primaryDef);
+            //if (skillLocator.secondary.baseSkill == chefPlugin.boostedSecondaryDef)
+            //{
+            //    skillLocator.secondary.SetBaseSkill(chefPlugin.secondaryDef);
+            //}
+            //if (skillLocator.secondary.baseSkill == chefPlugin.boostedAltSecondaryDef)
+            //{
+            //    skillLocator.secondary.SetBaseSkill(chefPlugin.altSecondaryDef);
+            //}
+            //skillLocator.utility.SetBaseSkill(chefPlugin.utilityDef);
             base.OnExit();
         }
 

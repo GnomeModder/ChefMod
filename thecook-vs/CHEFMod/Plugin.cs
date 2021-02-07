@@ -121,6 +121,10 @@ namespace ChefMod
             prefabBuilder.prefabName = "ChefBody";
             prefabBuilder.model = Assets.chefAssetBundle.LoadAsset<GameObject>("mdlCHEF");
             prefabBuilder.model.transform.localScale *= 1.25f;
+            prefabBuilder.defaultCustomRendererInfos = new CustomRendererInfo[] {
+                new CustomRendererInfo("Chef", Assets.matChefDefault),
+                new CustomRendererInfo("Cleaver", Assets.matChefDefaultKnife),
+            };
             prefabBuilder.defaultSkinIcon = Assets.defaultSkinIcon;
             prefabBuilder.masterySkinIcon = Assets.defaultSkinIcon;
             prefabBuilder.masteryAchievementUnlockable = "";
@@ -170,35 +174,32 @@ namespace ChefMod
             //    list.Add(chefPrefab);
             //};
 
-            CharacterBody component = chefPrefab.GetComponent<CharacterBody>();
-            component.baseDamage = 12f;
-            component.levelDamage = 2.4f;
-            component.baseMaxHealth = 100f;
-            component.levelMaxHealth = 25f;
-            component.baseArmor = 10f;
-            component.baseRegen = 1f;
-            component.levelRegen = 0.2f;
-            component.baseMoveSpeed = 7f;
-            component.levelMoveSpeed = 0f;
-            component.baseAttackSpeed = 1f;
-            component.name = "CHEF";
-            component.baseNameToken = "CHEF_NAME";
-            component.portraitIcon = Assets.chefIcon;
+            CharacterBody characterBody = chefPrefab.GetComponent<CharacterBody>();
+            characterBody.baseDamage = 12f;
+            characterBody.levelDamage = 2.4f;
+            characterBody.baseMaxHealth = 100f;
+            characterBody.levelMaxHealth = 25f;
+            characterBody.baseArmor = 10f;
+            characterBody.baseRegen = 1f;
+            characterBody.levelRegen = 0.2f;
+            characterBody.baseMoveSpeed = 7f;
+            characterBody.levelMoveSpeed = 0f;
+            characterBody.baseAttackSpeed = 1f;
+            characterBody.name = "CHEF";
+            characterBody.baseNameToken = "CHEF_NAME";
+            characterBody.portraitIcon = Assets.chefIcon;
 
             LanguageAPI.Add("CHEF_NAME", "CHEF");
 
             chefPrefab.GetComponent<CharacterBody>().preferredPodPrefab = Resources.Load<GameObject>("Prefabs/CharacterBodies/toolbotbody").GetComponent<CharacterBody>().preferredPodPrefab;
 
-            var stateMachine = component.GetComponent<EntityStateMachine>();
+            EntityStateMachine stateMachine = characterBody.GetComponent<EntityStateMachine>();
             stateMachine.mainStateType = new SerializableEntityStateType(typeof(EntityStates.Chef.Main));
 
-            GameObject displayPrefab = Resources.Load<GameObject>("Prefabs/CharacterDisplays/CommandoDisplay");
-
-            SurvivorDef survivorDef = new SurvivorDef
-            {
+            SurvivorDef survivorDef = new SurvivorDef {
                 bodyPrefab = chefPrefab,
                 descriptionToken = "CHEF_DESCRIPTION",
-                displayPrefab = Assets.chefAssetBundle.LoadAsset<GameObject>("CHEFDisplay"),
+                displayPrefab = prefabBuilder.createDisplayPrefab("CHEFDisplay"),
                 primaryColor = new Color(1, 1, 1),
                 name = "CHEF",
                 unlockableName = "",

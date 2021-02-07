@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace EntityStates.Chef
 {
-	public class Marinate : BaseSkillState
+	public class Marinate : BaseBoostedSkillState
 	{
 		public static float baseDuration = 1.5f;
 		private float duration;
@@ -105,16 +105,16 @@ namespace EntityStates.Chef
 			//this.oilTrail = null;
 			//this.oilTrail.active = false;
 
-			skillLocator.primary.SetBaseSkill(chefPlugin.primaryDef);
-			if (skillLocator.secondary.baseSkill == chefPlugin.boostedSecondaryDef)
-			{
-				skillLocator.secondary.SetBaseSkill(chefPlugin.secondaryDef);
-			}
-			if (skillLocator.secondary.baseSkill == chefPlugin.boostedAltSecondaryDef)
-			{
-				skillLocator.secondary.SetBaseSkill(chefPlugin.altSecondaryDef);
-			}
-			skillLocator.utility.SetBaseSkill(chefPlugin.utilityDef);
+			//skillLocator.primary.SetBaseSkill(chefPlugin.primaryDef);
+			//if (skillLocator.secondary.baseSkill == chefPlugin.boostedSecondaryDef)
+			//{
+			//	skillLocator.secondary.SetBaseSkill(chefPlugin.secondaryDef);
+			//}
+			//if (skillLocator.secondary.baseSkill == chefPlugin.boostedAltSecondaryDef)
+			//{
+			//	skillLocator.secondary.SetBaseSkill(chefPlugin.altSecondaryDef);
+			//}
+			//skillLocator.utility.SetBaseSkill(chefPlugin.utilityDef);
 
 			//skillLocator.utility.RunRecharge(chefPlugin.utilityDef.baseRechargeInterval);
 

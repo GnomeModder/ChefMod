@@ -14,6 +14,24 @@ using UnityEngine.Networking;
 /// </summary>
 /// 
 
+public class CustomRendererInfo {
+    public string childName;
+    public Material material;
+    public bool ignoreOverlays;
+
+    public CustomRendererInfo(string childName_, Material mat_) {
+        childName = childName_;
+        material = mat_;
+        ignoreOverlays = false;
+    }
+
+    public CustomRendererInfo(string childName_, Material mat_, bool ignoreOverlays_) {
+        childName = childName_;
+        material = mat_;
+        ignoreOverlays = ignoreOverlays_;
+    }
+}
+
 public class PrefabBuilder
 {
     /// <summary>
@@ -33,6 +51,9 @@ public class PrefabBuilder
     public GameObject camPivot = new GameObject("CameraPivot");
     public GameObject aimOrigin = new GameObject("AimOrigin");
 
+    public CustomRendererInfo[] defaultCustomRendererInfos;
+    public CustomRendererInfo[] masteryCustomRendererInfos;
+
     public Sprite defaultSkinIcon;
     public Sprite masterySkinIcon;
 
@@ -47,7 +68,7 @@ public class PrefabBuilder
     private CameraTargetParams camParams;
     private ModelLocator locator;
     private CharacterModel charModel;
-    private ChildLocator childLoc;
+    private ChildLocator childLocator;
 
     private TeamComponent teamComponent;
 
@@ -61,6 +82,9 @@ public class PrefabBuilder
     private HurtBox hb;
     private FootstepHandler footstep;
     private AimAnimator aimer;
+
+    private CharacterModel.RendererInfo[] defaultRendererInfos;
+    private CharacterModel.RendererInfo[] masteryRendererInfos;
 
     /// <summary>
     /// Create a survivor prefab from a model. Don't register the prefab that it outputs, because the method already does that for you.
@@ -81,34 +105,6 @@ public class PrefabBuilder
         SetupCamera();
         SetupAim();
 
-        void SetupModelBase()
-        {
-            chefPlugin.Destroy(prefab.transform.Find("ModelBase").gameObject);
-            chefPlugin.Destroy(prefab.transform.Find("CameraPivot").gameObject);
-            chefPlugin.Destroy(prefab.transform.Find("AimOrigin").gameObject);
-
-            modelBase.transform.parent = prefab.transform;
-            modelBase.transform.localPosition = new Vector3(0f, -0.81f, 0f);
-            modelBase.transform.localRotation = Quaternion.identity;
-            //modelBase.transform.localScale = Vector3.one;
-        }
-
-        void SetupCamera()
-        {
-            camPivot.transform.parent = prefab.transform;
-            camPivot.transform.localPosition = new Vector3(0f, -0.81f, 0f);
-            camPivot.transform.rotation = Quaternion.identity;
-            camPivot.transform.localScale = Vector3.one;
-        }
-
-        void SetupAim()
-        {
-            aimOrigin.transform.parent = prefab.transform;
-            aimOrigin.transform.localPosition = new Vector3(0f, 1.4f, 0f);
-            aimOrigin.transform.rotation = Quaternion.identity;
-            aimOrigin.transform.localScale = Vector3.one;
-        }
-
         if (!model)
         {
             Debug.LogError("Character model has not been loaded, returning null. " + prefabName + " will not function properly.");
@@ -122,7 +118,7 @@ public class PrefabBuilder
         camParams = prefab.GetComponent<CameraTargetParams>();
         locator = prefab.GetComponent<ModelLocator>();
         charModel = transform.gameObject.AddComponent<CharacterModel>();
-        childLoc = model.GetComponent<ChildLocator>();
+        childLocator = model.GetComponent<ChildLocator>();
 
         if (prefab.GetComponent<TeamComponent>() != null) teamComponent = prefab.GetComponent<TeamComponent>();
         else teamComponent = prefab.GetComponent<TeamComponent>();
@@ -145,6 +141,7 @@ public class PrefabBuilder
         SetupCameraParams();
         SetupModelLocator();
         SetupModel();
+        SetupRendererInfos();
         SetupSkins();
         SetupTeamComponent();
         SetupHealthComponent();
@@ -162,14 +159,83 @@ public class PrefabBuilder
 
         return prefab;
     }
-    void SetupModelTransform()
+
+    public GameObject createDisplayPrefab(string displayPrefab) {
+        GameObject gob = Assets.chefAssetBundle.LoadAsset<GameObject>(displayPrefab);
+
+        CharacterModel characterModel = gob.AddComponent<CharacterModel>();
+
+        characterModel.autoPopulateLightInfos = true;
+        characterModel.invisibilityCount = 0;
+        characterModel.temporaryOverlays = new List<TemporaryOverlay>();
+
+        characterModel.baseRendererInfos = getRendererInfos(gob.GetComponent<ChildLocator>(), defaultCustomRendererInfos);
+
+        return gob;
+    }
+
+    private void  SetupRendererInfos() {
+
+        defaultRendererInfos = getRendererInfos(childLocator, defaultCustomRendererInfos);
+        charModel.baseRendererInfos = defaultRendererInfos;
+
+        if (masteryCustomRendererInfos == null)
+            return;
+
+        masteryRendererInfos = getRendererInfos(childLocator, masteryCustomRendererInfos);
+
+    }
+
+    private static CharacterModel.RendererInfo[] getRendererInfos(ChildLocator childLocator, CustomRendererInfo[] customRendererInfos) {
+        
+        List<CharacterModel.RendererInfo> infos = new List<CharacterModel.RendererInfo>();
+        for (int i = 0; i < customRendererInfos.Length; i++) {
+
+            infos.Add(new CharacterModel.RendererInfo {
+
+                renderer = childLocator.FindChild(customRendererInfos[i].childName).GetComponent<Renderer>(),
+                defaultMaterial = customRendererInfos[i].material,
+                ignoreOverlays = customRendererInfos[i].ignoreOverlays,
+                defaultShadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On
+            });
+        }
+
+        return infos.ToArray();
+    }
+
+    private void  SetupModelBase() {
+        chefPlugin.Destroy(prefab.transform.Find("ModelBase").gameObject);
+        chefPlugin.Destroy(prefab.transform.Find("CameraPivot").gameObject);
+        chefPlugin.Destroy(prefab.transform.Find("AimOrigin").gameObject);
+
+        modelBase.transform.parent = prefab.transform;
+        modelBase.transform.localPosition = new Vector3(0f, -0.81f, 0f);
+        modelBase.transform.localRotation = Quaternion.identity;
+        //modelBase.transform.localScale = Vector3.one;
+    }
+
+    private void  SetupCamera() {
+        camPivot.transform.parent = prefab.transform;
+        camPivot.transform.localPosition = new Vector3(0f, -0.81f, 0f);
+        camPivot.transform.rotation = Quaternion.identity;
+        camPivot.transform.localScale = Vector3.one;
+    }
+
+    private void  SetupAim() {
+        aimOrigin.transform.parent = prefab.transform;
+        aimOrigin.transform.localPosition = new Vector3(0f, 1.4f, 0f);
+        aimOrigin.transform.rotation = Quaternion.identity;
+        aimOrigin.transform.localScale = Vector3.one;
+    }
+
+    private void  SetupModelTransform()
     {
         transform.parent = modelBase.transform;
         //transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
     }
 
-    void SetupCharacterDirection()
+    private void  SetupCharacterDirection()
     {
         dir.moveVector = Vector3.zero;
         dir.targetTransform = modelBase.transform;
@@ -180,7 +246,7 @@ public class PrefabBuilder
         dir.turnSpeed = 720f;
     }
 
-    void SetupCharacterBody()
+    private void  SetupCharacterBody()
     {
         body.name = prefabName;
         body.bodyFlags = CharacterBody.BodyFlags.ImmuneToExecutes;
@@ -191,7 +257,7 @@ public class PrefabBuilder
         body.hullClassification = HullClassification.Human;
     }
 
-    void SetupCharacterMotor()
+    private void  SetupCharacterMotor()
     { //CharacterMotor motor = prefab.GetComponent<CharacterMotor>();
         motor.walkSpeedPenaltyCoefficient = 1f;
         motor.characterDirection = dir;
@@ -202,7 +268,7 @@ public class PrefabBuilder
         motor.generateParametersOnAwake = true;
     }
 
-    void SetupCameraParams()
+    private void  SetupCameraParams()
     {
         camParams.cameraParams = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponent<CameraTargetParams>().cameraParams;
         camParams.cameraParams.pivotVerticalOffset *= 1.3f;
@@ -213,7 +279,7 @@ public class PrefabBuilder
         camParams.dontRaycastToPivot = false;
     }
 
-    void SetupModelLocator()
+    private void  SetupModelLocator()
     {
         locator.modelTransform = transform;
         locator.modelBaseTransform = modelBase.transform;
@@ -225,32 +291,32 @@ public class PrefabBuilder
         locator.preserveModel = false;
     }
 
-    void SetupTeamComponent()
+    private void  SetupTeamComponent()
     {
         teamComponent.hideAllyCardDisplay = false;
         teamComponent.teamIndex = TeamIndex.None;
     }
 
-    void SetupHealthComponent()
+    private void  SetupHealthComponent()
     {
         health.body = null;
         health.dontShowHealthbar = false;
         health.globalDeathEventChanceCoefficient = 1f;
     }
 
-    void SetupInteractors()
+    private void  SetupInteractors()
     {
         prefab.GetComponent<Interactor>().maxInteractionDistance = 3f;
         prefab.GetComponent<InteractionDriver>().highlightInteractor = true;
     }
 
-    void SetupDeathBehavior()
+    private void  SetupDeathBehavior()
     {
         deathBehavior.deathStateMachine = prefab.GetComponent<EntityStateMachine>();
         deathBehavior.deathState = new SerializableEntityStateType(typeof(GenericCharacterDeath));
     }
 
-    void SetupRigidBody()
+    private void  SetupRigidBody()
     {
         rigidbody.mass = 100f;
         rigidbody.drag = 0f;
@@ -262,7 +328,7 @@ public class PrefabBuilder
         rigidbody.constraints = RigidbodyConstraints.None;
     }
 
-    void SetupCollider()
+    private void  SetupCollider()
     {
         collider.isTrigger = false;
         collider.material = null;
@@ -270,7 +336,7 @@ public class PrefabBuilder
         collider.direction = 1;
     }
 
-    void SetupModel()
+    private void  SetupModel()
     {
         charModel.body = body;
         charModel.baseRendererInfos = new CharacterModel.RendererInfo[]
@@ -288,7 +354,7 @@ public class PrefabBuilder
         charModel.temporaryOverlays = new List<TemporaryOverlay>();
     }
 
-    void SetupKCharacterMotor()
+    private void  SetupKCharacterMotor()
     {
         kMotor.CharacterController = motor;
         kMotor.Capsule = collider;
@@ -311,7 +377,7 @@ public class PrefabBuilder
         kMotor.SafeMovement = false;
     }
 
-    void SetupHurtbox()
+    private void  SetupHurtbox()
     {
         hb.gameObject.layer = LayerIndex.entityPrecise.intVal;
 
@@ -326,7 +392,7 @@ public class PrefabBuilder
         hurtbox.bullseyeCount = 1;
     }
 
-    void SetupFootstep()
+    private void  SetupFootstep()
     {
         footstep.baseFootstepString = "Play_player_footstep";
         footstep.sprintFootstepOverrideString = "";
@@ -338,7 +404,7 @@ public class PrefabBuilder
     //ragdoll.bones = null;
     //ragdoll.componentsToDisableOnRagdoll = null;
 
-    void SetupAimAnimator()
+    private void  SetupAimAnimator()
     {
         aimer.inputBank = prefab.GetComponent<InputBankTest>();
         aimer.directionComponent = dir;
@@ -351,7 +417,7 @@ public class PrefabBuilder
         aimer.giveupDuration = 3f;
     }
 
-    void SetupHitbox()
+    private void  SetupHitbox()
     {
         foreach (Transform child in transform)
         {
@@ -365,7 +431,7 @@ public class PrefabBuilder
         }
     }
 
-    void SetupSkins()
+    private void  SetupSkins()
     {
         //LanguageAPI.Add("NEMMANDO_DEFAULT_SKIN_NAME", "Default");
 
@@ -396,6 +462,7 @@ public class PrefabBuilder
 
         array[0].defaultMaterial = commandoMat;
 
+        //TODO: masteryrendererinfos when we have them
         LoadoutAPI.SkinDefInfo masteryInfo = new LoadoutAPI.SkinDefInfo
         {
             Name = "DEFAULT_SKIN",

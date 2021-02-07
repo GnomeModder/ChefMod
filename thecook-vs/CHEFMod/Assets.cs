@@ -1,4 +1,5 @@
 ﻿using R2API;
+using RoR2;
 using System;
 using UnityEngine;
 
@@ -22,7 +23,12 @@ namespace ChefMod
 
         public static Sprite defaultSkinIcon = LoadoutAPI.CreateSkinIcon(new Color(210f / 255f, 210f / 255f, 210f / 255f), new Color(150f / 255f, 74f / 255f, 77f / 255f), new Color(98f / 255f, 128 / 255f, 131f / 255f), new Color(27f / 255f, 45f / 255f, 45f / 255f));
 
+        public static Material matChefDefault = CreateMaterial("matChefDefault");
+        public static Material matChefDefaultKnife = CreateMaterial("matChefDefaultKnife");
+
         public static UInt32 unloadingID = LoadSoundBank(ChefMod.Properties.Resources.ChefSoundBank);
+
+        private static Material commandoMat;
 
         static AssetBundle LoadAssetBundle(Byte[] resourceBytes)
         {
@@ -42,6 +48,40 @@ namespace ChefMod
 
             //Register the soundbank and return the ID
             return SoundAPI.SoundBanks.Add(resourceBytes);
+        }
+
+
+        public static Material CreateMaterial(string materialName, float emission, Color emissionColor, float normalStrength) {
+            if (!commandoMat) commandoMat = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponentInChildren<CharacterModel>().baseRendererInfos[0].defaultMaterial;
+
+            Material mat = UnityEngine.Object.Instantiate<Material>(commandoMat);
+            Material tempMat = chefAssetBundle.LoadAsset<Material>(materialName);
+            if (!tempMat) {
+                Debug.LogError($"couldn't get material {materialName}");
+                return commandoMat;
+            }
+
+            mat.name = materialName;
+            mat.SetColor("_Color", tempMat.GetColor("_Color"));
+            mat.SetTexture("_MainTex", tempMat.GetTexture("_MainTex"));
+            mat.SetColor("_EmColor", emissionColor);
+            mat.SetFloat("_EmPower", emission);
+            mat.SetTexture("_EmTex", tempMat.GetTexture("_EmissionMap"));
+            mat.SetFloat("_NormalStrength", normalStrength);
+
+            return mat;
+        }
+
+        public static Material CreateMaterial(string materialName) {
+            return CreateMaterial(materialName, 0f);
+        }
+
+        public static Material CreateMaterial(string materialName, float emission) {
+            return CreateMaterial(materialName, emission, Color.black);
+        }
+
+        public static Material CreateMaterial(string materialName, float emission, Color emissionColor) {
+            return CreateMaterial(materialName, emission, emissionColor, 0f);
         }
     }
 }

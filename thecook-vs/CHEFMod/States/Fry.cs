@@ -10,9 +10,11 @@ namespace EntityStates.Chef
 {
     class Fry : BaseSkillState
     {
-        public float baseDuration = 0.1f;
+        public float baseDuration = 0.3f;
+        public float throwTime = 0.38f;
 
         private float duration;
+        private bool hasThrown;
         private Vector3 direction;
 
         Tuple<CharacterBody, float> victim = new Tuple<CharacterBody, float>(null, 100f);
@@ -21,11 +23,20 @@ namespace EntityStates.Chef
             base.OnEnter();
             aimRay = base.GetAimRay();
             this.duration = this.baseDuration;
+            //temp until we get pan animation
+            base.PlayCrossfade("Gesture, Override", "Primary", "PrimaryCleaver.playbackRate", duration, 0.05f);
+
+            base.StartAimMode(2f, false);
         }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
+
+            if (fixedAge > duration * throwTime && !hasThrown) {
+                hasThrown = true;
+                Throw();
+            }
 
             if (base.fixedAge >= this.duration && base.isAuthority)
             {
@@ -102,8 +113,11 @@ namespace EntityStates.Chef
             base.OnExit();
         }
 
-        public override InterruptPriority GetMinimumInterruptPriority()
+        public override InterruptPriority GetMinimumInterruptPriority() 
         {
+            if (hasThrown)
+                return InterruptPriority.Any;
+
             return InterruptPriority.PrioritySkill;
         }
 

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace EntityStates.Chef
 {
-    class Flambe : BaseSkillState 
+    class Flambe : BaseBoostedSkillState 
     {
         public float damageCoefficient = 5;
         public float maxDistance = 25f;
@@ -20,8 +20,8 @@ namespace EntityStates.Chef
             base.OnEnter();
             duration = baseDuration / base.attackSpeedStat;
 
-            base.PlayAnimation("Gesture, Override", "SecondaryBoosted", "Secondary.playbackRate", duration);
             base.PlayAnimation("Fullbody, Override", "SecondaryBoosted", "Secondary.playbackRate", duration);
+            base.PlayAnimation("Gesture, Override", "SecondaryBoosted", "Secondary.playbackRate", duration);
 
             base.StartAimMode(2f, false);
         }
@@ -61,26 +61,29 @@ namespace EntityStates.Chef
                     fuseOverride = -1f
                 };
 
-                ProjectileManager.instance.FireProjectile(info);
+                ProjectileManager.instance.FireProjectile(info); 
 
                 Util.PlaySound("DIng", base.gameObject);
+
+                Util.PlaySound("Fireball", base.gameObject);
             }
         }
 
         public override void OnExit()
         {
-            skillLocator.primary.SetBaseSkill(chefPlugin.primaryDef);
-            skillLocator.secondary.SetBaseSkill(chefPlugin.secondaryDef);
-            skillLocator.utility.SetBaseSkill(chefPlugin.utilityDef);
-
-            Util.PlaySound("Fireball", base.gameObject);
+            //skillLocator.primary.SetBaseSkill(chefPlugin.primaryDef);
+            //skillLocator.secondary.SetBaseSkill(chefPlugin.secondaryDef);
+            //skillLocator.utility.SetBaseSkill(chefPlugin.utilityDef);
 
             //skillLocator.secondary.RunRecharge(chefPlugin.secondaryDef.baseRechargeInterval);
             base.OnExit();
         }
 
-        public override InterruptPriority GetMinimumInterruptPriority()
+        public override InterruptPriority GetMinimumInterruptPriority() 
         {
+            if (hasThrown)
+                return InterruptPriority.Any;
+
             return InterruptPriority.PrioritySkill;
         }
     }

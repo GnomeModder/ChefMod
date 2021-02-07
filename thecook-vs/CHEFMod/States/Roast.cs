@@ -6,22 +6,30 @@ using RoR2;
 using RoR2.Projectile;
 using UnityEngine;
 
-namespace EntityStates.Chef
-{
-    class Roast : BaseSkillState
-    {
+namespace EntityStates.Chef {
+
+    public class Roast : BaseBoostedSkillState {
+
         public float baseDuration = 0.1f;
+        public float throwTime = 0.38f;
+
         private float duration;
+        private bool hasThrown;
         private Vector3 direction;
         Tuple<CharacterBody, float> victim = new Tuple<CharacterBody, float>(null, 100f);
         Ray aimRay;
-        public override void OnEnter()
-        {
+        public override void OnEnter() {
             base.OnEnter();
             aimRay = base.GetAimRay();
             this.duration = this.baseDuration;
-            if (base.isAuthority)
-            {
+            //temp until we get pan animation
+            base.PlayCrossfade("Gesture, Override", "Primary", "PrimaryCleaver.playbackRate", duration, 0.05f);
+
+            base.StartAimMode(2f, false);
+        }
+
+        private void Throw() {
+            if (base.isAuthority) {
                 base.StartAimMode(0.2f, false);
 
                 BlastAttack blastAttack = new BlastAttack();
@@ -43,10 +51,8 @@ namespace EntityStates.Chef
                 direction = new Vector3(horizontal.x, 2, horizontal.z);
 
                 getVictim(blastAttack);
-                if (victim.Item1)
-                {
-                    DamageInfo damInfo = new DamageInfo
-                    {
+                if (victim.Item1) {
+                    DamageInfo damInfo = new DamageInfo {
                         attacker = base.gameObject,
                         crit = base.RollCrit(),
                         damage = 10f * base.damageStat,
@@ -58,8 +64,7 @@ namespace EntityStates.Chef
                     };
 
                     launch(victim.Item1);
-                    if (victim.Item1.characterMotor)
-                    {
+                    if (victim.Item1.characterMotor) {
                         var fl = victim.Item1.gameObject.AddComponent<Destroct>();
                         fl.damageInfo = damInfo;
                     }
@@ -83,9 +88,16 @@ namespace EntityStates.Chef
                 //}
             }
         }
+
         public override void FixedUpdate()
         {
             base.FixedUpdate();
+
+            if (fixedAge > duration * throwTime && !hasThrown) {
+                hasThrown = true;
+                Throw();
+            }
+
             if (base.fixedAge >= this.duration && base.isAuthority)
             {
                 this.outer.SetNextStateToMain();
@@ -95,17 +107,15 @@ namespace EntityStates.Chef
 
         public override void OnExit()
         {
-            skillLocator.primary.SetBaseSkill(chefPlugin.primaryDef);
-            skillLocator.secondary.SetBaseSkill(chefPlugin.altSecondaryDef);
-            skillLocator.utility.SetBaseSkill(chefPlugin.utilityDef);
-
-            //skillLocator.secondary.RunRecharge(chefPlugin.altSecondaryDef.baseRechargeInterval);
 
             base.OnExit();
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
+            if (hasThrown)
+                return InterruptPriority.Any;
+
             return InterruptPriority.PrioritySkill;
         }
 

@@ -10,12 +10,12 @@ namespace EntityStates.Chef
     class Cleaver : BaseSkillState
     {
         public float baseDuration = 0.5f;
-        public float throwTime = 0.4f;
-
-        ChildLocator childLocator;
+        public float throwTime = 0.38f;
 
         private float duration;
         private bool hasThrown;
+
+        private ChildLocator childLocator;
 
         public override void OnEnter() {
             base.OnEnter();
