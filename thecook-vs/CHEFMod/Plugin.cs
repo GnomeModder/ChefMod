@@ -560,12 +560,15 @@ namespace ChefMod
             cum.travelSpeed = boo.travelSpeed;
             cum.charge = boo.charge;
             cum.canHitCharacters = boo.canHitCharacters;
-            cum.canHitWorld = boo.canHitWorld;
+            cum.canHitWorld = boo.canHitWorld; 
             cum.distanceMultiplier = boo.distanceMultiplier;
             Destroy(boo);
 
+            HitBox hit = cleaverPrefab.GetComponentInChildren<HitBox>();
+            hit.transform.localScale = new Vector3(hit.transform.localScale.x, 0.69f, hit.transform.localScale.z);
+
             ProjectileController projcont = cleaverPrefab.GetComponent<ProjectileController>(); 
-            projcont.procCoefficient = 1f;
+            projcont.procCoefficient = 1f; 
 
             projcont.ghostPrefab = cleaverGhost;
             ProjectileOverlapAttack poa = cleaverPrefab.GetComponent<ProjectileOverlapAttack>();
