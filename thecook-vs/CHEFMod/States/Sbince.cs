@@ -21,7 +21,7 @@ namespace EntityStates.Chef
             base.OnEnter();
             duration = baseDuration / base.attackSpeedStat;
 
-            base.PlayAnimation("Gesture, Override", "Primary", "PrimaryCleaver.playbackrate", duration);
+            base.PlayAnimation("Gesture, Override", "Primary", "PrimaryCleaver.playbackRate", duration);
 
             base.StartAimMode(2f, false);
         }

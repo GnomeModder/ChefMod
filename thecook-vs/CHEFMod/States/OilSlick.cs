@@ -52,9 +52,9 @@ namespace EntityStates.Chef
 				//base.characterBody.GetComponent<TrailController>().slicks.Add(slick);
 
 				//Util.PlaySound("Glaze", base.gameObject);
-
-				
 			}
+
+			base.PlayAnimation("Fullbody, Override", "UtilityStart");
 		}
 
 		public override void FixedUpdate()
@@ -134,6 +134,9 @@ namespace EntityStates.Chef
 			//trailComponent.active = false;
 
 			characterBody.GetComponent<FieldComponent>().oil.enabled = false;
+
+
+			base.PlayAnimation("Fullbody, Override", "UtilityEnd");
 
 			base.OnExit();
 		}

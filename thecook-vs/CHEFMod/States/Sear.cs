@@ -11,7 +11,7 @@ namespace EntityStates.Chef
     {
         public float damageCoefficient = 5;
         public float maxDistance = 25f;
-        public float baseDuration = 0.1f;
+        public float baseDuration = 1f;
         public float throwTime = 0.25f;
 
         private float duration;
@@ -20,8 +20,8 @@ namespace EntityStates.Chef
             base.OnEnter();
             duration = baseDuration / base.attackSpeedStat;
 
-            base.PlayAnimation("Gesture, Override", "Secondary", "Secondary.playbackrate", duration);
-            base.PlayAnimation("Fullbody, Override", "Secondary", "Secondary.playbackrate", duration);
+            base.PlayAnimation("Gesture, Override", "Secondary", "Secondary.playbackRate", duration);
+            base.PlayAnimation("Fullbody, Override", "Secondary", "Secondary.playbackRate", duration);
 
             base.StartAimMode(2f, false);
         }
