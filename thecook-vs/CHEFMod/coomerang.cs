@@ -36,7 +36,7 @@ namespace ChefMod
 			}
 			Vector3 localScale = new Vector3(num * base.transform.localScale.x, num * base.transform.localScale.y, num * base.transform.localScale.z);
 			base.transform.localScale = localScale;
-			base.gameObject.GetComponent<ProjectileController>().ghost.transform.localScale = localScale;
+			base.gameObject.GetComponent<ProjectileController>().ghostPrefab.transform.localScale = localScale;
 			//base.GetComponent<ProjectileDotZone>().damageCoefficient *= num;
 
 			startTime = Time.fixedTime;
