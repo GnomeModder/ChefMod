@@ -12,18 +12,25 @@ namespace EntityStates.Chef
         public float damageCoefficient = 5;
         public float maxDistance = 25f;
         public float baseDuration = 0.1f;
+        public float throwTime = 0.25f;
+
         private float duration;
-        public override void OnEnter()
-        {
+        private bool hasThrown;
+        public override void OnEnter() {
             base.OnEnter();
             duration = baseDuration / base.attackSpeedStat;
-            if (base.isAuthority)
-            {
-                Ray aimRay = base.GetAimRay();
-                base.StartAimMode(0.2f, false);
 
-                FireProjectileInfo info = new FireProjectileInfo()
-                {
+            base.PlayAnimation("Gesture, Override", "Secondary", "Secondary.playbackrate", duration);
+            base.PlayAnimation("Fullbody, Override", "Secondary", "Secondary.playbackrate", duration);
+
+            base.StartAimMode(2f, false);
+        }
+
+        private void Throw() {
+            if (base.isAuthority) {
+                Ray aimRay = base.GetAimRay();
+
+                FireProjectileInfo info = new FireProjectileInfo() {
                     projectilePrefab = chefPlugin.foirballPrefab,
                     position = aimRay.origin + 1.5f * aimRay.direction,
                     rotation = Util.QuaternionSafeLookRotation(aimRay.direction) * Quaternion.FromToRotation(Vector3.left, Vector3.up),
@@ -46,6 +53,12 @@ namespace EntityStates.Chef
         public override void FixedUpdate()
         {
             base.FixedUpdate();
+
+            if (fixedAge > duration * throwTime && !hasThrown) {
+                hasThrown = true;
+                Throw();
+            }
+
             if (base.fixedAge >= this.duration && base.isAuthority)
             {
                 this.outer.SetNextStateToMain();

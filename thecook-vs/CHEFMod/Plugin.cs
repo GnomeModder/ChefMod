@@ -441,7 +441,7 @@ namespace ChefMod
             specialDef.icon = Assets.chefBHMIcon;
             specialDef.skillDescriptionToken = "CHEF_SPECIAL_DESCRIPTION";
             specialDef.skillName = "Special";
-            specialDef.skillNameToken = "CHEF_SPECIAL_NAME";
+            specialDef.skillNameToken = "CHEF_SPECIAL_NAME"; 
 
             LanguageAPI.Add("CHEF_SPECIAL_NAME", "Second Helping");
             LanguageAPI.Add("CHEF_SPECIAL_DESCRIPTION", "Boost your next skill");

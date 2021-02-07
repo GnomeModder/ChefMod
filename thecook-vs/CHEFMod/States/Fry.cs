@@ -11,6 +11,7 @@ namespace EntityStates.Chef
     class Fry : BaseSkillState
     {
         public float baseDuration = 0.1f;
+
         private float duration;
         private Vector3 direction;
 
@@ -20,7 +21,17 @@ namespace EntityStates.Chef
             base.OnEnter();
             aimRay = base.GetAimRay();
             this.duration = this.baseDuration;
-            Throw();
+        }
+
+        public override void FixedUpdate()
+        {
+            base.FixedUpdate();
+
+            if (base.fixedAge >= this.duration && base.isAuthority)
+            {
+                this.outer.SetNextStateToMain();
+                return;
+            }
         }
 
         private void Throw() {
@@ -83,16 +94,6 @@ namespace EntityStates.Chef
                 //    };
                 //    ProjectileManager.instance.FireProjectile(info);
                 //}
-            }
-        }
-
-        public override void FixedUpdate()
-        {
-            base.FixedUpdate();
-            if (base.fixedAge >= this.duration && base.isAuthority)
-            {
-                this.outer.SetNextStateToMain();
-                return;
             }
         }
 

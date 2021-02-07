@@ -1,10 +1,7 @@
 fileFormatVersion: 2
-guid: 46d1ecbfd22ccb044ae1c2630b90bc59
-timeCreated: 1610773635
-licenseType: Free
-NativeFormatImporter:
+guid: da0c3d28978478542aafd65aafb40ef4
+PrefabImporter:
   externalObjects: {}
-  mainObjectFileID: 100100000
   userData: 
-  assetBundleName: chef
+  assetBundleName: 
   assetBundleVariant: 
