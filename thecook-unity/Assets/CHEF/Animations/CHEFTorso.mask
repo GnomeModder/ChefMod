@@ -1,0 +1,247 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CHEFTorso
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Chef
+    m_Weight: 0
+  - m_Path: ChefArmature
+    m_Weight: 0
+  - m_Path: ChefArmature/body
+    m_Weight: 0
+  - m_Path: ChefArmature/body/body.001
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Door
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Door/Door_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/elbowIK.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/elbowIK.l/elbowIK.l_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/elbowIK.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/elbowIK.r/elbowIK.r_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/handIK.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/handIK.l/handIK.l_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/handIK.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/handIK.r/handIK.r_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/eye.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/eye.l/eye.l_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/eye.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/eye.r/eye.r_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/hat01
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/hat01/hat02
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/hat01/hat02/hat03
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/hat01/hat02/hat03/hat04
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/hat01/hat02/hat03/hat04/hat04_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/mustache01.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/mustache01.l/mustache02.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/mustache01.l/mustache02.l/mustache03.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/mustache01.l/mustache02.l/mustache03.l/mustache04.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/mustache01.l/mustache02.l/mustache03.l/mustache04.l/mustache05.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/mustache01.l/mustache02.l/mustache03.l/mustache04.l/mustache05.l/mustache05.l_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/mustache01.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/mustache01.r/mustache02.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/mustache01.r/mustache02.r/mustache03.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/mustache01.r/mustache02.r/mustache03.r/mustache04.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/mustache01.r/mustache02.r/mustache03.r/mustache04.r/mustache05.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/mustache01.r/mustache02.r/mustache03.r/mustache04.r/mustache05.r/mustache05.r_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/mustacheElbowIK.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/mustacheElbowIK.l/mustacheElbowIK.l_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/mustacheElbowIK.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/mustacheElbowIK.r/mustacheElbowIK.r_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/mustacheIK.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/mustacheIK.l/mustacheIK.l_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/mustacheIK.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/Neck/head/mustacheIK.r/mustacheIK.r_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l/arm04.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l/arm04.l/arm04.l.001
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l/arm04.l/arm04.l.001/finger01a.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l/arm04.l/arm04.l.001/finger01a.l/finger01b.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l/arm04.l/arm04.l.001/finger01a.l/finger01b.l/finger01c.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l/arm04.l/arm04.l.001/finger01a.l/finger01b.l/finger01c.l/finger01c.l_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l/arm04.l/arm04.l.001/finger02a.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l/arm04.l/arm04.l.001/finger02a.l/finger02b.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l/arm04.l/arm04.l.001/finger02a.l/finger02b.l/finger02c.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l/arm04.l/arm04.l.001/finger02a.l/finger02b.l/finger02c.l/finger02c.l_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l/arm04.l/arm04.l.001/finger03a.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l/arm04.l/arm04.l.001/finger03a.l/finger03b.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l/arm04.l/arm04.l.001/finger03a.l/finger03b.l/finger03c.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l/arm04.l/arm04.l.001/finger03a.l/finger03b.l/finger03c.l/finger03c.l_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l/arm04.l/arm04.l.001/finger04a.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l/arm04.l/arm04.l.001/finger04a.l/finger04b.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l/arm04.l/arm04.l.001/finger04a.l/finger04b.l/finger04c.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l/arm04.l/arm04.l.001/finger04a.l/finger04b.l/finger04c.l/finger04c.l_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l/arm04.l/arm04.l.001/finger05a.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l/arm04.l/arm04.l.001/finger05a.l/finger05b.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l/arm04.l/arm04.l.001/finger05a.l/finger05b.l/finger05c.l
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.l.001/arm01.l/arm02.l/arm03.l/arm04.l/arm04.l.001/finger05a.l/finger05b.l/finger05c.l/finger05c.l_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r/arm04.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r/arm04.r/arm04.r.001
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r/arm04.r/arm04.r.001/finger01a.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r/arm04.r/arm04.r.001/finger01a.r/finger01b.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r/arm04.r/arm04.r.001/finger01a.r/finger01b.r/finger01c.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r/arm04.r/arm04.r.001/finger01a.r/finger01b.r/finger01c.r/finger01c.r_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r/arm04.r/arm04.r.001/finger02a.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r/arm04.r/arm04.r.001/finger02a.r/finger02b.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r/arm04.r/arm04.r.001/finger02a.r/finger02b.r/finger02c.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r/arm04.r/arm04.r.001/finger02a.r/finger02b.r/finger02c.r/finger02c.r_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r/arm04.r/arm04.r.001/finger03a.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r/arm04.r/arm04.r.001/finger03a.r/finger03b.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r/arm04.r/arm04.r.001/finger03a.r/finger03b.r/finger03c.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r/arm04.r/arm04.r.001/finger03a.r/finger03b.r/finger03c.r/finger03c.r_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r/arm04.r/arm04.r.001/finger04a.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r/arm04.r/arm04.r.001/finger04a.r/finger04b.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r/arm04.r/arm04.r.001/finger04a.r/finger04b.r/finger04c.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r/arm04.r/arm04.r.001/finger04a.r/finger04b.r/finger04c.r/finger04c.r_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r/arm04.r/arm04.r.001/finger05a.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r/arm04.r/arm04.r.001/finger05a.r/finger05b.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r/arm04.r/arm04.r.001/finger05a.r/finger05b.r/finger05c.r
+    m_Weight: 1
+  - m_Path: ChefArmature/body/body.001/shoulder.r.001/arm01.r/arm02.r/arm03.r/arm04.r/arm04.r.001/finger05a.r/finger05b.r/finger05c.r/finger05c.r_end
+    m_Weight: 1
+  - m_Path: ChefArmature/body/leg01.r
+    m_Weight: 0
+  - m_Path: ChefArmature/body/leg01.r/leg02.r
+    m_Weight: 0
+  - m_Path: ChefArmature/body/leg01.r/leg02.r/leg03.r
+    m_Weight: 0
+  - m_Path: ChefArmature/body/leg01.r/leg02.r/leg03.r/leg03.r_end
+    m_Weight: 0
+  - m_Path: ChefArmature/body/leg01Thigh.l
+    m_Weight: 0
+  - m_Path: ChefArmature/body/leg01Thigh.l/leg02Shin.l
+    m_Weight: 0
+  - m_Path: ChefArmature/body/leg01Thigh.l/leg02Shin.l/leg03Foot.l
+    m_Weight: 0
+  - m_Path: ChefArmature/body/leg01Thigh.l/leg02Shin.l/leg03Foot.l/leg03Foot.l_end
+    m_Weight: 0
+  - m_Path: ChefArmature/body/Towel02
+    m_Weight: 0
+  - m_Path: ChefArmature/body/Towel02/Towel01
+    m_Weight: 0
+  - m_Path: ChefArmature/body/Towel02/Towel01/Towel01_end
+    m_Weight: 0
+  - m_Path: ChefArmature/footIK.l
+    m_Weight: 0
+  - m_Path: ChefArmature/footIK.l/footIK.l_end
+    m_Weight: 0
+  - m_Path: ChefArmature/footIK.r
+    m_Weight: 0
+  - m_Path: ChefArmature/footIK.r/footIK.r_end
+    m_Weight: 0
+  - m_Path: ChefArmature/kneeIK.l
+    m_Weight: 0
+  - m_Path: ChefArmature/kneeIK.l/kneeIK.l_end
+    m_Weight: 0
+  - m_Path: ChefArmature/kneeIK.r
+    m_Weight: 0
+  - m_Path: ChefArmature/kneeIK.r/kneeIK.r_end
+    m_Weight: 0
+  - m_Path: Cleaver
+    m_Weight: 0
