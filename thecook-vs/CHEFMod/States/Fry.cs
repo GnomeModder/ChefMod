@@ -16,13 +16,15 @@ namespace EntityStates.Chef
 
         Tuple<CharacterBody, float> victim = new Tuple<CharacterBody, float>(null, 100f);
         Ray aimRay;
-        public override void OnEnter()
-        {
+        public override void OnEnter() {
             base.OnEnter();
             aimRay = base.GetAimRay();
             this.duration = this.baseDuration;
-            if (base.isAuthority)
-            {
+            Throw();
+        }
+
+        private void Throw() {
+            if (base.isAuthority) {
                 base.StartAimMode(0.2f, false);
 
                 BlastAttack blastAttack = new BlastAttack();
@@ -45,10 +47,8 @@ namespace EntityStates.Chef
 
                 getVictim(blastAttack);
 
-                if (victim.Item1)
-                {
-                    DamageInfo damInfo = new DamageInfo
-                    {
+                if (victim.Item1) {
+                    DamageInfo damInfo = new DamageInfo {
                         attacker = base.gameObject,
                         crit = base.RollCrit(),
                         damage = 5f * base.damageStat,
@@ -60,8 +60,7 @@ namespace EntityStates.Chef
                     };
 
                     launch(victim.Item1);
-                    if (victim.Item1.characterMotor)
-                    {
+                    if (victim.Item1.characterMotor) {
                         var fl = victim.Item1.gameObject.AddComponent<FryLanding>();
                         fl.damageInfo = damInfo;
                         Util.PlaySound("PanHit", base.gameObject);
@@ -86,6 +85,7 @@ namespace EntityStates.Chef
                 //}
             }
         }
+
         public override void FixedUpdate()
         {
             base.FixedUpdate();

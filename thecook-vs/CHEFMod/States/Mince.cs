@@ -11,15 +11,26 @@ namespace EntityStates.Chef
 {
     class Mince : BaseSkillState
     {
-        public float baseDuration = 0.5f;
+        public float baseDuration = 0.5f;   
+        public float throwTime = 0.38f;
+
         private float duration;
+        private bool hasThrown;
+
         private List<CharacterBody> victimBodyList = new List<CharacterBody>();
-        public override void OnEnter()
-        {
+
+        public override void OnEnter() {
             base.OnEnter();
             duration = baseDuration / base.attackSpeedStat;
-            if (base.isAuthority)
-            {
+
+            base.PlayAnimation("Gesture, Override", "PrimaryBoosted", "PrimaryCleaver.playbackrate", duration);
+
+            base.StartAimMode(2f, false);
+        }
+
+        private void Throw() 
+        {
+            if (base.isAuthority) {
                 Ray aimRay = base.GetAimRay();
                 Vector3 right = new Vector3(aimRay.direction.z, 0, -1 * aimRay.direction.x).normalized;
 
@@ -29,13 +40,11 @@ namespace EntityStates.Chef
 
                 getHitList(characterBody.corePosition, 40f);
 
-                foreach (CharacterBody victim in victimBodyList)
-                {
+                foreach (CharacterBody victim in victimBodyList) {
                     Vector3 direction = victim.corePosition - characterBody.corePosition;
                     direction = direction.normalized;
 
-                    FireProjectileInfo info = new FireProjectileInfo()
-                    {
+                    FireProjectileInfo info = new FireProjectileInfo() {
                         projectilePrefab = ChefMod.chefPlugin.cleaverPrefab,
                         position = characterBody.corePosition + 1.5f * direction,// + 1.5f * Vector3.up + 2 * right,
                         rotation = Util.QuaternionSafeLookRotation(direction),// * Quaternion.FromToRotation(Vector3.left, Vector3.up),
@@ -57,14 +66,12 @@ namespace EntityStates.Chef
                 Vector3 split = new Vector3(aimRay.direction.z, aimRay.direction.y, -1 * aimRay.direction.x).normalized;
                 Vector3 aimer = 21 * aimRay.direction - 3 * split;
 
-                for (int i = 0; i < dale; i++)
-                {
+                for (int i = 0; i < dale; i++) {
                     float numbedr = 12 / (dale + 1);
                     Vector3 direction = (i * numbedr * split) + aimer;
                     direction = direction.normalized;
 
-                    FireProjectileInfo info = new FireProjectileInfo()
-                    {
+                    FireProjectileInfo info = new FireProjectileInfo() {
                         projectilePrefab = ChefMod.chefPlugin.cleaverPrefab,
                         position = characterBody.corePosition + 1.5f * direction,// + 1.5f * Vector3.up + 2 * right,
                         rotation = Util.QuaternionSafeLookRotation(direction),// * Quaternion.FromToRotation(Vector3.left, Vector3.up),
@@ -87,6 +94,13 @@ namespace EntityStates.Chef
         public override void FixedUpdate()
         {
             base.FixedUpdate();
+
+            if (fixedAge > duration * throwTime && !hasThrown) {
+                hasThrown = true;
+                Throw();
+            }
+
+
             if (base.fixedAge >= this.duration && base.isAuthority)
             {
                 this.outer.SetNextStateToMain();

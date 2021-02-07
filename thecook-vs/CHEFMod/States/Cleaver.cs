@@ -10,23 +10,48 @@ namespace EntityStates.Chef
     class Cleaver : BaseSkillState
     {
         public float baseDuration = 0.5f;
+        public float throwTime = 0.38f;
+
         private float duration;
-        public override void OnEnter()
-        {
+        private bool hasThrown;
+
+        public override void OnEnter() {
             base.OnEnter();
             duration = baseDuration / base.attackSpeedStat;
-            if (base.isAuthority)
+
+            base.PlayAnimation("Gesture, Override", "Primary", "PrimaryCleaver.playbackrate", duration);
+
+            base.StartAimMode(2f, false);
+        }
+
+        public override void FixedUpdate()
+        {
+            base.FixedUpdate();
+
+            if(fixedAge > duration * throwTime && !hasThrown) {
+                hasThrown = true;
+                Throw();
+            }
+
+            if (base.fixedAge >= this.duration && base.isAuthority)
             {
+                this.outer.SetNextStateToMain();
+                return;
+            }
+        }
+
+
+        private void Throw() {
+
+            if (base.isAuthority) {
                 Ray aimRay = base.GetAimRay();
                 Vector3 right = new Vector3(aimRay.direction.z, 0, -1 * aimRay.direction.x).normalized;
-                base.StartAimMode(0.5f, false);
 
                 var coom = chefPlugin.cleaverPrefab.GetComponent<CoomerangProjectile>();
                 coom.fieldComponent = characterBody.GetComponent<FieldComponent>();
                 coom.followRet = true;
 
-                FireProjectileInfo info = new FireProjectileInfo()
-                {
+                FireProjectileInfo info = new FireProjectileInfo() {
                     projectilePrefab = ChefMod.chefPlugin.cleaverPrefab,
                     position = aimRay.origin + 1.5f * aimRay.direction + 1.5f * Vector3.up + 2 * right,
                     rotation = Util.QuaternionSafeLookRotation(aimRay.direction),// * Quaternion.FromToRotation(Vector3.left, Vector3.up),
@@ -44,16 +69,6 @@ namespace EntityStates.Chef
             }
 
             Util.PlaySound("CleaverThrow", base.gameObject);
-        }
-
-        public override void FixedUpdate()
-        {
-            base.FixedUpdate();
-            if (base.fixedAge >= this.duration && base.isAuthority)
-            {
-                this.outer.SetNextStateToMain();
-                return;
-            }
         }
 
         public override void OnExit()

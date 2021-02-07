@@ -10,22 +10,30 @@ namespace EntityStates.Chef
     class Sbince : BaseSkillState
     {
         public float baseDuration = 0.5f;
+        public float throwTime = 0.38f;
+
         private float duration;
+        private bool hasThrown;
+
         private float pi = 3.14159f;
         private int intensity = chefPlugin.minceVerticalIntensity.Value;
-        public override void OnEnter()
-        {
+        public override void OnEnter() {
             base.OnEnter();
             duration = baseDuration / base.attackSpeedStat;
-            if (base.isAuthority)
-            {
+
+            base.PlayAnimation("Gesture, Override", "Primary", "PrimaryCleaver.playbackrate", duration);
+
+            base.StartAimMode(2f, false);
+        }
+
+        private void Throw() {
+            if (base.isAuthority) {
                 var coom = chefPlugin.cleaverPrefab.GetComponent<CoomerangProjectile>();
                 coom.fieldComponent = characterBody.GetComponent<FieldComponent>();
                 coom.followRet = false;
 
 
-                FireProjectileInfo info = new FireProjectileInfo()
-                {
+                FireProjectileInfo info = new FireProjectileInfo() {
                     projectilePrefab = ChefMod.chefPlugin.cleaverPrefab,
                     position = characterBody.corePosition,
                     owner = base.gameObject,
@@ -38,15 +46,13 @@ namespace EntityStates.Chef
                     fuseOverride = -1f
                 };
 
-                for (int i = -1 * intensity; i <= intensity; i++)
-                {
+                for (int i = -1 * intensity; i <= intensity; i++) {
                     float phi = 0;
                     if (intensity != 0) phi = i * (1f / (2f * intensity)) * pi;
                     float r = Mathf.Cos(phi);
                     int circum = Mathf.Max(1, Mathf.FloorToInt(chefPlugin.minceHorizontalIntensity.Value * pi * 2 * r));
-                    for (int j = 0; j < circum; j++)
-                    {
-                        float theta = 2 * pi * ((float) j / (float) circum);
+                    for (int j = 0; j < circum; j++) {
+                        float theta = 2 * pi * ((float)j / (float)circum);
                         Vector3 direction = new Vector3(r * Mathf.Cos(theta), Mathf.Sin(phi), r * Mathf.Sin(theta));
 
                         info.rotation = Util.QuaternionSafeLookRotation(direction);
@@ -59,8 +65,14 @@ namespace EntityStates.Chef
             Util.PlaySound("CleaverThrow", base.gameObject);
         }
 
-        public override void FixedUpdate()
+        public override void FixedUpdate() 
         {
+
+            if (fixedAge > duration * throwTime && !hasThrown) {
+                hasThrown = true;
+                Throw();
+            }
+
             base.FixedUpdate();
             if (base.fixedAge >= this.duration && base.isAuthority)
             {
