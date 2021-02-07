@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
 using EntityStates;
+using EntityStates.Chef;
 using R2API;
 using R2API.Utils;
 using RoR2;
@@ -213,8 +214,26 @@ namespace ChefMod
 
         private void registerSkills()
         {
+            LoadoutAPI.AddSkill(typeof(Cleaver));
+            LoadoutAPI.AddSkill(typeof(Mince));
+            LoadoutAPI.AddSkill(typeof(Sbince));
+
+            LoadoutAPI.AddSkill(typeof(Sear));
+            LoadoutAPI.AddSkill(typeof(Flambe));
+
+            LoadoutAPI.AddSkill(typeof(Fry));
+            LoadoutAPI.AddSkill(typeof(Roast));
+
+            LoadoutAPI.AddSkill(typeof(OilSlick));
+            LoadoutAPI.AddSkill(typeof(Marinate));
+
+            LoadoutAPI.AddSkill(typeof(Special));
+            LoadoutAPI.AddSkill(typeof(Meal));
+
+            LoadoutAPI.AddSkill(typeof(Main));
+
             primaryDef = ScriptableObject.CreateInstance<SkillDef>();
-            primaryDef.activationState = new SerializableEntityStateType(typeof(EntityStates.Chef.Cleaver));
+            primaryDef.activationState = new SerializableEntityStateType(typeof(Cleaver));
             primaryDef.activationStateMachineName = "Weapon";
             primaryDef.baseMaxStock = 1;
             primaryDef.baseRechargeInterval = 0f;

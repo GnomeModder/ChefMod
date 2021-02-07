@@ -3040,6 +3040,8 @@ MonoBehaviour:
     transform: {fileID: 4829421119659888}
   - name: Cleaver
     transform: {fileID: 3317154551050598175}
+  - name: Hat
+    transform: {fileID: 4062616279744338}
 --- !u!136 &5454570195039079062
 CapsuleCollider:
   m_ObjectHideFlags: 0
