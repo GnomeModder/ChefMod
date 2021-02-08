@@ -47,6 +47,7 @@ namespace EntityStates.Chef
                 ProjectileManager.instance.FireProjectile(info);
 
                 Util.PlaySound("DIng", base.gameObject);
+                Util.PlaySound("Fireball", base.gameObject);
             }
         }
 
@@ -68,7 +69,6 @@ namespace EntityStates.Chef
 
         public override void OnExit()
         {
-            Util.PlaySound("Fireball", base.gameObject);
             base.OnExit();
         }
 

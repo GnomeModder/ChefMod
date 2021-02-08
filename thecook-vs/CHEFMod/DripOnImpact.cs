@@ -39,7 +39,7 @@ namespace ChefMod
             position = impactInfo.estimatedPointOfImpact;
             damageInfo.position = position;
             esplode();
-            spawntheballs(Vector3.up, impactInfo.estimatedPointOfImpact, Vector3.forward, 8, 20f, 1f);
+            spawntheballs(impactInfo.estimatedImpactNormal, impactInfo.estimatedPointOfImpact, Vector3.forward, 8, 20f, 1f);
         }
 
         private void esplode()
@@ -79,7 +79,7 @@ namespace ChefMod
             for (int i = 0; i < meatballCount; i++)
             {
                 Vector3 forward2 = Quaternion.AngleAxis(num * (float)i, impactNormal) * point;
-                ProjectileManager.instance.FireProjectile(chefPlugin.drippingPrefab, impactPosition + 5f * Vector3.up, Util.QuaternionSafeLookRotation(forward2), damageInfo.attacker, damageInfo.damage, meatballForce, damageInfo.crit, DamageColorIndex.Default, null, -1f);
+                ProjectileManager.instance.FireProjectile(chefPlugin.drippingPrefab, impactPosition + 5f * impactNormal.normalized, Util.QuaternionSafeLookRotation(forward2), damageInfo.attacker, damageInfo.damage, meatballForce, damageInfo.crit, DamageColorIndex.Default, null, -1f);
             }
         }
     }

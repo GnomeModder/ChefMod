@@ -65,9 +65,9 @@ namespace ChefMod
 
         public void Awake()
         {
-            classicMince = base.Config.Bind<bool>(new ConfigDefinition("01 - General Settings", "Classic Mince"), false, new ConfigDescription("Makes Mince work more like ror1", null, Array.Empty<object>()));
-            minceVerticalIntensity = base.Config.Bind<int>(new ConfigDefinition("01 - General Settings", "Mince Vertical Intensity"), 0, new ConfigDescription("controls how much you want mince to lag your game. Doesn't do anything unless you have classic mince as true", null, Array.Empty<object>()));
-            minceHorizontalIntensity = base.Config.Bind<float>(new ConfigDefinition("01 - General Settings", "Mince Horizontal Intensity"), 5, new ConfigDescription("same as above", null, Array.Empty<object>()));
+            classicMince = base.Config.Bind<bool>(new ConfigDefinition("01 - General Settings", "Sbince"), true, new ConfigDescription("Makes Mince work more like ror1. Turn off if it's hurting performance too much, there's an alternate version that's less costly", null, Array.Empty<object>()));
+            minceVerticalIntensity = base.Config.Bind<int>(new ConfigDefinition("01 - General Settings", "Mince Vertical Density"), 3, new ConfigDescription("controls how much you want mince to lag your game. Doesn't do anything unless you have classic mince (sbince) as true", null, Array.Empty<object>()));
+            minceHorizontalIntensity = base.Config.Bind<float>(new ConfigDefinition("01 - General Settings", "Mince Horizontal Density"), 3, new ConfigDescription("same as above", null, Array.Empty<object>()));
             oilProc = base.Config.Bind<float>(new ConfigDefinition("01 - General Settings", "Oil Proc"), 0, new ConfigDescription("proc coef on fire oil tick", null, Array.Empty<object>()));
 
             registerCharacter();
@@ -180,7 +180,7 @@ namespace ChefMod
             characterBody.levelDamage = 2.4f;
             characterBody.baseMaxHealth = 100f;
             characterBody.levelMaxHealth = 25f;
-            characterBody.baseArmor = 10f;
+            characterBody.baseArmor = 20f;
             characterBody.baseRegen = 1f;
             characterBody.levelRegen = 0.2f;
             characterBody.baseMoveSpeed = 7f;
