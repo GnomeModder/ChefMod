@@ -126,6 +126,8 @@ namespace EntityStates.Chef
 
 			characterBody.GetComponent<FieldComponent>().oil.enabled = false;
 
+			base.PlayAnimation("Fullbody, Override", "UtilityEnd");
+
 			base.OnExit();
 		}
 
