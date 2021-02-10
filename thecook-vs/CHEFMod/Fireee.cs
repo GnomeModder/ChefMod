@@ -57,9 +57,10 @@ namespace ChefMod
             {
                 thisItem.gameObject.SetActive(false);
             }
-            //ground = body.characterMotor.isGrounded;
 
-            //oilPrefab = goku("Oyl");
+            oilPrefab = goku("Oyl");
+
+            //ground = body.characterMotor.isGrounded;
 
             //checkforhomies();
         }
@@ -74,7 +75,10 @@ namespace ChefMod
             if (!onFire && !ground && body.characterMotor.isGrounded)
             {
                 ground = true;
-                oilPrefab = goku("Oyl");
+                Quaternion floorRotation = Quaternion.FromToRotation(Vector3.up, body.characterMotor.estimatedGroundNormal);
+                Quaternion ninety = Quaternion.FromToRotation(Vector3.up, Vector3.forward);
+                oilPrefab.transform.rotation = this.transform.rotation * ninety * floorRotation;
+                oilPrefab.transform.localScale *= 2f;
                 checkforhomies();
             }
 
@@ -95,13 +99,7 @@ namespace ChefMod
             GameObject prefab;
             prefab = Instantiate(Assets.chefAssetBundle.LoadAsset<GameObject>(asset));
             var direction = this.transform.root.GetComponentInChildren<CharacterDirection>();
-            prefab.transform.position = body.footPosition - 7 * Vector3.up;
-            prefab.transform.localScale *= 2f;
-            Quaternion floorRotation = Quaternion.FromToRotation(Vector3.up, body.characterMotor.estimatedGroundNormal);
-            Quaternion ninety = Quaternion.FromToRotation(Vector3.up, Vector3.forward);
-            float randomtheta = UnityEngine.Random.Range(0, 2 * Mathf.PI);
-            Quaternion random = Quaternion.FromToRotation(Vector3.forward, new Vector3(Mathf.Cos(randomtheta), 0, Mathf.Sin(randomtheta)));
-            prefab.transform.rotation = this.transform.rotation * ninety * floorRotation;
+            prefab.transform.position = body.footPosition - Vector3.up;
             prefab.transform.SetParent(this.transform);
             return prefab;
         }
