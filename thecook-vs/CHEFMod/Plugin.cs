@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
 using EntityStates;
+using EntityStates.ArtifactShell;
 using EntityStates.Chef;
 using R2API;
 using R2API.Utils;
@@ -9,6 +10,7 @@ using RoR2.Projectile;
 using RoR2.Skills;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -653,18 +655,37 @@ namespace ChefMod
             oilPrefab.layer = LayerIndex.debris.intVal;
             oilPrefab.name = "OilBeetle";
 
-            ModelLocator modelLocator = oilPrefab.GetComponent<ModelLocator>();
-            foreach (HurtBox hbox in modelLocator.modelBaseTransform.gameObject.GetComponentsInChildren<HurtBox>())
-            {
-                hbox.damageModifier = HurtBox.DamageModifier.Barrier;
-                foreach (HurtBox hhbox in hbox.hurtBoxGroup.hurtBoxes)
+            foreach (Component comp in oilPrefab.GetComponents<Component>()) if (comp.GetType().Name == "KinematicCharacterMotor")
                 {
-                    hhbox.damageModifier = HurtBox.DamageModifier.Barrier;
+                    Destroy(comp);
                 }
-            }
+            Destroy(oilPrefab.GetComponent<CharacterMotor>());
+            var rig = oilPrefab.GetComponent<Rigidbody>();
+            rig.isKinematic = false;
+            rig.useGravity = true;
+            rig.freezeRotation = true;
+
+            ModelLocator modelLocator = oilPrefab.GetComponent<ModelLocator>();
+            modelLocator.modelBaseTransform.localScale *= 0.1f;
+            //foreach (HurtBox hbox in modelLocator.modelBaseTransform.gameObject.GetComponentsInChildren<HurtBox>())
+            //{
+            //    hbox.gameObject.transform.localScale *= .01f;
+            //}
+
+            var cap = oilPrefab.GetComponent<CapsuleCollider>();
+            cap.radius *= 0.6f;
+            cap.height = 0;
+
+            Destroy(oilPrefab.GetComponent<InteractionDriver>());
+            Destroy(oilPrefab.GetComponent<InputBankTest>());
+            Destroy(oilPrefab.GetComponent<CameraTargetParams>());
+            Destroy(oilPrefab.GetComponent<EntityStateMachine>());
+            foreach (GenericSkill skill in oilPrefab.GetComponents<GenericSkill>()) Destroy(skill);
+            Destroy(oilPrefab.GetComponent<NetworkStateMachine>());
+            Destroy(oilPrefab.GetComponent<Interactor>());
+            Destroy(oilPrefab.GetComponent<EquipmentSlot>());
 
             oilPrefab.AddComponent<Fireee>();
-            //oilPrefab.AddComponent<NetworkIdentity>();
             oilPrefab.AddComponent<ProjectileController>();
 
             On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>

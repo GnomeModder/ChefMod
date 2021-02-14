@@ -1,6 +1,7 @@
 ﻿using RoR2;
 using System;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -26,6 +27,7 @@ namespace ChefMod
         private float igniteTime;
         private bool ground = false;
         private int framecounter = 0;
+        private Rigidbody rig;
 
         private static List<HurtBox> hurtBoxBuffer = new List<HurtBox>();
         private static SphereSearch sphereSearch = new SphereSearch();
@@ -59,6 +61,8 @@ namespace ChefMod
             }
 
             oilPrefab = goku("Oyl");
+            rig = GetComponent<Rigidbody>();
+            rig.velocity += Vector3.down;
 
             //ground = body.characterMotor.isGrounded;
 
@@ -72,13 +76,15 @@ namespace ChefMod
                 ignate();
             }
 
-            if (!onFire && !ground && body.characterMotor.isGrounded)
+            if (!onFire && !ground && rig.velocity.magnitude < 1f)// && body.characterMotor.isGrounded)
             {
                 ground = true;
-                Quaternion floorRotation = Quaternion.FromToRotation(Vector3.up, body.characterMotor.estimatedGroundNormal);
+                rig.isKinematic = true;
+                Ray ray = new Ray(transform.position, Vector3.down);
+                RaycastHit[] casts = Physics.RaycastAll(ray);
+                Quaternion floorRotation = Quaternion.FromToRotation(Vector3.up, casts[0].normal);
                 Quaternion ninety = Quaternion.FromToRotation(Vector3.up, Vector3.forward);
                 oilPrefab.transform.rotation = this.transform.rotation * ninety * floorRotation;
-                oilPrefab.transform.localScale *= 2f;
                 checkforhomies();
             }
 
@@ -99,8 +105,9 @@ namespace ChefMod
             GameObject prefab;
             prefab = Instantiate(Assets.chefAssetBundle.LoadAsset<GameObject>(asset));
             var direction = this.transform.root.GetComponentInChildren<CharacterDirection>();
-            prefab.transform.position = body.footPosition - Vector3.up;
+            prefab.transform.position = body.footPosition - 2.5f * Vector3.up;
             prefab.transform.SetParent(this.transform);
+            prefab.transform.localScale *= 2.5f;
             return prefab;
         }
 
