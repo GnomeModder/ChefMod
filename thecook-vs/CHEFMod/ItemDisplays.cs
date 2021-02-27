@@ -45,7 +45,7 @@ namespace ChefMod
                             ruleType = ItemDisplayRuleType.ParentedPrefab,
                             followerPrefab = ItemDisplays.LoadDisplay("DisplayBugWings"),
                             limbMask = LimbFlags.None,
-                            childName = "Body",
+                            childName = "Hat",
                             localPos = new Vector3(0F, -0.0198F, -0.0186F),
                             localAngles = new Vector3(11.1031F, 0F, 0F),
                             localScale = new Vector3(0.0084F, 0.0084F, 0.0084F)
@@ -1609,7 +1609,7 @@ namespace ChefMod
                             childName = "Body",
                             localPos = new Vector3(0.0005F, 0.0043F, 0F),
                             localAngles = new Vector3(0F, 0F, 90F),
-                            localScale = new Vector3(0.0251F, 0.0251F, 0.0251F)
+                            localScale = new Vector3(0.027F, 0.027F, 0.027F)
                         }
                     }
                 }

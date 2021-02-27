@@ -33,12 +33,12 @@ namespace EntityStates.Chef
 				base.gameObject.layer = LayerIndex.fakeActor.intVal;
 				base.characterMotor.Motor.RebuildCollidableLayers();
 
-				var fire = chefPlugin.oilPrefab.GetComponent<Fireee>();
-				fire.owner = characterBody.gameObject;
-				fire.teamIndex = characterBody.teamComponent.teamIndex;
-				fire.damagePerFrame = characterBody.damage * 0.25f;
-				fire.critStat = base.critStat;
-				fire.master = characterBody.master;
+				//var fire = chefPlugin.oilPrefab.GetComponent<Fireee>();
+				//fire.owner = characterBody.gameObject;
+				//fire.teamIndex = characterBody.teamComponent.teamIndex;
+				//fire.damagePerFrame = characterBody.damage * 0.25f;
+				//fire.critStat = base.critStat;
+				//fire.master = characterBody.master;
 
 				//trailComponent = base.characterBody.GetComponent<ChefMod.FieldComponent>();
 				//trailComponent.active = true;
@@ -102,7 +102,9 @@ namespace EntityStates.Chef
 						projectilePrefab = ChefMod.chefPlugin.oilPrefab,
 						position = characterBody.corePosition,
 						rotation = Quaternion.identity,
-						owner = base.gameObject
+						owner = base.gameObject,
+						damage = characterBody.damage * 0.25f,
+						crit = base.RollCrit()
 					};
 
 					ProjectileManager.instance.FireProjectile(info);

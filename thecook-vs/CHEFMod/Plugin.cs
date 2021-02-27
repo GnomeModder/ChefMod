@@ -28,7 +28,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "0.11.0")]
+        "0.12.0")]
     public class chefPlugin : BaseUnityPlugin
     {
         public GameObject chefPrefab;
@@ -675,6 +675,7 @@ namespace ChefMod
             var cap = oilPrefab.GetComponent<CapsuleCollider>();
             cap.radius *= 0.6f;
             cap.height = 0;
+            cap.material.staticFriction = 1;
 
             Destroy(oilPrefab.GetComponent<InteractionDriver>());
             Destroy(oilPrefab.GetComponent<InputBankTest>());
@@ -684,9 +685,16 @@ namespace ChefMod
             Destroy(oilPrefab.GetComponent<NetworkStateMachine>());
             Destroy(oilPrefab.GetComponent<Interactor>());
             Destroy(oilPrefab.GetComponent<EquipmentSlot>());
+            Destroy(oilPrefab.GetComponent<CharacterDeathBehavior>());
+            Destroy(oilPrefab.GetComponent<DeathRewards>());
+            Destroy(oilPrefab.GetComponent<CharacterEmoteDefinitions>());
+            Destroy(oilPrefab.GetComponent<SfxLocator>());
 
             oilPrefab.AddComponent<Fireee>();
             oilPrefab.AddComponent<ProjectileController>();
+            oilPrefab.AddComponent<TeamFilter>();
+            oilPrefab.AddComponent<ProjectileDamage>();
+            //oilPrefab.AddComponent<ProjectileDotZone>().enabled = false;
 
             On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
             {
@@ -714,10 +722,17 @@ namespace ChefMod
 
             var firetrail = Resources.Load<GameObject>("Prefabs/FireTrail");
             segfab = firetrail.GetComponent<DamageTrail>().segmentPrefab;
-            //var ups = segfab.GetComponent<ParticleSystem>();
-            //var man = ups.main;
-            //man.maxParticles *= 10;
-            //man.duration *= 10;
+            var ups = segfab.GetComponent<ParticleSystem>();
+            var man = ups.main;
+            man.loop = true;
+            man.duration *= 10f;
+            man.simulationSpeed *= 5f;
+            man.startSizeMultiplier *= 5f;
+            segfab.transform.localScale = new Vector3(10, 100, 10);
+            var em = ups.emission;
+            em.enabled = true;
+            var x = em.rateOverTime; 
+            x.curveMultiplier *= 100f;
 
             //fireMat = segfab.GetComponent<LineRenderer>().sharedMaterial;
             //On.RoR2.Orbs.LightningOrb.PickNextTarget += (orig, self, position) =>

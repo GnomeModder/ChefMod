@@ -40,13 +40,13 @@ namespace EntityStates.Chef
         {
             base.Update();
 
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                //characterBody.master.inventory.GiveItem(ItemIndex.Hoof);
-                //characterBody.master.inventory.GiveItem(ItemIndex.FireRing);
-                //characterBody.master.inventory.GiveItem(ItemIndex.SlowOnHit);
-                characterBody.master.inventory.SetEquipmentIndex(EquipmentIndex.Blackhole);
-            }
+            //if (Input.GetKeyDown(KeyCode.K))
+            //{
+            //    //characterBody.master.inventory.GiveItem(ItemIndex.Hoof);
+            //    //characterBody.master.inventory.GiveItem(ItemIndex.FireRing);
+            //    //characterBody.master.inventory.GiveItem(ItemIndex.SlowOnHit);
+            //    characterBody.master.inventory.SetEquipmentIndex(EquipmentIndex.Blackhole);
+            //}
 
             //this.oilTrail.damagePerSecond = base.characterBody.damage * 1.5f;
             //this.oilTrail.active = fieldComponent.active;
@@ -60,6 +60,43 @@ namespace EntityStates.Chef
 
             //Object.Destroy(this.oilTrail.gameObject);
             //this.oilTrail = null;
+
+            if (characterBody.healthComponent.health < 1)
+            {
+                BlastAttack blastAttack = new BlastAttack();
+                blastAttack.radius = 0.25f;
+                blastAttack.procCoefficient = 1f;
+                blastAttack.position = characterBody.corePosition;
+                blastAttack.attacker = base.gameObject;
+                blastAttack.crit = true;
+                blastAttack.baseDamage = 1000000;
+                blastAttack.falloffModel = BlastAttack.FalloffModel.None;
+                blastAttack.baseForce = 300f;
+                blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
+                blastAttack.damageType = DamageType.Generic;
+                blastAttack.attackerFiltering = AttackerFiltering.NeverHit;
+                BlastAttack.Result result = blastAttack.Fire();
+
+                GameObject effect = Resources.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFX");
+                EffectData effectData = new EffectData
+                {
+                    scale = 8f,
+                    origin = characterBody.corePosition
+                };
+                EffectManager.SpawnEffect(effect, effectData, true);
+
+                var direction = characterBody.gameObject.GetComponentInChildren<CharacterDirection>();
+                foreach (var thisItem in direction.modelAnimator.GetComponentsInChildren<SkinnedMeshRenderer>())
+                {
+                    thisItem.gameObject.SetActive(false);
+                }
+                foreach (var thisItem in direction.modelAnimator.GetComponentsInChildren<MeshRenderer>())
+                {
+                    thisItem.gameObject.SetActive(false);
+                }
+            }
+
+
             base.OnExit();
         }
 

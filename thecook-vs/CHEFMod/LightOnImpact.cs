@@ -7,11 +7,14 @@ namespace ChefMod
 {
     public class LightOnImpact : MonoBehaviour, RoR2.Projectile.IProjectileImpactBehavior
     {
+        private bool impacted = false;
         private float radius = 10;
         private Vector3 position;
 
         public void OnProjectileImpact(ProjectileImpactInfo impactInfo)
         {
+            if (impacted) return;
+            impacted = true;
             position = impactInfo.estimatedPointOfImpact;
             light();
         }

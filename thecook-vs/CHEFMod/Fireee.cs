@@ -1,4 +1,5 @@
 ﻿using RoR2;
+using RoR2.Projectile;
 using System;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
@@ -9,15 +10,14 @@ namespace ChefMod
 {
     public class Fireee : NetworkBehaviour
     {
-        public GameObject owner;
-        public TeamIndex teamIndex = TeamIndex.Player;
         public bool onFire = false;
-        public float critStat = 0;
-        public CharacterMaster master = null;
 
+        private GameObject owner;
+        private TeamIndex teamIndex;
         private CharacterBody body;
+        private float damagePerFrame;
+        private bool crit;
         private float radius = 10;
-        public float damagePerFrame = 3;
         private float oilTime = 30f;
         private float burnTime = 10f;
 
@@ -63,6 +63,15 @@ namespace ChefMod
             oilPrefab = goku("Oyl");
             rig = GetComponent<Rigidbody>();
             rig.velocity += Vector3.down;
+
+            var projCont = this.gameObject.GetComponent<ProjectileController>();
+            var projDamg = this.gameObject.GetComponent<ProjectileDamage>();
+            var teamFilt = this.gameObject.GetComponent<TeamFilter>();
+
+            this.owner = projCont.owner;
+            this.teamIndex = teamFilt.teamIndex;
+            this.damagePerFrame = projDamg.damage;
+            this.crit = projDamg.crit;
 
             //ground = body.characterMotor.isGrounded;
 
@@ -132,7 +141,7 @@ namespace ChefMod
             //Destroy(oilPrefab);
             //firePrefab = goku("Fyre");
             oilPrefab.GetComponent<MeshRenderer>().material = chefPlugin.segfab.GetComponent<ParticleSystemRenderer>().material;
-            firePrefab = Instantiate(chefPlugin.segfab, this.transform.position, Quaternion.identity);
+            firePrefab = Instantiate(chefPlugin.segfab, this.transform.position - Vector3.up, Quaternion.identity);
 
             hitmyhomiesup();
 
@@ -198,14 +207,12 @@ namespace ChefMod
                                 {
                                     if (onFire)
                                     {
-                                        bool crit = false;
-                                        if (master) crit = Util.CheckRoll(critStat, master);
                                         healthComponent.TakeDamage(new RoR2.DamageInfo
                                         {
                                             position = healthComponent.body.corePosition,
                                             attacker = this.owner,
                                             inflictor = base.gameObject,
-                                            crit = crit,
+                                            crit = this.crit,
                                             damage = damage,
                                             damageColorIndex = RoR2.DamageColorIndex.Default,
                                             damageType = RoR2.DamageType.Generic,
@@ -253,7 +260,7 @@ namespace ChefMod
         }
         private void checkforhomies()
         {
-            RaycastHit[] array = Physics.SphereCastAll(body.corePosition, radius, Vector3.up, 5f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
+            RaycastHit[] array = Physics.SphereCastAll(body.corePosition, 1.2f * radius, Vector3.up, 5f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
             for (int j = 0; j < array.Length; j++)
             {
                 Collider collider = array[j].collider;

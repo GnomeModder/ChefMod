@@ -7,6 +7,7 @@ namespace ChefMod
 {
     public class DripOnImpact : MonoBehaviour, RoR2.Projectile.IProjectileImpactBehavior
     {
+        private bool impacted = false;
         private float radius = 10;
         private DamageInfo damageInfo;
         private TeamIndex teamIndex;
@@ -36,6 +37,8 @@ namespace ChefMod
 
         public void OnProjectileImpact(ProjectileImpactInfo impactInfo)
         {
+            if (impacted) return;
+            impacted = true;
             position = impactInfo.estimatedPointOfImpact;
             damageInfo.position = position;
             esplode();
