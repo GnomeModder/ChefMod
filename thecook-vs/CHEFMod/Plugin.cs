@@ -28,11 +28,12 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "0.12.0")]
+        "0.12.1")]
     public class chefPlugin : BaseUnityPlugin
     {
         public GameObject chefPrefab;
         public static GameObject cleaverPrefab;
+        public static GameObject knifePrefab;
         public static GameObject oilPrefab;
         public static GameObject segfab;
         public static GameObject foirballPrefab;
@@ -41,6 +42,8 @@ namespace ChefMod
 
         public static SkillDef primaryDef;
         public static SkillDef boostedPrimaryDef;
+        public static SkillDef altPrimaryDef;
+        public static SkillDef boostedAltPrimaryDef;
         public static SkillDef secondaryDef;
         public static SkillDef boostedSecondaryDef;
         public static SkillDef altSecondaryDef;
@@ -134,6 +137,12 @@ namespace ChefMod
             prefabBuilder.masteryAchievementUnlockable = "";
             chefPrefab = prefabBuilder.CreatePrefab();
 
+            var tracker = chefPrefab.AddComponent<HuntressTracker>();
+            tracker.maxTrackingDistance = 30f;
+            tracker.maxTrackingAngle = 90f;
+            //tracker.indicator = ;
+            tracker.enabled = false;
+
             ItemDisplays.RegisterDisplays(chefPrefab);
 
             var fc = chefPrefab.AddComponent<FieldComponent>();
@@ -223,6 +232,9 @@ namespace ChefMod
             LoadoutAPI.AddSkill(typeof(Mince));
             LoadoutAPI.AddSkill(typeof(Sbince));
 
+            LoadoutAPI.AddSkill(typeof(Slice));
+            LoadoutAPI.AddSkill(typeof(Julienne));
+
             LoadoutAPI.AddSkill(typeof(Sear));
             LoadoutAPI.AddSkill(typeof(Flambe));
 
@@ -260,19 +272,19 @@ namespace ChefMod
             primaryDef.skillNameToken = "CHEF_PRIMARY_NAME";
 
             LanguageAPI.Add("CHEF_PRIMARY_NAME", "Dice");
-            LanguageAPI.Add("CHEF_PRIMARY_DESCRIPTION", "Toss a boomerang cleaver for 50% damage. Agile");
+            LanguageAPI.Add("CHEF_PRIMARY_DESCRIPTION", "Toss a boomerang cleaver for 25% damage per hit. Agile");
             LoadoutAPI.AddSkillDef(primaryDef);
 
             boostedPrimaryDef = ScriptableObject.CreateInstance<SkillDef>();
-            boostedPrimaryDef.activationState = new SerializableEntityStateType(typeof(EntityStates.Chef.Mince));
-            if (classicMince.Value) boostedPrimaryDef.activationState = new SerializableEntityStateType(typeof(EntityStates.Chef.Sbince));
+            boostedPrimaryDef.activationState = new SerializableEntityStateType(typeof(Mince));
+            if (classicMince.Value) boostedPrimaryDef.activationState = new SerializableEntityStateType(typeof(Sbince));
             boostedPrimaryDef.activationStateMachineName = "Weapon";
             boostedPrimaryDef.baseMaxStock = 1;
             boostedPrimaryDef.baseRechargeInterval = 0f;
             boostedPrimaryDef.beginSkillCooldownOnSkillEnd = false;
             boostedPrimaryDef.canceledFromSprinting = false;
             boostedPrimaryDef.fullRestockOnAssign = false;
-            boostedPrimaryDef.interruptPriority = InterruptPriority.Any;
+            boostedPrimaryDef.interruptPriority = InterruptPriority.Frozen;
             boostedPrimaryDef.isBullets = true;
             boostedPrimaryDef.isCombatSkill = true;
             boostedPrimaryDef.mustKeyPress = false;
@@ -287,11 +299,63 @@ namespace ChefMod
             boostedPrimaryDef.skillNameToken = "CHEF_BOOSTED_PRIMARY_NAME";
 
             LanguageAPI.Add("CHEF_BOOSTED_PRIMARY_NAME", "Mince");
-            LanguageAPI.Add("CHEF_BOOSTED_PRIMARY_DESCRIPTION", "Throw a cleaver at every nearby enemy");
+            LanguageAPI.Add("CHEF_BOOSTED_PRIMARY_DESCRIPTION", "Throw a cleaver in every direction");
             LoadoutAPI.AddSkillDef(boostedPrimaryDef);
 
+            altPrimaryDef = ScriptableObject.CreateInstance<SkillDef>();
+            altPrimaryDef.activationState = new SerializableEntityStateType(typeof(Slice));
+            altPrimaryDef.activationStateMachineName = "Weapon";
+            altPrimaryDef.baseMaxStock = 1;
+            altPrimaryDef.baseRechargeInterval = 0f;
+            altPrimaryDef.beginSkillCooldownOnSkillEnd = false;
+            altPrimaryDef.canceledFromSprinting = false;
+            altPrimaryDef.fullRestockOnAssign = false;
+            altPrimaryDef.interruptPriority = InterruptPriority.Any;
+            altPrimaryDef.isBullets = true;
+            altPrimaryDef.isCombatSkill = true;
+            altPrimaryDef.mustKeyPress = false;
+            altPrimaryDef.noSprint = false;
+            altPrimaryDef.rechargeStock = 1;
+            altPrimaryDef.requiredStock = 1;
+            altPrimaryDef.shootDelay = 0.5f;
+            altPrimaryDef.stockToConsume = 1;
+            altPrimaryDef.icon = Assets.chefDiceIcon;
+            altPrimaryDef.skillDescriptionToken = "CHEF_ALTPRIMARY_DESCRIPTION";
+            altPrimaryDef.skillName = "Primary";
+            altPrimaryDef.skillNameToken = "CHEF_ALTPRIMARY_NAME";
+
+            LanguageAPI.Add("CHEF_ALTPRIMARY_NAME", "Slice");
+            LanguageAPI.Add("CHEF_ALTPRIMARY_DESCRIPTION", "Stab your target for 100% damage. Agile");
+            LoadoutAPI.AddSkillDef(altPrimaryDef);
+
+            boostedAltPrimaryDef = ScriptableObject.CreateInstance<SkillDef>();
+            boostedAltPrimaryDef.activationState = new SerializableEntityStateType(typeof(Julienne));
+            boostedAltPrimaryDef.activationStateMachineName = "Weapon";
+            boostedAltPrimaryDef.baseMaxStock = 1;
+            boostedAltPrimaryDef.baseRechargeInterval = 0f;
+            boostedAltPrimaryDef.beginSkillCooldownOnSkillEnd = false;
+            boostedAltPrimaryDef.canceledFromSprinting = false;
+            boostedAltPrimaryDef.fullRestockOnAssign = false;
+            boostedAltPrimaryDef.interruptPriority = InterruptPriority.Frozen;
+            boostedAltPrimaryDef.isBullets = true;
+            boostedAltPrimaryDef.isCombatSkill = true;
+            boostedAltPrimaryDef.mustKeyPress = false;
+            boostedAltPrimaryDef.noSprint = false;
+            boostedAltPrimaryDef.rechargeStock = 1;
+            boostedAltPrimaryDef.requiredStock = 1;
+            boostedAltPrimaryDef.shootDelay = 0.5f;
+            boostedAltPrimaryDef.stockToConsume = 1;
+            boostedAltPrimaryDef.icon = Assets.chefMinceIcon;
+            boostedAltPrimaryDef.skillDescriptionToken = "CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION";
+            boostedAltPrimaryDef.skillName = "BoostedPrimary";
+            boostedAltPrimaryDef.skillNameToken = "CHEF_BOOSTED_ALTPRIMARY_NAME";
+
+            LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_NAME", "Julienne");
+            LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION", "Stab every nearby enemy");
+            LoadoutAPI.AddSkillDef(boostedAltPrimaryDef);
+
             secondaryDef = ScriptableObject.CreateInstance<SkillDef>();
-            secondaryDef.activationState = new SerializableEntityStateType(typeof(EntityStates.Chef.Sear));
+            secondaryDef.activationState = new SerializableEntityStateType(typeof(Sear));
             secondaryDef.activationStateMachineName = "Weapon";
             secondaryDef.baseMaxStock = 1;
             secondaryDef.baseRechargeInterval = 4f;
@@ -317,7 +381,7 @@ namespace ChefMod
             LoadoutAPI.AddSkillDef(secondaryDef);
 
             boostedSecondaryDef = ScriptableObject.CreateInstance<SkillDef>();
-            boostedSecondaryDef.activationState = new SerializableEntityStateType(typeof(EntityStates.Chef.Flambe));
+            boostedSecondaryDef.activationState = new SerializableEntityStateType(typeof(Flambe));
             boostedSecondaryDef.activationStateMachineName = "Weapon";
             boostedSecondaryDef.baseMaxStock = 1;
             boostedSecondaryDef.baseRechargeInterval = 4f;
@@ -343,7 +407,7 @@ namespace ChefMod
             LoadoutAPI.AddSkillDef(boostedSecondaryDef);
 
             altSecondaryDef = ScriptableObject.CreateInstance<SkillDef>();
-            altSecondaryDef.activationState = new SerializableEntityStateType(typeof(EntityStates.Chef.Fry));
+            altSecondaryDef.activationState = new SerializableEntityStateType(typeof(Fry));
             altSecondaryDef.activationStateMachineName = "Weapon";
             altSecondaryDef.baseMaxStock = 1;
             altSecondaryDef.baseRechargeInterval = 4f;
@@ -369,7 +433,7 @@ namespace ChefMod
             LoadoutAPI.AddSkillDef(altSecondaryDef);
 
             boostedAltSecondaryDef = ScriptableObject.CreateInstance<SkillDef>();
-            boostedAltSecondaryDef.activationState = new SerializableEntityStateType(typeof(EntityStates.Chef.Roast));
+            boostedAltSecondaryDef.activationState = new SerializableEntityStateType(typeof(Roast));
             boostedAltSecondaryDef.activationStateMachineName = "Weapon";
             boostedAltSecondaryDef.baseMaxStock = 1;
             boostedAltSecondaryDef.baseRechargeInterval = 4f;
@@ -395,7 +459,7 @@ namespace ChefMod
             LoadoutAPI.AddSkillDef(boostedAltSecondaryDef);
 
             utilityDef = ScriptableObject.CreateInstance<SkillDef>();
-            utilityDef.activationState = new SerializableEntityStateType(typeof(EntityStates.Chef.OilSlick));
+            utilityDef.activationState = new SerializableEntityStateType(typeof(OilSlick));
             utilityDef.activationStateMachineName = "Weapon";
             utilityDef.baseMaxStock = 1;
             utilityDef.baseRechargeInterval = 7f;
@@ -421,7 +485,7 @@ namespace ChefMod
             LoadoutAPI.AddSkillDef(utilityDef);
 
             boostedUtilityDef = ScriptableObject.CreateInstance<SkillDef>();
-            boostedUtilityDef.activationState = new SerializableEntityStateType(typeof(EntityStates.Chef.Marinate));
+            boostedUtilityDef.activationState = new SerializableEntityStateType(typeof(Marinate));
             boostedUtilityDef.activationStateMachineName = "Weapon";
             boostedUtilityDef.baseMaxStock = 1;
             boostedUtilityDef.baseRechargeInterval = 7f;
@@ -447,7 +511,7 @@ namespace ChefMod
             LoadoutAPI.AddSkillDef(boostedUtilityDef);
 
             var specialDef = ScriptableObject.CreateInstance<SkillDef>();
-            specialDef.activationState = new SerializableEntityStateType(typeof(EntityStates.Chef.Meal));
+            specialDef.activationState = new SerializableEntityStateType(typeof(Meal));
             specialDef.activationStateMachineName = "Weapon";
             specialDef.baseMaxStock = 1;
             specialDef.baseRechargeInterval = 15f;
@@ -473,7 +537,7 @@ namespace ChefMod
             LoadoutAPI.AddSkillDef(specialDef);
 
             var altSpecialDef = ScriptableObject.CreateInstance<SkillDef>();
-            altSpecialDef.activationState = new SerializableEntityStateType(typeof(EntityStates.Chef.Special));
+            altSpecialDef.activationState = new SerializableEntityStateType(typeof(Special));
             altSpecialDef.activationStateMachineName = "Weapon";
             altSpecialDef.baseMaxStock = 1;
             altSpecialDef.baseRechargeInterval = 15f;
@@ -501,12 +565,19 @@ namespace ChefMod
             SkillLocator skillLocator = chefPrefab.GetComponent<SkillLocator>();
 
             var skillFamily = skillLocator.primary.skillFamily;
-
             skillFamily.variants[0] = new SkillFamily.Variant
             {
                 skillDef = primaryDef,
                 unlockableName = "",
                 viewableNode = new ViewablesCatalog.Node(primaryDef.skillNameToken, false, null)
+            };
+
+            Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
+            skillFamily.variants[1] = new SkillFamily.Variant
+            {
+                skillDef = altPrimaryDef,
+                unlockableName = "",
+                viewableNode = new ViewablesCatalog.Node(altPrimaryDef.skillNameToken, false, null)
             };
 
             skillFamily = skillLocator.secondary.skillFamily;
@@ -605,6 +676,14 @@ namespace ChefMod
             //pdz.resetFrequency *= 0.25f;
 
             cleaverPrefab.layer = LayerIndex.noCollision.intVal;
+
+            knifePrefab = cleaverPrefab.InstantiateClone("CHEFKnife", true);
+            knifePrefab.AddComponent<ProjectileTargetComponent>();
+            knifePrefab.layer = LayerIndex.projectile.intVal;
+
+            var kum = knifePrefab.GetComponent<CoomerangProjectile>();
+            Destroy(knifePrefab.GetComponent<ProjectileOverlapAttack>());
+            
 
             //GameObject stunGrenadeModel = Assets.chefAssetBundle.LoadAsset<GameObject>("Cleaver").InstantiateClone("CleaverGhost", true);
             //stunGrenadeModel.AddComponent<UnityEngine.Networking.NetworkIdentity>();
@@ -722,17 +801,17 @@ namespace ChefMod
 
             var firetrail = Resources.Load<GameObject>("Prefabs/FireTrail");
             segfab = firetrail.GetComponent<DamageTrail>().segmentPrefab;
-            var ups = segfab.GetComponent<ParticleSystem>();
-            var man = ups.main;
-            man.loop = true;
-            man.duration *= 10f;
-            man.simulationSpeed *= 5f;
-            man.startSizeMultiplier *= 5f;
-            segfab.transform.localScale = new Vector3(10, 100, 10);
-            var em = ups.emission;
-            em.enabled = true;
-            var x = em.rateOverTime; 
-            x.curveMultiplier *= 100f;
+            //var ups = segfab.GetComponent<ParticleSystem>();
+            //var man = ups.main;
+            //man.loop = true;
+            //man.duration *= 10f;
+            //man.simulationSpeed *= 5f;
+            //man.startSizeMultiplier *= 5f;
+            //segfab.transform.localScale = new Vector3(10, 100, 10);
+            //var em = ups.emission;
+            //em.enabled = true;
+            //var x = em.rateOverTime; 
+            //x.curveMultiplier *= 100f;
 
             //fireMat = segfab.GetComponent<LineRenderer>().sharedMaterial;
             //On.RoR2.Orbs.LightningOrb.PickNextTarget += (orig, self, position) =>

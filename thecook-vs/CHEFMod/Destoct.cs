@@ -66,7 +66,7 @@ namespace ChefMod
                 {
                     attacker = damageInfo.attacker,
                     attackerFiltering = AttackerFiltering.NeverHit,
-                    baseDamage = 2f * damageInfo.damage,
+                    baseDamage = 3f * damageInfo.damage,
                     baseForce = 5f,
                     crit = damageInfo.crit,
                     damageColorIndex = DamageColorIndex.Default,
@@ -74,7 +74,7 @@ namespace ChefMod
                     falloffModel = BlastAttack.FalloffModel.None,
                     position = transform.position,
                     procCoefficient = 1f,
-                    radius = 10f
+                    radius = 30f
                 };
                 blastAttack.Fire();
 

@@ -62,32 +62,32 @@ namespace EntityStates.Chef
                     Util.PlaySound("CleaverThrow", base.gameObject);
                 }
 
-                int dale = 3 - victimBodyList.Count;
-                Vector3 split = new Vector3(aimRay.direction.z, aimRay.direction.y, -1 * aimRay.direction.x).normalized;
-                Vector3 aimer = 21 * aimRay.direction - 3 * split;
+                //int dale = 3 - victimBodyList.Count;
+                //Vector3 split = new Vector3(aimRay.direction.z, aimRay.direction.y, -1 * aimRay.direction.x).normalized;
+                //Vector3 aimer = 21 * aimRay.direction - 3 * split;
 
-                for (int i = 0; i < dale; i++) {
-                    float numbedr = 12 / (dale + 1);
-                    Vector3 direction = (i * numbedr * split) + aimer;
-                    direction = direction.normalized;
+                //for (int i = 0; i < dale; i++) {
+                //    float numbedr = 12 / (dale + 1);
+                //    Vector3 direction = (i * numbedr * split) + aimer;
+                //    direction = direction.normalized;
 
-                    FireProjectileInfo info = new FireProjectileInfo() {
-                        projectilePrefab = ChefMod.chefPlugin.cleaverPrefab,
-                        position = characterBody.corePosition + 1.5f * direction,// + 1.5f * Vector3.up + 2 * right,
-                        rotation = Util.QuaternionSafeLookRotation(direction),// * Quaternion.FromToRotation(Vector3.left, Vector3.up),
-                        owner = base.gameObject,
-                        damage = base.characterBody.damage * 1.5f,
-                        force = 50f,
-                        crit = base.RollCrit(),
-                        damageColorIndex = DamageColorIndex.Default,
-                        target = null,
-                        speedOverride = 16f,
-                        fuseOverride = -1f
-                    };
+                //    FireProjectileInfo info = new FireProjectileInfo() {
+                //        projectilePrefab = ChefMod.chefPlugin.cleaverPrefab,
+                //        position = characterBody.corePosition + 1.5f * direction,// + 1.5f * Vector3.up + 2 * right,
+                //        rotation = Util.QuaternionSafeLookRotation(direction),// * Quaternion.FromToRotation(Vector3.left, Vector3.up),
+                //        owner = base.gameObject,
+                //        damage = base.characterBody.damage * 1.5f,
+                //        force = 50f,
+                //        crit = base.RollCrit(),
+                //        damageColorIndex = DamageColorIndex.Default,
+                //        target = null,
+                //        speedOverride = 16f,
+                //        fuseOverride = -1f
+                //    };
 
-                    ProjectileManager.instance.FireProjectile(info);
-                    Util.PlaySound("CleaverThrow", base.gameObject);
-                }
+                //    ProjectileManager.instance.FireProjectile(info);
+                //    Util.PlaySound("CleaverThrow", base.gameObject);
+                //}
             }
         }
 
@@ -125,7 +125,7 @@ namespace EntityStates.Chef
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.Skill;
+            return InterruptPriority.Frozen;
         }
 
         private void getHitList(Vector3 position, float radius)

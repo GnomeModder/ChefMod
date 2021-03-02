@@ -63,8 +63,9 @@ namespace EntityStates.Chef {
                         procCoefficient = 1f
                     };
 
-                    launch(victim.Item1);
-                    if (victim.Item1.characterMotor) {
+                    if (victim.Item1.characterMotor)
+                    {
+                        launch(victim.Item1);
                         var fl = victim.Item1.gameObject.AddComponent<Destroct>();
                         fl.damageInfo = damInfo;
                     }
@@ -155,13 +156,10 @@ namespace EntityStates.Chef {
             //horizontal = horizontal.normalized;
             //Vector3 direction = new Vector3(horizontal.x, 0.25f, horizontal.z);
             float speed = 100f;
-            if (charB.characterMotor)
-            {
-                if (charB.characterMotor.mass > 300f) speed = 1f; 
+            if (charB.characterMotor.mass > 300f) speed = 1f; 
 
-                charB.characterMotor.rootMotion.y += 1f;
-                charB.characterMotor.velocity += speed * aimRay.direction;
-            }
+            charB.characterMotor.rootMotion.y += 1f;
+            charB.characterMotor.velocity += speed * aimRay.direction;
         }
     }
 }

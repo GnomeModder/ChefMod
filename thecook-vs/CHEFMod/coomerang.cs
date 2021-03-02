@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.Networking;
 using RoR2;
 using RoR2.Projectile;
+using EntityStates.ArtifactShell;
 
 namespace ChefMod
 {
@@ -39,6 +40,13 @@ namespace ChefMod
 			base.gameObject.GetComponent<ProjectileController>().ghostPrefab.transform.localScale = localScale;
 			//base.GetComponent<ProjectileDotZone>().damageCoefficient *= num;
 
+			var targcomp = base.gameObject.GetComponent<ProjectileTargetComponent>();
+			if (targcomp)
+			{
+				target = targcomp.target;
+				this.travelSpeed *= projectileDamage.force;
+			}
+
 			startTime = Time.fixedTime;
 		}
 
@@ -56,6 +64,28 @@ namespace ChefMod
 				unityEvent.Invoke();
 			}
 			EffectManager.SimpleImpactEffect(this.impactSpark, impactInfo.estimatedPointOfImpact, -base.transform.forward, true);
+			if (target && !hasfired && impactInfo.collider)
+			{
+				var hurtbox = impactInfo.collider.GetComponent<HurtBox>();
+				if (hurtbox && hurtbox.healthComponent)
+				{
+					var projdamg = this.gameObject.GetComponent<ProjectileDamage>();
+					DamageInfo daminfo = new DamageInfo
+					{
+						attacker = projectileController.owner,
+						crit = projdamg.crit,
+						damage = projdamg.damage,
+						damageColorIndex = projdamg.damageColorIndex,
+						damageType = projdamg.damageType,
+						inflictor = this.gameObject,
+						position = impactInfo.estimatedPointOfImpact,
+						procCoefficient = 1
+					};
+					hurtbox.healthComponent.TakeDamage(daminfo);
+
+					hasfired = true;
+				}
+			}
 		}
 
 		// Token: 0x060025A5 RID: 9637 RVA: 0x0009C91C File Offset: 0x0009AB1C
@@ -63,7 +93,7 @@ namespace ChefMod
 		{
 			Vector3 vector = this.projectileController.owner.transform.position - base.transform.position;
 			Vector3 normalized = vector.normalized;
-			return vector.magnitude <= 2f;
+			return vector.magnitude <= 3f;
 		}
 
 		// Token: 0x060025A6 RID: 9638 RVA: 0x0009C968 File Offset: 0x0009AB68
@@ -86,6 +116,7 @@ namespace ChefMod
 						if (NetworkServer.active)
 						{
 							this.rigidbody.velocity = this.travelSpeed * base.transform.forward;
+							if (target) this.rigidbody.velocity = this.travelSpeed * (target.position - base.transform.position).normalized;
 							this.stopwatch += Time.fixedDeltaTime;
 							if (this.stopwatch >= this.maxFlyStopwatch)
 							{
@@ -124,6 +155,11 @@ namespace ChefMod
 								this.rigidbody.velocity = this.travelSpeed * a2;
 								if (flag)
 								{
+									if (Returned != null)
+									{
+										Action action = Returned;
+										action();
+									}
 									UnityEngine.Object.Destroy(base.gameObject);
 								}
 							}
@@ -220,6 +256,11 @@ namespace ChefMod
 		public bool followRet = false;
 		public FieldComponent fieldComponent;
 		private float startTime;
+
+		private Transform target = null;
+		public static event Action Returned;
+		private bool hasfired = false;
+
 		// Token: 0x04002055 RID: 8277
 		public float travelSpeed = 40f;
 

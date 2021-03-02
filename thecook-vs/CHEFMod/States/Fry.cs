@@ -65,7 +65,7 @@ namespace EntityStates.Chef
 
                 Vector3 horizontal = new Vector3(aimRay.direction.x, 0, aimRay.direction.z);
                 horizontal = horizontal.normalized;
-                direction = new Vector3(horizontal.x, 2, horizontal.z);
+                direction = new Vector3(horizontal.x, 0.5f, horizontal.z);
 
                 getVictim(blastAttack);
 
@@ -81,8 +81,9 @@ namespace EntityStates.Chef
                         procCoefficient = 1f
                     };
 
-                    launch(victim.Item1);
-                    if (victim.Item1.characterMotor) {
+                    if (victim.Item1.characterMotor)
+                    {
+                        launch(victim.Item1);
                         var fl = victim.Item1.gameObject.AddComponent<FryLanding>();
                         fl.damageInfo = damInfo;
                         Util.PlaySound("PanHit", base.gameObject);
@@ -154,12 +155,9 @@ namespace EntityStates.Chef
         private void launch(CharacterBody charB)
         {
             float speed = 35f;
-            if (charB.characterMotor)
-            {
-                if (charB.characterMotor.mass > 300f) speed = 1f;
-                charB.characterMotor.rootMotion.y += 1f;
-                charB.characterMotor.velocity += speed * direction.normalized;
-            }
+            if (charB.characterMotor.mass > 300f) speed = 1f;
+            charB.characterMotor.rootMotion.y += 1f;
+            charB.characterMotor.velocity += speed * direction.normalized;
         }
     }
 }

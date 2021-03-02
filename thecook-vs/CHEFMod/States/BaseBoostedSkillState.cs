@@ -6,7 +6,12 @@ namespace EntityStates.Chef {
         public override void OnEnter() {
             base.OnEnter();
 
-            skillLocator.primary.SetBaseSkill(chefPlugin.primaryDef);
+            if (skillLocator.primary.baseSkill == chefPlugin.boostedPrimaryDef){
+                skillLocator.primary.SetBaseSkill(chefPlugin.primaryDef);
+            }
+            if (skillLocator.primary.baseSkill == chefPlugin.boostedAltPrimaryDef){
+                skillLocator.primary.SetBaseSkill(chefPlugin.altPrimaryDef);
+            }
             if (skillLocator.secondary.baseSkill == chefPlugin.boostedSecondaryDef) {
                 skillLocator.secondary.SetBaseSkill(chefPlugin.secondaryDef);
             }
@@ -14,7 +19,6 @@ namespace EntityStates.Chef {
                 skillLocator.secondary.SetBaseSkill(chefPlugin.altSecondaryDef);
             }
             skillLocator.utility.SetBaseSkill(chefPlugin.utilityDef);
-
         }
     }
 }

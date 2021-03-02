@@ -12,6 +12,7 @@ namespace EntityStates.Chef
         //public ChefMod.Trail oilTrail;
         //public float radius = 3f;
         ChefMod.FieldComponent fieldComponent;
+        HuntressTracker tracker;
         public override void OnEnter()
         {
             base.OnEnter();
@@ -32,6 +33,12 @@ namespace EntityStates.Chef
 
             fieldComponent = base.characterBody.GetComponent<ChefMod.FieldComponent>();
             fieldComponent.characterBody = base.characterBody;
+
+            tracker = base.characterBody.GetComponent<HuntressTracker>();
+            if (skillLocator.primary.baseSkill == chefPlugin.altPrimaryDef || skillLocator.primary.baseSkill == chefPlugin.boostedAltPrimaryDef)
+            {
+                tracker.enabled = true;
+            }
 
             //RoR2.GlobalEventManager.onServerDamageDealt += chefHeal;
         }
@@ -60,6 +67,8 @@ namespace EntityStates.Chef
 
             //Object.Destroy(this.oilTrail.gameObject);
             //this.oilTrail = null;
+
+            tracker.enabled = false;
 
             if (characterBody.healthComponent.health < 1)
             {
