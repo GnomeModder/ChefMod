@@ -80,7 +80,7 @@ namespace ChefMod
 
         void FixedUpdate()
         {
-            if (!onFire && body.HasBuff(BuffIndex.OnFire))
+            if (!onFire && body.HasBuff(RoR2Content.Buffs.OnFire))
             {
                 ignate();
             }
@@ -222,9 +222,9 @@ namespace ChefMod
                                     }
                                     else
                                     {
-                                        if (!healthComponent.body.HasBuff(BuffIndex.ClayGoo))
+                                        if (!healthComponent.body.HasBuff(RoR2Content.Buffs.ClayGoo))
                                         {
-                                            healthComponent.body.AddTimedBuff(BuffIndex.ClayGoo, 5f);
+                                            healthComponent.body.AddTimedBuff(RoR2Content.Buffs.ClayGoo, 5f);
                                         }
                                     }
                                 }

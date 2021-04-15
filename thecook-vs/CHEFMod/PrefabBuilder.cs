@@ -155,7 +155,9 @@ public class PrefabBuilder
         SetupAimAnimator();
         SetupHitbox();
 
-        RegisterNewBody(prefab);
+        //RegisterNewBody(prefab);
+
+        ChefContent.bodyPrefabs.Add(prefab);
 
         return prefab;
     }
@@ -252,7 +254,6 @@ public class PrefabBuilder
         body.bodyFlags = CharacterBody.BodyFlags.ImmuneToExecutes;
         body.rootMotionInMainState = false;
         body.mainRootSpeed = 0;
-        body.bodyIndex = -1;
         body.aimOriginTransform = aimOrigin.transform;
         body.hullClassification = HullClassification.Human;
     }
@@ -450,8 +451,7 @@ public class PrefabBuilder
             MeshReplacements = Array.Empty<SkinDef.MeshReplacement>(),
             BaseSkins = Array.Empty<SkinDef>(),
             MinionSkinReplacements = Array.Empty<SkinDef.MinionSkinReplacement>(),
-            ProjectileGhostReplacements = Array.Empty<SkinDef.ProjectileGhostReplacement>(),
-            UnlockableName = ""
+            ProjectileGhostReplacements = Array.Empty<SkinDef.ProjectileGhostReplacement>()
         };
 
         Material commandoMat = Resources.Load<GameObject>("Prefabs/CharacterBodies/BrotherGlassBody").GetComponentInChildren<CharacterModel>().baseRendererInfos[0].defaultMaterial;
@@ -474,8 +474,7 @@ public class PrefabBuilder
             MeshReplacements = Array.Empty<SkinDef.MeshReplacement>(),
             BaseSkins = Array.Empty<SkinDef>(),
             MinionSkinReplacements = Array.Empty<SkinDef.MinionSkinReplacement>(),
-            ProjectileGhostReplacements = Array.Empty<SkinDef.ProjectileGhostReplacement>(),
-            UnlockableName = masteryAchievementUnlockable
+            ProjectileGhostReplacements = Array.Empty<SkinDef.ProjectileGhostReplacement>()
         };
 
         SkinDef skinDefault = LoadoutAPI.CreateNewSkinDef(skinDefInfo);

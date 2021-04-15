@@ -2699,8 +2699,8 @@ namespace ChefMod
         {
             ItemDisplayRuleSet itemDisplayRuleSet = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponent<ModelLocator>().modelTransform.GetComponent<CharacterModel>().itemDisplayRuleSet;
 
-            capacitorPrefab = PrefabAPI.InstantiateClone(itemDisplayRuleSet.FindEquipmentDisplayRuleGroup("Lightning").rules[0].followerPrefab, "DisplayEnforcerLightning", true);
-            capacitorPrefab.AddComponent<UnityEngine.Networking.NetworkIdentity>();
+            /*capacitorPrefab = PrefabAPI.InstantiateClone(itemDisplayRuleSet.FindEquipmentDisplayRuleGroup("Lightning").rules[0].followerPrefab, "DisplayEnforcerLightning", true);
+            capacitorPrefab.AddComponent<UnityEngine.Networking.NetworkIdentity>();*/
 
             var limbMatcher = capacitorPrefab.GetComponent<LimbMatcher>();
 
