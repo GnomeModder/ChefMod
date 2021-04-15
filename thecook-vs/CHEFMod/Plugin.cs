@@ -58,6 +58,11 @@ namespace ChefMod
 
         public static Color chefColor = new Color(189f / 255f, 190f / 255f, 194f / 255f);
 
+        public void Start()
+        {
+            ItemDisplays.RegisterDisplays(chefPrefab);
+        }
+
         public void Awake()
         {
             classicMince = base.Config.Bind<bool>(new ConfigDefinition("01 - General Settings", "Sbince"), true, new ConfigDescription("Makes Mince work more like ror1. Turn off if it's hurting performance too much, there's an alternate version that's less costly", null, Array.Empty<object>()));
@@ -145,8 +150,6 @@ namespace ChefMod
             tracker.maxTrackingAngle = 90f;
             //tracker.indicator = ;
             tracker.enabled = false;
-
-            //ItemDisplays.RegisterDisplays(chefPrefab);
 
             var fc = chefPrefab.AddComponent<FieldComponent>();
             var meshs = chefPrefab.GetComponentsInChildren<MeshRenderer>();
