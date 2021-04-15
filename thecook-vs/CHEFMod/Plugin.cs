@@ -35,7 +35,7 @@ namespace ChefMod
         public static GameObject cleaverPrefab;
         public static GameObject knifePrefab;
         public static GameObject oilPrefab;
-        public static GameObject segfab;
+        public static Material fireMat;
         public static GameObject foirballPrefab;
         public static GameObject flamballPrefab;
         public static GameObject drippingPrefab;
@@ -93,6 +93,12 @@ namespace ChefMod
                 orig(team);
                 hack.teamIndex = TeamIndex.Neutral;
             };
+
+            On.RoR2.DamageTrail.DoDamage += (orig, self) =>
+            {
+                if (self.damagePerSecond == 0) return;
+                orig(self);
+            };
         }
 
         private void registerBuff()
@@ -137,11 +143,11 @@ namespace ChefMod
             prefabBuilder.masteryAchievementUnlockable = "";
             chefPrefab = prefabBuilder.CreatePrefab();
 
-            var tracker = chefPrefab.AddComponent<HuntressTracker>();
-            tracker.maxTrackingDistance = 30f;
-            tracker.maxTrackingAngle = 90f;
-            //tracker.indicator = ;
-            tracker.enabled = false;
+            //var tracker = chefPrefab.AddComponent<HuntressTracker>();
+            //tracker.maxTrackingDistance = 30f;
+            //tracker.maxTrackingAngle = 90f;
+            ////tracker.indicator = ;
+            //tracker.enabled = false;
 
             ItemDisplays.RegisterDisplays(chefPrefab);
 
@@ -351,7 +357,7 @@ namespace ChefMod
             boostedAltPrimaryDef.skillNameToken = "CHEF_BOOSTED_ALTPRIMARY_NAME";
 
             LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_NAME", "Julienne");
-            LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION", "Stab every nearby enemy");
+            LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION", "Slice into thin strips");
             LoadoutAPI.AddSkillDef(boostedAltPrimaryDef);
 
             secondaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -678,10 +684,12 @@ namespace ChefMod
             cleaverPrefab.layer = LayerIndex.noCollision.intVal;
 
             knifePrefab = cleaverPrefab.InstantiateClone("CHEFKnife", true);
-            knifePrefab.AddComponent<ProjectileTargetComponent>();
+            //knifePrefab.AddComponent<ProjectileTargetComponent>();
+            var kum = knifePrefab.GetComponent<CoomerangProjectile>();
+            kum.target = true;
+            kum.distanceMultiplier *= 0.2f;
             knifePrefab.layer = LayerIndex.projectile.intVal;
 
-            var kum = knifePrefab.GetComponent<CoomerangProjectile>();
             Destroy(knifePrefab.GetComponent<ProjectileOverlapAttack>());
             
 
@@ -799,8 +807,8 @@ namespace ChefMod
                 orig(self);
             };
 
-            var firetrail = Resources.Load<GameObject>("Prefabs/FireTrail");
-            segfab = firetrail.GetComponent<DamageTrail>().segmentPrefab;
+            fireMat = Resources.Load<GameObject>("Prefabs/FireTrail").GetComponent<DamageTrail>().segmentPrefab.GetComponent<ParticleSystemRenderer>().material;
+
             //var ups = segfab.GetComponent<ParticleSystem>();
             //var man = ups.main;
             //man.loop = true;

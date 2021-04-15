@@ -17,7 +17,7 @@ namespace EntityStates.Chef
         private bool hasThrown;
         private Vector3 direction;
 
-        Tuple<CharacterBody, float> victim = new Tuple<CharacterBody, float>(null, 100f);
+        List<CharacterBody> victimList = new List<CharacterBody>();
         Ray aimRay;
         public override void OnEnter() {
             base.OnEnter();
@@ -69,8 +69,10 @@ namespace EntityStates.Chef
 
                 getVictim(blastAttack);
 
-                if (victim.Item1) {
-                    DamageInfo damInfo = new DamageInfo {
+                foreach (CharacterBody victim in victimList)
+                {
+                    DamageInfo damInfo = new DamageInfo 
+                    {
                         attacker = base.gameObject,
                         crit = base.RollCrit(),
                         damage = 5f * base.damageStat,
@@ -81,10 +83,10 @@ namespace EntityStates.Chef
                         procCoefficient = 1f
                     };
 
-                    if (victim.Item1.characterMotor)
+                    if (victim.characterMotor)
                     {
-                        launch(victim.Item1);
-                        var fl = victim.Item1.gameObject.AddComponent<FryLanding>();
+                        launch(victim);
+                        var fl = victim.gameObject.AddComponent<FryLanding>();
                         fl.damageInfo = damInfo;
                         Util.PlaySound("PanHit", base.gameObject);
                     }
@@ -145,10 +147,9 @@ namespace EntityStates.Chef
 
         private void Compare(CharacterBody candidate)
         {
-            Vector3 distance = candidate.corePosition - characterBody.corePosition;
-            if (distance.magnitude < victim.Item2)
+            if (!victimList.Contains(candidate))
             {
-                victim = new Tuple<CharacterBody, float>(candidate, distance.magnitude);
+                victimList.Add(candidate);
             }
         }
 

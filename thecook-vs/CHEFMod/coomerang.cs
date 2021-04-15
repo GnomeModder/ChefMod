@@ -40,11 +40,10 @@ namespace ChefMod
 			base.gameObject.GetComponent<ProjectileController>().ghostPrefab.transform.localScale = localScale;
 			//base.GetComponent<ProjectileDotZone>().damageCoefficient *= num;
 
-			var targcomp = base.gameObject.GetComponent<ProjectileTargetComponent>();
-			if (targcomp)
+			if (target)
 			{
-				target = targcomp.target;
 				this.travelSpeed *= projectileDamage.force;
+				this.gameObject.layer = LayerIndex.projectile.intVal;
 			}
 
 			startTime = Time.fixedTime;
@@ -64,24 +63,31 @@ namespace ChefMod
 				unityEvent.Invoke();
 			}
 			EffectManager.SimpleImpactEffect(this.impactSpark, impactInfo.estimatedPointOfImpact, -base.transform.forward, true);
+
+			if (target) this.gameObject.layer = LayerIndex.noCollision.intVal;
 			if (target && !hasfired && impactInfo.collider)
 			{
 				var hurtbox = impactInfo.collider.GetComponent<HurtBox>();
 				if (hurtbox && hurtbox.healthComponent)
 				{
 					var projdamg = this.gameObject.GetComponent<ProjectileDamage>();
-					DamageInfo daminfo = new DamageInfo
+					var teamfilt = this.gameObject.GetComponent<TeamFilter>();
+					
+					new BlastAttack
 					{
 						attacker = projectileController.owner,
 						crit = projdamg.crit,
-						damage = projdamg.damage,
+						baseDamage = projdamg.damage,
 						damageColorIndex = projdamg.damageColorIndex,
 						damageType = projdamg.damageType,
 						inflictor = this.gameObject,
 						position = impactInfo.estimatedPointOfImpact,
-						procCoefficient = 1
-					};
-					hurtbox.healthComponent.TakeDamage(daminfo);
+						attackerFiltering = AttackerFiltering.NeverHit,
+						falloffModel = BlastAttack.FalloffModel.None,
+						procCoefficient = 1f,
+						teamIndex = teamfilt.teamIndex,
+						radius = 0.2f
+					}.Fire();
 
 					hasfired = true;
 				}
@@ -116,7 +122,7 @@ namespace ChefMod
 						if (NetworkServer.active)
 						{
 							this.rigidbody.velocity = this.travelSpeed * base.transform.forward;
-							if (target) this.rigidbody.velocity = this.travelSpeed * (target.position - base.transform.position).normalized;
+							//if (target) this.rigidbody.velocity = this.travelSpeed * (target.position - base.transform.position).normalized;
 							this.stopwatch += Time.fixedDeltaTime;
 							if (this.stopwatch >= this.maxFlyStopwatch)
 							{
@@ -134,6 +140,8 @@ namespace ChefMod
 							this.rigidbody.velocity = Vector3.Lerp(this.travelSpeed * base.transform.forward, this.travelSpeed * a, num);
 							if (num >= 1f)
 							{
+								if (target) this.gameObject.layer = LayerIndex.noCollision.intVal;
+
 								this.NetworkCoomerangState = CoomerangProjectile.CoomerangState.FlyBack;
 								UnityEvent unityEvent = this.onFlyBack;
 								if (unityEvent == null)
@@ -177,7 +185,8 @@ namespace ChefMod
 					Vector3 cross = Vector3.Cross(position, aimRay.direction);
 					Vector3 component2 = Vector3.Cross(position, cross);
 					component2 = component2.normalized * -1f * Vector3.Angle(position, aimRay.direction);
-					this.rigidbody.velocity += component2 / Mathf.Max(2f * (Time.fixedTime - startTime), 1);
+					float timefactor = Mathf.Max(2f * (Time.fixedTime - startTime), 1);
+					this.rigidbody.velocity += component2 / timefactor;
 				}
 			}
 		}
@@ -257,7 +266,8 @@ namespace ChefMod
 		public FieldComponent fieldComponent;
 		private float startTime;
 
-		private Transform target = null;
+		//private Transform target = null;
+		public bool target = false;
 		public static event Action Returned;
 		private bool hasfired = false;
 

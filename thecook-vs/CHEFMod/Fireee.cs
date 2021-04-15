@@ -22,7 +22,6 @@ namespace ChefMod
         private float burnTime = 10f;
 
         private GameObject oilPrefab;
-        private GameObject firePrefab;
         private float startTime;
         private float igniteTime;
         private bool ground = false;
@@ -76,6 +75,8 @@ namespace ChefMod
             //ground = body.characterMotor.isGrounded;
 
             //checkforhomies();
+
+            //lineRenderer = chefPlugin.linren;
         }
 
         void FixedUpdate()
@@ -140,8 +141,9 @@ namespace ChefMod
 
             //Destroy(oilPrefab);
             //firePrefab = goku("Fyre");
-            oilPrefab.GetComponent<MeshRenderer>().material = chefPlugin.segfab.GetComponent<ParticleSystemRenderer>().material;
-            firePrefab = Instantiate(chefPlugin.segfab, this.transform.position - Vector3.up, Quaternion.identity);
+            oilPrefab.GetComponent<MeshRenderer>().material = chefPlugin.fireMat;
+
+            //firePrefab = Instantiate(chefPlugin.segfab, this.transform.position - Vector3.up, Quaternion.identity);
 
             hitmyhomiesup();
 
@@ -281,11 +283,6 @@ namespace ChefMod
                     }
                 }
             }
-        }
-
-        private void DestroyFX()
-        {
-
         }
     }
 }
