@@ -200,6 +200,19 @@ namespace ChefMod
 		// Token: 0x17000422 RID: 1058
 		// (get) Token: 0x060025AA RID: 9642 RVA: 0x0009CB5C File Offset: 0x0009AD5C
 		// (set) Token: 0x060025AB RID: 9643 RVA: 0x0009CB6F File Offset: 0x0009AD6F
+		//public CoomerangProjectile.CoomerangState NetworkCoomerangState
+		//{
+		//	get
+		//	{
+		//		return this.coomerangState;
+		//	}
+		//	[param: In]
+		//	set
+		//	{
+		//		base.SetSyncVar<CoomerangProjectile.CoomerangState>(value, ref this.coomerangState, 1U);
+		//	}
+		//}
+
 		public CoomerangProjectile.CoomerangState NetworkCoomerangState
 		{
 			get
@@ -209,7 +222,9 @@ namespace ChefMod
 			[param: In]
 			set
 			{
-				base.SetSyncVar<CoomerangProjectile.CoomerangState>(value, ref this.coomerangState, 1U);
+				ulong newValueAsUlong = (ulong)((long)value);
+				ulong fieldValueAsUlong = (ulong)((long)this.coomerangState);
+				base.SetSyncVarEnum<CoomerangProjectile.CoomerangState>(value, newValueAsUlong, ref this.coomerangState, fieldValueAsUlong, 1U);
 			}
 		}
 

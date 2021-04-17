@@ -26,7 +26,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "0.12.1")]
+        "0.12.2")]
     public class chefPlugin : BaseUnityPlugin
     {
         public GameObject chefPrefab;
@@ -555,13 +555,13 @@ namespace ChefMod
                 viewableNode = new ViewablesCatalog.Node(primaryDef.skillNameToken, false, null)
             };
 
-            Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
-            skillFamily.variants[1] = new SkillFamily.Variant
-            {
-                skillDef = altPrimaryDef,
-                unlockableName = "",
-                viewableNode = new ViewablesCatalog.Node(altPrimaryDef.skillNameToken, false, null)
-            };
+            //Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
+            //skillFamily.variants[1] = new SkillFamily.Variant
+            //{
+            //    skillDef = altPrimaryDef,
+            //    unlockableName = "",
+            //    viewableNode = new ViewablesCatalog.Node(altPrimaryDef.skillNameToken, false, null)
+            //};
 
             skillFamily = skillLocator.secondary.skillFamily;
             skillFamily.variants[0] = new SkillFamily.Variant
@@ -571,13 +571,13 @@ namespace ChefMod
                 viewableNode = new ViewablesCatalog.Node(secondaryDef.skillNameToken, false, null)
             };
 
-            Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
-            skillFamily.variants[1] = new SkillFamily.Variant
-            {
-                skillDef = altSecondaryDef,
-                unlockableName = "",
-                viewableNode = new ViewablesCatalog.Node(altSecondaryDef.skillNameToken, false, null)
-            };
+            //Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
+            //skillFamily.variants[1] = new SkillFamily.Variant
+            //{
+            //    skillDef = altSecondaryDef,
+            //    unlockableName = "",
+            //    viewableNode = new ViewablesCatalog.Node(altSecondaryDef.skillNameToken, false, null)
+            //};
 
             skillFamily = skillLocator.utility.skillFamily;
             skillFamily.variants[0] = new SkillFamily.Variant
@@ -595,13 +595,13 @@ namespace ChefMod
                 viewableNode = new ViewablesCatalog.Node(specialDef.skillNameToken, false, null)
             };
 
-            Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
-            skillFamily.variants[1] = new SkillFamily.Variant
-            {
-                skillDef = altSpecialDef,
-                unlockableName = "",
-                viewableNode = new ViewablesCatalog.Node(altSpecialDef.skillNameToken, false, null)
-            };
+            //Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
+            //skillFamily.variants[1] = new SkillFamily.Variant
+            //{
+            //    skillDef = altSpecialDef,
+            //    unlockableName = "",
+            //    viewableNode = new ViewablesCatalog.Node(altSpecialDef.skillNameToken, false, null)
+            //};
 
             skillLocator.passiveSkill.skillNameToken = "Bon Apetit";
             skillLocator.passiveSkill.skillDescriptionToken = "Regen health for each nearby ignited enemy";
