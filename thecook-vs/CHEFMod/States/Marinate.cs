@@ -52,6 +52,9 @@ namespace EntityStates.Chef
 				//base.characterBody.GetComponent<TrailController>().slicks.Add(slick);
 
 				//Util.PlaySound("Marinate", base.gameObject);
+
+				if (!base.characterMotor.isGrounded) base.characterMotor.velocity.y = 15f;
+
 				base.PlayAnimation("Fullbody, Override", "UtilityStart");
 			}
 		}

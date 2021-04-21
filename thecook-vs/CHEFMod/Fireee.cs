@@ -99,6 +99,7 @@ namespace ChefMod
 
             if (shouldDie())
             {
+                Destroy(firePrefab);
                 Destroy(body.gameObject);
             }
 
@@ -140,8 +141,8 @@ namespace ChefMod
 
             //Destroy(oilPrefab);
             //firePrefab = goku("Fyre");
-            oilPrefab.GetComponent<MeshRenderer>().material = chefPlugin.segfab.GetComponent<ParticleSystemRenderer>().material;
-            firePrefab = Instantiate(chefPlugin.segfab, this.transform.position - Vector3.up, Quaternion.identity);
+            Destroy(oilPrefab);
+            firePrefab = Instantiate(chefPlugin.firefab, this.transform.position - Vector3.up, Quaternion.identity);
 
             hitmyhomiesup();
 
@@ -281,11 +282,6 @@ namespace ChefMod
                     }
                 }
             }
-        }
-
-        private void DestroyFX()
-        {
-
         }
     }
 }

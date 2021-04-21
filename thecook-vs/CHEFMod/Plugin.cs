@@ -12,6 +12,7 @@ using RoR2.Skills;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using ThreeEyedGames;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -33,6 +34,7 @@ namespace ChefMod
         public static GameObject cleaverPrefab;
         public static GameObject knifePrefab;
         public static GameObject oilPrefab;
+        public static GameObject firefab;
         public static GameObject segfab;
         public static GameObject foirballPrefab;
         public static GameObject flamballPrefab;
@@ -125,6 +127,11 @@ namespace ChefMod
             //    }
             //    return orig(self);
             //};
+        }
+
+        private void registerUnlocks()
+        {
+
         }
 
         private void registerCharacter()
@@ -229,7 +236,7 @@ namespace ChefMod
 
             ChefContent.survivorDefs.Add(survivorDef);
 
-            LanguageAPI.Add("CHEF_DESCRIPTION", "*sizzle \n'You're not cooking' \n'yeah, dude' \n'eeh, aahh' \n*fire* \n'babbabababaa' \n'porkchop sandwiches' \n*fire alarm* \n'oh shit get the fuck out of here what are you doing go get  the  fuck  out  of here you stupid idiot fuck were all dead get the fuck out' \n*firetruck sidewalk* \n'my god did that smell good'\n 'detector no goin and you tell me do things I done runnin'" + "\r\n");
+            LanguageAPI.Add("CHEF_DESCRIPTION", "*sizzle* \n'You're not cooking' \n'yeah, dude' \n'eeh, aahh' \n*fire* \n'babbabababaa' \n'porkchop sandwiches' \n*fire alarm* \n'oh shit get the fuck out of here what are you doing go get  the  fuck  out  of here you stupid idiot fuck were all dead get the fuck out' \n*firetruck sidewalk* \n'my god did that smell good'\n'detector no goin and you tell me do things I done runnin'" + "\r\n");
             LanguageAPI.Add("CHEF_OUTRO", "...and so it left, rock hard");
         }
 
@@ -551,7 +558,6 @@ namespace ChefMod
             skillFamily.variants[0] = new SkillFamily.Variant
             {
                 skillDef = primaryDef,
-                unlockableName = "",
                 viewableNode = new ViewablesCatalog.Node(primaryDef.skillNameToken, false, null)
             };
 
@@ -567,7 +573,6 @@ namespace ChefMod
             skillFamily.variants[0] = new SkillFamily.Variant
             {
                 skillDef = secondaryDef,
-                unlockableName = "",
                 viewableNode = new ViewablesCatalog.Node(secondaryDef.skillNameToken, false, null)
             };
 
@@ -583,7 +588,6 @@ namespace ChefMod
             skillFamily.variants[0] = new SkillFamily.Variant
             {
                 skillDef = utilityDef,
-                unlockableName = "",
                 viewableNode = new ViewablesCatalog.Node(utilityDef.skillNameToken, false, null)
             };
 
@@ -591,7 +595,6 @@ namespace ChefMod
             skillFamily.variants[0] = new SkillFamily.Variant
             {
                 skillDef = specialDef,
-                unlockableName = "",
                 viewableNode = new ViewablesCatalog.Node(specialDef.skillNameToken, false, null)
             };
 
@@ -666,7 +669,7 @@ namespace ChefMod
 
             var kum = knifePrefab.GetComponent<CoomerangProjectile>();
             Destroy(knifePrefab.GetComponent<ProjectileOverlapAttack>());
-            
+
 
             //GameObject stunGrenadeModel = Assets.chefAssetBundle.LoadAsset<GameObject>("Cleaver").InstantiateClone("CleaverGhost", true);
             //stunGrenadeModel.AddComponent<UnityEngine.Networking.NetworkIdentity>();
@@ -702,8 +705,28 @@ namespace ChefMod
             ////decal.Material = oilcum;
             //cumStain.transform.localScale *= 7f;
 
+            var firetrail = Resources.Load<GameObject>("Prefabs/FireTrail");
+            Material firepart = firetrail.GetComponent<DamageTrail>().segmentPrefab.GetComponent<ParticleSystemRenderer>().material;
+
+            var cumStain = Resources.Load<GameObject>("prefabs/projectiles/LunarExploderProjectileDotZone");
+            firefab = cumStain.GetComponentInChildren<AlignToNormal>().gameObject.InstantiateClone("ChefFire", true);
+
+            Destroy(firefab.GetComponentInChildren<TeamAreaIndicator>().gameObject);
+            var decal = firefab.GetComponentInChildren<Decal>();
+            Material fireMat = new Material(decal.Material);
+            fireMat.SetColor("_Color", Color.red);
+            decal.Material = fireMat;
+
+            var systems = firefab.GetComponentsInChildren<ParticleSystemRenderer>();
+            Destroy(systems[0].gameObject);
+            Material bluefire = new Material(systems[1].material);
+            systems[1].material = firepart;
+            systems[2].material = firepart;
+
+            firefab.GetComponentInChildren<Light>().color = Color.red;
+
             //Debug.Log("------------------------------------------------");
-            //foreach (Component comp in cumStain.GetComponents<Component>()) Debug.Log(comp.GetType().Name);
+            //foreach (Component comp in firefab.GetComponentsInChildren<Component>()) Debug.Log(comp.GetType().Name);
 
             oilPrefab = Resources.Load<GameObject>("Prefabs/CharacterBodies/BeetleCrystalBody").InstantiateClone("OilSlick", true);
             oilPrefab.transform.localScale *= 3f;
@@ -782,8 +805,6 @@ namespace ChefMod
                 orig(self);
             };
 
-            var firetrail = Resources.Load<GameObject>("Prefabs/FireTrail");
-            segfab = firetrail.GetComponent<DamageTrail>().segmentPrefab;
             //var ups = segfab.GetComponent<ParticleSystem>();
             //var man = ups.main;
             //man.loop = true;
@@ -827,6 +848,10 @@ namespace ChefMod
             beegFire.AddComponent<NetworkIdentity>();
             beegFire.transform.localScale *= 5f;
 
+            //var bbFire = beegFire.InstantiateClone("FlamBallGhost");
+            //bbFire.GetComponentInChildren<ParticleSystemRenderer>().material.SetColor("_Color", Color.blue);
+            //bbFire.GetComponentInChildren<Light>().color = Color.blue;
+
             foirballPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/Fireball").InstantiateClone("FoirBall", true);
             foirballPrefab.transform.localScale *= 2f;
             var coq = foirballPrefab.GetComponent<ProjectileController>();
@@ -834,7 +859,7 @@ namespace ChefMod
             foirballPrefab.GetComponent<ProjectileDamage>().damageType = DamageType.IgniteOnHit;
             foirballPrefab.AddComponent<LightOnImpact>();
 
-            flamballPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/Fireball").InstantiateClone("FoirBall", true);
+            flamballPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/Fireball").InstantiateClone("FlamBall", true);
             flamballPrefab.transform.localScale *= 2f;
             var cock = flamballPrefab.GetComponent<ProjectileController>();
             cock.ghostPrefab = beegFire;

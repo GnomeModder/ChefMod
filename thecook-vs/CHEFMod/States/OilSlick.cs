@@ -54,6 +54,8 @@ namespace EntityStates.Chef
 				//Util.PlaySound("Glaze", base.gameObject);
 			}
 
+			if (!base.characterMotor.isGrounded) base.characterMotor.velocity.y = 15f; 
+
 			base.PlayAnimation("Fullbody, Override", "UtilityStart");
 		}
 

@@ -26,6 +26,8 @@ namespace EntityStates.Chef
             childLocator = base.GetModelChildLocator();
 
             base.StartAimMode(2f, false);
+
+            //UnityEngine.Object.Instantiate<GameObject>(chefPlugin.firefab, characterBody.footPosition, Quaternion.identity);
         }
 
         public override void FixedUpdate()
