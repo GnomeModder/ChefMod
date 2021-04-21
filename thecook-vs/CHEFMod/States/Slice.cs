@@ -11,17 +11,17 @@ namespace EntityStates.Chef
     {
         private bool hasThrown;
         private bool hasReturned = false;
-        private HurtBox victim;
+        //private HurtBox victim;
 
         private ChildLocator childLocator;
-        private HuntressTracker tracker;
+        //private HuntressTracker tracker;
 
         public override void OnEnter()
         {
             base.OnEnter();
 
-            tracker = base.characterBody.GetComponent<HuntressTracker>();
-            victim = tracker.GetTrackingTarget();
+            //tracker = base.characterBody.GetComponent<HuntressTracker>();
+            //victim = tracker.GetTrackingTarget();
 
             childLocator = base.GetModelChildLocator();
 
@@ -34,7 +34,7 @@ namespace EntityStates.Chef
         {
             base.FixedUpdate();
 
-            if (hasReturned || !victim)
+            if (hasReturned) // || !victim)
             {
                 this.outer.SetNextStateToMain();
                 return;
@@ -56,19 +56,19 @@ namespace EntityStates.Chef
                 Vector3 right = new Vector3(aimRay.direction.z, 0, -1 * aimRay.direction.x).normalized;
 
                 Vector3 shoulderPos = childLocator.FindChild("RightShoulder").position;
-                Vector3 difference = victim.transform.position - shoulderPos;
+                //Vector3 difference = victim.transform.position - shoulderPos;
 
                 FireProjectileInfo info = new FireProjectileInfo()
                 {
                     projectilePrefab = chefPlugin.knifePrefab,
                     position = shoulderPos,
-                    rotation = Util.QuaternionSafeLookRotation(difference),
+                    rotation = Util.QuaternionSafeLookRotation(aimRay.direction), //Util.QuaternionSafeLookRotation(difference),
                     owner = base.gameObject,
                     damage = base.characterBody.damage * 0.90f,
-                    force = base.attackSpeedStat * 1.5f,
+                    force = (1.5f + base.attackSpeedStat) * 1.5f,
                     crit = base.RollCrit(),
                     damageColorIndex = DamageColorIndex.Default,
-                    target = victim.gameObject,
+                    //target = victim.gameObject,
                     speedOverride = 160f,
                     fuseOverride = -1f
                 };

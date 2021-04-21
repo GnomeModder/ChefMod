@@ -11,126 +11,97 @@ namespace EntityStates.Chef
 {
     class Julienne : BaseBoostedSkillState
     {
-        public float baseDuration = 0.5f;
-        public float throwTime = 0.36f;
-
-        private float duration;
-        private bool hasThrown;
+        private int returnCounter = 0;
+        private int throwCounter = 0;
+        private int frameCounter = 0;
+        private float stabcount;
+        //private HurtBox victim;
 
         private ChildLocator childLocator;
-
-        private List<CharacterBody> victimBodyList = new List<CharacterBody>();
+        //private HuntressTracker tracker;
 
         public override void OnEnter()
         {
             base.OnEnter();
-            duration = baseDuration / base.attackSpeedStat;
 
-            base.PlayAnimation("Gesture, Override", "PrimaryBoosted", "PrimaryCleaver.playbackRate", duration);
+            stabcount = 10 * attackSpeedStat;
+            //tracker = base.characterBody.GetComponent<HuntressTracker>();
 
             childLocator = base.GetModelChildLocator();
 
+            CoomerangProjectile.Returned += setReturned;
+
             base.StartAimMode(2f, false);
-        }
-
-        private void Throw()
-        {
-            if (base.isAuthority)
-            {
-                getHitList(base.characterBody.corePosition, 40f);
-                
-                Vector3 shoulderPos = childLocator.FindChild("RightShoulder").position;
-                FireProjectileInfo info = new FireProjectileInfo()
-                {
-                    projectilePrefab = ChefMod.chefPlugin.knifePrefab,
-                    position = shoulderPos,
-                    owner = base.gameObject,
-                    damage = base.characterBody.damage * 6f,
-                    force = base.attackSpeedStat * 1.5f,
-                    crit = base.RollCrit(),
-                    damageColorIndex = DamageColorIndex.Default,
-                    speedOverride = 16f,
-                    fuseOverride = -1f
-                };
-                
-                foreach (CharacterBody victim in victimBodyList)
-                {
-                    Vector3 difference = victim.corePosition - shoulderPos;
-
-                    info.rotation = Util.QuaternionSafeLookRotation(difference);
-                    info.target = victim.gameObject;
-
-                    ProjectileManager.instance.FireProjectile(info);
-                    Util.PlaySound("CleaverThrow", base.gameObject);
-                }
-            }
         }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
 
-            if (fixedAge > duration * throwTime && !hasThrown)
-            {
-                hasThrown = true;
-                Throw();
-            }
+            //victim = tracker.GetTrackingTarget();
 
-
-            if (base.fixedAge >= this.duration && base.isAuthority)
+            if (returnCounter > stabcount)// || !victim)
             {
                 this.outer.SetNextStateToMain();
                 return;
+            }
+
+            if (frameCounter % 5 == 0 && throwCounter <= stabcount)
+            {
+                Throw();
+            }
+        }
+
+
+        private void Throw()
+        {
+            if (base.isAuthority)
+            {
+                Ray aimRay = base.GetAimRay();
+                Vector3 right = new Vector3(aimRay.direction.z, 0, -1 * aimRay.direction.x).normalized;
+
+                Vector3 shoulderPos = childLocator.FindChild("RightShoulder").position;
+                //Vector3 difference = victim.transform.position - shoulderPos;
+
+                FireProjectileInfo info = new FireProjectileInfo()
+                {
+                    projectilePrefab = chefPlugin.knifePrefab,
+                    position = shoulderPos,
+                    rotation = Util.QuaternionSafeLookRotation(aimRay.direction), //Util.QuaternionSafeLookRotation(difference),
+                    owner = base.gameObject,
+                    damage = base.characterBody.damage * 0.90f,
+                    force = (1.5f + base.attackSpeedStat) * 3f,
+                    crit = base.RollCrit(),
+                    damageColorIndex = DamageColorIndex.Default,
+                    //target = victim.gameObject,
+                    speedOverride = 160f,
+                    fuseOverride = -1f
+                };
+
+                childLocator.FindChild("RightShoulder").gameObject.SetActive(false);
+
+                ProjectileManager.instance.FireProjectile(info);
+
+                Util.PlaySound("CleaverThrow", base.gameObject);
             }
         }
 
         public override void OnExit()
         {
-            //skillLocator.primary.SetBaseSkill(chefPlugin.primaryDef);
-            //if (skillLocator.secondary.baseSkill == chefPlugin.boostedSecondaryDef)
-            //{
-            //    skillLocator.secondary.SetBaseSkill(chefPlugin.secondaryDef);
-            //}
-            //if (skillLocator.secondary.baseSkill == chefPlugin.boostedAltSecondaryDef)
-            //{
-            //    skillLocator.secondary.SetBaseSkill(chefPlugin.altSecondaryDef);
-            //}
-            //skillLocator.utility.SetBaseSkill(chefPlugin.utilityDef);
+            childLocator.FindChild("RightShoulder").gameObject.SetActive(true);
+            CoomerangProjectile.Returned -= setReturned;
+
             base.OnExit();
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.Frozen;
+            return InterruptPriority.Skill;
         }
 
-        private void getHitList(Vector3 position, float radius)
+        private void setReturned()
         {
-            Collider[] array = Physics.OverlapSphere(position, radius, LayerIndex.defaultLayer.mask);
-            int num = 0;
-            int num2 = 0;
-            while (num < array.Length && num2 < 12)
-            {
-                HealthComponent component = array[num].GetComponent<HealthComponent>();
-                if (component)
-                {
-                    TeamComponent component2 = component.GetComponent<TeamComponent>();
-                    if (component2.teamIndex != characterBody.teamComponent.teamIndex)
-                    {
-                        this.AddToList(component.body);
-                        num2++;
-                    }
-                }
-                num++;
-            }
-        }
-
-        private void AddToList(CharacterBody component)
-        {
-            if (!this.victimBodyList.Contains(component))
-            {
-                this.victimBodyList.Add(component);
-            }
+            returnCounter++;
         }
     }
 }

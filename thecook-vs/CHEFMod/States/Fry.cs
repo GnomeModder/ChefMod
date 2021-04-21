@@ -15,9 +15,9 @@ namespace EntityStates.Chef
 
         private float duration;
         private bool hasThrown;
-        private Vector3 direction;
+        private Vector3 thePoint;
 
-        Tuple<CharacterBody, float> victim = new Tuple<CharacterBody, float>(null, 100f);
+        List<CharacterBody> victimList = new List<CharacterBody>();
         Ray aimRay;
         public override void OnEnter() {
             base.OnEnter();
@@ -50,9 +50,9 @@ namespace EntityStates.Chef
                 base.StartAimMode(0.2f, false);
 
                 BlastAttack blastAttack = new BlastAttack();
-                blastAttack.radius = 5f;
+                blastAttack.radius = 10f;
                 blastAttack.procCoefficient = 1f;
-                blastAttack.position = aimRay.origin + aimRay.direction * 2.5f;
+                blastAttack.position = aimRay.origin;
                 blastAttack.attacker = base.gameObject;
                 blastAttack.crit = Util.CheckRoll(base.characterBody.crit, base.characterBody.master);
                 blastAttack.baseDamage = 0.1f;
@@ -63,13 +63,15 @@ namespace EntityStates.Chef
                 blastAttack.attackerFiltering = AttackerFiltering.NeverHit;
                 //blastAttack.Fire();
 
-                Vector3 horizontal = new Vector3(aimRay.direction.x, 0, aimRay.direction.z);
-                horizontal = horizontal.normalized;
-                direction = new Vector3(horizontal.x, 0.5f, horizontal.z);
+                //Vector3 horizontal = new Vector3(aimRay.direction.x, 0, aimRay.direction.z);
+                //horizontal = horizontal.normalized;
+                //direction = new Vector3(horizontal.x, 0.5f, horizontal.z);
 
                 getVictim(blastAttack);
 
-                if (victim.Item1) {
+                thePoint = aimRay.origin + 30 * aimRay.direction;
+
+                foreach (CharacterBody victim in victimList) {
                     DamageInfo damInfo = new DamageInfo {
                         attacker = base.gameObject,
                         crit = base.RollCrit(),
@@ -81,13 +83,18 @@ namespace EntityStates.Chef
                         procCoefficient = 1f
                     };
 
-                    if (victim.Item1.characterMotor)
+                    if (victim.characterMotor)
                     {
-                        launch(victim.Item1);
-                        var fl = victim.Item1.gameObject.AddComponent<FryLanding>();
+                        launch(victim);
+                        var fl = victim.gameObject.AddComponent<FryLanding>();
                         fl.damageInfo = damInfo;
-                        Util.PlaySound("PanHit", base.gameObject);
                     }
+                    else
+                    {
+                        victim.healthComponent.TakeDamage(damInfo);
+                    }
+
+                    Util.PlaySound("PanHit", base.gameObject);
                 }
                 //else
                 //{
@@ -135,7 +142,7 @@ namespace EntityStates.Chef
                     TeamComponent component2 = component.GetComponent<TeamComponent>();
                     if (component2.teamIndex != TeamComponent.GetObjectTeam(base.gameObject))
                     {
-                        this.Compare(component.body);
+                        this.AddToList(component.body);
                         num2++;
                     }
                 }
@@ -143,12 +150,11 @@ namespace EntityStates.Chef
             }
         }
 
-        private void Compare(CharacterBody candidate)
+        private void AddToList(CharacterBody candidate)
         {
-            Vector3 distance = candidate.corePosition - characterBody.corePosition;
-            if (distance.magnitude < victim.Item2)
+            if (!victimList.Contains(candidate))
             {
-                victim = new Tuple<CharacterBody, float>(candidate, distance.magnitude);
+                victimList.Add(candidate);
             }
         }
 
@@ -156,7 +162,11 @@ namespace EntityStates.Chef
         {
             float speed = 35f;
             if (charB.characterMotor.mass > 300f) speed = 1f;
-            charB.characterMotor.rootMotion.y += 1f;
+            Vector3 direction = thePoint - charB.corePosition;
+            direction.y = 0;
+            direction = direction.normalized;
+            direction.y = 1f;
+            charB.characterMotor.rootMotion.y += 0.5f;
             charB.characterMotor.velocity += speed * direction.normalized;
         }
     }

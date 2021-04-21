@@ -152,11 +152,11 @@ namespace ChefMod
             prefabBuilder.masteryAchievementUnlockable = "";
             chefPrefab = prefabBuilder.CreatePrefab();
 
-            var tracker = chefPrefab.AddComponent<HuntressTracker>();
-            tracker.maxTrackingDistance = 30f;
-            tracker.maxTrackingAngle = 90f;
-            //tracker.indicator = ;
-            tracker.enabled = false;
+            //var tracker = chefPrefab.AddComponent<HuntressTracker>();
+            //tracker.maxTrackingDistance = 30f;
+            //tracker.maxTrackingAngle = 90f;
+            ////tracker.indicator = ;
+            //tracker.enabled = false;
 
             var fc = chefPrefab.AddComponent<FieldComponent>();
             var meshs = chefPrefab.GetComponentsInChildren<MeshRenderer>();
@@ -561,13 +561,12 @@ namespace ChefMod
                 viewableNode = new ViewablesCatalog.Node(primaryDef.skillNameToken, false, null)
             };
 
-            //Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
-            //skillFamily.variants[1] = new SkillFamily.Variant
-            //{
-            //    skillDef = altPrimaryDef,
-            //    unlockableName = "",
-            //    viewableNode = new ViewablesCatalog.Node(altPrimaryDef.skillNameToken, false, null)
-            //};
+            Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
+            skillFamily.variants[1] = new SkillFamily.Variant
+            {
+                skillDef = altPrimaryDef,
+                viewableNode = new ViewablesCatalog.Node(altPrimaryDef.skillNameToken, false, null)
+            };
 
             skillFamily = skillLocator.secondary.skillFamily;
             skillFamily.variants[0] = new SkillFamily.Variant
@@ -580,7 +579,6 @@ namespace ChefMod
             //skillFamily.variants[1] = new SkillFamily.Variant
             //{
             //    skillDef = altSecondaryDef,
-            //    unlockableName = "",
             //    viewableNode = new ViewablesCatalog.Node(altSecondaryDef.skillNameToken, false, null)
             //};
 
@@ -664,10 +662,12 @@ namespace ChefMod
             cleaverPrefab.layer = LayerIndex.noCollision.intVal;
 
             knifePrefab = cleaverPrefab.InstantiateClone("CHEFKnife", true);
-            knifePrefab.AddComponent<ProjectileTargetComponent>();
+            //knifePrefab.AddComponent<ProjectileTargetComponent>();
+            var kum = knifePrefab.GetComponent<CoomerangProjectile>();
+            kum.target = true;
+            kum.distanceMultiplier *= 0.2f;
             knifePrefab.layer = LayerIndex.projectile.intVal;
 
-            var kum = knifePrefab.GetComponent<CoomerangProjectile>();
             Destroy(knifePrefab.GetComponent<ProjectileOverlapAttack>());
 
 
@@ -873,7 +873,7 @@ namespace ChefMod
             drippingPrefab.AddComponent<EsplodeOnImpact>();
 
             ChefContent.projectilePrefabs.Add(cleaverPrefab);
-            ChefContent.projectilePrefabs.Add(cleaverPrefab);
+            ChefContent.projectilePrefabs.Add(knifePrefab);
             ChefContent.projectilePrefabs.Add(oilPrefab);
             ChefContent.projectilePrefabs.Add(foirballPrefab);
             ChefContent.projectilePrefabs.Add(flamballPrefab);
