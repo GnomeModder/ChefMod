@@ -49,10 +49,10 @@ namespace EntityStates.Chef
 
             //if (Input.GetKeyDown(KeyCode.K))
             //{
-            //    //characterBody.master.inventory.GiveItem(ItemIndex.Hoof);
+            //    characterBody.master.inventory.GiveItem);
             //    //characterBody.master.inventory.GiveItem(ItemIndex.FireRing);
             //    //characterBody.master.inventory.GiveItem(ItemIndex.SlowOnHit);
-            //    characterBody.master.inventory.SetEquipmentIndex(EquipmentIndex.Blackhole);
+            //    //characterBody.master.inventory.SetEquipmentIndex(EquipmentIndex.Blackhole);
             //}
 
             //this.oilTrail.damagePerSecond = base.characterBody.damage * 1.5f;

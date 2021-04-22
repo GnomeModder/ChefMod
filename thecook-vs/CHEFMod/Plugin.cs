@@ -27,10 +27,11 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "0.12.2")]
+        "0.13.0")]
     public class chefPlugin : BaseUnityPlugin
     {
         public GameObject chefPrefab;
+        public static CharacterMaster invaderMaster;
         public static GameObject cleaverPrefab;
         public static GameObject knifePrefab;
         public static GameObject oilPrefab;
@@ -72,6 +73,7 @@ namespace ChefMod
             minceHorizontalIntensity = base.Config.Bind<float>(new ConfigDefinition("01 - General Settings", "Mince Horizontal Density"), 3, new ConfigDescription("same as above", null, Array.Empty<object>()));
             oilProc = base.Config.Bind<float>(new ConfigDefinition("01 - General Settings", "Oil Proc"), 0, new ConfigDescription("proc coef on fire oil tick", null, Array.Empty<object>()));
 
+            Unlockables.RegisterUnlockables();
             registerCharacter();
             registerSkills();
             registerProjectiles();
@@ -129,11 +131,6 @@ namespace ChefMod
             //};
         }
 
-        private void registerUnlocks()
-        {
-
-        }
-
         private void registerCharacter()
         {
             //Load your base character body, from somewhere in the game.
@@ -151,6 +148,11 @@ namespace ChefMod
             prefabBuilder.masterySkinIcon = Assets.defaultSkinIcon;
             prefabBuilder.masteryAchievementUnlockable = "";
             chefPrefab = prefabBuilder.CreatePrefab();
+
+            invaderMaster = Resources.Load<GameObject>("Prefabs/CharacterMasters/MercMonsterMaster").InstantiateClone("ChefInvader", true).GetComponent<CharacterMaster>();
+            invaderMaster.bodyPrefab = chefPrefab;
+            invaderMaster.name = "ChefInvader";
+            ChefContent.masterPrefabs.Add(invaderMaster.gameObject);
 
             //var tracker = chefPrefab.AddComponent<HuntressTracker>();
             //tracker.maxTrackingDistance = 30f;
@@ -215,10 +217,12 @@ namespace ChefMod
             characterBody.baseAttackSpeed = 1f;
             characterBody.name = "CHEF";
             characterBody.baseNameToken = "CHEF_NAME";
+            characterBody.subtitleNameToken = "CHEF_SUBTITLE";
             characterBody.portraitIcon = Assets.chefIcon;
             characterBody.bodyColor = chefColor;
 
             LanguageAPI.Add("CHEF_NAME", "CHEF");
+            LanguageAPI.Add("CHEF_SUBTITLE", "The Cook");
 
             chefPrefab.GetComponent<CharacterBody>().preferredPodPrefab = Resources.Load<GameObject>("Prefabs/CharacterBodies/toolbotbody").GetComponent<CharacterBody>().preferredPodPrefab;
 
@@ -233,6 +237,7 @@ namespace ChefMod
             survivorDef.displayNameToken = "CHEF_NAME";
             survivorDef.outroFlavorToken = "CHEF_OUTRO";
             survivorDef.desiredSortPosition = 99f;
+            survivorDef.unlockableDef = Unlockables.chefUnlockDef;
 
             ChefContent.survivorDefs.Add(survivorDef);
 
@@ -565,6 +570,7 @@ namespace ChefMod
             skillFamily.variants[1] = new SkillFamily.Variant
             {
                 skillDef = altPrimaryDef,
+                unlockableDef = Unlockables.sliceUnlockDef,
                 viewableNode = new ViewablesCatalog.Node(altPrimaryDef.skillNameToken, false, null)
             };
 

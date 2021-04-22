@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 using RoR2;
 using RoR2.Projectile;
 using EntityStates.ArtifactShell;
+using EntityStates.Chef;
 
 namespace ChefMod
 {
@@ -14,6 +15,8 @@ namespace ChefMod
 	[RequireComponent(typeof(ProjectileController))]
 	public class CoomerangProjectile : NetworkBehaviour, IProjectileImpactBehavior
 	{
+		public static event Action CleaverCreated;
+
 		// Token: 0x060025A2 RID: 9634 RVA: 0x0009C7B0 File Offset: 0x0009A9B0
 		private void Awake()
 		{
@@ -47,6 +50,12 @@ namespace ChefMod
 			}
 
 			startTime = Time.fixedTime;
+
+			if (CleaverCreated != null)
+			{
+				Action action = CleaverCreated;
+				action();
+			}
 		}
 
 		// Token: 0x060025A4 RID: 9636 RVA: 0x0009C8CC File Offset: 0x0009AACC
