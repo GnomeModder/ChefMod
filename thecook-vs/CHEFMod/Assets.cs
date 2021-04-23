@@ -10,7 +10,7 @@ namespace ChefMod
         public static AssetBundle chefAssetBundle = LoadAssetBundle(ChefMod.Properties.Resources.chef);
 
         public static Texture chefIcon = chefAssetBundle.LoadAsset<Texture>("cheficon");
-        public static Sprite chefIconSprite = chefAssetBundle.LoadAsset<Sprite>("cheficon");
+        public static Sprite chefIconSprite = chefAssetBundle.LoadAsset<Sprite>("unlockicon");
         public static Sprite chefDiceIcon = chefAssetBundle.LoadAsset<Sprite>("chef_primary");
         public static Sprite chefMinceIcon = chefAssetBundle.LoadAsset<Sprite>("chef_primary_boosted");
         public static Sprite chefSearIcon = chefAssetBundle.LoadAsset<Sprite>("chef_secondary");

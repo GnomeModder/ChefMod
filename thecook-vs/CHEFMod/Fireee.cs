@@ -61,7 +61,7 @@ namespace ChefMod
                 thisItem.gameObject.SetActive(false);
             }
 
-            oilPrefab = goku("Oyl");
+            //oilPrefab = goku("Oyl");
             rig = GetComponent<Rigidbody>();
             rig.velocity += Vector3.down;
 
@@ -96,7 +96,7 @@ namespace ChefMod
                 //Quaternion ninety = Quaternion.FromToRotation(Vector3.up, Vector3.forward);
                 //oilPrefab.transform.rotation = this.transform.rotation * ninety * floorRotation;
                 Quaternion randy = new Quaternion(0, 1, 0, UnityEngine.Random.Range(0, 360f));
-                Destroy(oilPrefab);
+                //Destroy(oilPrefab);
                 oilPrefab = Instantiate(chefPlugin.oilfab, this.transform.position - Vector3.up, randy);
                 if (edging) ignate();
                 checkforhomies();
