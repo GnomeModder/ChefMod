@@ -2317,26 +2317,26 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
-                keyAsset = RoR2Content.Equipment.Lightning,
-                displayRuleGroup = new DisplayRuleGroup
-                {
-                    rules = new ItemDisplayRule[]
-                    {
-                        new ItemDisplayRule
-                        {
-                            ruleType = ItemDisplayRuleType.ParentedPrefab,
-                            followerPrefab = ItemDisplays.capacitorPrefab,
-                            limbMask = LimbFlags.None,
-                            childName = "Body",
-                            localPos = new Vector3(-0.0247F, 0.0065F, 0.0011F),
-                            localAngles = new Vector3(53.2803F, 265.2803F, 39.4167F),
-                            localScale = new Vector3(0.0325F, 0.0325F, 0.0325F)
-                        }
-                    }
-                }
-            });
+            //list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
+            //{
+            //    keyAsset = RoR2Content.Equipment.Lightning,
+            //    displayRuleGroup = new DisplayRuleGroup
+            //    {
+            //        rules = new ItemDisplayRule[]
+            //        {
+            //            new ItemDisplayRule
+            //            {
+            //                ruleType = ItemDisplayRuleType.ParentedPrefab,
+            //                followerPrefab = ItemDisplays.capacitorPrefab,
+            //                limbMask = LimbFlags.None,
+            //                childName = "Body",
+            //                localPos = new Vector3(-0.0247F, 0.0065F, 0.0011F),
+            //                localAngles = new Vector3(53.2803F, 265.2803F, 39.4167F),
+            //                localScale = new Vector3(0.0325F, 0.0325F, 0.0325F)
+            //            }
+            //        }
+            //    }
+            //});
 
             list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
             {
