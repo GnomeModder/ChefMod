@@ -1,4 +1,5 @@
 ﻿using ChefMod;
+using ChefPlugin;
 using EntityStates;
 using EntityStates.Engi.EngiMissilePainter;
 using MonoMod;
@@ -89,7 +90,7 @@ namespace EntityStates.Chef
                 GameObject effect = Resources.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFX");
                 EffectData effectData = new EffectData
                 {
-                    scale = 8f,
+                    scale = 15f,
                     origin = characterBody.corePosition
                 };
                 EffectManager.SpawnEffect(effect, effectData, true);

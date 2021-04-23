@@ -11,6 +11,8 @@ namespace ChefMod
     public class Fireee : NetworkBehaviour
     {
         public bool onFire = false;
+        public bool ground = false;
+        private bool edging = false;
 
         private GameObject owner;
         private TeamIndex teamIndex;
@@ -25,7 +27,6 @@ namespace ChefMod
         private GameObject firePrefab;
         private float startTime;
         private float igniteTime;
-        private bool ground = false;
         private int framecounter = 0;
         private Rigidbody rig;
 
@@ -89,16 +90,21 @@ namespace ChefMod
             {
                 ground = true;
                 rig.isKinematic = true;
-                Ray ray = new Ray(transform.position, Vector3.down);
-                RaycastHit[] casts = Physics.RaycastAll(ray);
-                Quaternion floorRotation = Quaternion.FromToRotation(Vector3.up, casts[0].normal);
-                Quaternion ninety = Quaternion.FromToRotation(Vector3.up, Vector3.forward);
-                oilPrefab.transform.rotation = this.transform.rotation * ninety * floorRotation;
+                //Ray ray = new Ray(transform.position, Vector3.down);
+                //RaycastHit[] casts = Physics.RaycastAll(ray);
+                //Quaternion floorRotation = Quaternion.FromToRotation(Vector3.up, casts[0].normal);
+                //Quaternion ninety = Quaternion.FromToRotation(Vector3.up, Vector3.forward);
+                //oilPrefab.transform.rotation = this.transform.rotation * ninety * floorRotation;
+                Quaternion randy = new Quaternion(0, 1, 0, UnityEngine.Random.Range(0, 360f));
+                Destroy(oilPrefab);
+                oilPrefab = Instantiate(chefPlugin.oilfab, this.transform.position - Vector3.up, randy);
+                if (edging) ignate();
                 checkforhomies();
             }
 
             if (shouldDie())
             {
+                Destroy(oilPrefab);
                 Destroy(firePrefab);
                 Destroy(body.gameObject);
             }
@@ -135,13 +141,18 @@ namespace ChefMod
                 return;
             }
 
+            if (!ground)
+            {
+                edging = true;
+                return;
+            }
+
             onFire = true;
             igniteTime = Time.fixedTime;
             esplode();
 
             //Destroy(oilPrefab);
             //firePrefab = goku("Fyre");
-            Destroy(oilPrefab);
             firePrefab = Instantiate(chefPlugin.firefab, this.transform.position - Vector3.up, Quaternion.identity);
 
             hitmyhomiesup();
@@ -261,7 +272,8 @@ namespace ChefMod
         }
         private void checkforhomies()
         {
-            RaycastHit[] array = Physics.SphereCastAll(body.corePosition, 1.2f * radius, Vector3.up, 5f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
+            if (onFire) return;
+            RaycastHit[] array = Physics.SphereCastAll(body.corePosition, 1.5f * radius, Vector3.up, 5f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
             for (int j = 0; j < array.Length; j++)
             {
                 Collider collider = array[j].collider;

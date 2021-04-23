@@ -1,7 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
 using EntityStates;
-using EntityStates.ArtifactShell;
 using EntityStates.Chef;
 using R2API;
 using R2API.Utils;
@@ -11,7 +10,6 @@ using RoR2.Projectile;
 using RoR2.Skills;
 using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using ThreeEyedGames;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -35,8 +33,8 @@ namespace ChefMod
         public static GameObject cleaverPrefab;
         public static GameObject knifePrefab;
         public static GameObject oilPrefab;
+        public static GameObject oilfab;
         public static GameObject firefab;
-        public static GameObject segfab;
         public static GameObject foirballPrefab;
         public static GameObject flamballPrefab;
         public static GameObject drippingPrefab;
@@ -149,11 +147,6 @@ namespace ChefMod
             prefabBuilder.masteryAchievementUnlockable = "";
             chefPrefab = prefabBuilder.CreatePrefab();
 
-            invaderMaster = Resources.Load<GameObject>("Prefabs/CharacterMasters/MercMonsterMaster").InstantiateClone("ChefInvader", true).GetComponent<CharacterMaster>();
-            invaderMaster.bodyPrefab = chefPrefab;
-            invaderMaster.name = "ChefInvader";
-            ChefContent.masterPrefabs.Add(invaderMaster.gameObject);
-
             //var tracker = chefPrefab.AddComponent<HuntressTracker>();
             //tracker.maxTrackingDistance = 30f;
             //tracker.maxTrackingAngle = 90f;
@@ -224,7 +217,7 @@ namespace ChefMod
             LanguageAPI.Add("CHEF_NAME", "CHEF");
             LanguageAPI.Add("CHEF_SUBTITLE", "The Cook");
 
-            chefPrefab.GetComponent<CharacterBody>().preferredPodPrefab = Resources.Load<GameObject>("Prefabs/CharacterBodies/toolbotbody").GetComponent<CharacterBody>().preferredPodPrefab;
+            characterBody.preferredPodPrefab = Resources.Load<GameObject>("Prefabs/CharacterBodies/toolbotbody").GetComponent<CharacterBody>().preferredPodPrefab;
 
             EntityStateMachine stateMachine = characterBody.GetComponent<EntityStateMachine>();
             stateMachine.mainStateType = new SerializableEntityStateType(typeof(EntityStates.Chef.Main));
@@ -243,6 +236,11 @@ namespace ChefMod
 
             LanguageAPI.Add("CHEF_DESCRIPTION", "*sizzle* \n'You're not cooking' \n'yeah, dude' \n'eeh, aahh' \n*fire* \n'babbabababaa' \n'porkchop sandwiches' \n*fire alarm* \n'oh shit get the fuck out of here what are you doing go get  the  fuck  out  of here you stupid idiot fuck were all dead get the fuck out' \n*firetruck sidewalk* \n'my god did that smell good'\n'detector no goin and you tell me do things I done runnin'" + "\r\n");
             LanguageAPI.Add("CHEF_OUTRO", "...and so it left, rock hard");
+
+            invaderMaster = Resources.Load<GameObject>("Prefabs/CharacterMasters/MercMonsterMaster").InstantiateClone("ChefInvader", true).GetComponent<CharacterMaster>();
+            invaderMaster.bodyPrefab = chefPrefab;
+            invaderMaster.name = "ChefInvader";
+            ChefContent.masterPrefabs.Add(invaderMaster.gameObject);
         }
 
         private void registerSkills()
@@ -696,26 +694,33 @@ namespace ChefMod
             //bollPrefab.AddComponent<CharacterMotor>();
             //bollPrefab.AddComponent<Fireee>();
 
-            //GameObject acid = Resources.Load<GameObject>("Prefabs/Projectiles/CrocoLeapAcid");
-            //cumStain = acid.GetComponentInChildren<ThreeEyedGames.Decal>().gameObject.InstantiateClone("OilCum", true);
-            //Material oilcum = new Material(Resources.Load<Material>("Materials/matClayGooDebuff"));
-            //var decal = cumStain.GetComponent<ThreeEyedGames.Decal>();
-            ////decal.Material = Resources.Load<Material>("Materials/matBeetleJuice");
-            ////Material acidcum = decal.Material;
-            ////oilcum.mainTexture = acidcum.mainTexture;
-            ////oilcum.mainTextureOffset = acidcum.mainTextureOffset;
-            ////oilcum.mainTextureScale = acidcum.mainTextureScale;
-            ////oilcum.shaderKeywords = acidcum.shaderKeywords;
-            ////oilcum.
-            ////oilcum.shader = acidcum.shader;
-            ////decal.Material = oilcum;
-            //cumStain.transform.localScale *= 7f;
+            GameObject acid = Resources.Load<GameObject>("Prefabs/CharacterBodies/commandobody").GetComponent<CharacterBody>().preferredPodPrefab;
+            oilfab = acid.GetComponentInChildren<ThreeEyedGames.Decal>().gameObject.InstantiateClone("OilCum", true);
+            var dekal = oilfab.GetComponent<ThreeEyedGames.Decal>();
+
+            //dekal.Material.SetTexture("_MainTex", Assets.chefIcon);
+            //dekal.Material.SetTexture("_Cloud1Tex", Assets.chefIcon);
+            //dekal.Material.SetTexture("_Cloud2Tex", Assets.chefIcon);
+            //dekal.Material.SetTexture("_RemapTex", Assets.chefIcon);
+            //dekal.Material.SetTexture("_NormalTex", Assets.chefIcon);
+            //dekal.Material.SetTexture("_MaskTex", Assets.chefIcon);
+
+            //decal.Material = Resources.Load<Material>("Materials/matBeetleJuice");
+            //Material acidcum = decal.Material;
+            //oilcum.mainTexture = acidcum.mainTexture;
+            //oilcum.mainTextureOffset = acidcum.mainTextureOffset;
+            //oilcum.mainTextureScale = acidcum.mainTextureScale;
+            //oilcum.shaderKeywords = acidcum.shaderKeywords;
+            //oilcum.
+            //oilcum.shader = acidcum.shader;
+            //decal.Material = oilcum;
+            oilfab.transform.localScale *= 4f;
 
             var firetrail = Resources.Load<GameObject>("Prefabs/FireTrail");
             Material firepart = firetrail.GetComponent<DamageTrail>().segmentPrefab.GetComponent<ParticleSystemRenderer>().material;
 
-            var cumStain = Resources.Load<GameObject>("prefabs/projectiles/LunarExploderProjectileDotZone");
-            firefab = cumStain.GetComponentInChildren<AlignToNormal>().gameObject.InstantiateClone("ChefFire", true);
+            var chumStain = Resources.Load<GameObject>("prefabs/projectiles/LunarExploderProjectileDotZone");
+            firefab = chumStain.GetComponentInChildren<AlignToNormal>().gameObject.InstantiateClone("ChefFire", true);
 
             Destroy(firefab.GetComponentInChildren<TeamAreaIndicator>().gameObject);
             var decal = firefab.GetComponentInChildren<Decal>();

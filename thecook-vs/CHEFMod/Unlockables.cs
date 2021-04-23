@@ -19,9 +19,9 @@ namespace ChefMod
 
         public static void RegisterUnlockables()
         {
-            LanguageAPI.Add("CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME", "Burning Hunger");
-            LanguageAPI.Add("CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC", "Go Grocery Shopping");
-            LanguageAPI.Add("CHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME", "Burning Hunger");
+            LanguageAPI.Add("CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME", "Mise en Place");
+            LanguageAPI.Add("CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC", "Gather Ingredients");
+            LanguageAPI.Add("CHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME", "Mise en Place");
 
             LanguageAPI.Add("CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME", "Full Set");
             LanguageAPI.Add("CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC", "Have 200 cleavers in the air at once");
@@ -70,11 +70,11 @@ namespace ChefMod.Achievements
             orig(self);
 
             String[] chefwarnings = new String[5];
-            chefwarnings[0] = "Je peux le sentir";
-            chefwarnings[1] = "Je viens à vous bientôt";
-            chefwarnings[2] = "Mon four préchauffe";
-            chefwarnings[3] = "Vous m'avez arousé";
-            chefwarnings[4] = "Le dîner est toujours à l'heure";
+            chefwarnings[0] = "JE PEUX LE SENTIR";
+            chefwarnings[1] = "JE VIENS À VOUS BIENTÔT";
+            chefwarnings[2] = "MON FOUR PRÉCHAUFFE";
+            chefwarnings[3] = "VOUS M'AVEZ AROUSÉ";
+            chefwarnings[4] = "LE DÎNER EST TOUJOURS À L'HEURE";
 
             if (self && self.teamIndex == TeamIndex.Player && self.inventory)
             {
@@ -84,7 +84,7 @@ namespace ChefMod.Achievements
                 {
                     warning = true;
                     int choice = UnityEngine.Random.Range(0, 5);
-                    Chat.AddMessage("CHEF: " + chefwarnings[choice]);
+                    Chat.AddMessage(Util.GenerateColoredString("CHEF: " + chefwarnings[choice], Color.red));
                 }
                 if (warning && !death && !spawned && count > 4)
                 {
@@ -110,6 +110,11 @@ namespace ChefMod.Achievements
         {
             if (report.victimMaster && report.victimMaster.name == "ChefInvader(Clone)")
             {
+                if (report.isFallDamage)
+                {
+                    ChefInvasionManager.PerformInvasion(new Xoroshiro128Plus(Run.instance.seed));
+                    return;
+                }
                 death = true;
             }
         }
@@ -126,6 +131,19 @@ namespace ChefMod.Achievements
             if (death) base.Grant();
         }
 
+        private void Buff(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
+        {
+            if (self.master && self.master.name == "ChefInvader(Clone)")
+            {
+                self.baseMaxHealth = 1000f;
+                self.levelMaxHealth = 500f;
+                self.baseMoveSpeed = 14f;
+                self.levelMoveSpeed = 2;
+                self.levelDamage = 7.2f;
+            }
+            orig(self);
+        }
+
         public override void OnInstall()
         {
             base.OnInstall();
@@ -134,6 +152,7 @@ namespace ChefMod.Achievements
             GlobalEventManager.onCharacterDeathGlobal += Death;
             Stage.onServerStageBegin += Reset;
             Stage.onServerStageComplete += Check;
+            On.RoR2.CharacterBody.RecalculateStats += Buff;
         }
 
         public override void OnUninstall()
@@ -144,6 +163,7 @@ namespace ChefMod.Achievements
             GlobalEventManager.onCharacterDeathGlobal -= Death;
             Stage.onServerStageBegin -= Reset;
             Stage.onServerStageComplete -= Check;
+            On.RoR2.CharacterBody.RecalculateStats -= Buff;
         }
     }
 
