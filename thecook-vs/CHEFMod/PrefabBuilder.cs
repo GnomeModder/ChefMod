@@ -463,27 +463,27 @@ public class PrefabBuilder
         array[0].defaultMaterial = commandoMat;
 
         //TODO: masteryrendererinfos when we have them
-        LoadoutAPI.SkinDefInfo masteryInfo = new LoadoutAPI.SkinDefInfo
-        {
-            Name = "DEFAULT_SKIN",
-            NameToken = "DEFAULT_SKIN",
-            Icon = defaultSkinIcon,
-            RootObject = obj,
-            RendererInfos = array,
-            GameObjectActivations = Array.Empty<SkinDef.GameObjectActivation>(),
-            MeshReplacements = Array.Empty<SkinDef.MeshReplacement>(),
-            BaseSkins = Array.Empty<SkinDef>(),
-            MinionSkinReplacements = Array.Empty<SkinDef.MinionSkinReplacement>(),
-            ProjectileGhostReplacements = Array.Empty<SkinDef.ProjectileGhostReplacement>()
-        };
+        //LoadoutAPI.SkinDefInfo masteryInfo = new LoadoutAPI.SkinDefInfo
+        //{
+        //    Name = "DEFAULT_SKIN",
+        //    NameToken = "DEFAULT_SKIN",
+        //    Icon = defaultSkinIcon,
+        //    RootObject = obj,
+        //    RendererInfos = array,
+        //    GameObjectActivations = Array.Empty<SkinDef.GameObjectActivation>(),
+        //    MeshReplacements = Array.Empty<SkinDef.MeshReplacement>(),
+        //    BaseSkins = Array.Empty<SkinDef>(),
+        //    MinionSkinReplacements = Array.Empty<SkinDef.MinionSkinReplacement>(),
+        //    ProjectileGhostReplacements = Array.Empty<SkinDef.ProjectileGhostReplacement>()
+        //};
 
         SkinDef skinDefault = LoadoutAPI.CreateNewSkinDef(skinDefInfo);
-        SkinDef mastery = LoadoutAPI.CreateNewSkinDef(masteryInfo);
+        //SkinDef mastery = LoadoutAPI.CreateNewSkinDef(masteryInfo);
 
-        SkinDef[] skinDefs = new SkinDef[2]
+        SkinDef[] skinDefs = new SkinDef[1]
         {
-            skinDefault,
-            mastery
+            skinDefault
+            //mastery
         };
 
         skinController.skins = skinDefs;

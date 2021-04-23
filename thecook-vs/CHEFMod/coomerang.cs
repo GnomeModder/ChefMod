@@ -23,6 +23,7 @@ namespace ChefMod
 			this.rigidbody = base.GetComponent<Rigidbody>();
 			this.projectileController = base.GetComponent<ProjectileController>();
 			this.projectileDamage = base.GetComponent<ProjectileDamage>();
+			this.lineRenderer = base.GetComponent<LineRenderer>();
 			if (this.projectileController && this.projectileController.owner)
 			{
 				this.ownerTransform = this.projectileController.owner.transform;
@@ -47,6 +48,7 @@ namespace ChefMod
 			{
 				this.travelSpeed *= projectileDamage.force;
 				this.gameObject.layer = LayerIndex.projectile.intVal;
+				this.lineRenderer.enabled = true;
 			}
 
 			startTime = Time.fixedTime;
@@ -109,6 +111,14 @@ namespace ChefMod
 			Vector3 vector = this.projectileController.owner.transform.position - base.transform.position;
 			Vector3 normalized = vector.normalized;
 			return vector.magnitude <= 3f;
+		}
+
+		public void Update()
+		{
+			if (NetworkServer.active)
+			{
+				if (this.lineRenderer.enabled) this.lineRenderer.SetPositions(new Vector3[2] { this.transform.position, shoulder.position });
+			}
 		}
 
 		// Token: 0x060025A6 RID: 9638 RVA: 0x0009C968 File Offset: 0x0009AB68
@@ -177,6 +187,7 @@ namespace ChefMod
 										Action action = Returned;
 										action();
 									}
+									this.lineRenderer.enabled = false;
 									UnityEngine.Object.Destroy(base.gameObject);
 								}
 							}
@@ -294,6 +305,9 @@ namespace ChefMod
 		public bool target = false;
 		public static event Action Returned;
 		private bool hasfired = false;
+
+		private LineRenderer lineRenderer;
+		public Transform shoulder;
 
 		// Token: 0x04002055 RID: 8277
 		public float travelSpeed = 40f;

@@ -636,6 +636,15 @@ namespace ChefMod
             effect.GetComponent<EffectComponent>().soundName = "CleaverHit";
             ChefContent.effectDefs.Add(new EffectDef(effect));
 
+            var lr = cleaverPrefab.AddComponent<LineRenderer>();
+            lr.textureMode = LineTextureMode.Tile;
+            lr.numCornerVertices = 4;
+            lr.enabled = false;
+            lr.startWidth *= 0.35f;
+            lr.endWidth *= 0.35f;
+            lr.alignment = LineAlignment.View;
+            lr.SetMaterials(new Material[1] { Assets.armmat }, 1);
+
             BoomerangProjectile boo = cleaverPrefab.GetComponent<BoomerangProjectile>();
             CoomerangProjectile cum = cleaverPrefab.AddComponent<CoomerangProjectile>();
             cum.impactSpark = effect;

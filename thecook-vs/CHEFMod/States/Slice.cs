@@ -28,6 +28,8 @@ namespace EntityStates.Chef
             CoomerangProjectile.Returned += setReturned;
 
             base.StartAimMode(2f, false);
+
+            base.PlayAnimation("Gesture, Override", "AltPrimary");
         }
 
         public override void FixedUpdate()
@@ -57,6 +59,7 @@ namespace EntityStates.Chef
 
                 Vector3 shoulderPos = childLocator.FindChild("RightShoulder").position;
                 //Vector3 difference = victim.transform.position - shoulderPos;
+                chefPlugin.knifePrefab.GetComponent<CoomerangProjectile>().shoulder = childLocator.FindChild("RightShoulder");
 
                 FireProjectileInfo info = new FireProjectileInfo()
                 {
@@ -85,6 +88,7 @@ namespace EntityStates.Chef
         {
             childLocator.FindChild("RightShoulder").gameObject.SetActive(true);
             CoomerangProjectile.Returned -= setReturned;
+            base.PlayAnimation("Gesture, Override", "AltPrimaryEnd");
 
             base.OnExit();
         }
