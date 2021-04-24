@@ -13,6 +13,7 @@ namespace EntityStates.Chef
         //public ChefMod.Trail oilTrail;
         //public float radius = 3f;
         ChefMod.FieldComponent fieldComponent;
+        ChildLocator childLocator;
         //HuntressTracker tracker;
         public override void OnEnter()
         {
@@ -34,6 +35,18 @@ namespace EntityStates.Chef
 
             fieldComponent = base.characterBody.GetComponent<ChefMod.FieldComponent>();
             fieldComponent.characterBody = base.characterBody;
+
+            childLocator = base.GetModelChildLocator();
+            if (skillLocator.primary.baseSkill == chefPlugin.primaryDef || skillLocator.primary.baseSkill == chefPlugin.boostedPrimaryDef)
+            {
+                childLocator.FindChild("Cleaver").gameObject.SetActive(true);
+                childLocator.FindChild("Knife").gameObject.SetActive(false);
+            }
+            if (skillLocator.primary.baseSkill == chefPlugin.altPrimaryDef || skillLocator.primary.baseSkill == chefPlugin.boostedAltPrimaryDef)
+            {
+                childLocator.FindChild("Cleaver").gameObject.SetActive(false);
+                childLocator.FindChild("Knife").gameObject.SetActive(true);
+            }
 
             //tracker = base.characterBody.GetComponent<HuntressTracker>();
             //if (skillLocator.primary.baseSkill == chefPlugin.altPrimaryDef || skillLocator.primary.baseSkill == chefPlugin.boostedAltPrimaryDef)
@@ -104,6 +117,9 @@ namespace EntityStates.Chef
                 {
                     thisItem.gameObject.SetActive(false);
                 }
+
+                childLocator.FindChild("Cleaver").gameObject.SetActive(false);
+                childLocator.FindChild("Knife").gameObject.SetActive(false);
             }
 
 

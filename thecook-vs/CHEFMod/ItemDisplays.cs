@@ -327,6 +327,27 @@ namespace ChefMod
                 }
             });
 
+            //list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
+            //{
+            //    keyAsset = RoR2Content.Items.BleedOnHit,
+            //    displayRuleGroup = new DisplayRuleGroup
+            //    {
+            //        rules = new ItemDisplayRule[]
+            //        {
+            //            new ItemDisplayRule
+            //            {
+            //                ruleType = ItemDisplayRuleType.ParentedPrefab,
+            //                followerPrefab = ItemDisplays.LoadDisplay("DisplayTriTip"),
+            //                limbMask = LimbFlags.None,
+            //                childName = "Knife",
+            //                localPos = new Vector3(-0.001F, 0.0233F, 0.0001F),
+            //                localAngles = new Vector3(0F, 0F, 0F),
+            //                localScale = new Vector3(0.0089F, 0.0089F, 0.0089F)
+            //            }
+            //        }
+            //    }
+            //});
+
             list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
             {
                 keyAsset = RoR2Content.Items.WardOnLevel,
@@ -767,6 +788,27 @@ namespace ChefMod
                 }
             });
 
+            //list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
+            //{
+            //    keyAsset = RoR2Content.Items.ExecuteLowHealthElite,
+            //    displayRuleGroup = new DisplayRuleGroup
+            //    {
+            //        rules = new ItemDisplayRule[]
+            //        {
+            //            new ItemDisplayRule
+            //            {
+            //                ruleType = ItemDisplayRuleType.ParentedPrefab,
+            //                followerPrefab = ItemDisplays.LoadDisplay("DisplayGuillotine"),
+            //                limbMask = LimbFlags.None,
+            //                childName = "Knife",
+            //                localPos = new Vector3(0.0029F, 0.0155F, -0.0001F),
+            //                localAngles = new Vector3(1.1394F, 90.2069F, 269.7308F),
+            //                localScale = new Vector3(0.0211F, 0.0128F, 0.0138F)
+            //            }
+            //        }
+            //    }
+            //});
+
             list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
             {
                 keyAsset = RoR2Content.Items.EquipmentMagazine,
@@ -1070,6 +1112,27 @@ namespace ChefMod
                     }
                 }
             });
+
+            //list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
+            //{
+            //    keyAsset = RoR2Content.Items.SecondarySkillMagazine,
+            //    displayRuleGroup = new DisplayRuleGroup
+            //    {
+            //        rules = new ItemDisplayRule[]
+            //        {
+            //            new ItemDisplayRule
+            //            {
+            //                ruleType = ItemDisplayRuleType.ParentedPrefab,
+            //                followerPrefab = ItemDisplays.LoadDisplay("DisplayDoubleMag"),
+            //                limbMask = LimbFlags.None,
+            //                childName = "Knife",
+            //                localPos = new Vector3(-0.0008F, -0.0009F, 0F),
+            //                localAngles = new Vector3(7.8622F, 270F, 0F),
+            //                localScale = new Vector3(0.0028F, 0.0047F, 0.0028F)
+            //            }
+            //        }
+            //    }
+            //});
 
             list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
             {

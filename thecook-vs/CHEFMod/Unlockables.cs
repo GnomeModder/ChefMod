@@ -175,7 +175,7 @@ namespace ChefMod.Achievements
         public override string PrerequisiteUnlockableIdentifier { get; } = "CHEF_CHEFUNLOCKABLE_REWARD_ID";
         public override string UnlockableNameToken { get; } = "CHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME";
         public override string AchievementDescToken { get; } = "CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC";
-        public override Sprite Sprite { get; } = Assets.chefDiceIcon;
+        public override Sprite Sprite { get; } = Assets.chefSliceIcon;
 
         public override Func<string> GetHowToUnlock { get; } = (() => Language.GetStringFormatted("UNLOCK_VIA_ACHIEVEMENT_FORMAT", new object[]
                             {

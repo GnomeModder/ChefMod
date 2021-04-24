@@ -330,7 +330,7 @@ namespace ChefMod
             altPrimaryDef.rechargeStock = 1;
             altPrimaryDef.requiredStock = 1;
             altPrimaryDef.stockToConsume = 1;
-            altPrimaryDef.icon = Assets.chefDiceIcon;
+            altPrimaryDef.icon = Assets.chefSliceIcon;
             altPrimaryDef.skillDescriptionToken = "CHEF_ALTPRIMARY_DESCRIPTION";
             altPrimaryDef.skillName = "Primary";
             altPrimaryDef.skillNameToken = "CHEF_ALTPRIMARY_NAME";
@@ -354,7 +354,7 @@ namespace ChefMod
             boostedAltPrimaryDef.rechargeStock = 1;
             boostedAltPrimaryDef.requiredStock = 1;
             boostedAltPrimaryDef.stockToConsume = 1;
-            boostedAltPrimaryDef.icon = Assets.chefMinceIcon;
+            boostedAltPrimaryDef.icon = Assets.chefJulienneIcon;
             boostedAltPrimaryDef.skillDescriptionToken = "CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION";
             boostedAltPrimaryDef.skillName = "BoostedPrimary";
             boostedAltPrimaryDef.skillNameToken = "CHEF_BOOSTED_ALTPRIMARY_NAME";
@@ -617,7 +617,11 @@ namespace ChefMod
         {
             GameObject cleaverGhost = Assets.chefAssetBundle.LoadAsset<GameObject>("CleaverParent").InstantiateClone("CleaverGhost", true);
             cleaverGhost.AddComponent<NetworkIdentity>();
-            var pog = cleaverGhost.AddComponent<ProjectileGhostController>();
+            cleaverGhost.AddComponent<ProjectileGhostController>();
+
+            GameObject knifeGhost = Assets.chefAssetBundle.LoadAsset<GameObject>("KnifeParent").InstantiateClone("KnifeGhost", true);
+            knifeGhost.AddComponent<NetworkIdentity>();
+            knifeGhost.AddComponent<ProjectileGhostController>();
 
             //var spin = cleaverGhost.GetComponentInChildren<MeshRenderer>().gameObject.AddComponent<Spin>();
 
@@ -682,6 +686,9 @@ namespace ChefMod
             knifePrefab.layer = LayerIndex.projectile.intVal;
 
             Destroy(knifePrefab.GetComponent<ProjectileOverlapAttack>());
+
+            var pojcont = knifePrefab.GetComponent<ProjectileController>();
+            pojcont.ghostPrefab = knifeGhost;
 
 
             //GameObject stunGrenadeModel = Assets.chefAssetBundle.LoadAsset<GameObject>("Cleaver").InstantiateClone("CleaverGhost", true);

@@ -309,7 +309,7 @@ namespace ChefMod
 
 		private LineRenderer lineRenderer;
 		public Transform shoulder;
-		private List<Vector3> relativePoints = new List<Vector3>();
+		//private List<Vector3> relativePoints = new List<Vector3>()
 
 		// Token: 0x04002055 RID: 8277
 		public float travelSpeed = 40f;
