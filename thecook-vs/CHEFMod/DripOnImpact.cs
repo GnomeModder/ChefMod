@@ -2,6 +2,7 @@
 using RoR2;
 using RoR2.Projectile;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace ChefMod
 {
@@ -37,7 +38,7 @@ namespace ChefMod
 
         public void OnProjectileImpact(ProjectileImpactInfo impactInfo)
         {
-            if (impacted) return;
+            if (impacted || !NetworkServer.active) return;
             impacted = true;
             position = impactInfo.estimatedPointOfImpact;
             damageInfo.position = position;

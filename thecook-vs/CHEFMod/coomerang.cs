@@ -9,6 +9,7 @@ using RoR2.Projectile;
 using EntityStates.ArtifactShell;
 using EntityStates.Chef;
 using System.Collections.Generic;
+using EntityStates.Engi.EngiWeapon;
 
 namespace ChefMod
 {
@@ -64,11 +65,11 @@ namespace ChefMod
 		// Token: 0x060025A4 RID: 9636 RVA: 0x0009C8CC File Offset: 0x0009AACC
 		public void OnProjectileImpact(ProjectileImpactInfo impactInfo)
 		{
-			if (!this.canHitWorld)
+			if (!this.canHitWorld || !NetworkServer.active)
 			{
 				return;
 			}
-			this.NetworkCoomerangState = CoomerangProjectile.CoomerangState.FlyBack;
+			this.coomerangState = (int)CoomerangProjectile.CoomerangState.FlyBack;
 			UnityEvent unityEvent = this.onFlyBack;
 			if (unityEvent != null)
 			{
@@ -136,7 +137,7 @@ namespace ChefMod
 					UnityEngine.Object.Destroy(base.gameObject);
 					return;
 				}
-				switch (this.coomerangState)
+				switch ((CoomerangProjectile.CoomerangState)this.coomerangState)
 				{
 					case CoomerangProjectile.CoomerangState.FlyOut:
 						if (NetworkServer.active)
@@ -147,7 +148,7 @@ namespace ChefMod
 							if (this.stopwatch >= this.maxFlyStopwatch)
 							{
 								this.stopwatch = 0f;
-								this.NetworkCoomerangState = CoomerangProjectile.CoomerangState.Transition;
+								this.coomerangState = (int)CoomerangProjectile.CoomerangState.Transition;
 								return;
 							}
 						}
@@ -162,7 +163,7 @@ namespace ChefMod
 							{
 								if (target) this.gameObject.layer = LayerIndex.noCollision.intVal;
 
-								this.NetworkCoomerangState = CoomerangProjectile.CoomerangState.FlyBack;
+								this.coomerangState = (int)CoomerangProjectile.CoomerangState.FlyBack;
 								UnityEvent unityEvent = this.onFlyBack;
 								if (unityEvent == null)
 								{
@@ -222,81 +223,6 @@ namespace ChefMod
 			return base.transform.forward;
 		}
 
-		// Token: 0x060025A9 RID: 9641 RVA: 0x00004379 File Offset: 0x00002579
-		private void UNetVersion()
-		{
-		}
-
-		// Token: 0x17000422 RID: 1058
-		// (get) Token: 0x060025AA RID: 9642 RVA: 0x0009CB5C File Offset: 0x0009AD5C
-		// (set) Token: 0x060025AB RID: 9643 RVA: 0x0009CB6F File Offset: 0x0009AD6F
-		//public CoomerangProjectile.CoomerangState NetworkCoomerangState
-		//{
-		//	get
-		//	{
-		//		return this.coomerangState;
-		//	}
-		//	[param: In]
-		//	set
-		//	{
-		//		base.SetSyncVar<CoomerangProjectile.CoomerangState>(value, ref this.coomerangState, 1U);
-		//	}
-		//}
-
-		public CoomerangProjectile.CoomerangState NetworkCoomerangState
-		{
-			get
-			{
-				return this.coomerangState;
-			}
-			[param: In]
-			set
-			{
-				ulong newValueAsUlong = (ulong)((long)value);
-				ulong fieldValueAsUlong = (ulong)((long)this.coomerangState);
-				base.SetSyncVarEnum<CoomerangProjectile.CoomerangState>(value, newValueAsUlong, ref this.coomerangState, fieldValueAsUlong, 1U);
-			}
-		}
-
-		// Token: 0x060025AC RID: 9644 RVA: 0x0009CB84 File Offset: 0x0009AD84
-		public override bool OnSerialize(NetworkWriter writer, bool forceAll)
-		{
-			if (forceAll)
-			{
-				writer.Write((int)this.coomerangState);
-				return true;
-			}
-			bool flag = false;
-			if ((base.syncVarDirtyBits & 1U) != 0U)
-			{
-				if (!flag)
-				{
-					writer.WritePackedUInt32(base.syncVarDirtyBits);
-					flag = true;
-				}
-				writer.Write((int)this.coomerangState);
-			}
-			if (!flag)
-			{
-				writer.WritePackedUInt32(base.syncVarDirtyBits);
-			}
-			return flag;
-		}
-
-		// Token: 0x060025AD RID: 9645 RVA: 0x0009CBF0 File Offset: 0x0009ADF0
-		public override void OnDeserialize(NetworkReader reader, bool initialState)
-		{
-			if (initialState)
-			{
-				this.coomerangState = (CoomerangProjectile.CoomerangState)reader.ReadInt32();
-				return;
-			}
-			int num = (int)reader.ReadPackedUInt32();
-			if ((num & 1) != 0)
-			{
-				this.coomerangState = (CoomerangProjectile.CoomerangState)reader.ReadInt32();
-			}
-		}
 
 		public bool followRet = false;
 		public FieldComponent fieldComponent;
@@ -340,7 +266,7 @@ namespace ChefMod
 
 		// Token: 0x0400205E RID: 8286
 		[SyncVar]
-		private CoomerangProjectile.CoomerangState coomerangState;
+		private int coomerangState;
 
 		// Token: 0x0400205F RID: 8287
 		private Transform ownerTransform;

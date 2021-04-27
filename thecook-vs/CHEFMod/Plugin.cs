@@ -199,12 +199,12 @@ namespace ChefMod
 
             CharacterBody characterBody = chefPrefab.GetComponent<CharacterBody>();
             characterBody.baseDamage = 12f;
-            characterBody.levelDamage = 2.4f;
-            characterBody.baseMaxHealth = 100f;
-            characterBody.levelMaxHealth = 25f;
-            characterBody.baseArmor = 20f;
+            characterBody.levelDamage = characterBody.baseDamage * 0.2f;
+            characterBody.baseMaxHealth = 110f;
+            characterBody.levelMaxHealth = characterBody.baseMaxHealth * 0.3f;
+            characterBody.baseArmor = 12f;
             characterBody.baseRegen = 1f;
-            characterBody.levelRegen = 0.2f;
+            characterBody.levelRegen = characterBody.baseRegen * 0.2f;
             characterBody.baseMoveSpeed = 7f;
             characterBody.levelMoveSpeed = 0f;
             characterBody.baseAttackSpeed = 1f;
@@ -285,9 +285,9 @@ namespace ChefMod
             primaryDef.skillDescriptionToken = "CHEF_PRIMARY_DESCRIPTION";
             primaryDef.skillName = "Primary";
             primaryDef.skillNameToken = "CHEF_PRIMARY_NAME";
-
+            primaryDef.keywordTokens = new string[] { "KEYWORD_AGILE" };
             LanguageAPI.Add("CHEF_PRIMARY_NAME", "Dice");
-            LanguageAPI.Add("CHEF_PRIMARY_DESCRIPTION", "Toss a boomerang cleaver for 25% damage per hit. Agile");
+            LanguageAPI.Add("CHEF_PRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Toss a boomerang cleaver for <style=cIsDamage>25% damage</style> per hit.");
             ChefContent.skillDefs.Add(primaryDef);
 
             boostedPrimaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -310,9 +310,10 @@ namespace ChefMod
             boostedPrimaryDef.skillDescriptionToken = "CHEF_BOOSTED_PRIMARY_DESCRIPTION";
             boostedPrimaryDef.skillName = "BoostedPrimary";
             boostedPrimaryDef.skillNameToken = "CHEF_BOOSTED_PRIMARY_NAME";
+            boostedPrimaryDef.keywordTokens = new string[] { "KEYWORD_AGILE" };
 
             LanguageAPI.Add("CHEF_BOOSTED_PRIMARY_NAME", "Mince");
-            LanguageAPI.Add("CHEF_BOOSTED_PRIMARY_DESCRIPTION", "Throw a cleaver in every direction");
+            LanguageAPI.Add("CHEF_BOOSTED_PRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Throw a cleaver in every direction");
             ChefContent.skillDefs.Add(boostedPrimaryDef);
 
             altPrimaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -336,7 +337,7 @@ namespace ChefMod
             altPrimaryDef.skillNameToken = "CHEF_ALTPRIMARY_NAME";
 
             LanguageAPI.Add("CHEF_ALTPRIMARY_NAME", "Slice");
-            LanguageAPI.Add("CHEF_ALTPRIMARY_DESCRIPTION", "Stab your target for 100% damage. Agile");
+            LanguageAPI.Add("CHEF_ALTPRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Stab your target for <style=cIsDamage>100% damage</style>.");
             ChefContent.skillDefs.Add(altPrimaryDef);
 
             boostedAltPrimaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -360,7 +361,7 @@ namespace ChefMod
             boostedAltPrimaryDef.skillNameToken = "CHEF_BOOSTED_ALTPRIMARY_NAME";
 
             LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_NAME", "Julienne");
-            LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION", "Stab every nearby enemy");
+            LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Stab every nearby enemy");
             ChefContent.skillDefs.Add(boostedAltPrimaryDef);
 
             secondaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -384,7 +385,7 @@ namespace ChefMod
             secondaryDef.skillNameToken = "CHEF_SECONDARY_NAME";
 
             LanguageAPI.Add("CHEF_SECONDARY_NAME", "Sear");
-            LanguageAPI.Add("CHEF_SECONDARY_DESCRIPTION", "Shoot a fireball for 500% damage. Agile");
+            LanguageAPI.Add("CHEF_SECONDARY_DESCRIPTION", "Shoot a fireball for <style=cIsDamage>500% damage</style>.");
             ChefContent.skillDefs.Add(secondaryDef);
 
             boostedSecondaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -408,7 +409,7 @@ namespace ChefMod
             boostedSecondaryDef.skillNameToken = "CHEF_BOOSTED_SECONDARY_NAME";
 
             LanguageAPI.Add("CHEF_BOOSTED_SECONDARY_NAME", "Flambe");
-            LanguageAPI.Add("CHEF_BOOSTED_SECONDARY_DESCRIPTION", "be a flaming homosexual for 500% dmage");
+            LanguageAPI.Add("CHEF_BOOSTED_SECONDARY_DESCRIPTION", "be a flaming homosexual for <style=cIsDamage>500% damage</style>");
             ChefContent.skillDefs.Add(boostedSecondaryDef);
 
             altSecondaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -480,7 +481,7 @@ namespace ChefMod
             utilityDef.skillNameToken = "CHEF_UTILITY_NAME";
 
             LanguageAPI.Add("CHEF_UTILITY_NAME", "Glaze");
-            LanguageAPI.Add("CHEF_UTILITY_DESCRIPTION", "Dash forward leaving a trail of oil that slows enemies. Oil can be ignited");
+            LanguageAPI.Add("CHEF_UTILITY_DESCRIPTION", "Dash forward leaving a trail of oil that <style=cIsUtility>slows enemies</style>. Oil can be <style=cIsDamage>ignited</style>.");
             ChefContent.skillDefs.Add(utilityDef);
 
             boostedUtilityDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -615,12 +616,12 @@ namespace ChefMod
 
         private void registerProjectiles()
         {
-            GameObject cleaverGhost = Assets.chefAssetBundle.LoadAsset<GameObject>("CleaverParent").InstantiateClone("CleaverGhost", true);
-            cleaverGhost.AddComponent<NetworkIdentity>();
+            GameObject cleaverGhost = Assets.chefAssetBundle.LoadAsset<GameObject>("CleaverParent").InstantiateClone("CleaverGhost", false);
+            //cleaverGhost.AddComponent<NetworkIdentity>();
             cleaverGhost.AddComponent<ProjectileGhostController>();
 
-            GameObject knifeGhost = Assets.chefAssetBundle.LoadAsset<GameObject>("KnifeParent").InstantiateClone("KnifeGhost", true);
-            knifeGhost.AddComponent<NetworkIdentity>();
+            GameObject knifeGhost = Assets.chefAssetBundle.LoadAsset<GameObject>("KnifeParent").InstantiateClone("KnifeGhost", false);
+            //knifeGhost.AddComponent<NetworkIdentity>();
             knifeGhost.AddComponent<ProjectileGhostController>();
 
             //var spin = cleaverGhost.GetComponentInChildren<MeshRenderer>().gameObject.AddComponent<Spin>();
@@ -664,7 +665,8 @@ namespace ChefMod
             hit.transform.localScale = new Vector3(hit.transform.localScale.x, 0.69f, hit.transform.localScale.z);
 
             ProjectileController projcont = cleaverPrefab.GetComponent<ProjectileController>(); 
-            projcont.procCoefficient = 1f; 
+            projcont.procCoefficient = 1f;
+            projcont.allowPrediction = false;
 
             projcont.ghostPrefab = cleaverGhost;
             ProjectileOverlapAttack poa = cleaverPrefab.GetComponent<ProjectileOverlapAttack>();

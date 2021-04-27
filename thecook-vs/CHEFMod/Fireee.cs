@@ -162,6 +162,7 @@ namespace ChefMod
 
         private void esplode()
         {
+            if (!NetworkServer.active) return;
             Vector3 corePosition = body.corePosition;
             sphereSearch.origin = corePosition;
             sphereSearch.mask = LayerIndex.entityPrecise.mask;
@@ -191,6 +192,7 @@ namespace ChefMod
 
         private void doSomething()
         {
+            if (!NetworkServer.active) return;
             float damage = this.damagePerFrame;
             HashSet<GameObject> hashSet = new HashSet<GameObject>();
             RoR2.TeamIndex attackerTeamIndex = teamIndex;
