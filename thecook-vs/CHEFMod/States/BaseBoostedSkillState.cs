@@ -19,6 +19,8 @@ namespace EntityStates.Chef {
                 skillLocator.secondary.SetBaseSkill(chefPlugin.altSecondaryDef);
             }
             skillLocator.utility.SetBaseSkill(chefPlugin.utilityDef);
+
+            skillLocator.special.enabled = true;
         }
     }
 }

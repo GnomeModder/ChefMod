@@ -37,7 +37,7 @@ namespace EntityStates.Chef
                     projectilePrefab = ChefMod.chefPlugin.cleaverPrefab,
                     position = characterBody.corePosition,
                     owner = base.gameObject,
-                    damage = base.characterBody.damage * (1f / (chefPlugin.minceHorizontalIntensity.Value + intensity)),
+                    damage = base.characterBody.damage * (1f / (chefPlugin.minceHorizontolIntensity.Value + intensity)),
                     force = 50f,
                     crit = base.RollCrit(),
                     damageColorIndex = DamageColorIndex.Default,
@@ -50,7 +50,7 @@ namespace EntityStates.Chef
                     float phi = 0;
                     if (intensity != 0) phi = i * (1f / (2f * intensity)) * pi;
                     float r = Mathf.Cos(phi);
-                    int circum = Mathf.Max(1, Mathf.FloorToInt(chefPlugin.minceHorizontalIntensity.Value * pi * 2 * r));
+                    int circum = Mathf.Max(1, Mathf.FloorToInt(chefPlugin.minceHorizontolIntensity.Value * pi * 2 * r));
                     for (int j = 0; j < circum; j++) {
                         float theta = 2 * pi * ((float)j / (float)circum);
                         Vector3 direction = new Vector3(r * Mathf.Cos(theta), Mathf.Sin(phi), r * Mathf.Sin(theta));

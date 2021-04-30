@@ -25,7 +25,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "0.13.0")]
+        "1.0.0")]
     public class chefPlugin : BaseUnityPlugin
     {
         public GameObject chefPrefab;
@@ -52,8 +52,9 @@ namespace ChefMod
 
         public static ConfigEntry<bool> classicMince;
         public static ConfigEntry<int> minceVerticalIntensity;
-        public static ConfigEntry<float> minceHorizontalIntensity;
+        public static ConfigEntry<float> minceHorizontolIntensity;
         public static ConfigEntry<float> oilProc;
+        public static ConfigEntry<bool> charUnlock;
 
         public static BuffDef foodBuff;
 
@@ -68,8 +69,9 @@ namespace ChefMod
         {
             classicMince = base.Config.Bind<bool>(new ConfigDefinition("01 - General Settings", "Sbince"), true, new ConfigDescription("Makes Mince work more like ror1. Turn off if it's hurting performance too much, there's an alternate version that's less costly", null, Array.Empty<object>()));
             minceVerticalIntensity = base.Config.Bind<int>(new ConfigDefinition("01 - General Settings", "Mince Vertical Density"), 3, new ConfigDescription("controls how much you want mince to lag your game. Doesn't do anything unless you have classic mince (sbince) as true", null, Array.Empty<object>()));
-            minceHorizontalIntensity = base.Config.Bind<float>(new ConfigDefinition("01 - General Settings", "Mince Horizontal Density"), 3, new ConfigDescription("same as above", null, Array.Empty<object>()));
+            minceHorizontolIntensity = base.Config.Bind<float>(new ConfigDefinition("01 - General Settings", "Mince Horizontal Density"), 2, new ConfigDescription("same as above", null, Array.Empty<object>()));
             oilProc = base.Config.Bind<float>(new ConfigDefinition("01 - General Settings", "Oil Proc"), 0, new ConfigDescription("proc coef on fire oil tick", null, Array.Empty<object>()));
+            charUnlock = base.Config.Bind<bool>(new ConfigDefinition("01 - General Settings", "Auto Unlock"), false, new ConfigDescription("Automatically unlocks Chef", null, Array.Empty<object>()));
 
             Unlockables.RegisterUnlockables();
             registerCharacter();
@@ -155,7 +157,8 @@ namespace ChefMod
 
             var fc = chefPrefab.AddComponent<FieldComponent>();
             var meshs = chefPrefab.GetComponentsInChildren<MeshRenderer>();
-            foreach (MeshRenderer mesh in meshs) { if (!mesh.enabled) fc.oil = mesh; }
+            foreach (MeshRenderer mesh in meshs) { if (!mesh.enabled) fc.oil = mesh.gameObject; }
+            fc.oil.SetActive(false);
 
             GameObject gameObject = chefPrefab.GetComponent<ModelLocator>().modelBaseTransform.gameObject;
 
@@ -361,7 +364,7 @@ namespace ChefMod
             boostedAltPrimaryDef.skillNameToken = "CHEF_BOOSTED_ALTPRIMARY_NAME";
 
             LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_NAME", "Julienne");
-            LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Stab every nearby enemy");
+            LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Stab many times");
             ChefContent.skillDefs.Add(boostedAltPrimaryDef);
 
             secondaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -512,10 +515,10 @@ namespace ChefMod
             specialDef.activationState = new SerializableEntityStateType(typeof(Meal));
             specialDef.activationStateMachineName = "Weapon";
             specialDef.baseMaxStock = 1;
-            specialDef.baseRechargeInterval = 15f;
+            specialDef.baseRechargeInterval = 12f;
             specialDef.beginSkillCooldownOnSkillEnd = true;
             specialDef.canceledFromSprinting = false;
-            specialDef.fullRestockOnAssign = true;
+            specialDef.fullRestockOnAssign = false;
             specialDef.interruptPriority = InterruptPriority.PrioritySkill;
             specialDef.isCombatSkill = false;
             specialDef.mustKeyPress = true;
@@ -875,7 +878,7 @@ namespace ChefMod
 
             var beegFire = Resources.Load<GameObject>("Prefabs/ProjectileGhosts/FireballGhost").InstantiateClone("FoirBallGhost", true);
             beegFire.AddComponent<NetworkIdentity>();
-            beegFire.transform.localScale *= 5f;
+            beegFire.transform.localScale *= 4f;
 
             //var bbFire = beegFire.InstantiateClone("FlamBallGhost");
             //bbFire.GetComponentInChildren<ParticleSystemRenderer>().material.SetColor("_Color", Color.blue);

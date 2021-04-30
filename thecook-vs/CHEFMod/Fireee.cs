@@ -61,7 +61,7 @@ namespace ChefMod
                 thisItem.gameObject.SetActive(false);
             }
 
-            //oilPrefab = goku("Oyl");
+            oilPrefab = goku("OilBall");
             rig = GetComponent<Rigidbody>();
             rig.velocity += Vector3.down;
 
@@ -96,7 +96,7 @@ namespace ChefMod
                 //Quaternion ninety = Quaternion.FromToRotation(Vector3.up, Vector3.forward);
                 //oilPrefab.transform.rotation = this.transform.rotation * ninety * floorRotation;
                 Quaternion randy = new Quaternion(0, 1, 0, UnityEngine.Random.Range(0, 360f));
-                //Destroy(oilPrefab);
+                Destroy(oilPrefab);
                 oilPrefab = Instantiate(chefPlugin.oilfab, this.transform.position - Vector3.up, randy);
                 if (edging) ignate();
                 checkforhomies();
@@ -120,7 +120,7 @@ namespace ChefMod
         {
             GameObject prefab;
             prefab = Instantiate(Assets.chefAssetBundle.LoadAsset<GameObject>(asset));
-            var direction = this.transform.root.GetComponentInChildren<CharacterDirection>();
+            //var direction = this.transform.root.GetComponentInChildren<CharacterDirection>();
             prefab.transform.position = body.footPosition - 2.5f * Vector3.up;
             prefab.transform.SetParent(this.transform);
             prefab.transform.localScale *= 2.5f;
@@ -250,7 +250,7 @@ namespace ChefMod
         }
         private void hitmyhomiesup()
         {
-            RaycastHit[] array = Physics.SphereCastAll(body.corePosition, radius, Vector3.up, 5f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
+            RaycastHit[] array = Physics.SphereCastAll(body.corePosition, 1.5f * radius, Vector3.up, 5f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
             for (int j = 0; j < array.Length; j++)
             {
                 Collider collider = array[j].collider;

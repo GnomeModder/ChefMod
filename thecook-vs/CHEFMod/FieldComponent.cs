@@ -9,6 +9,6 @@ namespace ChefMod
     {
         public CharacterBody characterBody;
         public Ray aimRay = new Ray();
-        public MeshRenderer oil;
+        public GameObject oil;
     }
 }

@@ -64,7 +64,7 @@ namespace EntityStates.Chef
                 FireProjectileInfo info = new FireProjectileInfo()
                 {
                     projectilePrefab = chefPlugin.knifePrefab,
-                    position = shoulderPos,
+                    position = shoulderPos + aimRay.direction,
                     rotation = Util.QuaternionSafeLookRotation(aimRay.direction), //Util.QuaternionSafeLookRotation(difference),
                     owner = base.gameObject,
                     damage = base.characterBody.damage * 0.90f,

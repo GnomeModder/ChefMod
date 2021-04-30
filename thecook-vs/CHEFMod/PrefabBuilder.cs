@@ -271,7 +271,15 @@ public class PrefabBuilder
 
     private void  SetupCameraParams()
     {
-        camParams.cameraParams = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponent<CameraTargetParams>().cameraParams;
+        camParams.cameraParams = new CharacterCameraParams();
+        var copy = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponent<CameraTargetParams>().cameraParams;
+        camParams.cameraParams.maxPitch = copy.maxPitch;
+        camParams.cameraParams.minPitch = copy.minPitch;
+        camParams.cameraParams.name = "CHEFcam";
+        camParams.cameraParams.pivotVerticalOffset = 1.3f * copy.pivotVerticalOffset;
+        camParams.cameraParams.standardLocalCameraPos = 1.4f * copy.standardLocalCameraPos;
+        camParams.cameraParams.wallCushion = copy.wallCushion;
+
         camParams.cameraParams.pivotVerticalOffset *= 1.3f;
         camParams.cameraPivotTransform = null;
         camParams.aimMode = CameraTargetParams.AimType.Standard;

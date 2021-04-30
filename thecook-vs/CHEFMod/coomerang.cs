@@ -49,6 +49,7 @@ namespace ChefMod
 			if (target)
 			{
 				this.travelSpeed *= projectileDamage.force;
+				reelDistance *= projectileDamage.force;
 				this.gameObject.layer = LayerIndex.projectile.intVal;
 				this.lineRenderer.enabled = true;
 			}
@@ -65,7 +66,7 @@ namespace ChefMod
 		// Token: 0x060025A4 RID: 9636 RVA: 0x0009C8CC File Offset: 0x0009AACC
 		public void OnProjectileImpact(ProjectileImpactInfo impactInfo)
 		{
-			if (!this.canHitWorld || !NetworkServer.active)
+			if (!this.canHitWorld)// || !NetworkServer.active)
 			{
 				return;
 			}
@@ -112,14 +113,17 @@ namespace ChefMod
 		{
 			Vector3 vector = this.projectileController.owner.transform.position - base.transform.position;
 			Vector3 normalized = vector.normalized;
-			return vector.magnitude <= 3f;
+			return vector.magnitude <= reelDistance;
 		}
 
 		public void Update()
 		{
 			if (NetworkServer.active)
 			{
-				if (this.lineRenderer.enabled) this.lineRenderer.SetPositions(new Vector3[2] { this.transform.position, shoulder.position });
+				if (this.lineRenderer.enabled)
+				{
+					this.lineRenderer.SetPositions(new Vector3[2] { this.transform.position, shoulder.position });
+				}
 			}
 		}
 
@@ -232,6 +236,7 @@ namespace ChefMod
 		public bool target = false;
 		public static event Action Returned;
 		private bool hasfired = false;
+		private float reelDistance = 3;
 
 		private LineRenderer lineRenderer;
 		public Transform shoulder;

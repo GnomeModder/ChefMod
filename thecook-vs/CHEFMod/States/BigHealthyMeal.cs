@@ -42,6 +42,7 @@ namespace EntityStates.Chef
 
         public override void OnExit()
         {
+            skillLocator.special.enabled = false;
             base.OnExit();
         }
 

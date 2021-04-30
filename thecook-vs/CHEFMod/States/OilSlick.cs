@@ -28,7 +28,7 @@ namespace EntityStates.Chef
 
 			if (base.isAuthority)
 			{
-				characterBody.GetComponent<FieldComponent>().oil.enabled = true;
+				characterBody.GetComponent<FieldComponent>().oil.SetActive(true);
 
 				base.gameObject.layer = LayerIndex.fakeActor.intVal;
 				base.characterMotor.Motor.RebuildCollidableLayers();
@@ -137,7 +137,7 @@ namespace EntityStates.Chef
 
 			//trailComponent.active = false;
 
-			characterBody.GetComponent<FieldComponent>().oil.enabled = false;
+			characterBody.GetComponent<FieldComponent>().oil.SetActive(false);
 
 
 			base.PlayAnimation("Fullbody, Override", "UtilityEnd");

@@ -24,7 +24,7 @@ namespace ChefMod
             LanguageAPI.Add("CHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME", "Mise en Place");
 
             LanguageAPI.Add("CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME", "Full Set");
-            LanguageAPI.Add("CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC", "Have 200 cleavers in the air at once");
+            LanguageAPI.Add("CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC", "Have 100 cleavers in the air at once");
             LanguageAPI.Add("CHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME", "Full Set");
 
             chefUnlockDef = Unlockable.AddUnlockable<Achievements.ChefAchievement>(true);
@@ -138,7 +138,6 @@ namespace ChefMod.Achievements
                 self.baseMaxHealth = 1000f;
                 self.levelMaxHealth = 500f;
                 self.baseMoveSpeed = 14f;
-                self.levelMoveSpeed = 2;
                 self.levelDamage = 7.2f;
             }
             orig(self);
@@ -147,6 +146,8 @@ namespace ChefMod.Achievements
         public override void OnInstall()
         {
             base.OnInstall();
+
+            if (chefPlugin.charUnlock.Value) base.Grant();
 
             On.RoR2.CharacterMaster.OnInventoryChanged += CheckItem;
             GlobalEventManager.onCharacterDeathGlobal += Death;
@@ -198,15 +199,20 @@ namespace ChefMod.Achievements
         private void increment()
         {
             cleavercount++;
-            if (cleavercount >= 200)
-            {
-                base.Grant();
-            }
         }
 
         private void decrement()
         {
             cleavercount--;
+        }
+
+        private void check(On.RoR2.CharacterBody.orig_FixedUpdate orig, CharacterBody self)
+        {
+            if (self.baseNameToken == "CHEF_NAME" && cleavercount >= 100)
+            {
+                base.Grant();
+            }
+            orig(self);
         }
 
         public override void OnInstall()
@@ -215,6 +221,7 @@ namespace ChefMod.Achievements
 
             CoomerangProjectile.CleaverCreated += increment;
             CoomerangProjectile.Returned += decrement;
+            On.RoR2.CharacterBody.FixedUpdate += check;
         }
 
         public override void OnUninstall()
@@ -223,6 +230,7 @@ namespace ChefMod.Achievements
 
             CoomerangProjectile.CleaverCreated -= increment;
             CoomerangProjectile.Returned -= decrement;
+            On.RoR2.CharacterBody.FixedUpdate -= check;
         }
     }
 }

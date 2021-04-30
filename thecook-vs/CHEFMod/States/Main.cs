@@ -63,10 +63,8 @@ namespace EntityStates.Chef
 
             //if (Input.GetKeyDown(KeyCode.K))
             //{
-            //    characterBody.master.inventory.GiveItem);
-            //    //characterBody.master.inventory.GiveItem(ItemIndex.FireRing);
-            //    //characterBody.master.inventory.GiveItem(ItemIndex.SlowOnHit);
-            //    //characterBody.master.inventory.SetEquipmentIndex(EquipmentIndex.Blackhole);
+            //    //for (int i = 0; i < 10; i++) characterBody.master.inventory.GiveItem(RoR2Content.Items.Syringe);
+            //    characterBody.inventory.GiveItem(RoR2Content.Items.Bandolier);
             //}
 
             //this.oilTrail.damagePerSecond = base.characterBody.damage * 1.5f;
@@ -121,7 +119,6 @@ namespace EntityStates.Chef
                 childLocator.FindChild("Cleaver").gameObject.SetActive(false);
                 childLocator.FindChild("Knife").gameObject.SetActive(false);
             }
-
 
             base.OnExit();
         }
