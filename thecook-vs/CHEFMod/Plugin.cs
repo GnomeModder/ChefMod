@@ -231,14 +231,30 @@ namespace ChefMod
             survivorDef.displayPrefab = prefabBuilder.createDisplayPrefab("CHEFDisplay");
             survivorDef.primaryColor = chefColor;
             survivorDef.displayNameToken = "CHEF_NAME";
-            survivorDef.outroFlavorToken = "CHEF_OUTRO";
+            survivorDef.outroFlavorToken = "CHEF_OUTRO_FLAVOR";
             survivorDef.desiredSortPosition = 99f;
             survivorDef.unlockableDef = Unlockables.chefUnlockDef;
 
             ChefContent.survivorDefs.Add(survivorDef);
 
-            LanguageAPI.Add("CHEF_DESCRIPTION", "*sizzle* \n'You're not cooking' \n'yeah, dude' \n'eeh, aahh' \n*fire* \n'babbabababaa' \n'porkchop sandwiches' \n*fire alarm* \n'oh shit get the fuck out of here what are you doing go get  the  fuck  out  of here you stupid idiot fuck were all dead get the fuck out' \n*firetruck sidewalk* \n'my god did that smell good'\n'detector no goin and you tell me do things I done runnin'" + "\r\n");
-            LanguageAPI.Add("CHEF_OUTRO", "...and so it left, rock hard");
+            string chefDesc = "Chef is a close-ranged survivor who can serve generous helpings of palette cleansing AOE attacks.<style=cSub>";
+            chefDesc += "\n\n< ! > Dice boomerangs back when thrown, letting it hit customers multiple times.";
+            chefDesc += "\n\n< ! > Glaze provides a large boost of speed, letting you weave in and out of fights with ease.";
+            chefDesc += "\n\n< ! > Combine Glaze and Sear to cook many customers at once.";
+            chefDesc += "\n\n< ! > Serve different skills with Second Helping to suit your customers' tastes.</style>";
+            chefDesc += "\n\n<style=cIsDamage>Boosted Dice</style>: Throw cleavers in all directions.";
+            chefDesc += "\n<style=cIsDamage>Boosted Sear</style>: Glazed customers burst into fireballs.";
+            chefDesc += "\n<style=cIsDamage>Boosted Glaze</style>: Leave a longer trail of oil.";
+            chefDesc += "\n<style=cIsDamage>Boosted Slice</style>: Stab many times.";
+
+            LanguageAPI.Add("CHEF_DESCRIPTION", chefDesc);
+            LanguageAPI.Add("CHEF_OUTRO_FLAVOR", "...and so it left, entirely forgetting its original purpose.");
+            LanguageAPI.Add("CHEF_OUTRO_FLAVOR", "...and so it vanished, with no tips.");
+
+            LanguageAPI.Add("KEYWORD_CHEF_BOOST_DICE", "<style=cKeywordName>Boosted Dice</style><style=cSub>Throw cleavers in all directions.</style>");
+            LanguageAPI.Add("KEYWORD_CHEF_BOOST_SEAR", "<style=cKeywordName>Boosted Sear</style><style=cSub>Glazed customers burst into fireballs.</style>");
+            LanguageAPI.Add("KEYWORD_CHEF_BOOST_GLAZE", "<style=cKeywordName>Boosted Glaze</style><style=cSub>Leave a longer trail of oil.</style>");
+            LanguageAPI.Add("KEYWORD_CHEF_BOOST_SLICE", "<style=cKeywordName>Boosted Slice</style><style=cSub>Stab many times.</style>");
 
             invaderMaster = Resources.Load<GameObject>("Prefabs/CharacterMasters/MercMonsterMaster").InstantiateClone("ChefInvader", true).GetComponent<CharacterMaster>();
             invaderMaster.bodyPrefab = chefPrefab;
@@ -290,7 +306,7 @@ namespace ChefMod
             primaryDef.skillNameToken = "CHEF_PRIMARY_NAME";
             primaryDef.keywordTokens = new string[] { "KEYWORD_AGILE" };
             LanguageAPI.Add("CHEF_PRIMARY_NAME", "Dice");
-            LanguageAPI.Add("CHEF_PRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Toss a boomerang cleaver for <style=cIsDamage>25% damage</style> per hit.");
+            LanguageAPI.Add("CHEF_PRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Throw a cleaver towards customers for <style=cIsDamage>100% damage</style>. Boomerangs back.");
             ChefContent.skillDefs.Add(primaryDef);
 
             boostedPrimaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -316,7 +332,7 @@ namespace ChefMod
             boostedPrimaryDef.keywordTokens = new string[] { "KEYWORD_AGILE" };
 
             LanguageAPI.Add("CHEF_BOOSTED_PRIMARY_NAME", "Mince");
-            LanguageAPI.Add("CHEF_BOOSTED_PRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Throw a cleaver in every direction");
+            LanguageAPI.Add("CHEF_BOOSTED_PRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Throw cleavers in <style=cIsDamage>all directions</style>.");
             ChefContent.skillDefs.Add(boostedPrimaryDef);
 
             altPrimaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -340,7 +356,7 @@ namespace ChefMod
             altPrimaryDef.skillNameToken = "CHEF_ALTPRIMARY_NAME";
 
             LanguageAPI.Add("CHEF_ALTPRIMARY_NAME", "Slice");
-            LanguageAPI.Add("CHEF_ALTPRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Stab your target for <style=cIsDamage>100% damage</style>.");
+            LanguageAPI.Add("CHEF_ALTPRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Stab a customer for <style=cIsDamage>100% damage</style>.");
             ChefContent.skillDefs.Add(altPrimaryDef);
 
             boostedAltPrimaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -364,7 +380,7 @@ namespace ChefMod
             boostedAltPrimaryDef.skillNameToken = "CHEF_BOOSTED_ALTPRIMARY_NAME";
 
             LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_NAME", "Julienne");
-            LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Stab many times");
+            LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Stab a customer <style=cIsDamage>many times</style>.");
             ChefContent.skillDefs.Add(boostedAltPrimaryDef);
 
             secondaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -388,7 +404,7 @@ namespace ChefMod
             secondaryDef.skillNameToken = "CHEF_SECONDARY_NAME";
 
             LanguageAPI.Add("CHEF_SECONDARY_NAME", "Sear");
-            LanguageAPI.Add("CHEF_SECONDARY_DESCRIPTION", "Shoot a fireball for <style=cIsDamage>500% damage</style>.");
+            LanguageAPI.Add("CHEF_SECONDARY_DESCRIPTION", "Cook customers for <style=cIsDamage>500% damage</style> until golden brown.");
             ChefContent.skillDefs.Add(secondaryDef);
 
             boostedSecondaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -412,7 +428,7 @@ namespace ChefMod
             boostedSecondaryDef.skillNameToken = "CHEF_BOOSTED_SECONDARY_NAME";
 
             LanguageAPI.Add("CHEF_BOOSTED_SECONDARY_NAME", "Flambe");
-            LanguageAPI.Add("CHEF_BOOSTED_SECONDARY_DESCRIPTION", "be a flaming homosexual for <style=cIsDamage>500% damage</style>");
+            LanguageAPI.Add("CHEF_BOOSTED_SECONDARY_DESCRIPTION", "Flambe <color=#BDBEC2>Glazed</color> customers to create a burst of fireballs.");
             ChefContent.skillDefs.Add(boostedSecondaryDef);
 
             altSecondaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -484,7 +500,7 @@ namespace ChefMod
             utilityDef.skillNameToken = "CHEF_UTILITY_NAME";
 
             LanguageAPI.Add("CHEF_UTILITY_NAME", "Glaze");
-            LanguageAPI.Add("CHEF_UTILITY_DESCRIPTION", "Dash forward leaving a trail of oil that <style=cIsUtility>slows enemies</style>. Oil can be <style=cIsDamage>ignited</style>.");
+            LanguageAPI.Add("CHEF_UTILITY_DESCRIPTION", "Leave a trail of oil, <style=cIsUtility>slowing customers</style>. Oil can be <style=cIsDamage>ignited</style> with <color=#BDBEC2>Sear</color>.");
             ChefContent.skillDefs.Add(utilityDef);
 
             boostedUtilityDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -508,7 +524,7 @@ namespace ChefMod
             boostedUtilityDef.skillNameToken = "CHEF_BOOSTED_UTILITY_NAME";
 
             LanguageAPI.Add("CHEF_BOOSTED_UTILITY_NAME", "Marinate");
-            LanguageAPI.Add("CHEF_BOOSTED_UTILITY_DESCRIPTION", "cover yourself in oil");
+            LanguageAPI.Add("CHEF_BOOSTED_UTILITY_DESCRIPTION", "Leave a long trail of oil, <style=cIsUtility>slowing customers</style>. Oil can be <style=cIsDamage>ignited</style> with <color=#BDBEC2>Sear</color>.");
             ChefContent.skillDefs.Add(boostedUtilityDef);
 
             var specialDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -529,10 +545,11 @@ namespace ChefMod
             specialDef.icon = Assets.chefBHMIcon;
             specialDef.skillDescriptionToken = "CHEF_SPECIAL_DESCRIPTION";
             specialDef.skillName = "Special";
-            specialDef.skillNameToken = "CHEF_SPECIAL_NAME"; 
+            specialDef.skillNameToken = "CHEF_SPECIAL_NAME";
+            specialDef.keywordTokens = new string[] { "KEYWORD_CHEF_BOOST_DICE", "KEYWORD_CHEF_BOOST_SEAR", "KEYWORD_CHEF_BOOST_GLAZE"};
 
             LanguageAPI.Add("CHEF_SPECIAL_NAME", "Second Helping");
-            LanguageAPI.Add("CHEF_SPECIAL_DESCRIPTION", "Boost your next skill");
+            LanguageAPI.Add("CHEF_SPECIAL_DESCRIPTION", "Prepare a master meal, <style=cIsUtility>boosting the next ability cast</style>.");
             ChefContent.skillDefs.Add(specialDef);
 
             var altSpecialDef = ScriptableObject.CreateInstance<SkillDef>();
