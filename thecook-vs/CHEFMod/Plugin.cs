@@ -5,6 +5,7 @@ using EntityStates.Chef;
 using R2API;
 using R2API.Utils;
 using RoR2;
+using RoR2.CharacterAI;
 using RoR2.ContentManagement;
 using RoR2.Projectile;
 using RoR2.Skills;
@@ -258,11 +259,7 @@ namespace ChefMod
             LanguageAPI.Add("KEYWORD_CHEF_BOOST_GLAZE", "<style=cKeywordName>Boosted Glaze</style><style=cSub>Leave a longer trail of oil.</style>");
             LanguageAPI.Add("KEYWORD_CHEF_BOOST_SLICE", "<style=cKeywordName>Boosted Slice</style><style=cSub>Stab many times.</style>");
 
-            invaderMaster = Resources.Load<GameObject>("Prefabs/CharacterMasters/MercMonsterMaster").InstantiateClone("ChefInvader", true).GetComponent<CharacterMaster>();
-            invaderMaster.bodyPrefab = chefPrefab;
-            invaderMaster.name = "ChefInvader";
-            BuildChefAI(invaderMaster);
-            ChefContent.masterPrefabs.Add(invaderMaster.gameObject);
+            BuildChefAI();
         }
 
         private void registerSkills()
@@ -939,9 +936,127 @@ namespace ChefMod
             LanguageAPI.Add("CHEF_LORE", "A few months ago, I was driving along the streets of Petricor V with my friend, Commando, until we realize that we were running out of gas.\n\nWe were trying to park somewhere to give our car a rest, but no luck. Then something caught our eyes. It was a McDonald's building with Ronald McDonald at the top of it. \n\nWhen we parked by the parking lot, we noticed that they was no customers inside. It was weird, considering that McDonald's is open 24/7. Also. there were no cars either. I could've swore that the Ronald McDonald statue turned its head against me. \n\nI told Commando about it, but when he he saw it, it was in normal position. He told me I was going nuts, but the statue DID turn it's head. I then heard a faint laugh coming from the inside. We got terrified. I tried opening the door, but it was locked by a rusty Master combination lock. We didn't have time to figure out the combination, so Commando pulled out his gun and shot at it. it was finally unlocked. \n\nSo we opened the door to the inside. What we saw was so horrible. There were dead corpses all over the tables and chairs, and lots of blood in the soda machine. We puked in the trash can that was next to us, but before we did that, I saw mutilated arms and legs inside, which made us puke even more. How did McDonald's end up like this? We were so hungry, so we ran into the kitchen. There were fries and a few burgers, I thought we finally found food, until we saw more corpses. \n\nThis time, they had no eyeballs, juts blood coming from the sockets. Their stomachs have been ripped open with the organs ripped out. I tried ignoring them, but they still bother me. I didn't even have time to eat fries. We tried escaping through the main door, but it mysteriously locked by itself. We were now prisoners inside the building. We got scared just by staring at the corpses. Commando and I spitted up, trying to look for a exit. He went to a door that was covered in oil. \n\nI didn't want to enter with him, because I felt that danger was lurking behind the door. That's when I saw a small bomb in one of the dining tables. I picked up, fused with my flamethrower, and placed in the door. After 10 seconds, it finally exploded. I was free to go wherever I want. I tried calling him to come back, but he still didn't answer. I filled up my car with my backup gas supply that I stored in the trunk. I waited for him to go back to my car with me, it was now 7:00 pm. That's when I saw a tall figure coming from the door with a meat cleaver. I drove away as fast as I could. I managed to escaped to my house. Commando never came back at all... \n\nTwo days later, I received a newspaper with the most disturbing headline of all, it said: \n\n'2 boys went to a abandoned McDonald's restaurant in the far side of Petricor V. One manged to get away, with the other one nowhere in sight. Police are still trying to locate the man, but they never found proof. Then they mysteriously disappeared by entering a oil covered door.' \n\nWhat was behind that door? How did they all went missing? I hope someone would this mystery anytime soon...... And who is the strange figure?");
         }
 
-        private void BuildChefAI(CharacterMaster master)
+        private void BuildChefAI()
         {
+            invaderMaster = Resources.Load<GameObject>("Prefabs/CharacterMasters/MercMonsterMaster").InstantiateClone("ChefInvader", true).GetComponent<CharacterMaster>();
+            invaderMaster.bodyPrefab = chefPrefab;
+            invaderMaster.name = "ChefInvader";
 
+            Component[] toDelete = invaderMaster.GetComponents<AISkillDriver>();
+            foreach (AISkillDriver asd in toDelete)
+            {
+                Destroy(asd);
+            }
+
+            AISkillDriver oilSkillNear = invaderMaster.gameObject.AddComponent<AISkillDriver>();
+            oilSkillNear.skillSlot = SkillSlot.Utility;
+            oilSkillNear.requireSkillReady = true;
+            oilSkillNear.requireEquipmentReady = false;
+            oilSkillNear.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            oilSkillNear.minDistance = 0f;
+            oilSkillNear.maxDistance = Mathf.Infinity;
+            oilSkillNear.selectionRequiresTargetLoS = false;
+            oilSkillNear.activationRequiresTargetLoS = false;
+            oilSkillNear.activationRequiresAimConfirmation = false;
+            oilSkillNear.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            oilSkillNear.aimType = AISkillDriver.AimType.MoveDirection;
+            oilSkillNear.ignoreNodeGraph = false;
+            oilSkillNear.noRepeat = true;
+            oilSkillNear.shouldSprint = true;
+            oilSkillNear.shouldFireEquipment = false;
+            oilSkillNear.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+
+            AISkillDriver specialSkill = invaderMaster.gameObject.AddComponent<AISkillDriver>();
+            specialSkill.skillSlot = SkillSlot.Special;
+            specialSkill.requireSkillReady = true;
+            specialSkill.requireEquipmentReady = false;
+            specialSkill.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            specialSkill.minDistance = 0f;
+            specialSkill.maxDistance = 30f;
+            specialSkill.selectionRequiresTargetLoS = false;
+            specialSkill.activationRequiresTargetLoS = false;
+            specialSkill.activationRequiresAimConfirmation = false;
+            specialSkill.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            specialSkill.aimType = AISkillDriver.AimType.MoveDirection;
+            specialSkill.ignoreNodeGraph = false;
+            specialSkill.noRepeat = true;
+            specialSkill.shouldSprint = true;
+            specialSkill.shouldFireEquipment = false;
+            specialSkill.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+
+            AISkillDriver searSkill = invaderMaster.gameObject.AddComponent<AISkillDriver>();
+            searSkill.skillSlot = SkillSlot.Secondary;
+            searSkill.requireSkillReady = true;
+            searSkill.requireEquipmentReady = false;
+            searSkill.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            searSkill.minDistance = 0f;
+            searSkill.maxDistance = 20f;
+            searSkill.selectionRequiresTargetLoS = true;
+            searSkill.activationRequiresTargetLoS = false;
+            searSkill.activationRequiresAimConfirmation = false;
+            searSkill.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            searSkill.aimType = AISkillDriver.AimType.AtMoveTarget;
+            searSkill.ignoreNodeGraph = false;
+            searSkill.noRepeat = false;
+            searSkill.shouldSprint = true;
+            searSkill.shouldFireEquipment = false;
+            searSkill.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+
+            AISkillDriver cleaverStrafeSkill = invaderMaster.gameObject.AddComponent<AISkillDriver>();
+            cleaverStrafeSkill.skillSlot = SkillSlot.Primary;
+            cleaverStrafeSkill.requireSkillReady = true;
+            cleaverStrafeSkill.requireEquipmentReady = false;
+            cleaverStrafeSkill.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            cleaverStrafeSkill.minDistance = 0f;
+            cleaverStrafeSkill.maxDistance = 10f;
+            cleaverStrafeSkill.selectionRequiresTargetLoS = true;
+            cleaverStrafeSkill.activationRequiresTargetLoS = false;
+            cleaverStrafeSkill.activationRequiresAimConfirmation = false;
+            cleaverStrafeSkill.movementType = AISkillDriver.MovementType.StrafeMovetarget;
+            cleaverStrafeSkill.aimType = AISkillDriver.AimType.AtMoveTarget;
+            cleaverStrafeSkill.ignoreNodeGraph = false;
+            cleaverStrafeSkill.noRepeat = false;
+            cleaverStrafeSkill.shouldSprint = true;
+            cleaverStrafeSkill.shouldFireEquipment = false;
+            cleaverStrafeSkill.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+
+            AISkillDriver cleaverSkill = invaderMaster.gameObject.AddComponent<AISkillDriver>();
+            cleaverSkill.skillSlot = SkillSlot.Primary;
+            cleaverSkill.requireSkillReady = true;
+            cleaverSkill.requireEquipmentReady = false;
+            cleaverSkill.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            cleaverSkill.minDistance = 10f;
+            cleaverSkill.maxDistance = 30f;
+            cleaverSkill.selectionRequiresTargetLoS = true;
+            cleaverSkill.activationRequiresTargetLoS = false;
+            cleaverSkill.activationRequiresAimConfirmation = false;
+            cleaverSkill.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            cleaverSkill.aimType = AISkillDriver.AimType.AtMoveTarget;
+            cleaverSkill.ignoreNodeGraph = false;
+            cleaverSkill.noRepeat = false;
+            cleaverSkill.shouldSprint = true;
+            cleaverSkill.shouldFireEquipment = false;
+            cleaverSkill.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+
+            AISkillDriver chase = invaderMaster.gameObject.AddComponent<AISkillDriver>();
+            chase.skillSlot = SkillSlot.None;
+            chase.requireSkillReady = false;
+            chase.requireEquipmentReady = false;
+            chase.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            chase.minDistance = 0f;
+            chase.maxDistance = Mathf.Infinity;
+            chase.selectionRequiresTargetLoS = false;
+            chase.activationRequiresTargetLoS = false;
+            chase.activationRequiresAimConfirmation = false;
+            chase.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            chase.aimType = AISkillDriver.AimType.MoveDirection;
+            chase.ignoreNodeGraph = false;
+            chase.noRepeat = false;
+            chase.shouldSprint = true;
+            chase.shouldFireEquipment = false;
+            chase.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+
+            ChefContent.masterPrefabs.Add(invaderMaster.gameObject);
         }
     }
 }
