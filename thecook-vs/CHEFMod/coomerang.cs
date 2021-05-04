@@ -24,6 +24,7 @@ namespace ChefMod
 		{
 			this.rigidbody = base.GetComponent<Rigidbody>();
 			this.projectileController = base.GetComponent<ProjectileController>();
+			this.projectileOverlapAttack = base.GetComponent<ProjectileOverlapAttack>();
 			this.projectileDamage = base.GetComponent<ProjectileDamage>();
 			this.lineRenderer = base.GetComponent<LineRenderer>();
 			if (this.projectileController && this.projectileController.owner)
@@ -66,7 +67,7 @@ namespace ChefMod
 		// Token: 0x060025A4 RID: 9636 RVA: 0x0009C8CC File Offset: 0x0009AACC
 		public void OnProjectileImpact(ProjectileImpactInfo impactInfo)
 		{
-			if (!this.canHitWorld)// || !NetworkServer.active)
+			if (!this.canHitWorld || !NetworkServer.active)
 			{
 				return;
 			}
@@ -153,6 +154,12 @@ namespace ChefMod
 							{
 								this.stopwatch = 0f;
 								this.coomerangState = (int)CoomerangProjectile.CoomerangState.Transition;
+
+								if (this.projectileOverlapAttack)
+                                {
+									this.projectileOverlapAttack.ResetOverlapAttack();
+								}
+
 								return;
 							}
 						}
@@ -268,6 +275,8 @@ namespace ChefMod
 
 		// Token: 0x0400205D RID: 8285
 		private ProjectileController projectileController;
+
+		private ProjectileOverlapAttack projectileOverlapAttack;
 
 		// Token: 0x0400205E RID: 8286
 		[SyncVar]

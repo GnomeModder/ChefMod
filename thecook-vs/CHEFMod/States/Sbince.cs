@@ -37,7 +37,7 @@ namespace EntityStates.Chef
                     projectilePrefab = ChefMod.chefPlugin.cleaverPrefab,
                     position = characterBody.corePosition,
                     owner = base.gameObject,
-                    damage = base.characterBody.damage * (1f / (chefPlugin.minceHorizontolIntensity.Value + intensity)),
+                    damage = base.characterBody.damage * (4f / (chefPlugin.minceHorizontolIntensity.Value + intensity)),
                     force = 50f,
                     crit = base.RollCrit(),
                     damageColorIndex = DamageColorIndex.Default,
