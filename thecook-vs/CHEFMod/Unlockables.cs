@@ -138,7 +138,7 @@ namespace ChefMod.Achievements
                 self.baseMaxHealth = 1000f;
                 self.levelMaxHealth = 500f;
                 self.baseMoveSpeed = 14f;
-                self.levelDamage = 7.2f;
+                self.levelDamage = 4.8f;
             }
             orig(self);
         }

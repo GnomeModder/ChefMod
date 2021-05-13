@@ -5,6 +5,7 @@ using EntityStates.Engi.EngiMissilePainter;
 using MonoMod;
 using RoR2;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace EntityStates.Chef
 {
@@ -37,15 +38,16 @@ namespace EntityStates.Chef
             fieldComponent.characterBody = base.characterBody;
 
             childLocator = base.GetModelChildLocator();
+            if (skillLocator.primary.baseSkill == chefPlugin.altPrimaryDef || skillLocator.primary.baseSkill == chefPlugin.boostedAltPrimaryDef)
+            {
+                if (!NetworkServer.active) skillLocator.primary.baseSkill = chefPlugin.primaryDef;
+                childLocator.FindChild("Cleaver").gameObject.SetActive(false);
+                childLocator.FindChild("Knife").gameObject.SetActive(true);
+            }
             if (skillLocator.primary.baseSkill == chefPlugin.primaryDef || skillLocator.primary.baseSkill == chefPlugin.boostedPrimaryDef)
             {
                 childLocator.FindChild("Cleaver").gameObject.SetActive(true);
                 childLocator.FindChild("Knife").gameObject.SetActive(false);
-            }
-            if (skillLocator.primary.baseSkill == chefPlugin.altPrimaryDef || skillLocator.primary.baseSkill == chefPlugin.boostedAltPrimaryDef)
-            {
-                childLocator.FindChild("Cleaver").gameObject.SetActive(false);
-                childLocator.FindChild("Knife").gameObject.SetActive(true);
             }
 
             //tracker = base.characterBody.GetComponent<HuntressTracker>();
