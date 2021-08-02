@@ -26,7 +26,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "1.0.0")]
+        "1.0.1")]
     public class chefPlugin : BaseUnityPlugin
     {
         public GameObject chefPrefab;
@@ -72,7 +72,7 @@ namespace ChefMod
             classicMince = base.Config.Bind<bool>(new ConfigDefinition("01 - General Settings", "Sbince"), true, new ConfigDescription("Makes Mince work more like ror1. Turn off if it's hurting performance too much, there's an alternate version that's less costly", null, Array.Empty<object>()));
             minceVerticalIntensity = base.Config.Bind<int>(new ConfigDefinition("01 - General Settings", "Mince Vertical Density"), 3, new ConfigDescription("controls how much you want mince to lag your game. Doesn't do anything unless you have classic mince (sbince) as true", null, Array.Empty<object>()));
             minceHorizontolIntensity = base.Config.Bind<float>(new ConfigDefinition("01 - General Settings", "Mince Horizontal Density"), 2, new ConfigDescription("same as above", null, Array.Empty<object>()));
-            oilProc = base.Config.Bind<float>(new ConfigDefinition("01 - General Settings", "Oil Proc"), 0, new ConfigDescription("proc coef on fire oil tick", null, Array.Empty<object>()));
+            oilProc = base.Config.Bind<float>(new ConfigDefinition("01 - General Settings", "Oil Proc"), 0.2f, new ConfigDescription("proc coef on fire oil tick", null, Array.Empty<object>()));
             charUnlock = base.Config.Bind<bool>(new ConfigDefinition("01 - General Settings", "Auto Unlock"), false, new ConfigDescription("Automatically unlocks Chef", null, Array.Empty<object>()));
             altSkill = base.Config.Bind<bool>(new ConfigDefinition("01 - General Settings", "Alt Skills"), false, new ConfigDescription("Enables the previous alternate skills. They aren't networked or good so only set to true if you're chicken fried freak", null, Array.Empty<object>()));
 
@@ -219,6 +219,7 @@ namespace ChefMod
             characterBody.subtitleNameToken = "CHEF_SUBTITLE";
             characterBody.portraitIcon = Assets.chefIcon;
             characterBody.bodyColor = chefColor;
+            characterBody.bodyFlags = CharacterBody.BodyFlags.ImmuneToExecutes | CharacterBody.BodyFlags.Mechanical;
 
             LanguageAPI.Add("CHEF_NAME", "CHEF");
             LanguageAPI.Add("CHEF_SUBTITLE", "The Cook");
@@ -770,6 +771,9 @@ namespace ChefMod
             var chumStain = Resources.Load<GameObject>("prefabs/projectiles/LunarExploderProjectileDotZone");
             firefab = chumStain.GetComponentInChildren<AlignToNormal>().gameObject.InstantiateClone("ChefFire", false);
 
+            DestroyOnTimer ffDT = firefab.AddComponent<DestroyOnTimer>();
+            ffDT.duration = Fireee.burnTime + 3f;
+
             Destroy(firefab.GetComponentInChildren<TeamAreaIndicator>().gameObject);
             var decal = firefab.GetComponentInChildren<Decal>();
             Material fireMat = new Material(decal.Material);
@@ -838,7 +842,15 @@ namespace ChefMod
             oilPrefab.AddComponent<ProjectileController>();
             oilPrefab.AddComponent<TeamFilter>();
             oilPrefab.AddComponent<ProjectileDamage>();
+            DestroyOnTimer oilDT = oilPrefab.AddComponent<DestroyOnTimer>();
+            oilDT.duration = Fireee.oilTime + Fireee.burnTime + 3f;
             //oilPrefab.AddComponent<ProjectileDotZone>().enabled = false;
+
+            /*GameObject oilExplosionEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/ImpactEffects/IgniteExplosionVFX").InstantiateClone("OilExplosionVFX", false);
+            DestroyOnTimer dt = oilExplosionEffectPrefab.AddComponent<DestroyOnTimer>();
+            dt.duration = Fireee.burnTime;
+            ChefContent.effectDefs.Add(new EffectDef(oilExplosionEffectPrefab));
+            Fireee.ExplosionEffectPrefab = oilExplosionEffectPrefab;*/
 
             On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
             {

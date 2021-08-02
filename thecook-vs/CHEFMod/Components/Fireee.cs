@@ -10,6 +10,7 @@ namespace ChefMod
 {
     public class Fireee : NetworkBehaviour
     {
+        [SyncVar]
         public bool onFire = false;
         public bool ground = false;
         private bool edging = false;
@@ -20,19 +21,23 @@ namespace ChefMod
         private float damagePerFrame;
         private bool crit;
         private float radius = 10;
-        private float oilTime = 30f;
-        private float burnTime = 10f;
+        public static float oilTime = 30f;
+        public static float burnTime = 10f;
 
         private GameObject oilPrefab;
         private GameObject firePrefab;
+
+        [SyncVar]
         private float startTime;
+        [SyncVar]
         private float igniteTime;
+
         private int framecounter = 0;
         private Rigidbody rig;
 
         private static List<HurtBox> hurtBoxBuffer = new List<HurtBox>();
         private static SphereSearch sphereSearch = new SphereSearch();
-        private static GameObject ExplosionEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/ImpactEffects/IgniteExplosionVFX");
+        public static GameObject ExplosionEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/ImpactEffects/IgniteExplosionVFX");
         private static GameObject FireMaybe = Resources.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXQuick");
 
         void Start()
@@ -148,6 +153,7 @@ namespace ChefMod
             }
 
             onFire = true;
+
             igniteTime = Time.fixedTime;
             esplode();
 
