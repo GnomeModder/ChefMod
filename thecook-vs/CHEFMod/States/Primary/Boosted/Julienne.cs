@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 namespace EntityStates.Chef
 {
-    class Julienne : BaseBoostedSkillState
+    class Julienne : BaseState
     {
         private int returnCounter = 0;
         private int throwCounter = 0;
@@ -99,7 +99,7 @@ namespace EntityStates.Chef
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.Skill;
+            return InterruptPriority.PrioritySkill;
         }
 
         private void setReturned()

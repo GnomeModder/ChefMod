@@ -147,7 +147,7 @@ namespace EntityStates.Chef
 
 		public override InterruptPriority GetMinimumInterruptPriority()
 		{
-			return InterruptPriority.Frozen;
+			return InterruptPriority.PrioritySkill;
 		}
 
 		private void UpdateDirection()

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace EntityStates.Chef
 {
-	public class Marinate : BaseBoostedSkillState
+	public class Marinate : BaseState
 	{
 		public static float baseDuration = 1.5f;
 		private float duration;
@@ -149,7 +149,7 @@ namespace EntityStates.Chef
 
 		public override InterruptPriority GetMinimumInterruptPriority()
 		{
-			return InterruptPriority.Frozen;
+			return InterruptPriority.PrioritySkill;
 		}
 
 		private void UpdateDirection()

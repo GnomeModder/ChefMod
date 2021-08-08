@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 namespace EntityStates.Chef
 {
-    class Mince : BaseBoostedSkillState
+    class MinceHoming : BaseState
     {
         public float baseDuration = 0.5f;   
         public float throwTime = 0.36f;
@@ -125,7 +125,7 @@ namespace EntityStates.Chef
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.Frozen;
+            return InterruptPriority.PrioritySkill;
         }
 
         private void getHitList(Vector3 position, float radius)

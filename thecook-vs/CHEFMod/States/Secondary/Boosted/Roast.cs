@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace EntityStates.Chef {
 
-    public class Roast : BaseBoostedSkillState {
+    public class Roast : BaseState {
 
         public float baseDuration = 0.1f;
         public float throwTime = 0.38f;

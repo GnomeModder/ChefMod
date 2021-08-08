@@ -11,6 +11,7 @@ using RoR2.Projectile;
 using RoR2.Skills;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using ThreeEyedGames;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -27,6 +28,7 @@ namespace ChefMod
         "com.Gnome.ChefMod",
         "ChefMod",
         "1.0.1")]
+    [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     public class chefPlugin : BaseUnityPlugin
     {
         public GameObject chefPrefab;
@@ -50,6 +52,7 @@ namespace ChefMod
         public static SkillDef boostedAltSecondaryDef;
         public static SkillDef utilityDef;
         public static SkillDef boostedUtilityDef;
+        public static SkillDef mealScepterDef;
 
         public static ConfigEntry<bool> classicMince;
         public static ConfigEntry<int> minceVerticalIntensity;
@@ -97,6 +100,13 @@ namespace ChefMod
             };
             ContentManager.collectContentPackProviders += ContentManager_collectContentPackProviders;
         }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void SetupScepter()
+        {
+            AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(mealScepterDef, chefPrefab.name, SkillSlot.Special, 0);
+        }
+
         private void ContentManager_collectContentPackProviders(ContentManager.AddContentPackProviderDelegate addContentPackProvider)
         {
             addContentPackProvider(new ChefContent());
@@ -198,6 +208,11 @@ namespace ChefMod
             ChefContent.skillFamilies.Add(nywFamily);
             skillLocator.special.SetFieldValue("_skillFamily", nywFamily);
 
+            EntityStateMachine mealMachine = chefPrefab.AddComponent<EntityStateMachine>();
+            mealMachine.customName = "MealPrep";
+            mealMachine.initialStateType = new SerializableEntityStateType(typeof(EntityStates.BaseBodyAttachmentState));
+            mealMachine.mainStateType = new SerializableEntityStateType(typeof(EntityStates.BaseBodyAttachmentState));
+
             //BodyCatalog.getAdditionalEntries += delegate (List<GameObject> list)
             //{
             //    list.Add(chefPrefab);
@@ -269,8 +284,8 @@ namespace ChefMod
         private void registerSkills()
         {
             ChefContent.entityStates.Add(typeof(Cleaver));
+            ChefContent.entityStates.Add(typeof(MinceHoming));
             ChefContent.entityStates.Add(typeof(Mince));
-            ChefContent.entityStates.Add(typeof(Sbince));
 
             ChefContent.entityStates.Add(typeof(Slice));
             ChefContent.entityStates.Add(typeof(Julienne));
@@ -286,6 +301,7 @@ namespace ChefMod
 
             ChefContent.entityStates.Add(typeof(Special));
             ChefContent.entityStates.Add(typeof(Meal));
+            ChefContent.entityStates.Add(typeof(MealScepter));
 
             ChefContent.entityStates.Add(typeof(Main));
 
@@ -314,19 +330,19 @@ namespace ChefMod
             ChefContent.skillDefs.Add(primaryDef);
 
             boostedPrimaryDef = ScriptableObject.CreateInstance<SkillDef>();
-            boostedPrimaryDef.activationState = new SerializableEntityStateType(typeof(Mince));
-            if (classicMince.Value) boostedPrimaryDef.activationState = new SerializableEntityStateType(typeof(Sbince));
+            boostedPrimaryDef.activationState = new SerializableEntityStateType(typeof(MinceHoming));
+            if (classicMince.Value) boostedPrimaryDef.activationState = new SerializableEntityStateType(typeof(Mince));
             boostedPrimaryDef.activationStateMachineName = "Weapon";
             boostedPrimaryDef.baseMaxStock = 1;
             boostedPrimaryDef.baseRechargeInterval = 0f;
             boostedPrimaryDef.beginSkillCooldownOnSkillEnd = false;
             boostedPrimaryDef.canceledFromSprinting = false;
             boostedPrimaryDef.fullRestockOnAssign = false;
-            boostedPrimaryDef.interruptPriority = InterruptPriority.Frozen;
+            boostedPrimaryDef.interruptPriority = InterruptPriority.Any;
             boostedPrimaryDef.isCombatSkill = true;
             boostedPrimaryDef.mustKeyPress = false;
             boostedPrimaryDef.cancelSprintingOnActivation = false;
-            boostedPrimaryDef.rechargeStock = 1;
+            boostedPrimaryDef.rechargeStock = 0;
             boostedPrimaryDef.requiredStock = 1;
             boostedPrimaryDef.stockToConsume = 1;
             boostedPrimaryDef.icon = Assets.chefMinceIcon;
@@ -371,11 +387,11 @@ namespace ChefMod
             boostedAltPrimaryDef.beginSkillCooldownOnSkillEnd = false;
             boostedAltPrimaryDef.canceledFromSprinting = false;
             boostedAltPrimaryDef.fullRestockOnAssign = false;
-            boostedAltPrimaryDef.interruptPriority = InterruptPriority.Frozen;
+            boostedAltPrimaryDef.interruptPriority = InterruptPriority.Any;
             boostedAltPrimaryDef.isCombatSkill = true;
             boostedAltPrimaryDef.mustKeyPress = false;
             boostedAltPrimaryDef.cancelSprintingOnActivation = false;
-            boostedAltPrimaryDef.rechargeStock = 1;
+            boostedAltPrimaryDef.rechargeStock = 0;
             boostedAltPrimaryDef.requiredStock = 1;
             boostedAltPrimaryDef.stockToConsume = 1;
             boostedAltPrimaryDef.icon = Assets.chefJulienneIcon;
@@ -424,7 +440,7 @@ namespace ChefMod
             boostedSecondaryDef.isCombatSkill = true;
             boostedSecondaryDef.mustKeyPress = false;
             boostedSecondaryDef.cancelSprintingOnActivation = false;
-            boostedSecondaryDef.rechargeStock = 1;
+            boostedSecondaryDef.rechargeStock = 0;
             boostedSecondaryDef.requiredStock = 1;
             boostedSecondaryDef.stockToConsume = 1;
             boostedSecondaryDef.icon = Assets.chefFlambeIcon;
@@ -472,7 +488,7 @@ namespace ChefMod
             boostedAltSecondaryDef.isCombatSkill = true;
             boostedAltSecondaryDef.mustKeyPress = false;
             boostedAltSecondaryDef.cancelSprintingOnActivation = false;
-            boostedAltSecondaryDef.rechargeStock = 1;
+            boostedAltSecondaryDef.rechargeStock = 0;
             boostedAltSecondaryDef.requiredStock = 1;
             boostedAltSecondaryDef.stockToConsume = 1;
             boostedAltSecondaryDef.icon = Assets.chefFryIcon;
@@ -492,7 +508,7 @@ namespace ChefMod
             utilityDef.beginSkillCooldownOnSkillEnd = true;
             utilityDef.canceledFromSprinting = false;
             utilityDef.fullRestockOnAssign = false;
-            utilityDef.interruptPriority = InterruptPriority.Pain;
+            utilityDef.interruptPriority = InterruptPriority.Skill;
             utilityDef.isCombatSkill = false;
             utilityDef.mustKeyPress = false;
             utilityDef.cancelSprintingOnActivation = false;
@@ -517,11 +533,11 @@ namespace ChefMod
             boostedUtilityDef.beginSkillCooldownOnSkillEnd = true;
             boostedUtilityDef.canceledFromSprinting = false;
             boostedUtilityDef.fullRestockOnAssign = true;
-            boostedUtilityDef.interruptPriority = InterruptPriority.Pain;
+            boostedUtilityDef.interruptPriority = InterruptPriority.Skill;
             boostedUtilityDef.isCombatSkill = false;
             boostedUtilityDef.mustKeyPress = false;
             boostedUtilityDef.cancelSprintingOnActivation = false;
-            boostedUtilityDef.rechargeStock = 1;
+            boostedUtilityDef.rechargeStock = 0;
             boostedUtilityDef.requiredStock = 1;
             boostedUtilityDef.stockToConsume = 1;
             boostedUtilityDef.icon = Assets.chefMarinateIcon;
@@ -533,15 +549,17 @@ namespace ChefMod
             LanguageAPI.Add("CHEF_BOOSTED_UTILITY_DESCRIPTION", "Leave a long trail of oil, <style=cIsUtility>slowing customers</style>. Oil can be <style=cIsDamage>ignited</style>.");
             ChefContent.skillDefs.Add(boostedUtilityDef);
 
+            
+
             var specialDef = ScriptableObject.CreateInstance<SkillDef>();
             specialDef.activationState = new SerializableEntityStateType(typeof(Meal));
-            specialDef.activationStateMachineName = "Weapon";
+            specialDef.activationStateMachineName = "MealPrep";
             specialDef.baseMaxStock = 1;
             specialDef.baseRechargeInterval = 12f;
             specialDef.beginSkillCooldownOnSkillEnd = true;
             specialDef.canceledFromSprinting = false;
             specialDef.fullRestockOnAssign = false;
-            specialDef.interruptPriority = InterruptPriority.PrioritySkill;
+            specialDef.interruptPriority = InterruptPriority.Any;
             specialDef.isCombatSkill = false;
             specialDef.mustKeyPress = true;
             specialDef.cancelSprintingOnActivation = false;
@@ -556,6 +574,35 @@ namespace ChefMod
             LanguageAPI.Add("CHEF_SPECIAL_NAME", "Second Helping");
             LanguageAPI.Add("CHEF_SPECIAL_DESCRIPTION", "Prepare a big healthy meal, <style=cIsUtility>boosting the next ability cast</style>.");
             ChefContent.skillDefs.Add(specialDef);
+
+            var specialScepterDef = ScriptableObject.CreateInstance<SkillDef>();
+            specialScepterDef.activationState = new SerializableEntityStateType(typeof(MealScepter));
+            specialScepterDef.activationStateMachineName = "MealPrep";
+            specialScepterDef.baseMaxStock = 1;
+            specialScepterDef.baseRechargeInterval = 12f;
+            specialScepterDef.beginSkillCooldownOnSkillEnd = true;
+            specialScepterDef.canceledFromSprinting = false;
+            specialScepterDef.fullRestockOnAssign = false;
+            specialScepterDef.interruptPriority = InterruptPriority.Any;
+            specialScepterDef.isCombatSkill = false;
+            specialScepterDef.mustKeyPress = true;
+            specialScepterDef.cancelSprintingOnActivation = false;
+            specialScepterDef.rechargeStock = 1;
+            specialScepterDef.requiredStock = 1;
+            specialScepterDef.stockToConsume = 1;
+            specialScepterDef.icon = Assets.chefBHMIcon;
+            specialScepterDef.skillDescriptionToken = "CHEF_SPECIAL_SCEPTER_DESCRIPTION";
+            specialScepterDef.skillName = "SpecialScepter";
+            specialScepterDef.skillNameToken = "CHEF_SPECIAL_SCEPTER_NAME";
+
+            LanguageAPI.Add("CHEF_SPECIAL_SCEPTER_NAME", "Full Course Meal");
+            LanguageAPI.Add("CHEF_SPECIAL_SCEPTER_DESCRIPTION", "Prepare a master meal, <style=cIsUtility>boosting the next 2 ability casts</style>.");
+            ChefContent.skillDefs.Add(specialScepterDef);
+            mealScepterDef = specialScepterDef;
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter"))
+            {
+                SetupScepter();
+            }
 
             var altSpecialDef = ScriptableObject.CreateInstance<SkillDef>();
             altSpecialDef.activationState = new SerializableEntityStateType(typeof(Special));

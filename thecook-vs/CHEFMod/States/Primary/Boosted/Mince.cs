@@ -7,7 +7,7 @@ using ChefMod;
 
 namespace EntityStates.Chef
 {
-    class Sbince : BaseBoostedSkillState
+    class Mince : BaseState
     {
         public float baseDuration = 0.5f;
         public float throwTime = 0.36f;
@@ -15,7 +15,6 @@ namespace EntityStates.Chef
         private float duration;
         private bool hasThrown;
 
-        private float pi = 3.14159f;
         private int intensity = chefPlugin.minceVerticalIntensity.Value;
         public override void OnEnter() {
             base.OnEnter();
@@ -48,11 +47,11 @@ namespace EntityStates.Chef
 
                 for (int i = -1 * intensity; i <= intensity; i++) {
                     float phi = 0;
-                    if (intensity != 0) phi = i * (1f / (2f * intensity)) * pi;
+                    if (intensity != 0) phi = i * (1f / (2f * intensity)) * Mathf.PI;
                     float r = Mathf.Cos(phi);
-                    int circum = Mathf.Max(1, Mathf.FloorToInt(chefPlugin.minceHorizontolIntensity.Value * pi * 2 * r));
+                    int circum = Mathf.Max(1, Mathf.FloorToInt(chefPlugin.minceHorizontolIntensity.Value * Mathf.PI * 2 * r));
                     for (int j = 0; j < circum; j++) {
-                        float theta = 2 * pi * ((float)j / (float)circum);
+                        float theta = 2 * Mathf.PI * ((float)j / (float)circum);
                         Vector3 direction = new Vector3(r * Mathf.Cos(theta), Mathf.Sin(phi), r * Mathf.Sin(theta));
 
                         info.rotation = Util.QuaternionSafeLookRotation(direction);
@@ -98,7 +97,7 @@ namespace EntityStates.Chef
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.Frozen;
+            return InterruptPriority.PrioritySkill;
         }
     }
 }

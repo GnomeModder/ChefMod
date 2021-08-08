@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace EntityStates.Chef
 {
-    class Flambe : BaseBoostedSkillState 
+    class Flambe : BaseState
     {
         public float damageCoefficient = 5;
         public float maxDistance = 25f;
