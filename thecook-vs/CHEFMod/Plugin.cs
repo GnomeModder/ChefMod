@@ -337,7 +337,7 @@ namespace ChefMod
             boostedPrimaryDef.baseRechargeInterval = 0f;
             boostedPrimaryDef.beginSkillCooldownOnSkillEnd = false;
             boostedPrimaryDef.canceledFromSprinting = false;
-            boostedPrimaryDef.fullRestockOnAssign = false;
+            boostedPrimaryDef.fullRestockOnAssign = true;
             boostedPrimaryDef.interruptPriority = InterruptPriority.Any;
             boostedPrimaryDef.isCombatSkill = true;
             boostedPrimaryDef.mustKeyPress = false;
@@ -376,7 +376,7 @@ namespace ChefMod
             altPrimaryDef.skillNameToken = "CHEF_ALTPRIMARY_NAME";
             altPrimaryDef.keywordTokens = new string[] { "KEYWORD_AGILE","KEYWORD_CHEF_BOOST_SLICE" };
             LanguageAPI.Add("CHEF_ALTPRIMARY_NAME", "Slice");
-            LanguageAPI.Add("CHEF_ALTPRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Stab a customer for <style=cIsDamage>100% damage</style>.");
+            LanguageAPI.Add("CHEF_ALTPRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Stab a customer for <style=cIsDamage>100% damage</style>. <style=cIsHealth>BROKEN IN MULTIPLAYER</style>");
             ChefContent.skillDefs.Add(altPrimaryDef);
 
             boostedAltPrimaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -386,7 +386,7 @@ namespace ChefMod
             boostedAltPrimaryDef.baseRechargeInterval = 0f;
             boostedAltPrimaryDef.beginSkillCooldownOnSkillEnd = false;
             boostedAltPrimaryDef.canceledFromSprinting = false;
-            boostedAltPrimaryDef.fullRestockOnAssign = false;
+            boostedAltPrimaryDef.fullRestockOnAssign = true;
             boostedAltPrimaryDef.interruptPriority = InterruptPriority.Any;
             boostedAltPrimaryDef.isCombatSkill = true;
             boostedAltPrimaryDef.mustKeyPress = false;
@@ -432,7 +432,7 @@ namespace ChefMod
             boostedSecondaryDef.activationState = new SerializableEntityStateType(typeof(Flambe));
             boostedSecondaryDef.activationStateMachineName = "Weapon";
             boostedSecondaryDef.baseMaxStock = 1;
-            boostedSecondaryDef.baseRechargeInterval = 4f;
+            boostedSecondaryDef.baseRechargeInterval = secondaryDef.baseRechargeInterval;
             boostedSecondaryDef.beginSkillCooldownOnSkillEnd = true;
             boostedSecondaryDef.canceledFromSprinting = false;
             boostedSecondaryDef.fullRestockOnAssign = true;
@@ -480,7 +480,7 @@ namespace ChefMod
             boostedAltSecondaryDef.activationState = new SerializableEntityStateType(typeof(Roast));
             boostedAltSecondaryDef.activationStateMachineName = "Weapon";
             boostedAltSecondaryDef.baseMaxStock = 1;
-            boostedAltSecondaryDef.baseRechargeInterval = 4f;
+            boostedAltSecondaryDef.baseRechargeInterval = altSecondaryDef.baseRechargeInterval;
             boostedAltSecondaryDef.beginSkillCooldownOnSkillEnd = true;
             boostedAltSecondaryDef.canceledFromSprinting = false;
             boostedAltSecondaryDef.fullRestockOnAssign = true;
@@ -529,7 +529,7 @@ namespace ChefMod
             boostedUtilityDef.activationState = new SerializableEntityStateType(typeof(Marinate));
             boostedUtilityDef.activationStateMachineName = "Weapon";
             boostedUtilityDef.baseMaxStock = 1;
-            boostedUtilityDef.baseRechargeInterval = 7f;
+            boostedUtilityDef.baseRechargeInterval = utilityDef.baseRechargeInterval;
             boostedUtilityDef.beginSkillCooldownOnSkillEnd = true;
             boostedUtilityDef.canceledFromSprinting = false;
             boostedUtilityDef.fullRestockOnAssign = true;
@@ -579,7 +579,7 @@ namespace ChefMod
             specialScepterDef.activationState = new SerializableEntityStateType(typeof(MealScepter));
             specialScepterDef.activationStateMachineName = "MealPrep";
             specialScepterDef.baseMaxStock = 1;
-            specialScepterDef.baseRechargeInterval = 12f;
+            specialScepterDef.baseRechargeInterval = specialDef.baseRechargeInterval;
             specialScepterDef.beginSkillCooldownOnSkillEnd = true;
             specialScepterDef.canceledFromSprinting = false;
             specialScepterDef.fullRestockOnAssign = false;

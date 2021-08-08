@@ -32,8 +32,10 @@ namespace EntityStates.Chef
         public override void FixedUpdate()
         {
             base.FixedUpdate();
+            Debug.Log(skillLocator.primary.stock + skillLocator.secondary.stock + skillLocator.utility.stock);
             if ((skillLocator.primary.stock + skillLocator.secondary.stock + skillLocator.utility.stock) < 3 && base.isAuthority)
             {
+                Debug.Log("Skill used, returning");
                 NextState();
                 return;
             }
