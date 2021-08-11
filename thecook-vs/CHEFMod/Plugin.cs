@@ -27,7 +27,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "1.0.1")]
+        "1.1.0")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     public class chefPlugin : BaseUnityPlugin
     {
@@ -72,12 +72,15 @@ namespace ChefMod
 
         public void Awake()
         {
-            classicMince = base.Config.Bind<bool>(new ConfigDefinition("01 - General Settings", "Sbince"), true, new ConfigDescription("Makes Mince work more like ror1. Turn off if it's hurting performance too much, there's an alternate version that's less costly", null, Array.Empty<object>()));
-            minceVerticalIntensity = base.Config.Bind<int>(new ConfigDefinition("01 - General Settings", "Mince Vertical Density"), 3, new ConfigDescription("controls how much you want mince to lag your game. Doesn't do anything unless you have classic mince (sbince) as true", null, Array.Empty<object>()));
-            minceHorizontolIntensity = base.Config.Bind<float>(new ConfigDefinition("01 - General Settings", "Mince Horizontal Density"), 2, new ConfigDescription("same as above", null, Array.Empty<object>()));
-            oilProc = base.Config.Bind<float>(new ConfigDefinition("01 - General Settings", "Oil Proc"), 0.15f, new ConfigDescription("proc coef on fire oil tick", null, Array.Empty<object>()));
+            
             charUnlock = base.Config.Bind<bool>(new ConfigDefinition("01 - General Settings", "Auto Unlock"), false, new ConfigDescription("Automatically unlocks Chef", null, Array.Empty<object>()));
             altSkill = base.Config.Bind<bool>(new ConfigDefinition("01 - General Settings", "Alt Skills"), false, new ConfigDescription("Enables the previous alternate skills. They aren't networked or good so only set to true if you're chicken fried freak", null, Array.Empty<object>()));
+
+            classicMince = base.Config.Bind<bool>(new ConfigDefinition("11 - Mince (Boosted Dice)", "Classic Mince"), true, new ConfigDescription("Makes Mince throw Cleavers in a sphere around you. Disabling this makes Cleavers auto target or something.", null, Array.Empty<object>()));
+            minceVerticalIntensity = base.Config.Bind<int>(new ConfigDefinition("11 - Mince (Boosted Dice)", "Mince Vertical Density"), 2, new ConfigDescription("Affects the amount of Cleavers from Classic Mince.", null, Array.Empty<object>()));
+            minceHorizontolIntensity = base.Config.Bind<float>(new ConfigDefinition("11 - Mince (Boosted Dice)", "Mince Horizontal Density"), 1, new ConfigDescription("same as above", null, Array.Empty<object>()));
+            
+            oilProc = base.Config.Bind<float>(new ConfigDefinition("30 - Glaze", "Oil Proc Coefficient"), 0.2f, new ConfigDescription("Proc coefficient of burning oil.", null, Array.Empty<object>()));
 
             Unlockables.RegisterUnlockables();
             registerCharacter();
@@ -326,7 +329,7 @@ namespace ChefMod
             primaryDef.skillNameToken = "CHEF_PRIMARY_NAME";
             primaryDef.keywordTokens = new string[] { "KEYWORD_AGILE", "KEYWORD_CHEF_BOOST_DICE" };
             LanguageAPI.Add("CHEF_PRIMARY_NAME", "Dice");
-            LanguageAPI.Add("CHEF_PRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Throw a cleaver towards customers for <style=cIsDamage>100% damage</style>. Boomerangs back.");
+            LanguageAPI.Add("CHEF_PRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Throw a cleaver towards customers for <style=cIsDamage>150% damage</style>. Boomerangs back.");
             ChefContent.skillDefs.Add(primaryDef);
 
             boostedPrimaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -561,7 +564,7 @@ namespace ChefMod
             specialDef.fullRestockOnAssign = false;
             specialDef.interruptPriority = InterruptPriority.Any;
             specialDef.isCombatSkill = false;
-            specialDef.mustKeyPress = true;
+            specialDef.mustKeyPress = false;
             specialDef.cancelSprintingOnActivation = false;
             specialDef.rechargeStock = 1;
             specialDef.requiredStock = 1;
@@ -585,7 +588,7 @@ namespace ChefMod
             specialScepterDef.fullRestockOnAssign = false;
             specialScepterDef.interruptPriority = InterruptPriority.Any;
             specialScepterDef.isCombatSkill = false;
-            specialScepterDef.mustKeyPress = true;
+            specialScepterDef.mustKeyPress = false;
             specialScepterDef.cancelSprintingOnActivation = false;
             specialScepterDef.rechargeStock = 1;
             specialScepterDef.requiredStock = 1;
@@ -769,6 +772,7 @@ namespace ChefMod
 
             var pojcont = knifePrefab.GetComponent<ProjectileController>();
             pojcont.ghostPrefab = knifeGhost;
+            pojcont.allowPrediction = false;
 
 
             //GameObject stunGrenadeModel = Assets.chefAssetBundle.LoadAsset<GameObject>("Cleaver").InstantiateClone("CleaverGhost", true);

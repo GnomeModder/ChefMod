@@ -24,7 +24,7 @@ namespace ChefMod
             LanguageAPI.Add("CHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME", "Mise en Place");
 
             LanguageAPI.Add("CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME", "Full Set");
-            LanguageAPI.Add("CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC", "Have 100 cleavers in the air at once");
+            LanguageAPI.Add("CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC", "Have 40 cleavers in the air at once");
             LanguageAPI.Add("CHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME", "Full Set");
 
             chefUnlockDef = Unlockable.AddUnlockable<Achievements.ChefAchievement>(true);
@@ -65,16 +65,11 @@ namespace ChefMod.Achievements
         private bool spawned = false;
         private bool death = false;
 
+        string[] chefwarnings = { "JE PEUX LE SENTIR", "JE VIENS À VOUS BIENTÔT", "MON FOUR PRÉCHAUFFE", "VOUS M'AVEZ AROUSÉ", "LE DÎNER EST TOUJOURS À L'HEURE" };
+
         private void CheckItem(On.RoR2.CharacterMaster.orig_OnInventoryChanged orig, CharacterMaster self)
         {
             orig(self);
-
-            String[] chefwarnings = new String[5];
-            chefwarnings[0] = "JE PEUX LE SENTIR";
-            chefwarnings[1] = "JE VIENS À VOUS BIENTÔT";
-            chefwarnings[2] = "MON FOUR PRÉCHAUFFE";
-            chefwarnings[3] = "VOUS M'AVEZ AROUSÉ";
-            chefwarnings[4] = "LE DÎNER EST TOUJOURS À L'HEURE";
 
             if (self && self.teamIndex == TeamIndex.Player && self.inventory)
             {
@@ -83,7 +78,7 @@ namespace ChefMod.Achievements
                 if (!warning && count > 3)
                 {
                     warning = true;
-                    int choice = UnityEngine.Random.Range(0, 5);
+                    int choice = UnityEngine.Random.Range(0, chefwarnings.Length);
                     Chat.AddMessage(Util.GenerateColoredString("CHEF: " + chefwarnings[choice], Color.red));
                 }
                 if (warning && !death && !spawned && count > 4)
@@ -208,7 +203,7 @@ namespace ChefMod.Achievements
 
         private void check(On.RoR2.CharacterBody.orig_FixedUpdate orig, CharacterBody self)
         {
-            if (self.baseNameToken == "CHEF_NAME" && cleavercount >= 100)
+            if (self.baseNameToken == "CHEF_NAME" && cleavercount >= 40)
             {
                 base.Grant();
             }

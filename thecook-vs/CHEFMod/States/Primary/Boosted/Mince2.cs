@@ -7,7 +7,7 @@ using ChefMod;
 
 namespace EntityStates.Chef
 {
-    class Mince : BaseState
+    class Mince2 : BaseState
     {
         public float baseDuration = 0.5f;
         public float throwTime = 0.36f;
@@ -15,7 +15,7 @@ namespace EntityStates.Chef
         private float duration;
         private bool hasThrown;
 
-        private int intensity = chefPlugin.minceVerticalIntensity.Value;
+        private int intensity = 2;
         public override void OnEnter() {
             base.OnEnter();
             duration = baseDuration / base.attackSpeedStat;
@@ -36,7 +36,6 @@ namespace EntityStates.Chef
                     projectilePrefab = ChefMod.chefPlugin.cleaverPrefab,
                     position = characterBody.corePosition,
                     owner = base.gameObject,
-                    //damage = base.characterBody.damage * (4f / (chefPlugin.minceHorizontolIntensity.Value + intensity)),
                     damage = base.damageStat * Cleaver.damageCoefficient,
                     force = 50f,
                     crit = base.RollCrit(),
@@ -50,7 +49,7 @@ namespace EntityStates.Chef
                     float phi = 0;
                     if (intensity != 0) phi = i * (1f / (2f * intensity)) * Mathf.PI;
                     float r = Mathf.Cos(phi);
-                    int circum = Mathf.Max(1, Mathf.FloorToInt(chefPlugin.minceHorizontolIntensity.Value * Mathf.PI * 2 * r));
+                    int circum = Mathf.Max(1, Mathf.FloorToInt(Mathf.PI * 2f * r));
                     for (int j = 0; j < circum; j++) {
                         float theta = 2 * Mathf.PI * ((float)j / (float)circum);
                         Vector3 direction = new Vector3(r * Mathf.Cos(theta), Mathf.Sin(phi), r * Mathf.Sin(theta));

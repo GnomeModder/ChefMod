@@ -9,6 +9,7 @@ namespace EntityStates.Chef
 {
     class Cleaver : BaseSkillState
     {
+        public static float damageCoefficient = 1.5f;
         public float baseDuration = 0.5f;
         public float throwTime = 0.38f;
 
@@ -62,7 +63,7 @@ namespace EntityStates.Chef
                     position = aimRay.origin + 1.5f * aimRay.direction + 1.5f * Vector3.up + 2 * right,
                     rotation = Util.QuaternionSafeLookRotation(aimRay.direction),// * Quaternion.FromToRotation(Vector3.left, Vector3.up),
                     owner = base.gameObject,
-                    damage = base.characterBody.damage * 1f,
+                    damage = base.characterBody.damage * Cleaver.damageCoefficient,
                     force = 50f,
                     crit = base.RollCrit(),
                     damageColorIndex = DamageColorIndex.Default,

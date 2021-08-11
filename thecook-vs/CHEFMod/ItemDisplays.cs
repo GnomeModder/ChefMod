@@ -1230,10 +1230,10 @@ namespace ChefMod
                             ruleType = ItemDisplayRuleType.ParentedPrefab,
                             followerPrefab = ItemDisplays.LoadDisplay("DisplayHippo"),
                             limbMask = LimbFlags.None,
-                            childName = "Body",
-                            localPos = new Vector3(0F, 0.0531F, -0.0131F),
+                            childName = "Hat",
+                            localPos = new Vector3(0.00348F, 0.04706F, -0.01449F),
                             localAngles = new Vector3(0F, 0F, 0F),
-                            localScale = new Vector3(0.0989F, 0.0989F, 0.0989F)
+                            localScale = new Vector3(0.0069F, 0.0069F, 0.0069F)
                         }
                     }
                 }
