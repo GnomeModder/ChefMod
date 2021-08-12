@@ -9,7 +9,7 @@ namespace EntityStates.Chef
 {
     class Cleaver : BaseSkillState
     {
-        public static float damageCoefficient = 1.5f;
+        public static float damageCoefficient = 1.5f;//
         public float baseDuration = 0.5f;
         public float throwTime = 0.38f;
 
