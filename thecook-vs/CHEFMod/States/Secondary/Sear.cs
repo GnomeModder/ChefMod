@@ -57,7 +57,6 @@ namespace EntityStates.Chef
         public static GameObject specialCrosshairPrefab = Resources.Load<GameObject>("prefabs/crosshair/banditcrosshairrevolver");
         private GameObject defaultCrosshairPrefab;
         private float duration;
-        private Animator modelAnimator;
         public bool specialBoosted = false;
     }
 
@@ -161,7 +160,7 @@ namespace EntityStates.Chef
         }
         public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/missileexplosionvfx");
         public static float damageCoefficient = 2.6f;
-        public static float force = 2500f;
+        public static float force = 2400f;
         public static int bulletCount;
         public static float baseDuration = 0.5f;
         public static string attackSoundString = "Fireball";

@@ -255,7 +255,6 @@ namespace ChefMod
 		//private Transform target = null;
 		public bool target = false;
 		public static event Action Returned;
-		private bool hasfired = false;
 		private float reelDistance = 3;
 
 		private LineRenderer lineRenderer;

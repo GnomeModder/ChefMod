@@ -49,7 +49,7 @@ namespace EntityStates.Chef
                 };
 
                 for (int i = -1 * verticalIntensity; i <= verticalIntensity; i++) {
-                    float phi = 0;
+                    float phi = 0f;
                     if (verticalIntensity != 0) phi = i * (1f / (2f * verticalIntensity)) * Mathf.PI;
                     float r = Mathf.Cos(phi);
                     int circum = Mathf.Max(1, Mathf.FloorToInt(horizontalIntensity * Mathf.PI * 2 * r));
