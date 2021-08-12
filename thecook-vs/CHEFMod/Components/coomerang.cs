@@ -41,9 +41,10 @@ namespace ChefMod
 			{
 				num = 1f;
 			}
-			Vector3 localScale = new Vector3(num * base.transform.localScale.x, num * base.transform.localScale.y, num * base.transform.localScale.z);
-			base.transform.localScale = localScale;
-			base.gameObject.GetComponent<ProjectileController>().ghostPrefab.transform.localScale = localScale;
+			//Vector3 localScale = new Vector3(num * base.transform.localScale.x, num * base.transform.localScale.y, num * base.transform.localScale.z);
+			//Debug.Log(localScale);
+			//base.transform.localScale = localScale;
+			//base.gameObject.GetComponent<ProjectileController>().ghostPrefab.transform.localScale = localScale;
 			//base.GetComponent<ProjectileDotZone>().damageCoefficient *= num;
 
 			if (target)
@@ -78,7 +79,7 @@ namespace ChefMod
 			}
 			EffectManager.SimpleImpactEffect(this.impactSpark, impactInfo.estimatedPointOfImpact, -base.transform.forward, true);
 
-			if (target) this.gameObject.layer = LayerIndex.noCollision.intVal;
+			/*if (target) this.gameObject.layer = LayerIndex.noCollision.intVal;
 			if (target && !hasfired && impactInfo.collider)
 			{
 				var hurtbox = impactInfo.collider.GetComponent<HurtBox>();
@@ -105,7 +106,7 @@ namespace ChefMod
 
 					hasfired = true;
 				}
-			}
+			}*/
 		}
 
 		// Token: 0x060025A5 RID: 9637 RVA: 0x0009C91C File Offset: 0x0009AB1C
@@ -160,6 +161,11 @@ namespace ChefMod
 						break;
 					case CoomerangProjectile.CoomerangState.Transition:
 						{
+							ProjectileOverlapAttack poa = base.gameObject.GetComponent<ProjectileOverlapAttack>();
+							if (poa)
+                            {
+								poa.ResetOverlapAttack();
+                            }
 							this.stopwatch += Time.fixedDeltaTime;
 							float num = this.stopwatch / this.transitionDuration;
 							Vector3 a = this.CalculatePullDirection();

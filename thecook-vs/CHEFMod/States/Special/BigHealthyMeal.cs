@@ -8,43 +8,43 @@ namespace EntityStates.Chef
 {
     class Meal : BaseSkillState
     {
-        private bool boostPrimary = false;
-        private bool boostSecondary = false;
-        private bool boostUtility = false;
+        private int boostPrimary = 0;
+        private int boostSecondary = 0;
+        private int boostUtility = 0;
         public override void OnEnter()
         {
             if (skillLocator.primary.baseSkill == chefPlugin.primaryDef)
             {
                 base.skillLocator.primary.SetSkillOverride(this, chefPlugin.boostedPrimaryDef, GenericSkill.SkillOverridePriority.Contextual);
-                boostPrimary = true;
+                boostPrimary = 1;
             }
             if (skillLocator.primary.baseSkill == chefPlugin.altPrimaryDef)
             {
                 base.skillLocator.primary.SetSkillOverride(this, chefPlugin.boostedAltPrimaryDef, GenericSkill.SkillOverridePriority.Contextual);
-                boostPrimary = true;
+                boostPrimary = 1;
             }
             if (skillLocator.secondary.baseSkill == chefPlugin.secondaryDef)
             {
                 base.skillLocator.secondary.SetSkillOverride(this, chefPlugin.boostedSecondaryDef, GenericSkill.SkillOverridePriority.Contextual);
-                boostSecondary = true;
+                boostSecondary = 1;
             }
             if (skillLocator.secondary.baseSkill == chefPlugin.altSecondaryDef)
             {
                 base.skillLocator.secondary.SetSkillOverride(this, chefPlugin.boostedAltSecondaryDef, GenericSkill.SkillOverridePriority.Contextual);
-                boostSecondary = true;
+                boostSecondary = 1;
             }
             if (skillLocator.utility.baseSkill == chefPlugin.utilityDef)
             {
                 base.skillLocator.utility.SetSkillOverride(this, chefPlugin.boostedUtilityDef, GenericSkill.SkillOverridePriority.Contextual);
-                boostUtility = true;
+                boostUtility = 1;
             }
         }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            int maxStock = (boostPrimary ? skillLocator.primary.maxStock : 0) + (boostSecondary ? skillLocator.secondary.maxStock : 0) + (boostUtility ? skillLocator.utility.maxStock : 0);
-            int currentStock = (boostPrimary ? skillLocator.primary.stock : 0) + (boostSecondary ? skillLocator.secondary.stock : 0) + (boostUtility ? skillLocator.utility.stock : 0);
+            int maxStock = (boostPrimary * skillLocator.primary.maxStock) + (boostSecondary * skillLocator.secondary.maxStock) + (boostUtility * skillLocator.utility.maxStock);
+            int currentStock = (boostPrimary * skillLocator.primary.stock) + (boostSecondary * skillLocator.secondary.stock) + (boostUtility * skillLocator.utility.stock);
             if ((currentStock) < maxStock && base.isAuthority)
             {
                 NextState();
@@ -59,7 +59,7 @@ namespace EntityStates.Chef
 
         public override void OnExit()
         {
-            if (boostPrimary)
+            if (boostPrimary != 0)
             {
                 if (skillLocator.primary.baseSkill == chefPlugin.primaryDef)
                 {
@@ -70,7 +70,7 @@ namespace EntityStates.Chef
                     base.skillLocator.primary.UnsetSkillOverride(this, chefPlugin.boostedAltPrimaryDef, GenericSkill.SkillOverridePriority.Contextual);
                 }
             }
-            if (boostSecondary)
+            if (boostSecondary != 0)
             {
                 if (skillLocator.secondary.baseSkill == chefPlugin.secondaryDef)
                 {
@@ -81,7 +81,7 @@ namespace EntityStates.Chef
                     base.skillLocator.secondary.UnsetSkillOverride(this, chefPlugin.boostedAltSecondaryDef, GenericSkill.SkillOverridePriority.Contextual);
                 }
             }
-            if (boostUtility)
+            if (boostUtility != 0)
             {
                 base.skillLocator.utility.UnsetSkillOverride(this, chefPlugin.boostedUtilityDef, GenericSkill.SkillOverridePriority.Contextual);
             }

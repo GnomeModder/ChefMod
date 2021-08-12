@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
+using ChefMod.Hooks;
 using EntityStates;
 using EntityStates.Chef;
 using R2API;
@@ -15,6 +16,7 @@ using System.Runtime.CompilerServices;
 using ThreeEyedGames;
 using UnityEngine;
 using UnityEngine.Networking;
+using static R2API.DamageAPI;
 
 namespace ChefMod
 {
@@ -23,6 +25,7 @@ namespace ChefMod
     [R2APISubmoduleDependency("LoadoutAPI")]
     [R2APISubmoduleDependency("SoundAPI")]
     [R2APISubmoduleDependency("AssetAPI")]
+    [R2APISubmoduleDependency("DamageAPI")]
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin(
         "com.Gnome.ChefMod",
@@ -61,33 +64,129 @@ namespace ChefMod
         public static ConfigEntry<bool> charUnlock;
         public static ConfigEntry<bool> altSkill;
 
+        public static ModdedDamageType chefSear;
+        public static ModdedDamageType chefFireballOnHit;
+
         public static BuffDef foodBuff;
 
         public static Color chefColor = new Color(189f / 255f, 190f / 255f, 194f / 255f);
+
+        private void ContentManager_collectContentPackProviders(ContentManager.AddContentPackProviderDelegate addContentPackProvider)
+        {
+            addContentPackProvider(new ChefContent());
+        }
 
         public void Start()
         {
             ItemDisplays.RegisterDisplays(chefPrefab);
         }
 
+        public void RegisterLanguageTokens()
+        {
+            LanguageAPI.Add("CHEF_NAME", "CHEF");
+            LanguageAPI.Add("CHEF_SUBTITLE", "The Cook");
+
+            string chefDesc = "CHEF is a cooking robot capable of serving generous helpings to even the largest crowds.<style=cSub>";
+            chefDesc += "\n\n< ! > Cleavers can hit customers on the way back.";
+            chefDesc += "\n\n< ! > Use Glaze to get around the kitchen quickly and to avoid bumping into customers";
+            chefDesc += "\n\n< ! > Combine Glaze and Sear to efficiently cook large batches.";
+            chefDesc += "\n\n< ! > Serve different skills with Second Helping to suit your customers' tastes.</style>";
+
+            //Don't need these since they're already shown as keywords.
+            /*chefDesc += "\n\n<style=cIsDamage>Boosted Dice</style>: Throw cleavers in all directions.";
+            chefDesc += "\n<style=cIsDamage>Boosted Sear</style>: Glazed customers burst into fireballs.";
+            chefDesc += "\n<style=cIsDamage>Boosted Glaze</style>: Leave a longer trail of oil.";
+            chefDesc += "\n<style=cIsDamage>Boosted Slice</style>: Stab many times.";*/
+
+            LanguageAPI.Add("CHEF_DESCRIPTION", chefDesc);
+            LanguageAPI.Add("CHEF_OUTRO_FLAVOR", "...and so it left, rock hard.");
+            LanguageAPI.Add("CHEF_OUTRO_FAILURE", "...and so it vanished, blue balled.");
+
+            LanguageAPI.Add("KEYWORD_CHEF_BOOST_DICE", "<style=cKeywordName>Mince</style><style=cSub>Throw 16 cleavers in a sphere for <style=cIsDamage>16x150% damage</style>.</style>");
+            //LanguageAPI.Add("KEYWORD_CHEF_BOOST_SEAR", "<style=cKeywordName>Flambe</style><style=cSub>Ricochet explosive grease balls on impact.</style>");
+            LanguageAPI.Add("KEYWORD_CHEF_BOOST_SEAR", "<style=cKeywordName>Blaze</style><style=cSub>Blaze customers for <style=cIsDamage>420%</style> on high. Glazed customers take double damage and burst into flames for <style=cIsDamage>5x260% damage</style>.</style>");
+            LanguageAPI.Add("KEYWORD_CHEF_BOOST_GLAZE", "<style=cKeywordName>Marinate</style><style=cSub>Leave a longer trail of oil.</style>");
+            LanguageAPI.Add("KEYWORD_CHEF_BOOST_SLICE", "<style=cKeywordName>Julienne</style><style=cSub>Stab many times.</style>");
+
+            LanguageAPI.Add("CHEF_PRIMARY_NAME", "Dice");
+            LanguageAPI.Add("CHEF_PRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Throw a cleaver towards customers for <style=cIsDamage>150% damage</style>. Boomerangs back.");
+            LanguageAPI.Add("CHEF_BOOSTED_PRIMARY_NAME", "Mince");
+            LanguageAPI.Add("CHEF_BOOSTED_PRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Throw 16 cleavers in a sphere for <style=cIsDamage>16x150% damage</style>. Boomerangs back.");
+            
+            
+            LanguageAPI.Add("CHEF_SECONDARY_NAME", "Sear");
+            //LanguageAPI.Add("CHEF_SECONDARY_DESCRIPTION", "Cook customers for <style=cIsDamage>500% damage</style> or until golden brown.");
+            LanguageAPI.Add("CHEF_SECONDARY_DESCRIPTION", "<style=cIsDamage>Sear</style> customers for <style=cIsDamage>260% damage</style> until golden brown, <style=cIsDamage>knocking them away</style>." +
+                " Damage is <style=cIsDamage>doubled</style> against <style=cIsUtility>Glazed</style> customers.");
+            //LanguageAPI.Add("CHEF_BOOSTED_SECONDARY_NAME", "Flambe");
+            //LanguageAPI.Add("CHEF_BOOSTED_SECONDARY_DESCRIPTION", "Ricochet explosive grease balls on impact.");
+            LanguageAPI.Add("CHEF_BOOSTED_SECONDARY_NAME", "Blaze");
+            LanguageAPI.Add("CHEF_BOOSTED_SECONDARY_DESCRIPTION", "<style=cIsDamage>Blaze</style> customers for <style=cIsDamage>420%</style> on high." +
+                " <style=cIsUtility>Glazed</style> customers take <style=cIsDamage>double</style> damage and burst into flames for <style=cIsDamage>5x260% damage</style>.");
+
+
+            LanguageAPI.Add("CHEF_UTILITY_NAME", "Glaze");
+            LanguageAPI.Add("CHEF_UTILITY_DESCRIPTION", "Leave a trail of oil, <style=cIsUtility>slowing customers</style>."// Oil can be <style=cIsDamage>ignited</style>.
+                + " <style=cIsUtility>Glazed</style> customers explode for <style=cIsDamage>78% damage</style> when <style=cIsDamage>Seared</style>.");
+
+            LanguageAPI.Add("CHEF_BOOSTED_UTILITY_NAME", "Marinate");
+            LanguageAPI.Add("CHEF_BOOSTED_UTILITY_DESCRIPTION", "Leave a long trail of oil, <style=cIsUtility>slowing customers</style>."
+                + " <style=cIsUtility>Glazed</style> customers explode for <style=cIsDamage>78% damage</style> when <style=cIsDamage>Seared</style>.");
+
+            LanguageAPI.Add("CHEF_SPECIAL_NAME", "Second Helping");
+            LanguageAPI.Add("CHEF_SPECIAL_DESCRIPTION", "Prepare a big healthy meal, <style=cIsUtility>boosting the next ability cast</style>.");
+
+            LanguageAPI.Add("CHEF_SPECIAL_SCEPTER_NAME", "Full Course Meal");
+            LanguageAPI.Add("CHEF_SPECIAL_SCEPTER_DESCRIPTION", "Prepare a master meal, <style=cIsUtility>boosting the next 2 ability casts</style>.");
+
+            LanguageAPI.Add("CHEF_ALT_SPECIAL_NAME", "Buffet");
+            LanguageAPI.Add("CHEF_ALT_SPECIAL_DESCRIPTION", "Remove secondary cooldown for yourself and nearby allies");
+
+            //WiP alts
+            LanguageAPI.Add("CHEF_ALTPRIMARY_NAME", "Slice");
+            LanguageAPI.Add("CHEF_ALTPRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Stab a customer for <style=cIsDamage>100% damage</style>. <style=cIsHealth>BROKEN IN MULTIPLAYER</style>");
+            LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_NAME", "Julienne");
+            LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Stab a customer <style=cIsDamage>many times</style>.");
+            LanguageAPI.Add("CHEF_ALTSECONDARY_NAME", "Sautee");
+            LanguageAPI.Add("CHEF_ALTSECONDARY_DESCRIPTION", "Launch small enemies in the air, dealing 500% damage on landing and igniting nearby enemies. Agile");
+            LanguageAPI.Add("CHEF_BOOSTED_ALTSECONDARY_NAME", "Fry");
+            LanguageAPI.Add("CHEF_BOOSTED_ALTSECONDARY_DESCRIPTION", "fcking obliterate");
+        }
+
+        public void ReadConfig()
+        {
+            charUnlock = base.Config.Bind<bool>(new ConfigDefinition("01 - General Settings", "Auto Unlock"), false, new ConfigDescription("Automatically unlocks Chef", null, Array.Empty<object>()));
+            //altSkill = base.Config.Bind<bool>(new ConfigDefinition("01 - General Settings", "Alt Skills"), false, new ConfigDescription("Enables the previous alternate skills. They aren't networked or good so only set to true if you're chicken fried freak", null, Array.Empty<object>()));
+
+            //classicMince = base.Config.Bind<bool>(new ConfigDefinition("11 - Mince (Boosted Dice)", "Classic Mince"), true, new ConfigDescription("Makes Mince throw Cleavers in a sphere around you. Disabling this makes Cleavers auto target or something.", null, Array.Empty<object>()));
+            //minceVerticalIntensity = base.Config.Bind<int>(new ConfigDefinition("11 - Mince (Boosted Dice)", "Mince Vertical Density"), 2, new ConfigDescription("Affects the amount of Cleavers from Classic Mince.", null, Array.Empty<object>()));
+            //minceHorizontolIntensity = base.Config.Bind<float>(new ConfigDefinition("11 - Mince (Boosted Dice)", "Mince Horizontal Density"), 1, new ConfigDescription("same as above", null, Array.Empty<object>()));
+            //Mince.verticalIntensity = minceVerticalIntensity.Value;
+            //Mince.horizontalIntensity = minceHorizontolIntensity.Value;
+
+            Mince.verticalIntensity = 2;
+            Mince.horizontalIntensity = 1f;
+
+            //oilProc = base.Config.Bind<float>(new ConfigDefinition("30 - Glaze", "Oil Proc Coefficient"), 0.2f, new ConfigDescription("Proc coefficient of burning oil.", null, Array.Empty<object>()));
+            //Fireee.procCoefficient = oilProc.Value;
+            Fireee.procCoefficient = 0.2f;
+        }
+
         public void Awake()
         {
-            
-            charUnlock = base.Config.Bind<bool>(new ConfigDefinition("01 - General Settings", "Auto Unlock"), false, new ConfigDescription("Automatically unlocks Chef", null, Array.Empty<object>()));
-            altSkill = base.Config.Bind<bool>(new ConfigDefinition("01 - General Settings", "Alt Skills"), false, new ConfigDescription("Enables the previous alternate skills. They aren't networked or good so only set to true if you're chicken fried freak", null, Array.Empty<object>()));
-
-            classicMince = base.Config.Bind<bool>(new ConfigDefinition("11 - Mince (Boosted Dice)", "Classic Mince"), true, new ConfigDescription("Makes Mince throw Cleavers in a sphere around you. Disabling this makes Cleavers auto target or something.", null, Array.Empty<object>()));
-            minceVerticalIntensity = base.Config.Bind<int>(new ConfigDefinition("11 - Mince (Boosted Dice)", "Mince Vertical Density"), 2, new ConfigDescription("Affects the amount of Cleavers from Classic Mince.", null, Array.Empty<object>()));
-            minceHorizontolIntensity = base.Config.Bind<float>(new ConfigDefinition("11 - Mince (Boosted Dice)", "Mince Horizontal Density"), 1, new ConfigDescription("same as above", null, Array.Empty<object>()));
-            
-            oilProc = base.Config.Bind<float>(new ConfigDefinition("30 - Glaze", "Oil Proc Coefficient"), 0.2f, new ConfigDescription("Proc coefficient of burning oil.", null, Array.Empty<object>()));
-
+            ReadConfig();
+            AddHooks();
             Unlockables.RegisterUnlockables();
             registerCharacter();
             registerSkills();
             registerProjectiles();
             registerBuff();
+            RegisterLanguageTokens();
             AddLore();
+            BuildEffects();
+
+            chefSear = ReserveDamageType();
+            chefFireballOnHit = ReserveDamageType();
 
             On.RoR2.GlobalEventManager.OnTeamLevelUp += (orig, team) =>
             {
@@ -104,15 +203,22 @@ namespace ChefMod
             ContentManager.collectContentPackProviders += ContentManager_collectContentPackProviders;
         }
 
+        public void AddHooks()
+        {
+            On.RoR2.HealthComponent.TakeDamage += TakeDamage.HealthComponent_TakeDamage;
+            On.RoR2.GlobalEventManager.OnHitAll += OnHitAll.HitAll;
+            On.RoR2.CharacterBody.Update += CharacterBody_Update.Update;
+        }
+
+        public void BuildEffects()
+        {
+            BuildOilChainExplosionEffect();
+        }
+
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void SetupScepter()
         {
             AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(mealScepterDef, chefPrefab.name, SkillSlot.Special, 0);
-        }
-
-        private void ContentManager_collectContentPackProviders(ContentManager.AddContentPackProviderDelegate addContentPackProvider)
-        {
-            addContentPackProvider(new ChefContent());
         }
 
         private void registerBuff()
@@ -239,9 +345,6 @@ namespace ChefMod
             characterBody.bodyColor = chefColor;
             characterBody.bodyFlags = CharacterBody.BodyFlags.ImmuneToExecutes | CharacterBody.BodyFlags.Mechanical;
 
-            LanguageAPI.Add("CHEF_NAME", "CHEF");
-            LanguageAPI.Add("CHEF_SUBTITLE", "The Cook");
-
             characterBody.preferredPodPrefab = Resources.Load<GameObject>("Prefabs/CharacterBodies/toolbotbody").GetComponent<CharacterBody>().preferredPodPrefab;
 
             EntityStateMachine stateMachine = characterBody.GetComponent<EntityStateMachine>();
@@ -259,28 +362,6 @@ namespace ChefMod
             survivorDef.unlockableDef = Unlockables.chefUnlockDef;
 
             ChefContent.survivorDefs.Add(survivorDef);
-
-            string chefDesc = "CHEF is a cooking robot capable of serving generous helpings to even the largest crowds.<style=cSub>";
-            chefDesc += "\n\n< ! > Cleavers can hit customers on the way back.";
-            chefDesc += "\n\n< ! > Use Glaze to get around the kitchen quickly and to avoid bumping into customers";
-            chefDesc += "\n\n< ! > Combine Glaze and Sear to efficiently cook large batches.";
-            chefDesc += "\n\n< ! > Serve different skills with Second Helping to suit your customers' tastes.</style>";
-
-            //Don't need these since they're already shown as keywords.
-            /*chefDesc += "\n\n<style=cIsDamage>Boosted Dice</style>: Throw cleavers in all directions.";
-            chefDesc += "\n<style=cIsDamage>Boosted Sear</style>: Glazed customers burst into fireballs.";
-            chefDesc += "\n<style=cIsDamage>Boosted Glaze</style>: Leave a longer trail of oil.";
-            chefDesc += "\n<style=cIsDamage>Boosted Slice</style>: Stab many times.";*/
-
-            LanguageAPI.Add("CHEF_DESCRIPTION", chefDesc);
-            LanguageAPI.Add("CHEF_OUTRO_FLAVOR", "...and so it left, rock hard.");
-            LanguageAPI.Add("CHEF_OUTRO_FAILURE", "...and so it vanished, blue balled.");
-
-            LanguageAPI.Add("KEYWORD_CHEF_BOOST_DICE", "<style=cKeywordName>Mince</style><style=cSub>Throw cleavers in all directions.</style>");
-            LanguageAPI.Add("KEYWORD_CHEF_BOOST_SEAR", "<style=cKeywordName>Flambe</style><style=cSub>Ricochet explosive grease balls on impact.</style>");
-            LanguageAPI.Add("KEYWORD_CHEF_BOOST_GLAZE", "<style=cKeywordName>Marinate</style><style=cSub>Leave a longer trail of oil.</style>");
-            LanguageAPI.Add("KEYWORD_CHEF_BOOST_SLICE", "<style=cKeywordName>Julienne</style><style=cSub>Stab many times.</style>");
-
             BuildChefAI();
         }
 
@@ -293,8 +374,14 @@ namespace ChefMod
             ChefContent.entityStates.Add(typeof(Slice));
             ChefContent.entityStates.Add(typeof(Julienne));
 
-            ChefContent.entityStates.Add(typeof(Sear));
+            ChefContent.entityStates.Add(typeof(SearOld));
             ChefContent.entityStates.Add(typeof(Flambe));
+
+            ChefContent.entityStates.Add(typeof(PrepSear));
+            ChefContent.entityStates.Add(typeof(FireSear));
+
+            ChefContent.entityStates.Add(typeof(PrepBlaze));
+            ChefContent.entityStates.Add(typeof(FireBlaze));
 
             ChefContent.entityStates.Add(typeof(Fry));
             ChefContent.entityStates.Add(typeof(Roast));
@@ -315,7 +402,7 @@ namespace ChefMod
             primaryDef.baseRechargeInterval = 0f;
             primaryDef.beginSkillCooldownOnSkillEnd = false;
             primaryDef.canceledFromSprinting = false;
-            primaryDef.fullRestockOnAssign = false;
+            primaryDef.fullRestockOnAssign = true;
             primaryDef.interruptPriority = InterruptPriority.Any;
             primaryDef.isCombatSkill = true;
             primaryDef.mustKeyPress = false;
@@ -328,13 +415,12 @@ namespace ChefMod
             primaryDef.skillName = "Primary";
             primaryDef.skillNameToken = "CHEF_PRIMARY_NAME";
             primaryDef.keywordTokens = new string[] { "KEYWORD_AGILE", "KEYWORD_CHEF_BOOST_DICE" };
-            LanguageAPI.Add("CHEF_PRIMARY_NAME", "Dice");
-            LanguageAPI.Add("CHEF_PRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Throw a cleaver towards customers for <style=cIsDamage>150% damage</style>. Boomerangs back.");
             ChefContent.skillDefs.Add(primaryDef);
 
             boostedPrimaryDef = ScriptableObject.CreateInstance<SkillDef>();
-            boostedPrimaryDef.activationState = new SerializableEntityStateType(typeof(MinceHoming));
-            if (classicMince.Value) boostedPrimaryDef.activationState = new SerializableEntityStateType(typeof(Mince));
+            //boostedPrimaryDef.activationState = new SerializableEntityStateType(typeof(MinceHoming));
+            //if (classicMince.Value) boostedPrimaryDef.activationState = new SerializableEntityStateType(typeof(Mince));
+            boostedPrimaryDef.activationState = new SerializableEntityStateType(typeof(Mince));
             boostedPrimaryDef.activationStateMachineName = "Weapon";
             boostedPrimaryDef.baseMaxStock = 1;
             boostedPrimaryDef.baseRechargeInterval = 0f;
@@ -353,9 +439,6 @@ namespace ChefMod
             boostedPrimaryDef.skillName = "BoostedPrimary";
             boostedPrimaryDef.skillNameToken = "CHEF_BOOSTED_PRIMARY_NAME";
             boostedPrimaryDef.keywordTokens = new string[] { "KEYWORD_AGILE" };
-
-            LanguageAPI.Add("CHEF_BOOSTED_PRIMARY_NAME", "Mince");
-            LanguageAPI.Add("CHEF_BOOSTED_PRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Throw cleavers in <style=cIsDamage>all directions</style>.");
             ChefContent.skillDefs.Add(boostedPrimaryDef);
 
             altPrimaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -365,7 +448,7 @@ namespace ChefMod
             altPrimaryDef.baseRechargeInterval = 0f;
             altPrimaryDef.beginSkillCooldownOnSkillEnd = false;
             altPrimaryDef.canceledFromSprinting = false;
-            altPrimaryDef.fullRestockOnAssign = false;
+            altPrimaryDef.fullRestockOnAssign = true;
             altPrimaryDef.interruptPriority = InterruptPriority.Any;
             altPrimaryDef.isCombatSkill = true;
             altPrimaryDef.mustKeyPress = false;
@@ -378,8 +461,6 @@ namespace ChefMod
             altPrimaryDef.skillName = "Primary";
             altPrimaryDef.skillNameToken = "CHEF_ALTPRIMARY_NAME";
             altPrimaryDef.keywordTokens = new string[] { "KEYWORD_AGILE","KEYWORD_CHEF_BOOST_SLICE" };
-            LanguageAPI.Add("CHEF_ALTPRIMARY_NAME", "Slice");
-            LanguageAPI.Add("CHEF_ALTPRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Stab a customer for <style=cIsDamage>100% damage</style>. <style=cIsHealth>BROKEN IN MULTIPLAYER</style>");
             ChefContent.skillDefs.Add(altPrimaryDef);
 
             boostedAltPrimaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -401,13 +482,10 @@ namespace ChefMod
             boostedAltPrimaryDef.skillDescriptionToken = "CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION";
             boostedAltPrimaryDef.skillName = "BoostedPrimary";
             boostedAltPrimaryDef.skillNameToken = "CHEF_BOOSTED_ALTPRIMARY_NAME";
-
-            LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_NAME", "Julienne");
-            LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Stab a customer <style=cIsDamage>many times</style>.");
             ChefContent.skillDefs.Add(boostedAltPrimaryDef);
 
             secondaryDef = ScriptableObject.CreateInstance<SkillDef>();
-            secondaryDef.activationState = new SerializableEntityStateType(typeof(Sear));
+            secondaryDef.activationState = new SerializableEntityStateType(typeof(PrepSear));
             secondaryDef.activationStateMachineName = "Weapon";
             secondaryDef.baseMaxStock = 1;
             secondaryDef.baseRechargeInterval = 4f;
@@ -426,19 +504,16 @@ namespace ChefMod
             secondaryDef.skillName = "Secondary";
             secondaryDef.skillNameToken = "CHEF_SECONDARY_NAME";
             secondaryDef.keywordTokens = new string[] { "KEYWORD_CHEF_BOOST_SEAR" };
-
-            LanguageAPI.Add("CHEF_SECONDARY_NAME", "Sear");
-            LanguageAPI.Add("CHEF_SECONDARY_DESCRIPTION", "Cook customers for <style=cIsDamage>500% damage</style> or until golden brown.");
             ChefContent.skillDefs.Add(secondaryDef);
 
             boostedSecondaryDef = ScriptableObject.CreateInstance<SkillDef>();
-            boostedSecondaryDef.activationState = new SerializableEntityStateType(typeof(Flambe));
+            boostedSecondaryDef.activationState = new SerializableEntityStateType(typeof(PrepBlaze));
             boostedSecondaryDef.activationStateMachineName = "Weapon";
             boostedSecondaryDef.baseMaxStock = 1;
             boostedSecondaryDef.baseRechargeInterval = secondaryDef.baseRechargeInterval;
             boostedSecondaryDef.beginSkillCooldownOnSkillEnd = true;
             boostedSecondaryDef.canceledFromSprinting = false;
-            boostedSecondaryDef.fullRestockOnAssign = true;
+            boostedSecondaryDef.fullRestockOnAssign = false;
             boostedSecondaryDef.interruptPriority = InterruptPriority.Skill;
             boostedSecondaryDef.isCombatSkill = true;
             boostedSecondaryDef.mustKeyPress = false;
@@ -450,9 +525,6 @@ namespace ChefMod
             boostedSecondaryDef.skillDescriptionToken = "CHEF_BOOSTED_SECONDARY_DESCRIPTION";
             boostedSecondaryDef.skillName = "BoostedSecondary";
             boostedSecondaryDef.skillNameToken = "CHEF_BOOSTED_SECONDARY_NAME";
-
-            LanguageAPI.Add("CHEF_BOOSTED_SECONDARY_NAME", "Flambe");
-            LanguageAPI.Add("CHEF_BOOSTED_SECONDARY_DESCRIPTION", "Ricochet explosive grease balls on impact.");
             ChefContent.skillDefs.Add(boostedSecondaryDef);
 
             altSecondaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -474,9 +546,6 @@ namespace ChefMod
             altSecondaryDef.skillDescriptionToken = "CHEF_ALTSECONDARY_DESCRIPTION";
             altSecondaryDef.skillName = "AltSecondary";
             altSecondaryDef.skillNameToken = "CHEF_ALTSECONDARY_NAME";
-
-            LanguageAPI.Add("CHEF_ALTSECONDARY_NAME", "Sautee");
-            LanguageAPI.Add("CHEF_ALTSECONDARY_DESCRIPTION", "Launch small enemies in the air, dealing 500% damage on landing and igniting nearby enemies. Agile");
             ChefContent.skillDefs.Add(altSecondaryDef);
 
             boostedAltSecondaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -486,7 +555,7 @@ namespace ChefMod
             boostedAltSecondaryDef.baseRechargeInterval = altSecondaryDef.baseRechargeInterval;
             boostedAltSecondaryDef.beginSkillCooldownOnSkillEnd = true;
             boostedAltSecondaryDef.canceledFromSprinting = false;
-            boostedAltSecondaryDef.fullRestockOnAssign = true;
+            boostedAltSecondaryDef.fullRestockOnAssign = false;
             boostedAltSecondaryDef.interruptPriority = InterruptPriority.Skill;
             boostedAltSecondaryDef.isCombatSkill = true;
             boostedAltSecondaryDef.mustKeyPress = false;
@@ -498,9 +567,6 @@ namespace ChefMod
             boostedAltSecondaryDef.skillDescriptionToken = "CHEF_BOOSTED_ALTSECONDARY_DESCRIPTION";
             boostedAltSecondaryDef.skillName = "BoostedAltSecondary";
             boostedAltSecondaryDef.skillNameToken = "CHEF_BOOSTED_ALTSECONDARY_NAME";
-
-            LanguageAPI.Add("CHEF_BOOSTED_ALTSECONDARY_NAME", "Fry");
-            LanguageAPI.Add("CHEF_BOOSTED_ALTSECONDARY_DESCRIPTION", "fcking obliterate");
             ChefContent.skillDefs.Add(boostedAltSecondaryDef);
 
             utilityDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -523,9 +589,6 @@ namespace ChefMod
             utilityDef.skillName = "Utility";
             utilityDef.skillNameToken = "CHEF_UTILITY_NAME";
             utilityDef.keywordTokens = new string[] { "KEYWORD_CHEF_BOOST_GLAZE" };
-
-            LanguageAPI.Add("CHEF_UTILITY_NAME", "Glaze");
-            LanguageAPI.Add("CHEF_UTILITY_DESCRIPTION", "Leave a trail of oil, <style=cIsUtility>slowing customers</style>. Oil can be <style=cIsDamage>ignited</style>.");
             ChefContent.skillDefs.Add(utilityDef);
 
             boostedUtilityDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -535,7 +598,7 @@ namespace ChefMod
             boostedUtilityDef.baseRechargeInterval = utilityDef.baseRechargeInterval;
             boostedUtilityDef.beginSkillCooldownOnSkillEnd = true;
             boostedUtilityDef.canceledFromSprinting = false;
-            boostedUtilityDef.fullRestockOnAssign = true;
+            boostedUtilityDef.fullRestockOnAssign = false;
             boostedUtilityDef.interruptPriority = InterruptPriority.Skill;
             boostedUtilityDef.isCombatSkill = false;
             boostedUtilityDef.mustKeyPress = false;
@@ -547,9 +610,6 @@ namespace ChefMod
             boostedUtilityDef.skillDescriptionToken = "CHEF_BOOSTED_UTILITY_DESCRIPTION";
             boostedUtilityDef.skillName = "boostedUtilityDef";
             boostedUtilityDef.skillNameToken = "CHEF_BOOSTED_UTILITY_NAME";
-
-            LanguageAPI.Add("CHEF_BOOSTED_UTILITY_NAME", "Marinate");
-            LanguageAPI.Add("CHEF_BOOSTED_UTILITY_DESCRIPTION", "Leave a long trail of oil, <style=cIsUtility>slowing customers</style>. Oil can be <style=cIsDamage>ignited</style>.");
             ChefContent.skillDefs.Add(boostedUtilityDef);
 
             
@@ -561,7 +621,7 @@ namespace ChefMod
             specialDef.baseRechargeInterval = 12f;
             specialDef.beginSkillCooldownOnSkillEnd = true;
             specialDef.canceledFromSprinting = false;
-            specialDef.fullRestockOnAssign = false;
+            specialDef.fullRestockOnAssign = true;
             specialDef.interruptPriority = InterruptPriority.Any;
             specialDef.isCombatSkill = false;
             specialDef.mustKeyPress = false;
@@ -573,9 +633,6 @@ namespace ChefMod
             specialDef.skillDescriptionToken = "CHEF_SPECIAL_DESCRIPTION";
             specialDef.skillName = "Special";
             specialDef.skillNameToken = "CHEF_SPECIAL_NAME";
-
-            LanguageAPI.Add("CHEF_SPECIAL_NAME", "Second Helping");
-            LanguageAPI.Add("CHEF_SPECIAL_DESCRIPTION", "Prepare a big healthy meal, <style=cIsUtility>boosting the next ability cast</style>.");
             ChefContent.skillDefs.Add(specialDef);
 
             var specialScepterDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -585,7 +642,7 @@ namespace ChefMod
             specialScepterDef.baseRechargeInterval = specialDef.baseRechargeInterval;
             specialScepterDef.beginSkillCooldownOnSkillEnd = true;
             specialScepterDef.canceledFromSprinting = false;
-            specialScepterDef.fullRestockOnAssign = false;
+            specialScepterDef.fullRestockOnAssign = true;
             specialScepterDef.interruptPriority = InterruptPriority.Any;
             specialScepterDef.isCombatSkill = false;
             specialScepterDef.mustKeyPress = false;
@@ -597,9 +654,6 @@ namespace ChefMod
             specialScepterDef.skillDescriptionToken = "CHEF_SPECIAL_SCEPTER_DESCRIPTION";
             specialScepterDef.skillName = "SpecialScepter";
             specialScepterDef.skillNameToken = "CHEF_SPECIAL_SCEPTER_NAME";
-
-            LanguageAPI.Add("CHEF_SPECIAL_SCEPTER_NAME", "Full Course Meal");
-            LanguageAPI.Add("CHEF_SPECIAL_SCEPTER_DESCRIPTION", "Prepare a master meal, <style=cIsUtility>boosting the next 2 ability casts</style>.");
             ChefContent.skillDefs.Add(specialScepterDef);
             mealScepterDef = specialScepterDef;
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter"))
@@ -626,9 +680,6 @@ namespace ChefMod
             altSpecialDef.skillDescriptionToken = "CHEF_ALT_SPECIAL_DESCRIPTION";
             altSpecialDef.skillName = "AltSpecial";
             altSpecialDef.skillNameToken = "CHEF_ALT_SPECIAL_NAME";
-
-            LanguageAPI.Add("CHEF_ALT_SPECIAL_NAME", "Buffet");
-            LanguageAPI.Add("CHEF_ALT_SPECIAL_DESCRIPTION", "Remove secondary cooldown for yourself and nearby allies");
             ChefContent.skillDefs.Add(altSpecialDef);
 
             SkillLocator skillLocator = chefPrefab.GetComponent<SkillLocator>();
@@ -655,7 +706,7 @@ namespace ChefMod
                 viewableNode = new ViewablesCatalog.Node(secondaryDef.skillNameToken, false, null)
             };
 
-            if (altSkill.Value)
+            if (false && altSkill.Value)
             {
                 Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
                 skillFamily.variants[1] = new SkillFamily.Variant
@@ -679,7 +730,7 @@ namespace ChefMod
                 viewableNode = new ViewablesCatalog.Node(specialDef.skillNameToken, false, null)
             };
 
-            if (altSkill.Value)
+            if (false && altSkill.Value)
             {
                 Array.Resize(ref skillFamily.variants, skillFamily.variants.Length + 1);
                 skillFamily.variants[1] = new SkillFamily.Variant
@@ -744,6 +795,9 @@ namespace ChefMod
             HitBox hit = cleaverPrefab.GetComponentInChildren<HitBox>();
             hit.transform.localScale = new Vector3(hit.transform.localScale.x, 0.69f, hit.transform.localScale.z);
 
+            cleaverPrefab.transform.localScale = 7f * Vector3.one;
+            cleaverGhost.transform.localScale = cleaverPrefab.transform.localScale;
+
             ProjectileController projcont = cleaverPrefab.GetComponent<ProjectileController>(); 
             projcont.procCoefficient = 1f;
             projcont.allowPrediction = false;
@@ -751,7 +805,7 @@ namespace ChefMod
             projcont.ghostPrefab = cleaverGhost;
             ProjectileOverlapAttack poa = cleaverPrefab.GetComponent<ProjectileOverlapAttack>();
             poa.impactEffect = effect;
-            poa.resetInterval = 0.5f;
+            poa.resetInterval = 60f;
             poa.damageCoefficient = 1f;
 
             Destroy(cleaverPrefab.GetComponent<ProjectileDotZone>());
@@ -921,12 +975,6 @@ namespace ChefMod
                 orig(self, damageInfo, victim);
             };
 
-            On.RoR2.CharacterBody.Update += (orig, self) =>
-            {
-                if (self.baseNameToken == "OilBeetle") return;
-                orig(self);
-            };
-
             //var ups = segfab.GetComponent<ParticleSystem>();
             //var man = ups.main;
             //man.loop = true;
@@ -994,12 +1042,31 @@ namespace ChefMod
             //drippingPrefab.AddComponent<LightOnImpact>();
             drippingPrefab.AddComponent<EsplodeOnImpact>();
 
+            OilExplosion.boostedSearProjectilePrefab = Resources.Load<GameObject>("Prefabs/Projectiles/MagmaOrbProjectile").InstantiateClone("BoostedSearProjectile", true);
+            ProjectileDamage bspd = OilExplosion.boostedSearProjectilePrefab.GetComponent<ProjectileDamage>();
+            bspd.damageType = DamageType.Stun1s | DamageType.IgniteOnHit;
+            ModdedDamageTypeHolderComponent mdthc = OilExplosion.boostedSearProjectilePrefab.AddComponent<ModdedDamageTypeHolderComponent>();
+            mdthc.Add(chefSear);
+            mdthc.Add(chefFireballOnHit);
+            ProjectileImpactExplosion bspie = OilExplosion.boostedSearProjectilePrefab.GetComponent<ProjectileImpactExplosion>();
+            bspie.blastProcCoefficient = 0.4f;
+
+            ChefContent.projectilePrefabs.Add(OilExplosion.boostedSearProjectilePrefab);
             ChefContent.projectilePrefabs.Add(cleaverPrefab);
             ChefContent.projectilePrefabs.Add(knifePrefab);
             ChefContent.projectilePrefabs.Add(oilPrefab);
             ChefContent.projectilePrefabs.Add(foirballPrefab);
             ChefContent.projectilePrefabs.Add(flamballPrefab);
             ChefContent.projectilePrefabs.Add(drippingPrefab);
+        }
+
+        private void BuildOilChainExplosionEffect()
+        {
+            OilExplosion.explosionEffectPrefab = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfx"), "ChefOilChainExplosion", false);
+            EffectComponent ec = OilExplosion.explosionEffectPrefab.GetComponent<EffectComponent>();
+            ec.soundName = "Play_engi_M2_explo";
+            ec.applyScale = true;
+            ChefContent.effectDefs.Add(new EffectDef(OilExplosion.explosionEffectPrefab));
         }
 
         private void AddLore()

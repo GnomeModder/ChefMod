@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿using R2API;
+using RoR2;
 using RoR2.Projectile;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,10 @@ namespace ChefMod
         private float radius = 10;
         public static float oilTime = 30f;
         public static float burnTime = 10f;
+        public static float procCoefficient = 0.2f;
+
+        private float flameStopwatch = 0f;
+        public static float flameTickRate = 0.5f;
 
         private GameObject oilPrefab;
         private GameObject firePrefab;
@@ -32,13 +37,13 @@ namespace ChefMod
         [SyncVar]
         private float igniteTime;
 
-        private int framecounter = 0;
         private Rigidbody rig;
 
         private static List<HurtBox> hurtBoxBuffer = new List<HurtBox>();
         private static SphereSearch sphereSearch = new SphereSearch();
         public static GameObject ExplosionEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/ImpactEffects/IgniteExplosionVFX");
         private static GameObject FireMaybe = Resources.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXQuick");
+        private CharacterBody characterBody;
 
         void Start()
         {
@@ -79,6 +84,11 @@ namespace ChefMod
             this.damagePerFrame = projDamg.damage;
             this.crit = projDamg.crit;
 
+            if (owner)
+            {
+                characterBody = owner.GetComponent<CharacterBody>();
+            }
+
             //ground = body.characterMotor.isGrounded;
 
             //checkforhomies();
@@ -114,11 +124,12 @@ namespace ChefMod
                 Destroy(body.gameObject);
             }
 
-            if (framecounter % 30 == 0)
+            flameStopwatch += Time.fixedDeltaTime;
+            if (flameStopwatch > flameTickRate)
             {
+                flameStopwatch -= flameTickRate;
                 doSomething();
             }
-            framecounter++;
         }
 
         private GameObject goku(String asset)
@@ -170,7 +181,7 @@ namespace ChefMod
         {
             if (!NetworkServer.active) return;
             Vector3 corePosition = body.corePosition;
-            sphereSearch.origin = corePosition;
+            /*sphereSearch.origin = corePosition;
             sphereSearch.mask = LayerIndex.entityPrecise.mask;
             sphereSearch.radius = radius;
             sphereSearch.RefreshCandidates();
@@ -184,16 +195,17 @@ namespace ChefMod
                 HurtBox hurtBox = hurtBoxBuffer[i];
                 if (hurtBox.healthComponent)
                 {
-                    DotController.InflictDot(hurtBox.healthComponent.gameObject, owner, DotController.DotIndex.Burn, 1.5f + 1.5f, 0.5f);
+                    DotController.InflictDot(hurtBox.healthComponent.gameObject, owner, DotController.DotIndex.Burn);
                 }
             }
-            hurtBoxBuffer.Clear();
+            hurtBoxBuffer.Clear();*/
             EffectManager.SpawnEffect(ExplosionEffectPrefab, new EffectData
             {
                 origin = corePosition,
                 scale = radius,
                 rotation = Util.QuaternionSafeLookRotation(Vector3.up)
             }, true);
+            //OilExplosion.Explode(characterBody, null, this.crit, body.corePosition);
         }
 
         private void doSomething()
@@ -227,7 +239,7 @@ namespace ChefMod
                                 {
                                     if (onFire)
                                     {
-                                        healthComponent.TakeDamage(new RoR2.DamageInfo
+                                        DamageInfo di = new RoR2.DamageInfo
                                         {
                                             position = healthComponent.body.corePosition,
                                             attacker = this.owner,
@@ -237,12 +249,26 @@ namespace ChefMod
                                             damageColorIndex = RoR2.DamageColorIndex.Default,
                                             damageType = RoR2.DamageType.Generic,
                                             force = Vector3.zero,
-                                            procCoefficient = chefPlugin.oilProc.Value
-                                        }) ;
+                                            procCoefficient = Fireee.procCoefficient
+                                        };
+                                        di.AddModdedDamageType(chefPlugin.chefSear);
+                                        healthComponent.TakeDamage(di);
+                                        if (!healthComponent.body.HasBuff(RoR2Content.Buffs.OnFire))
+                                        {
+                                            DotController.InflictDot(healthComponent.gameObject, owner, DotController.DotIndex.Burn);
+                                        }
+                                        if (healthComponent.body.HasBuff(RoR2Content.Buffs.ClayGoo))
+                                        {
+                                            OilExplosion.Explode(characterBody, healthComponent.body, this.crit, false);
+                                        }
                                     }
                                     else
                                     {
-                                        if (!healthComponent.body.HasBuff(RoR2Content.Buffs.ClayGoo))
+                                        if (healthComponent.body.HasBuff(RoR2Content.Buffs.OnFire) || healthComponent.body.HasBuff(RoR2Content.Buffs.AffixRed))
+                                        {
+                                            ignate();
+                                        }
+                                        else if (!healthComponent.body.HasBuff(RoR2Content.Buffs.ClayGoo))
                                         {
                                             healthComponent.body.AddTimedBuff(RoR2Content.Buffs.ClayGoo, 5f);
                                         }

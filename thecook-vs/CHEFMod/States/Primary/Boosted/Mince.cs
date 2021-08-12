@@ -15,7 +15,9 @@ namespace EntityStates.Chef
         private float duration;
         private bool hasThrown;
 
-        private int intensity = chefPlugin.minceVerticalIntensity.Value;
+        public static int verticalIntensity;
+        public static float horizontalIntensity;
+
         public override void OnEnter() {
             base.OnEnter();
             duration = baseDuration / base.attackSpeedStat;
@@ -46,11 +48,11 @@ namespace EntityStates.Chef
                     fuseOverride = -1f
                 };
 
-                for (int i = -1 * intensity; i <= intensity; i++) {
+                for (int i = -1 * verticalIntensity; i <= verticalIntensity; i++) {
                     float phi = 0;
-                    if (intensity != 0) phi = i * (1f / (2f * intensity)) * Mathf.PI;
+                    if (verticalIntensity != 0) phi = i * (1f / (2f * verticalIntensity)) * Mathf.PI;
                     float r = Mathf.Cos(phi);
-                    int circum = Mathf.Max(1, Mathf.FloorToInt(chefPlugin.minceHorizontolIntensity.Value * Mathf.PI * 2 * r));
+                    int circum = Mathf.Max(1, Mathf.FloorToInt(horizontalIntensity * Mathf.PI * 2 * r));
                     for (int j = 0; j < circum; j++) {
                         float theta = 2 * Mathf.PI * ((float)j / (float)circum);
                         Vector3 direction = new Vector3(r * Mathf.Cos(theta), Mathf.Sin(phi), r * Mathf.Sin(theta));

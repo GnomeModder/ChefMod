@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using R2API;
 using RoR2;
 using RoR2.Projectile;
 using UnityEngine;
@@ -9,10 +10,12 @@ namespace ChefMod
     public class EsplodeOnImpact : MonoBehaviour, RoR2.Projectile.IProjectileImpactBehavior
     {
         private bool impacted = false;
-        private float radius = 10;
+        private float radius = 6;
         private DamageInfo damageInfo;
         private TeamIndex teamIndex;
         private Vector3 position;
+        ProjectileDamage damage;
+        private GameObject owner;
 
         private static List<HurtBox> hurtBoxBuffer = new List<HurtBox>();
         private static SphereSearch sphereSearch = new SphereSearch();
@@ -21,7 +24,8 @@ namespace ChefMod
         void Start()
         {
             ProjectileController controller = GetComponent<ProjectileController>();
-            ProjectileDamage damage = GetComponent<ProjectileDamage>();
+            owner = controller.owner;
+            damage = GetComponent<ProjectileDamage>();
             damageInfo = new DamageInfo
             {
                 attacker = controller.owner,
@@ -62,16 +66,10 @@ namespace ChefMod
                 HurtBox hurtBox = hurtBoxBuffer[i];
                 if (hurtBox.healthComponent)
                 {
-                    DotController.InflictDot(hurtBox.healthComponent.gameObject, damageInfo.attacker, DotController.DotIndex.Burn, 1.5f + 1.5f, 0.5f);
+                    DotController.InflictDot(hurtBox.healthComponent.gameObject, damageInfo.attacker, DotController.DotIndex.Burn);
                 }
             }
             hurtBoxBuffer.Clear();
-            EffectManager.SpawnEffect(ExplosionEffectPrefab, new EffectData
-            {
-                origin = corePosition,
-                scale = radius,
-                rotation = Util.QuaternionSafeLookRotation(Vector3.up)
-            }, true);
         }
     }
 }

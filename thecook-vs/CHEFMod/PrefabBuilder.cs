@@ -504,8 +504,9 @@ public class PrefabBuilder
     {
         if (bodyObject)
         {
-            BodyCatalog.getAdditionalEntries += list => list.Add(bodyObject);
-            Debug.Log("Registered body " + bodyObject.name + " to the body catalog!");
+            //BodyCatalog.getAdditionalEntries += list => list.Add(bodyObject);
+            //Debug.Log("Registered body " + bodyObject.name + " to the body catalog!");
+            ChefContent.bodyPrefabs.Add(bodyObject);
             return true;
         }
         Debug.LogError("FATAL ERROR:" + bodyObject.name + " failed to register to the body catalog!");

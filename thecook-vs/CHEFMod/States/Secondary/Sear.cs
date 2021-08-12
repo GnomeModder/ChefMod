@@ -1,65 +1,136 @@
-﻿using System;
-using ChefMod;
-using EntityStates;
+﻿using ChefMod;
+using R2API;
 using RoR2;
-using RoR2.Projectile;
+using System;
+using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 namespace EntityStates.Chef
 {
-    class Sear : BaseSkillState
+    public class PrepSear : BaseState
     {
-        public float damageCoefficient = 5;
-        public float maxDistance = 25f;
-        public float baseDuration = 1f;
-        public float throwTime = 0.25f;
-
-        private float duration;
-        private bool hasThrown;
-        public override void OnEnter() {
+        public override void OnEnter()
+        {
             base.OnEnter();
-            duration = baseDuration / base.attackSpeedStat;
-
-            base.PlayAnimation("Fullbody, Override", "Secondary", "Secondary.playbackRate", duration);
-            base.PlayAnimation("Gesture, Override", "Secondary", "Secondary.playbackRate", duration);
-
-            base.StartAimMode(2f, false);
-        }
-
-        private void Throw() {
-            if (base.isAuthority) {
-                Ray aimRay = base.GetAimRay();
-
-                FireProjectileInfo info = new FireProjectileInfo() {
-                    projectilePrefab = chefPlugin.foirballPrefab,
-                    position = aimRay.origin + 1.5f * aimRay.direction,
-                    rotation = Util.QuaternionSafeLookRotation(aimRay.direction) * Quaternion.FromToRotation(Vector3.left, Vector3.up),
-                    owner = base.gameObject,
-                    damage = base.characterBody.damage * 5f,
-                    force = 50f,
-                    crit = base.RollCrit(),
-                    damageColorIndex = DamageColorIndex.Default,
-                    target = null,
-                    speedOverride = 100f,
-                    fuseOverride = -1f
-                };
-
-                ProjectileManager.instance.FireProjectile(info);
-
-                Util.PlaySound("DIng", base.gameObject);
-                Util.PlaySound("Fireball", base.gameObject);
+            this.duration = PrepSear.baseDuration / this.attackSpeedStat;
+            Util.PlaySound(PrepSear.prepSoundString, base.gameObject);
+            base.PlayAnimation("Fullbody, Override", "Secondary", "Secondary.playbackRate", duration * 4f);
+            base.PlayAnimation("Gesture, Override", "Secondary", "Secondary.playbackRate", duration * 4f);
+            if (base.characterBody)
+            {
+                base.characterBody.SetAimTimer(2f);
             }
+
+            this.defaultCrosshairPrefab = base.characterBody.crosshairPrefab;
+            base.characterBody.crosshairPrefab = PrepSear.specialCrosshairPrefab;
         }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-
-            if (fixedAge > duration * throwTime && !hasThrown) {
-                hasThrown = true;
-                Throw();
+            if (base.fixedAge >= this.duration && base.isAuthority)
+            {
+                NextState();
+                return;
             }
+        }
 
+        public virtual void NextState()
+        {
+            this.outer.SetNextState(new FireSear());
+        }
+
+        public override void OnExit()
+        {
+            base.characterBody.crosshairPrefab = this.defaultCrosshairPrefab;
+            base.OnExit();
+        }
+
+        public override InterruptPriority GetMinimumInterruptPriority()
+        {
+            return InterruptPriority.PrioritySkill;
+        }
+
+        public static float baseDuration = 0.5f;
+        public static string prepSoundString = "DIng";
+        public static GameObject specialCrosshairPrefab = Resources.Load<GameObject>("prefabs/crosshair/banditcrosshairrevolver");
+        private GameObject defaultCrosshairPrefab;
+        private float duration;
+        private Animator modelAnimator;
+        public bool specialBoosted = false;
+    }
+
+    public class FireSear : BaseState
+    {
+        public override void OnEnter()
+        {
+            base.OnEnter();
+
+            this.duration = FireSear.baseDuration / this.attackSpeedStat;
+            base.AddRecoil(-3f * FireSear.recoilAmplitude, -4f * FireSear.recoilAmplitude, -0.5f * FireSear.recoilAmplitude, 0.5f * FireSear.recoilAmplitude);
+            Util.PlaySound(FireSear.attackSoundString, base.gameObject);
+
+            if (!flamethrowerEffectPrefab)
+            {
+                Mage.Weapon.Flamethrower flameEffect = new Mage.Weapon.Flamethrower();
+                flamethrowerEffectPrefab = flameEffect.flamethrowerEffectPrefab;
+            }
+            this.childLocator = base.GetModelChildLocator();
+            if (this.childLocator)
+            {
+                Transform transform2 = this.childLocator.FindChild("Body");
+                if (transform2)
+                {
+                    this.flamethrowerTransform = UnityEngine.Object.Instantiate<GameObject>(flamethrowerEffectPrefab, transform2).transform;
+                    if (this.flamethrowerTransform)
+                    {
+                        this.flamethrowerTransform.localPosition += flameEffectOffset;
+                        this.flamethrowerTransform.localScale = 0.07f * Vector3.one;
+                        this.flamethrowerTransform.GetComponent<ScaleParticleSystemDuration>().newDuration = duration;
+                    }
+                }
+            }
+            if (base.isAuthority)
+            {
+                Ray aimRay = base.GetAimRay();
+                base.StartAimMode(aimRay, 2f, false);
+                BulletAttack ba = new BulletAttack
+                {
+                    owner = base.gameObject,
+                    weapon = base.gameObject,
+                    origin = aimRay.origin,
+                    aimVector = aimRay.direction,
+                    minSpread = 0f,
+                    maxSpread = 0f,
+                    bulletCount = 1,
+                    damage = FireSear.damageCoefficient * this.damageStat,
+                    damageType = DamageType.IgniteOnHit | DamageType.Stun1s,
+                    procCoefficient = FireSear.procCoefficient,
+                    force = FireSear.force,
+                    falloffModel = BulletAttack.FalloffModel.None,
+                    hitEffectPrefab = FireSear.hitEffectPrefab,
+                    tracerEffectPrefab = null,
+                    isCrit = base.RollCrit(),
+                    radius = 2f,
+                    smartCollision = true,
+                    maxDistance = 48f,
+                    stopperMask = LayerIndex.world.mask
+                };
+                ModifyBullet(ba);
+                ba.Fire();
+            }
+        }
+
+        public virtual void ModifyBullet(BulletAttack ba)
+        {
+            ba.AddModdedDamageType(chefPlugin.chefSear);
+        }
+
+        public override void FixedUpdate()
+        {
+            base.FixedUpdate();
+            UpdateFlamethrowerEffect();
             if (base.fixedAge >= this.duration && base.isAuthority)
             {
                 this.outer.SetNextStateToMain();
@@ -69,15 +140,39 @@ namespace EntityStates.Chef
 
         public override void OnExit()
         {
+            if (this.flamethrowerTransform)
+            {
+                EntityState.Destroy(this.flamethrowerTransform.gameObject);
+            }
             base.OnExit();
+        }
+
+        private void UpdateFlamethrowerEffect()
+        {
+            if (this.flamethrowerTransform)
+            {
+                this.flamethrowerTransform.forward = base.GetAimRay().direction;
+            }
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            if (hasThrown)
-                return InterruptPriority.Any;
-
             return InterruptPriority.PrioritySkill;
         }
+        public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/missileexplosionvfx");
+        public static float damageCoefficient = 2.6f;
+        public static float force = 2500f;
+        public static int bulletCount;
+        public static float baseDuration = 0.5f;
+        public static string attackSoundString = "Fireball";
+        public static float recoilAmplitude = 1f;
+        private float duration;
+
+        public static float procCoefficient = 1f;
+
+        private static Vector3 flameEffectOffset = new Vector3(0f, 0.012f, 0.015f);
+        public static GameObject flamethrowerEffectPrefab = null;
+        private Transform flamethrowerTransform;
+        private ChildLocator childLocator;
     }
 }
