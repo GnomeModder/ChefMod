@@ -19,6 +19,8 @@ namespace ChefMod
 	{
 		public static event Action CleaverCreated;
 
+		private bool resetTargets = false;
+
 		// Token: 0x060025A2 RID: 9634 RVA: 0x0009C7B0 File Offset: 0x0009A9B0
 		private void Awake()
 		{
@@ -76,6 +78,14 @@ namespace ChefMod
 			if (unityEvent != null)
 			{
 				unityEvent.Invoke();
+			}
+			if (impactInfo.collider)
+            {
+				HurtBox hb = impactInfo.collider.GetComponent<HurtBox>();
+				if (hb && hb.healthComponent && hb.healthComponent.body && hb.healthComponent.body.baseNameToken == "OilBeetle")
+                {
+					return;
+                }
 			}
 			EffectManager.SimpleImpactEffect(this.impactSpark, impactInfo.estimatedPointOfImpact, -base.transform.forward, true);
 
@@ -161,11 +171,14 @@ namespace ChefMod
 						break;
 					case CoomerangProjectile.CoomerangState.Transition:
 						{
-							ProjectileOverlapAttack poa = base.gameObject.GetComponent<ProjectileOverlapAttack>();
-							if (poa)
-                            {
-								poa.ResetOverlapAttack();
-                            }
+							if (!resetTargets)
+							{
+								ProjectileOverlapAttack poa = base.gameObject.GetComponent<ProjectileOverlapAttack>();
+								if (poa)
+								{
+									poa.ResetOverlapAttack();
+								}
+							}
 							this.stopwatch += Time.fixedDeltaTime;
 							float num = this.stopwatch / this.transitionDuration;
 							Vector3 a = this.CalculatePullDirection();

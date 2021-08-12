@@ -491,7 +491,7 @@ namespace ChefMod
             secondaryDef.baseRechargeInterval = 4f;
             secondaryDef.beginSkillCooldownOnSkillEnd = true;
             secondaryDef.canceledFromSprinting = false;
-            secondaryDef.fullRestockOnAssign = false;
+            secondaryDef.fullRestockOnAssign = true;
             secondaryDef.interruptPriority = InterruptPriority.Skill;
             secondaryDef.isCombatSkill = true;
             secondaryDef.mustKeyPress = false;
@@ -513,7 +513,7 @@ namespace ChefMod
             boostedSecondaryDef.baseRechargeInterval = secondaryDef.baseRechargeInterval;
             boostedSecondaryDef.beginSkillCooldownOnSkillEnd = true;
             boostedSecondaryDef.canceledFromSprinting = false;
-            boostedSecondaryDef.fullRestockOnAssign = false;
+            boostedSecondaryDef.fullRestockOnAssign = true;
             boostedSecondaryDef.interruptPriority = InterruptPriority.Skill;
             boostedSecondaryDef.isCombatSkill = true;
             boostedSecondaryDef.mustKeyPress = false;
@@ -534,7 +534,7 @@ namespace ChefMod
             altSecondaryDef.baseRechargeInterval = 4f;
             altSecondaryDef.beginSkillCooldownOnSkillEnd = true;
             altSecondaryDef.canceledFromSprinting = false;
-            altSecondaryDef.fullRestockOnAssign = false;
+            altSecondaryDef.fullRestockOnAssign = true;
             altSecondaryDef.interruptPriority = InterruptPriority.Skill;
             altSecondaryDef.isCombatSkill = true;
             altSecondaryDef.mustKeyPress = true;
@@ -555,7 +555,7 @@ namespace ChefMod
             boostedAltSecondaryDef.baseRechargeInterval = altSecondaryDef.baseRechargeInterval;
             boostedAltSecondaryDef.beginSkillCooldownOnSkillEnd = true;
             boostedAltSecondaryDef.canceledFromSprinting = false;
-            boostedAltSecondaryDef.fullRestockOnAssign = false;
+            boostedAltSecondaryDef.fullRestockOnAssign = true;
             boostedAltSecondaryDef.interruptPriority = InterruptPriority.Skill;
             boostedAltSecondaryDef.isCombatSkill = true;
             boostedAltSecondaryDef.mustKeyPress = false;
@@ -576,7 +576,7 @@ namespace ChefMod
             utilityDef.baseRechargeInterval = 7f;
             utilityDef.beginSkillCooldownOnSkillEnd = true;
             utilityDef.canceledFromSprinting = false;
-            utilityDef.fullRestockOnAssign = false;
+            utilityDef.fullRestockOnAssign = true;
             utilityDef.interruptPriority = InterruptPriority.Skill;
             utilityDef.isCombatSkill = false;
             utilityDef.mustKeyPress = false;
@@ -598,7 +598,7 @@ namespace ChefMod
             boostedUtilityDef.baseRechargeInterval = utilityDef.baseRechargeInterval;
             boostedUtilityDef.beginSkillCooldownOnSkillEnd = true;
             boostedUtilityDef.canceledFromSprinting = false;
-            boostedUtilityDef.fullRestockOnAssign = false;
+            boostedUtilityDef.fullRestockOnAssign = true;
             boostedUtilityDef.interruptPriority = InterruptPriority.Skill;
             boostedUtilityDef.isCombatSkill = false;
             boostedUtilityDef.mustKeyPress = false;

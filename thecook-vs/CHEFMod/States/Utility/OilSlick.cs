@@ -116,7 +116,7 @@ namespace EntityStates.Chef
 						position = characterBody.corePosition,
 						rotation = Quaternion.identity,
 						owner = base.gameObject,
-						damage = characterBody.damage * 0.25f,
+						damage = characterBody.damage * 0.2f,
 						crit = base.RollCrit()
 					};
 

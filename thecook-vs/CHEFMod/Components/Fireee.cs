@@ -264,7 +264,7 @@ namespace ChefMod
                                     }
                                     else
                                     {
-                                        if (healthComponent.body.HasBuff(RoR2Content.Buffs.OnFire) || healthComponent.body.HasBuff(RoR2Content.Buffs.AffixRed))
+                                        if (healthComponent.body.HasBuff(RoR2Content.Buffs.OnFire))// || healthComponent.body.HasBuff(RoR2Content.Buffs.AffixRed)
                                         {
                                             ignate();
                                         }
