@@ -173,6 +173,7 @@ namespace ChefMod
 						{
 							if (!resetTargets)
 							{
+								resetTargets = true;
 								ProjectileOverlapAttack poa = base.gameObject.GetComponent<ProjectileOverlapAttack>();
 								if (poa)
 								{

@@ -21,9 +21,6 @@ namespace EntityStates.Chef
             {
                 base.characterBody.SetAimTimer(2f);
             }
-
-            this.defaultCrosshairPrefab = base.characterBody.crosshairPrefab;
-            base.characterBody.crosshairPrefab = PrepSear.specialCrosshairPrefab;
         }
 
         public override void FixedUpdate()
@@ -43,7 +40,6 @@ namespace EntityStates.Chef
 
         public override void OnExit()
         {
-            base.characterBody.crosshairPrefab = this.defaultCrosshairPrefab;
             base.OnExit();
         }
 
@@ -54,8 +50,6 @@ namespace EntityStates.Chef
 
         public static float baseDuration = 0.5f;
         public static string prepSoundString = "DIng";
-        public static GameObject specialCrosshairPrefab = Resources.Load<GameObject>("prefabs/crosshair/banditcrosshairrevolver");
-        private GameObject defaultCrosshairPrefab;
         private float duration;
         public bool specialBoosted = false;
     }
