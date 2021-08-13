@@ -30,7 +30,8 @@ namespace ChefMod.Hooks
                     {
                         if (rb.mass > 100f)
                         {
-                            damageInfo.force *= isBoostSear ? rb.mass / 100f: Mathf.Min(rb.mass / 100f, 10f);
+                            //damageInfo.force *= isBoostSear ? rb.mass / 100f: Mathf.Min(rb.mass / 100f, 10f);
+                            damageInfo.force *= rb.mass / 100f;
                         }
                         else
                         {

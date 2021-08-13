@@ -46,6 +46,8 @@ namespace ChefMod
         private static GameObject FireMaybe = Resources.Load<GameObject>("Prefabs/Effects/OmniEffect/OmniExplosionVFXQuick");
         private CharacterBody characterBody;
 
+        public bool boosted = false;
+
         void Start()
         {
             startTime = Time.fixedTime;
@@ -254,6 +256,10 @@ namespace ChefMod
                                             procChainMask = default(ProcChainMask)
                                         };
                                         di.AddModdedDamageType(chefPlugin.chefSear);
+                                        if (boosted)
+                                        {
+                                            di.AddModdedDamageType(chefPlugin.chefFireballOnHit);
+                                        }
                                         NetworkingHelpers.DealDamage(di, component, true, true, false);
                                         if (!healthComponent.body.HasBuff(RoR2Content.Buffs.OnFire))
                                         {
@@ -299,6 +305,10 @@ namespace ChefMod
                             Fireee fire = healthComponent.body.GetComponent<Fireee>();
                             if (fire)
                             {
+                                if (boosted)
+                                {
+                                    fire.boosted = true;
+                                }
                                 fire.ignate();
                             }
                         }

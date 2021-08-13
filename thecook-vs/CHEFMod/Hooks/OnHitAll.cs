@@ -28,6 +28,10 @@ namespace ChefMod.Hooks
                                 Fireee fire = healthComponent.body.GetComponent<Fireee>();
                                 if (fire)
                                 {
+                                    if (damageInfo.HasModdedDamageType(chefPlugin.chefFireballOnHit))
+                                    {
+                                        fire.boosted = true;
+                                    }
                                     fire.ignate();
                                 }
                             }

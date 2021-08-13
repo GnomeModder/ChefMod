@@ -26,43 +26,43 @@ namespace ChefMod
                 }
                 victimBody.ClearTimedBuffs(RoR2Content.Buffs.ClayGoo);
                 //Debug.Log("Triggering chain explosion with radius " + 10f * Mathf.Max(1f, victimBody.radius));
-            }
 
-            float radius = 10f * Mathf.Max(1f, victimBody ? victimBody.radius : 1f) * (boosted ? 1.5f : 1f);
+                float radius = 10f * Mathf.Max(1f, victimBody ? victimBody.radius : 1f) * (boosted ? 1.5f : 1f);
 
-            if (boosted)
-            {
-                Vector3 normalized = Vector3.ProjectOnPlane(Vector3.forward, Vector3.up).normalized;
-                Vector3 point = Vector3.RotateTowards(Vector3.up, normalized, 15f * 0.017453292f, float.PositiveInfinity);
-                float num = 360f / (float)boostedFireballCount;
-                for (int i = 0; i < boostedFireballCount; i++)
+                if (boosted)
                 {
-                    Vector3 forward2 = Quaternion.AngleAxis(num * (float)i, Vector3.up) * point;
-                    ProjectileManager.instance.FireProjectile(chefPlugin.drippingPrefab, position + 5f * Vector3.up, Util.QuaternionSafeLookRotation(forward2),
-                        attackerBody.gameObject, attackerBody.damage * 2.6f, 0f, crit, DamageColorIndex.Default, null, -1f);
+                    Vector3 normalized = Vector3.ProjectOnPlane(Vector3.forward, Vector3.up).normalized;
+                    Vector3 point = Vector3.RotateTowards(Vector3.up, normalized, 15f * 0.017453292f, float.PositiveInfinity);
+                    float num = 360f / (float)boostedFireballCount;
+                    for (int i = 0; i < boostedFireballCount; i++)
+                    {
+                        Vector3 forward2 = Quaternion.AngleAxis(num * (float)i, Vector3.up) * point;
+                        ProjectileManager.instance.FireProjectile(chefPlugin.drippingPrefab, position + 5f * Vector3.up, Util.QuaternionSafeLookRotation(forward2),
+                            attackerBody.gameObject, attackerBody.damage * 2.6f, 0f, crit, DamageColorIndex.Default, null, -1f);
+                    }
                 }
+
+                new BlastAttack
+                {
+                    radius = radius,
+                    procCoefficient = 0.4f,
+                    position = position,
+                    attacker = attackerBody.gameObject,
+                    crit = crit,
+                    baseDamage = attackerBody.damage * 0.78f,
+                    falloffModel = BlastAttack.FalloffModel.None,
+                    baseForce = 0f,
+                    teamIndex = attackerBody.teamComponent.teamIndex,
+                    damageType = DamageType.Stun1s | DamageType.IgniteOnHit,
+                    attackerFiltering = AttackerFiltering.NeverHit
+                }.Fire();
+
+                EffectManager.SpawnEffect(explosionEffectPrefab, new EffectData
+                {
+                    origin = position,
+                    scale = 12f
+                }, true);
             }
-
-            new BlastAttack
-            {
-                radius = radius,
-                procCoefficient = 0.4f,
-                position = position,
-                attacker = attackerBody.gameObject,
-                crit = crit,
-                baseDamage = attackerBody.damage * 0.78f,
-                falloffModel = BlastAttack.FalloffModel.None,
-                baseForce = 0f,
-                teamIndex = attackerBody.teamComponent.teamIndex,
-                damageType = DamageType.Stun1s | DamageType.IgniteOnHit,
-                attackerFiltering = AttackerFiltering.NeverHit
-            }.Fire();
-
-            EffectManager.SpawnEffect(explosionEffectPrefab, new EffectData
-            {
-                origin = position,
-                scale = 12f
-            }, true);
         }
 
         public static int boostedFireballCount = 6;
