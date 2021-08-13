@@ -10,7 +10,7 @@ namespace EntityStates.Chef
     {
         public override void NextState()
         {
-            this.outer.SetNextState(new Meal());
+            this.outer.SetNextState(new Meal() { playSound = false });
         }
     }
 }

@@ -6,10 +6,11 @@
 
   <ItemGroup>
     <None Remove="Properties\chef" />
+    <None Remove="Resources\ChefSounds.bnk" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Properties\chef" />
+    <EmbeddedResource Include="Resources\ChefSounds.bnk" />
   </ItemGroup>
 
   <ItemGroup>

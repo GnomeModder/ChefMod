@@ -79,14 +79,14 @@ namespace ChefMod
 			{
 				unityEvent.Invoke();
 			}
-			if (impactInfo.collider)
+			/*if (impactInfo.collider)
             {
 				HurtBox hb = impactInfo.collider.GetComponent<HurtBox>();
 				if (hb && hb.healthComponent && hb.healthComponent.body && hb.healthComponent.body.baseNameToken == "OilBeetle")
                 {
 					return;
                 }
-			}
+			}*/
 			EffectManager.SimpleImpactEffect(this.impactSpark, impactInfo.estimatedPointOfImpact, -base.transform.forward, true);
 
 			/*if (target) this.gameObject.layer = LayerIndex.noCollision.intVal;

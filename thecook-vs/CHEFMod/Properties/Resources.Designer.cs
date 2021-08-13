@@ -73,9 +73,9 @@ namespace ChefMod.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] ChefSoundBank {
+        internal static byte[] ChefSounds {
             get {
-                object obj = ResourceManager.GetObject("ChefSoundBank", resourceCulture);
+                object obj = ResourceManager.GetObject("ChefSounds", resourceCulture);
                 return ((byte[])(obj));
             }
         }

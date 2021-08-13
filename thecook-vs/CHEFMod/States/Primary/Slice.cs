@@ -80,7 +80,7 @@ namespace EntityStates.Chef
 
                 ProjectileManager.instance.FireProjectile(info);
 
-                Util.PlaySound("CleaverThrow", base.gameObject);
+                Util.PlaySound("Play_ChefMod_Cleaver_Throw", base.gameObject);
             }
         }
 

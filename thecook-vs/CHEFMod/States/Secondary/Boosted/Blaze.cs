@@ -18,6 +18,11 @@ namespace EntityStates.Chef
     public class FireBlaze : FireSear
     {
         public static new float damageCoefficient = 4.2f;
+
+        public override void PlaySound()
+        {
+            Util.PlaySound("Play_Chefmod_Sear2", base.gameObject);
+        }
         public override void ModifyBullet(BulletAttack ba)
         {
             ba.damage = base.damageStat * FireBlaze.damageCoefficient;

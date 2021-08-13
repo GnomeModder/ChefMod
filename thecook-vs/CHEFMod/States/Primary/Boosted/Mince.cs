@@ -64,7 +64,7 @@ namespace EntityStates.Chef
                 }
             }
 
-            Util.PlaySound("CleaverThrow", base.gameObject);
+            Util.PlaySound("Play_ChefMod_Cleaver_Throw", base.gameObject);
         }
 
         public override void FixedUpdate() 

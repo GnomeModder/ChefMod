@@ -49,20 +49,26 @@ namespace EntityStates.Chef
         }
 
         public static float baseDuration = 0.5f;
-        public static string prepSoundString = "DIng";
+        public static string prepSoundString = "Play_ChefMod_Ding";
         private float duration;
         public bool specialBoosted = false;
     }
 
     public class FireSear : BaseState
     {
+        public virtual void PlaySound()
+        {
+            Util.PlaySound("Play_Chefmod_Sear", base.gameObject);
+        }
+
         public override void OnEnter()
         {
             base.OnEnter();
 
             this.duration = FireSear.baseDuration / this.attackSpeedStat;
             base.AddRecoil(-3f * FireSear.recoilAmplitude, -4f * FireSear.recoilAmplitude, -0.5f * FireSear.recoilAmplitude, 0.5f * FireSear.recoilAmplitude);
-            Util.PlaySound(FireSear.attackSoundString, base.gameObject);
+
+            PlaySound();
 
             if (!flamethrowerEffectPrefab)
             {
@@ -157,7 +163,6 @@ namespace EntityStates.Chef
         public static float force = 2400f;
         public static int bulletCount;
         public static float baseDuration = 0.5f;
-        public static string attackSoundString = "Fireball";
         public static float recoilAmplitude = 1f;
         private float duration;
 

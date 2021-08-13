@@ -7,7 +7,7 @@ namespace ChefMod
 {
     public static class Assets
     {
-        public static AssetBundle chefAssetBundle = LoadAssetBundle(ChefMod.Properties.Resources.chef);
+        public static AssetBundle chefAssetBundle = LoadAssetBundle(Properties.Resources.chef);
 
         public static Texture chefIcon = chefAssetBundle.LoadAsset<Texture>("cheficon");
         public static Sprite chefIconSprite = chefAssetBundle.LoadAsset<Sprite>("unlockicon");
@@ -31,7 +31,7 @@ namespace ChefMod
         public static Material matChefDefault = CreateMaterial("matChefDefault");
         public static Material matChefDefaultKnife = CreateMaterial("matChefDefaultKnife");
 
-        public static UInt32 unloadingID = LoadSoundBank(ChefMod.Properties.Resources.ChefSoundBank);
+        public static UInt32 unloadingID = LoadSoundBank(ChefMod.Properties.Resources.ChefSounds);
 
         private static Material commandoMat;
 

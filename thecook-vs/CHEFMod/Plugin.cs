@@ -769,10 +769,10 @@ namespace ChefMod
 
             cleaverPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/Sawmerang").InstantiateClone("CHEFCleaver", true);
 
-            GameObject effect = Resources.Load<GameObject>("Prefabs/Effects/OmniEffect/omniimpactvfx").InstantiateClone("CleaverFX", true);
-            effect.AddComponent<NetworkIdentity>();
-            effect.GetComponent<EffectComponent>().soundName = "CleaverHit";
-            ChefContent.effectDefs.Add(new EffectDef(effect));
+            GameObject cleaverImpactEffect = Resources.Load<GameObject>("Prefabs/Effects/OmniEffect/omniimpactvfx").InstantiateClone("CleaverFX", true);
+            cleaverImpactEffect.AddComponent<NetworkIdentity>();
+            cleaverImpactEffect.GetComponent<EffectComponent>().soundName = "Play_ChefMod_Cleaver_Hit";
+            ChefContent.effectDefs.Add(new EffectDef(cleaverImpactEffect));
 
             var lr = cleaverPrefab.AddComponent<LineRenderer>();
             lr.textureMode = LineTextureMode.Tile;
@@ -785,7 +785,7 @@ namespace ChefMod
 
             BoomerangProjectile boo = cleaverPrefab.GetComponent<BoomerangProjectile>();
             CoomerangProjectile cum = cleaverPrefab.AddComponent<CoomerangProjectile>();
-            cum.impactSpark = effect;
+            cum.impactSpark = cleaverImpactEffect;
             cum.transitionDuration = boo.transitionDuration;
             cum.travelSpeed = boo.travelSpeed;
             cum.charge = boo.charge;
@@ -806,7 +806,7 @@ namespace ChefMod
 
             projcont.ghostPrefab = cleaverGhost;
             ProjectileOverlapAttack poa = cleaverPrefab.GetComponent<ProjectileOverlapAttack>();
-            poa.impactEffect = effect;
+            poa.impactEffect = cleaverImpactEffect;
             poa.resetInterval = 60f;
             poa.damageCoefficient = 1f;
 

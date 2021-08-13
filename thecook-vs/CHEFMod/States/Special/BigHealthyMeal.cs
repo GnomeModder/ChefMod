@@ -14,6 +14,8 @@ namespace EntityStates.Chef
 
         private SkillStatus primaryStatus, secondaryStatus, utilityStatus;
 
+        public bool playSound = true;
+
         private class SkillStatus
         {
             public int stock;
@@ -27,6 +29,10 @@ namespace EntityStates.Chef
 
         public override void OnEnter()
         {
+            if (playSound)
+            {
+                Util.PlaySound("Play_ChefMod_Special", base.gameObject);
+            }
             if (skillLocator.primary.baseSkill == chefPlugin.primaryDef)
             {
                 primaryStatus = new SkillStatus(skillLocator.primary.stock, skillLocator.primary.rechargeStopwatch);
