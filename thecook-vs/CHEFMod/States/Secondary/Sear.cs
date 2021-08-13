@@ -79,8 +79,8 @@ namespace EntityStates.Chef
                     if (this.flamethrowerTransform)
                     {
                         this.flamethrowerTransform.localPosition += flameEffectOffset;
-                        this.flamethrowerTransform.localScale = 0.07f * Vector3.one;
-                        this.flamethrowerTransform.GetComponent<ScaleParticleSystemDuration>().newDuration = duration;
+                        this.flamethrowerTransform.localScale = flameScale;
+                        this.flamethrowerTransform.GetComponent<ScaleParticleSystemDuration>().newDuration = duration*0.25f;
                     }
                 }
             }
@@ -163,6 +163,7 @@ namespace EntityStates.Chef
 
         public static float procCoefficient = 1f;
 
+        public static Vector3 flameScale = new Vector3(0.14f, 0.14f, 0.07f);
         private static Vector3 flameEffectOffset = new Vector3(0f, 0.012f, 0.015f);
         public static GameObject flamethrowerEffectPrefab = null;
         private Transform flamethrowerTransform;

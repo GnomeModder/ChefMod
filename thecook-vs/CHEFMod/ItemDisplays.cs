@@ -1231,7 +1231,7 @@ namespace ChefMod
                             followerPrefab = ItemDisplays.LoadDisplay("DisplayHippo"),
                             limbMask = LimbFlags.None,
                             childName = "Hat",
-                            localPos = new Vector3(0.00348F, 0.04706F, -0.01449F),
+                            localPos = new Vector3(0.00315F, 0.01512F, -0.00771F),
                             localAngles = new Vector3(0F, 0F, 0F),
                             localScale = new Vector3(0.0069F, 0.0069F, 0.0069F)
                         }
