@@ -4,6 +4,7 @@ using ChefMod.Hooks;
 using EntityStates;
 using EntityStates.Chef;
 using R2API;
+using R2API.Networking;
 using R2API.Utils;
 using RoR2;
 using RoR2.CharacterAI;
@@ -26,6 +27,7 @@ namespace ChefMod
     [R2APISubmoduleDependency("SoundAPI")]
     [R2APISubmoduleDependency("AssetAPI")]
     [R2APISubmoduleDependency("DamageAPI")]
+    [R2APISubmoduleDependency(nameof(NetworkingAPI))]
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin(
         "com.Gnome.ChefMod",
@@ -650,7 +652,7 @@ namespace ChefMod
             specialScepterDef.rechargeStock = 1;
             specialScepterDef.requiredStock = 1;
             specialScepterDef.stockToConsume = 1;
-            specialScepterDef.icon = Assets.chefBHMIcon;
+            specialScepterDef.icon = Assets.chefBHMScepterIcon;
             specialScepterDef.skillDescriptionToken = "CHEF_SPECIAL_SCEPTER_DESCRIPTION";
             specialScepterDef.skillName = "SpecialScepter";
             specialScepterDef.skillNameToken = "CHEF_SPECIAL_SCEPTER_NAME";

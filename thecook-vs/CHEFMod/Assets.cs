@@ -22,6 +22,7 @@ namespace ChefMod
         public static Sprite chefGlazeIcon = chefAssetBundle.LoadAsset<Sprite>("chef_utility");
         public static Sprite chefMarinateIcon = chefAssetBundle.LoadAsset<Sprite>("chef_utility_boosted");
         public static Sprite chefBHMIcon = chefAssetBundle.LoadAsset<Sprite>("chef_special");
+        public static Sprite chefBHMScepterIcon = chefAssetBundle.LoadAsset<Sprite>("chef_special_scepter");
         public static Sprite chefBuffetIcon = chefAssetBundle.LoadAsset<Sprite>("chef_alt_special");
         public static Material armmat = chefAssetBundle.LoadAsset<Material>("matArm");
 

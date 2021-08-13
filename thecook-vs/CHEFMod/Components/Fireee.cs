@@ -1,4 +1,5 @@
 ﻿using R2API;
+using R2API.Networking;
 using RoR2;
 using RoR2.Projectile;
 using System;
@@ -96,10 +97,17 @@ namespace ChefMod
 
         void FixedUpdate()
         {
-            if (!onFire && body.HasBuff(RoR2Content.Buffs.OnFire))
+            if (shouldDie())
+            {
+                Destroy(oilPrefab);
+                Destroy(firePrefab);
+                Destroy(body.gameObject);
+            }
+
+            /*if (!onFire && body.HasBuff(RoR2Content.Buffs.OnFire))
             {
                 ignate();
-            }
+            }*/
 
             if (!onFire && !ground && rig.velocity.magnitude < 1f)// && body.characterMotor.isGrounded)
             {
@@ -115,13 +123,6 @@ namespace ChefMod
                 oilPrefab = Instantiate(chefPlugin.oilfab, this.transform.position - Vector3.up, randy);
                 if (edging) ignate();
                 checkforhomies();
-            }
-
-            if (shouldDie())
-            {
-                Destroy(oilPrefab);
-                Destroy(firePrefab);
-                Destroy(body.gameObject);
             }
 
             flameStopwatch += Time.fixedDeltaTime;
@@ -239,20 +240,21 @@ namespace ChefMod
                                 {
                                     if (onFire)
                                     {
-                                        DamageInfo di = new RoR2.DamageInfo
+                                        DamageInfo di = new DamageInfo
                                         {
                                             position = healthComponent.body.corePosition,
                                             attacker = this.owner,
                                             inflictor = base.gameObject,
                                             crit = this.crit,
                                             damage = damage,
-                                            damageColorIndex = RoR2.DamageColorIndex.Default,
-                                            damageType = RoR2.DamageType.Generic,
+                                            damageColorIndex = DamageColorIndex.Default,
+                                            damageType = DamageType.Generic,
                                             force = Vector3.zero,
-                                            procCoefficient = Fireee.procCoefficient
+                                            procCoefficient = Fireee.procCoefficient,
+                                            procChainMask = default(ProcChainMask)
                                         };
                                         di.AddModdedDamageType(chefPlugin.chefSear);
-                                        healthComponent.TakeDamage(di);
+                                        NetworkingHelpers.DealDamage(di, component, true, true, false);
                                         if (!healthComponent.body.HasBuff(RoR2Content.Buffs.OnFire))
                                         {
                                             DotController.InflictDot(healthComponent.gameObject, owner, DotController.DotIndex.Burn);
@@ -264,11 +266,11 @@ namespace ChefMod
                                     }
                                     else
                                     {
-                                        if (healthComponent.body.HasBuff(RoR2Content.Buffs.OnFire))// || healthComponent.body.HasBuff(RoR2Content.Buffs.AffixRed)
+                                        /*if (healthComponent.body.HasBuff(RoR2Content.Buffs.OnFire))// || healthComponent.body.HasBuff(RoR2Content.Buffs.AffixRed)
                                         {
                                             ignate();
-                                        }
-                                        else if (!healthComponent.body.HasBuff(RoR2Content.Buffs.ClayGoo))
+                                        }*/
+                                        if (!healthComponent.body.HasBuff(RoR2Content.Buffs.ClayGoo))
                                         {
                                             healthComponent.body.AddTimedBuff(RoR2Content.Buffs.ClayGoo, 5f);
                                         }
@@ -282,7 +284,7 @@ namespace ChefMod
         }
         private void hitmyhomiesup()
         {
-            RaycastHit[] array = Physics.SphereCastAll(body.corePosition, 1.5f * radius, Vector3.up, 5f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
+            RaycastHit[] array = Physics.SphereCastAll(body.corePosition, 1.5f * radius, Vector3.up, 1.5f * radius, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
             for (int j = 0; j < array.Length; j++)
             {
                 Collider collider = array[j].collider;
