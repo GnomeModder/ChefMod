@@ -67,7 +67,7 @@ namespace ChefMod
 		}
 
 		// Token: 0x060025A4 RID: 9636 RVA: 0x0009C8CC File Offset: 0x0009AACC
-		public void OnProjectileImpact(ProjectileImpactInfo impactInfo)
+		public void OnProjectileImpact(ProjectileImpactInfo impactInfo) //this never triggers because the boomerang is set to never be solid
 		{
 			if (!this.canHitWorld || !NetworkServer.active)
 			{
@@ -82,12 +82,16 @@ namespace ChefMod
 			/*if (impactInfo.collider)
             {
 				HurtBox hb = impactInfo.collider.GetComponent<HurtBox>();
-				if (hb && hb.healthComponent && hb.healthComponent.body && hb.healthComponent.body.baseNameToken == "OilBeetle")
+				if (hb && hb.healthComponent)
                 {
+					if (!(hb.healthComponent.body && hb.healthComponent.body.baseNameToken == "OilBeetle"))
+					{
+						Debug.Log(hb.healthComponent.body.baseNameToken);
+						EffectManager.SimpleImpactEffect(this.impactSpark, impactInfo.estimatedPointOfImpact, -base.transform.forward, true);
+					}
 					return;
                 }
 			}*/
-			EffectManager.SimpleImpactEffect(this.impactSpark, impactInfo.estimatedPointOfImpact, -base.transform.forward, true);
 
 			/*if (target) this.gameObject.layer = LayerIndex.noCollision.intVal;
 			if (target && !hasfired && impactInfo.collider)

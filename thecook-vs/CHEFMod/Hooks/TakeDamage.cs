@@ -51,6 +51,10 @@ namespace ChefMod.Hooks
                     {
                         if (isSear)
                         {
+                            if (damageInfo.force.magnitude > 0f && damageInfo.procCoefficient == 1f)
+                            {
+                                EffectManager.SimpleImpactEffect(chefPlugin.searBonusEffect, damageInfo.position, Vector3.up, true);
+                            }
                             OilExplosion.Explode(attackerBody, self.body, damageInfo.crit, isBoostSear);
                         }
                     }

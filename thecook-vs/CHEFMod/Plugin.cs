@@ -46,6 +46,7 @@ namespace ChefMod
         public static GameObject foirballPrefab;
         public static GameObject flamballPrefab;
         public static GameObject drippingPrefab;
+        public static GameObject searBonusEffect;
 
         public static SkillDef primaryDef;
         public static SkillDef boostedPrimaryDef;
@@ -72,6 +73,8 @@ namespace ChefMod
         public static BuffDef foodBuff;
 
         public static Color chefColor = new Color(189f / 255f, 190f / 255f, 194f / 255f);
+
+        
 
         private void ContentManager_collectContentPackProviders(ContentManager.AddContentPackProviderDelegate addContentPackProvider)
         {
@@ -769,10 +772,13 @@ namespace ChefMod
 
             cleaverPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/Sawmerang").InstantiateClone("CHEFCleaver", true);
 
-            GameObject cleaverImpactEffect = Resources.Load<GameObject>("Prefabs/Effects/OmniEffect/omniimpactvfx").InstantiateClone("CleaverFX", true);
-            cleaverImpactEffect.AddComponent<NetworkIdentity>();
+            GameObject cleaverImpactEffect = Resources.Load<GameObject>("Prefabs/Effects/OmniEffect/omniimpactvfx").InstantiateClone("ChefCleaverImpactEffect", false);
             cleaverImpactEffect.GetComponent<EffectComponent>().soundName = "Play_ChefMod_Cleaver_Hit";
             ChefContent.effectDefs.Add(new EffectDef(cleaverImpactEffect));
+
+            searBonusEffect = Resources.Load<GameObject>("Prefabs/Effects/OmniEffect/omniimpactvfx").InstantiateClone("ChefSearBonusEffect", false);
+            searBonusEffect.GetComponent<EffectComponent>().soundName = "Play_bandit2_R_kill";
+            ChefContent.effectDefs.Add(new EffectDef(searBonusEffect));
 
             var lr = cleaverPrefab.AddComponent<LineRenderer>();
             lr.textureMode = LineTextureMode.Tile;
