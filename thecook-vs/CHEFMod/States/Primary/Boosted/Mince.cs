@@ -15,8 +15,8 @@ namespace EntityStates.Chef
         private float duration;
         private bool hasThrown;
 
-        public static int verticalIntensity;
-        public static float horizontalIntensity;
+        public static int verticalIntensity = 2;
+        public static float horizontalIntensity = 1f;
 
         public override void OnEnter() {
             base.OnEnter();

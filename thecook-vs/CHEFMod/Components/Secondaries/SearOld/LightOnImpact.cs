@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ChefMod.Components;
 using RoR2;
 using RoR2.Projectile;
 using UnityEngine;
@@ -33,10 +34,10 @@ namespace ChefMod
                         RoR2.HealthComponent healthComponent = component.healthComponent;
                         if (healthComponent)
                         {
-                            Fireee fire = healthComponent.body.GetComponent<Fireee>();
+                            OilController fire = healthComponent.body.GetComponent<OilController>();
                             if (fire)
                             {
-                                fire.ignate();
+                                fire.Ignite();
                             }
                         }
                     }

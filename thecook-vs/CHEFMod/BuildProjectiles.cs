@@ -11,7 +11,7 @@ using ThreeEyedGames;
 
 namespace ChefMod
 {
-    public static class BuildProjectiles
+    public class BuildProjectiles
     {
         public static void BuildCleaver()
         {
@@ -114,7 +114,7 @@ namespace ChefMod
             GameObject firefab = chumStain.GetComponentInChildren<AlignToNormal>().gameObject.InstantiateClone("ChefFire", false);
 
             DestroyOnTimer ffDT = firefab.AddComponent<DestroyOnTimer>();
-            ffDT.duration = Fireee.burnTime + 3f;
+            ffDT.duration = OilController.burnLifetime + 3f;
 
             UnityEngine.Object.Destroy(firefab.GetComponentInChildren<TeamAreaIndicator>().gameObject);
             var decal = firefab.GetComponentInChildren<Decal>();
@@ -172,48 +172,18 @@ namespace ChefMod
             UnityEngine.Object.Destroy(oilPrefab.GetComponent<CharacterEmoteDefinitions>());
             UnityEngine.Object.Destroy(oilPrefab.GetComponent<SfxLocator>());
 
-            oilPrefab.AddComponent<Fireee>();
+            OilController.firePrefab = firefab;
+            OilController.oilDecalPrefab = oilfab;
+            oilPrefab.AddComponent<OilController>();
             oilPrefab.AddComponent<ProjectileController>();
             oilPrefab.AddComponent<TeamFilter>();
             oilPrefab.AddComponent<ProjectileDamage>();
             DestroyOnTimer oilDT = oilPrefab.AddComponent<DestroyOnTimer>();
-            oilDT.duration = Fireee.oilTime + Fireee.burnTime + 3f;
+            oilDT.duration = OilController.damageInterval + OilController.burnLifetime + 3f;
 
-            On.RoR2.GlobalEventManager.OnTeamLevelUp += (orig, team) =>
-            {
-                if (team != TeamIndex.Neutral)
-                {
-                    orig(team);
-                    return;
-                }
-                var hack = oilPrefab.GetComponent<TeamComponent>();
-                hack.teamIndex = TeamIndex.Player;
-                orig(team);
-                hack.teamIndex = TeamIndex.Neutral;
-            };
-
-            /*On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
-            {
-                if (victim.name == "OilBeetle(Clone)")
-                {
-                    bool flag5 = (damageInfo.damageType & DamageType.IgniteOnHit) > DamageType.Generic;
-                    bool flag6 = (damageInfo.damageType & DamageType.PercentIgniteOnHit) != DamageType.Generic;
-                    bool flag7 = false;
-                    if (damageInfo.attacker) flag7 = damageInfo.attacker.GetComponent<CharacterBody>().HasBuff(RoR2Content.Buffs.AffixRed);
-                    if (flag5 || flag6 || flag7)
-                    {
-                        DotController.InflictDot(victim, damageInfo.attacker, flag6 ? DotController.DotIndex.PercentBurn : DotController.DotIndex.Burn, 4f * damageInfo.procCoefficient, 1f);
-                    }
-                    damageInfo.procCoefficient = 0f;
-                }
-
-                orig(self, damageInfo, victim);
-            };*/
-
-            Fireee.oilFirePrefab = firefab;
-            Fireee.oilGroundPrefab = oilfab;
-            OilSlick.projectilePrefab = oilPrefab;
             ChefContent.projectilePrefabs.Add(oilPrefab);
+            ChefContent.bodyPrefabs.Add(oilPrefab);
+            OilSlick.projectilePrefab = oilPrefab;
         }
     }
 }

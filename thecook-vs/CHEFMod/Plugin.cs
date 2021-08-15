@@ -33,7 +33,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "1.1.0")]
+        "2.0.0")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     public class chefPlugin : BaseUnityPlugin
     {
@@ -56,10 +56,7 @@ namespace ChefMod
         public static SkillDef boostedUtilityDef;
         public static SkillDef mealScepterDef;
 
-        public static ConfigEntry<bool> classicMince;
-        public static ConfigEntry<int> minceVerticalIntensity;
-        public static ConfigEntry<float> minceHorizontolIntensity;
-        public static ConfigEntry<float> oilProc;
+        public static ConfigEntry<bool> altVictoryMessage;
         public static ConfigEntry<bool> charUnlock;
         public static ConfigEntry<bool> altSkill;
 
@@ -87,7 +84,7 @@ namespace ChefMod
             LanguageAPI.Add("CHEF_NAME", "CHEF");
             LanguageAPI.Add("CHEF_SUBTITLE", "The Cook");
 
-            string chefDesc = "CHEF is a cooking robot capable of serving generous helpings to even the largest crowds.<style=cSub>";
+            string chefDesc = "CHEF is a robot cook who is capable of serving generous helpings to even the largest crowds.<style=cSub>";
             chefDesc += "\n\n< ! > Cleavers can hit customers on the way back.";
             chefDesc += "\n\n< ! > Use Glaze to get around the kitchen quickly and to avoid bumping into customers";
             chefDesc += "\n\n< ! > Combine Glaze and Sear to efficiently cook large batches.";
@@ -100,8 +97,16 @@ namespace ChefMod
             chefDesc += "\n<style=cIsDamage>Boosted Slice</style>: Stab many times.";*/
 
             LanguageAPI.Add("CHEF_DESCRIPTION", chefDesc);
-            LanguageAPI.Add("CHEF_OUTRO_FLAVOR", "...and so it left, rock hard.");
-            LanguageAPI.Add("CHEF_OUTRO_FAILURE", "...and so it vanished, blue balled.");
+            if (!altVictoryMessage.Value)
+            {
+                LanguageAPI.Add("CHEF_OUTRO_FLAVOR", "...and so it left, rock hard.");
+                LanguageAPI.Add("CHEF_OUTRO_FAILURE", "...and so it vanished, blue balled.");
+            }
+            else
+            {
+                LanguageAPI.Add("CHEF_OUTRO_FLAVOR", "...and so it left, eager to serve more customers.");
+                LanguageAPI.Add("CHEF_OUTRO_FAILURE", "...and so it vanished, entirely forgetting its original purpose.");
+            }
 
             LanguageAPI.Add("KEYWORD_CHEF_BOOST_DICE", "<style=cKeywordName>Mince</style><style=cSub>Throw 16 cleavers in a sphere for <style=cIsDamage>16x150% damage</style>.</style>");
             //LanguageAPI.Add("KEYWORD_CHEF_BOOST_SEAR", "<style=cKeywordName>Flambe</style><style=cSub>Ricochet explosive grease balls on impact.</style>");
@@ -159,20 +164,7 @@ namespace ChefMod
         public void ReadConfig()
         {
             charUnlock = base.Config.Bind<bool>(new ConfigDefinition("01 - General Settings", "Auto Unlock"), false, new ConfigDescription("Automatically unlocks Chef", null, Array.Empty<object>()));
-            //altSkill = base.Config.Bind<bool>(new ConfigDefinition("01 - General Settings", "Alt Skills"), false, new ConfigDescription("Enables the previous alternate skills. They aren't networked or good so only set to true if you're chicken fried freak", null, Array.Empty<object>()));
-
-            //classicMince = base.Config.Bind<bool>(new ConfigDefinition("11 - Mince (Boosted Dice)", "Classic Mince"), true, new ConfigDescription("Makes Mince throw Cleavers in a sphere around you. Disabling this makes Cleavers auto target or something.", null, Array.Empty<object>()));
-            //minceVerticalIntensity = base.Config.Bind<int>(new ConfigDefinition("11 - Mince (Boosted Dice)", "Mince Vertical Density"), 2, new ConfigDescription("Affects the amount of Cleavers from Classic Mince.", null, Array.Empty<object>()));
-            //minceHorizontolIntensity = base.Config.Bind<float>(new ConfigDefinition("11 - Mince (Boosted Dice)", "Mince Horizontal Density"), 1, new ConfigDescription("same as above", null, Array.Empty<object>()));
-            //Mince.verticalIntensity = minceVerticalIntensity.Value;
-            //Mince.horizontalIntensity = minceHorizontolIntensity.Value;
-
-            Mince.verticalIntensity = 2;
-            Mince.horizontalIntensity = 1f;
-
-            //oilProc = base.Config.Bind<float>(new ConfigDefinition("30 - Glaze", "Oil Proc Coefficient"), 0.2f, new ConfigDescription("Proc coefficient of burning oil.", null, Array.Empty<object>()));
-            //Fireee.procCoefficient = oilProc.Value;
-            Fireee.procCoefficient = 0.2f;
+            altVictoryMessage = base.Config.Bind<bool>(new ConfigDefinition("01 - General Settings", "Alt Victory Message"), false, new ConfigDescription("Makes the victory message more in-line with the game's tone.", null, Array.Empty<object>()));
         }
 
         public void Awake()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ChefMod.Components;
 using R2API;
 using RoR2;
 using UnityEngine;
@@ -25,14 +26,14 @@ namespace ChefMod.Hooks
                             RoR2.HealthComponent healthComponent = component.healthComponent;
                             if (healthComponent)
                             {
-                                Fireee fire = healthComponent.body.GetComponent<Fireee>();
+                                OilController fire = healthComponent.body.GetComponent<OilController>();
                                 if (fire)
                                 {
                                     if (damageInfo.HasModdedDamageType(chefPlugin.chefFireballOnHit))
                                     {
                                         fire.boosted = true;
                                     }
-                                    fire.ignate();
+                                    fire.Ignite();
                                 }
                             }
                         }
