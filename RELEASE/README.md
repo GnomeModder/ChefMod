@@ -36,6 +36,10 @@ the mod icon was made by Destructor check out his youtube Destructor1089 for ris
 
 
 ## Changelog
+`2.0.3`
+
+- Improved anti Oil self-proc code. This probably doesn't change anything, but this method of doing it should make it less prone to compatibility issues.
+
 `2.0.2`
 Made the CHEF Invader less ridiculous to fight. Would like feedback on how it feels!
 - Fixed Oil being able to proc on-hit effects against itself.

@@ -124,41 +124,44 @@ namespace ChefMod.Components
                                 hashSet.Add(gameObject);
                                 if (RoR2.FriendlyFireManager.ShouldSplashHitProceed(healthComponent, attackerTeamIndex))
                                 {
-                                    if (onFire)
+                                    if (healthComponent.body && healthComponent.body.baseNameToken != "OilBeetle")
                                     {
-                                        DamageInfo di = new DamageInfo
+                                        if (onFire)
                                         {
-                                            position = healthComponent.body.corePosition,
-                                            attacker = this.owner,
-                                            inflictor = base.gameObject,
-                                            crit = this.crit,
-                                            damage = damage,
-                                            damageColorIndex = DamageColorIndex.Default,
-                                            damageType = DamageType.Generic,
-                                            force = Vector3.zero,
-                                            procCoefficient = procCoefficient,
-                                            procChainMask = default(ProcChainMask)
-                                        };
-                                        di.AddModdedDamageType(chefPlugin.chefSear);
-                                        if (boosted)
-                                        {
-                                            di.AddModdedDamageType(chefPlugin.chefFireballOnHit);
+                                            DamageInfo di = new DamageInfo
+                                            {
+                                                position = healthComponent.body.corePosition,
+                                                attacker = this.owner,
+                                                inflictor = base.gameObject,
+                                                crit = this.crit,
+                                                damage = damage,
+                                                damageColorIndex = DamageColorIndex.Default,
+                                                damageType = DamageType.Generic,
+                                                force = Vector3.zero,
+                                                procCoefficient = procCoefficient,
+                                                procChainMask = default(ProcChainMask)
+                                            };
+                                            di.AddModdedDamageType(chefPlugin.chefSear);
+                                            if (boosted)
+                                            {
+                                                di.AddModdedDamageType(chefPlugin.chefFireballOnHit);
+                                            }
+                                            NetworkingHelpers.DealDamage(di, component, true, true, false);
+                                            if (!healthComponent.body.HasBuff(RoR2Content.Buffs.OnFire))
+                                            {
+                                                DotController.InflictDot(healthComponent.gameObject, owner, DotController.DotIndex.Burn);
+                                            }
+                                            if (healthComponent.body.HasBuff(RoR2Content.Buffs.ClayGoo))
+                                            {
+                                                OilExplosion.Explode(ownerBody, healthComponent.body, this.crit, false);
+                                            }
                                         }
-                                        NetworkingHelpers.DealDamage(di, component, true, true, false);
-                                        if (!healthComponent.body.HasBuff(RoR2Content.Buffs.OnFire))
+                                        else
                                         {
-                                            DotController.InflictDot(healthComponent.gameObject, owner, DotController.DotIndex.Burn);
-                                        }
-                                        if (healthComponent.body.HasBuff(RoR2Content.Buffs.ClayGoo))
-                                        {
-                                            OilExplosion.Explode(ownerBody, healthComponent.body, this.crit, false);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (onGround && !pendingIgnite && !healthComponent.body.HasBuff(RoR2Content.Buffs.ClayGoo))
-                                        {
-                                            healthComponent.body.AddTimedBuff(RoR2Content.Buffs.ClayGoo, 5f);
+                                            if (onGround && !pendingIgnite && !healthComponent.body.HasBuff(RoR2Content.Buffs.ClayGoo))
+                                            {
+                                                healthComponent.body.AddTimedBuff(RoR2Content.Buffs.ClayGoo, 5f);
+                                            }
                                         }
                                     }
                                 }

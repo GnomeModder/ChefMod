@@ -14,10 +14,6 @@ namespace ChefMod.Hooks
             bool hasGoo = false;
             bool isSear = damageInfo.HasModdedDamageType(chefPlugin.chefSear);
             bool isBoostSear = damageInfo.HasModdedDamageType(chefPlugin.chefFireballOnHit);
-            if (self.body && self.body.baseNameToken == "OilBeetle")
-            {
-                damageInfo.procCoefficient = 0f;
-            }
             if (isSear)
             {
                 if (self.body)
