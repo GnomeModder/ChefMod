@@ -4,6 +4,8 @@ using R2API.Utils;
 using RoR2;
 using RoR2.Navigation;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -68,25 +70,37 @@ namespace ChefPlugin
                     characterMaster.inventory.AddItemsFrom(arenaInventory);
                 }
 
-                //thanks man
-                //have some bullshit boss scaling~
-                float num = 1f;
-                float num2 = 1f;
-                num += Run.instance.difficultyCoefficient / 2.5f;
-                num2 += Run.instance.difficultyCoefficient / 30f;
-                int num3 = Mathf.Max(1, Run.instance.livingPlayerCount);
-                num *= Mathf.Pow((float)num3, 0.5f);
-                /*Debug.LogFormat("Nemesis Encounter: currentBoostHpCoefficient={0}, currentBoostDamageCoefficient={1}", new object[]
+                if (chefPlugin.oldChefInvader.Value)
                 {
-                        num,
-                        num2
-                });*/
-                characterMaster.inventory.GiveItem(RoR2Content.Items.BoostHp, Mathf.RoundToInt((num - 1f) * 10f));
-                characterMaster.inventory.GiveItem(RoR2Content.Items.BoostDamage, Mathf.RoundToInt((num2 - 1f) * 10f));
+                    //thanks man
+                    //have some bullshit boss scaling~
+                    float num = 1f;
+                    float num2 = 1f;
+                    num += Run.instance.difficultyCoefficient / 2.5f;
+                    num2 += Run.instance.difficultyCoefficient / 30f;
+                    int num3 = Mathf.Max(1, Run.instance.livingPlayerCount);
+                    num *= Mathf.Pow((float)num3, 0.5f);
+                    characterMaster.inventory.GiveItem(RoR2Content.Items.BoostHp, Mathf.RoundToInt((num - 1f) * 10f));
+                    characterMaster.inventory.GiveItem(RoR2Content.Items.BoostDamage, Mathf.RoundToInt((num2 - 1f) * 10f));
 
-                //haha fuck you
-                //!
-                characterMaster.inventory.GiveItem(RoR2Content.Items.AdaptiveArmor, 1);
+                    //haha fuck you
+                    //!
+                    characterMaster.inventory.GiveItem(RoR2Content.Items.AdaptiveArmor, 1);
+                }
+                else
+                {
+                    //Swapping scaling to Vengeance-Like scaling and Scavenger items.
+                    characterMaster.inventory.GiveItem(RoR2Content.Items.InvadingDoppelganger, 1);
+                    characterMaster.inventory.GiveItem(RoR2Content.Items.UseAmbientLevel, 1);
+                    List<PickupIndex> list = Run.instance.availableTier1DropList.Where(PickupIsNonBlacklistedItem).ToList<PickupIndex>();
+                    List<PickupIndex> list2 = Run.instance.availableTier2DropList.Where(PickupIsNonBlacklistedItem).ToList<PickupIndex>();
+                    List<PickupIndex> list3 = Run.instance.availableTier3DropList.Where(PickupIsNonBlacklistedItem).ToList<PickupIndex>();
+                    List<PickupIndex> availableEquipmentDropList = Run.instance.availableEquipmentDropList;
+                    GrantItems(characterMaster.inventory, list, 3, 9);
+                    GrantItems(characterMaster.inventory, list2, 2, 4);
+                    GrantItems(characterMaster.inventory, list3, 1, 1);
+                }
+                
 
                 combatSquad.AddMember(characterMaster);
             }));
@@ -99,6 +113,27 @@ namespace ChefPlugin
             }
 
             UnityEngine.Object.Destroy(spawnCard);
+        }
+
+        private static void GrantItems(Inventory inventory, List<PickupIndex> list, int types, int stackSize)
+        {
+            for (int i = 0; i < types; i++)
+            {
+                PickupIndex pickupIndex = list[UnityEngine.Random.Range(0, list.Count)];
+                PickupDef pickupDef = PickupCatalog.GetPickupDef(pickupIndex);
+                inventory.GiveItem((pickupDef != null) ? pickupDef.itemIndex : ItemIndex.None, stackSize);
+            }
+        }
+
+        private static bool PickupIsNonBlacklistedItem(PickupIndex pickupIndex)
+        {
+            PickupDef pickupDef = PickupCatalog.GetPickupDef(pickupIndex);
+            if (pickupDef == null)
+            {
+                return false;
+            }
+            ItemDef itemDef = ItemCatalog.GetItemDef(pickupDef.itemIndex);
+            return !(itemDef == null) && itemDef.DoesNotContainTag(ItemTag.AIBlacklist);
         }
     }
 

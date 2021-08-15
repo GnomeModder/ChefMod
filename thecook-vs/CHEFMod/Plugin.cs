@@ -33,7 +33,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "2.0.1")]
+        "2.0.2")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     public class chefPlugin : BaseUnityPlugin
     {
@@ -59,6 +59,9 @@ namespace ChefMod
         public static ConfigEntry<bool> altVictoryMessage;
         public static ConfigEntry<bool> charUnlock;
         public static ConfigEntry<bool> altSkill;
+
+        public static ConfigEntry<bool> oldChefInvader;
+        public static ConfigEntry<bool> unlockDisablesInvasion;
 
         public static ModdedDamageType chefSear;
         public static ModdedDamageType chefFireballOnHit;
@@ -165,6 +168,8 @@ namespace ChefMod
         {
             charUnlock = base.Config.Bind<bool>(new ConfigDefinition("01 - General Settings", "Auto Unlock"), false, new ConfigDescription("Automatically unlocks Chef", null, Array.Empty<object>()));
             altVictoryMessage = base.Config.Bind<bool>(new ConfigDefinition("01 - General Settings", "Alt Victory Message"), false, new ConfigDescription("Makes the victory message more in-line with the game's tone.", null, Array.Empty<object>()));
+            //unlockDisablesInvasion = base.Config.Bind<bool>(new ConfigDefinition("02 - Invasion Settings", "Disable Invasion after Unlock"), true, new ConfigDescription("Disables the CHEF invasion bossfight once CHEF is unlocked.", null, Array.Empty<object>()));
+            oldChefInvader = base.Config.Bind<bool>(new ConfigDefinition("02 - Invasion Settings", "Old Chef Invader"), false, new ConfigDescription("Use the old overpowered CHEF invasion bossfight.", null, Array.Empty<object>()));
         }
 
         public void Awake()

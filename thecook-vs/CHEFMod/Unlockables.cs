@@ -75,13 +75,13 @@ namespace ChefMod.Achievements
             {
                 int count = getFoodCount(self.inventory);
 
-                if (!warning && count > 3)
+                if (!warning && count > 8)
                 {
                     warning = true;
                     int choice = UnityEngine.Random.Range(0, chefwarnings.Length);
                     Chat.AddMessage(Util.GenerateColoredString("CHEF: " + chefwarnings[choice], Color.red));
                 }
-                if (warning && !death && !spawned && count > 4)
+                if (warning && !death && !spawned && count > 9)
                 {
                     ChefInvasionManager.PerformInvasion(new Xoroshiro128Plus(Run.instance.seed));
                     spawned = true;
@@ -97,6 +97,13 @@ namespace ChefMod.Achievements
             output += inventory.GetItemCount(RoR2Content.Items.HealWhileSafe);
             output += inventory.GetItemCount(RoR2Content.Items.Squid);
             output += inventory.GetItemCount(RoR2Content.Items.NovaOnLowHealth);
+            output += inventory.GetItemCount(RoR2Content.Items.Seed);
+            output += inventory.GetItemCount(RoR2Content.Items.TPHealingNova);
+            output += inventory.GetItemCount(RoR2Content.Items.Clover);
+            output += inventory.GetItemCount(RoR2Content.Items.Plant);
+            output += inventory.GetItemCount(RoR2Content.Items.IncreaseHealing);
+            output += inventory.GetItemCount(RoR2Content.Items.Hoof);
+            output += inventory.GetItemCount(RoR2Content.Items.SprintBonus);
             if (inventory.GetEquipmentIndex() == RoR2Content.Equipment.Fruit.equipmentIndex) output += 2;
             return output;
         }
@@ -126,9 +133,9 @@ namespace ChefMod.Achievements
             if (death) base.Grant();
         }
 
-        private void Buff(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
+        private void BuffChefInvader(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
         {
-            if (self.master && self.master.name == "ChefInvader(Clone)")
+            if (chefPlugin.oldChefInvader.Value && self.master && self.master.name == "ChefInvader(Clone)")
             {
                 self.baseMaxHealth = 1000f;
                 self.levelMaxHealth = 500f;
@@ -148,7 +155,7 @@ namespace ChefMod.Achievements
             GlobalEventManager.onCharacterDeathGlobal += Death;
             Stage.onServerStageBegin += Reset;
             Stage.onServerStageComplete += Check;
-            On.RoR2.CharacterBody.RecalculateStats += Buff;
+            On.RoR2.CharacterBody.RecalculateStats += BuffChefInvader;
         }
 
         public override void OnUninstall()
@@ -159,7 +166,7 @@ namespace ChefMod.Achievements
             GlobalEventManager.onCharacterDeathGlobal -= Death;
             Stage.onServerStageBegin -= Reset;
             Stage.onServerStageComplete -= Check;
-            On.RoR2.CharacterBody.RecalculateStats -= Buff;
+            On.RoR2.CharacterBody.RecalculateStats -= BuffChefInvader;
         }
     }
 

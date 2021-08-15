@@ -1,5 +1,5 @@
 ## ChefMod
-CHEF is a robot cook who is capable of serving generous helpings to even the largest crowds.
+CHEF is a robot cook who is capable of serving generous helpings to even the largest crowds. Supports StandaloneAncientScepter!
 [![](https://i.imgur.com/SFP5RIj.jpeg)]()
 
 [![](https://i.imgur.com/lyhIDFe.jpeg)]()
@@ -36,6 +36,14 @@ the mod icon was made by Destructor check out his youtube Destructor1089 for ris
 
 
 ## Changelog
+`2.0.2`
+Made the CHEF Invader less ridiculous to fight. Would like feedback on how it feels!
+- Fixed Oil being able to proc on-hit effects against itself.
+- CHEF Invader scaling changed: Now uses Vengeance Scaling + Scavenger items.
+- Added Energy Drink, Gooat Hoof, Leeching Seed, Lepton Daisy, Clover, Desk Plant, Rejuvenation Rack to the list of ingredients.
+- Increased ingredient requirement from 5 to 10 to make CHEF less likely to spawn early-on.
+- Added config option to use the old CHEF Invader stats (disabled by default)
+
 `2.0.1`
 
 - Primary projectiles are now centered.
