@@ -33,7 +33,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "2.0.3")]
+        "2.0.4")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     public class chefPlugin : BaseUnityPlugin
     {

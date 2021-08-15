@@ -36,6 +36,10 @@ the mod icon was made by Destructor check out his youtube Destructor1089 for ris
 
 
 ## Changelog
+`2.0.4`
+
+- Re-implemented old anti self-proc code alongside the new one, since removing it caused CHEF to be able to proc against oil by attacking it.
+
 `2.0.3`
 
 - Improved anti Oil self-proc code. This probably doesn't change anything, but this method of doing it should make it less prone to compatibility issues.
