@@ -1,35 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using EntityStates;
+using System.Text;
 using RoR2;
 using UnityEngine;
 using RoR2.Projectile;
-using ChefMod;
-using System.Runtime.InteropServices;
+using ChefMod.Components;
 
 namespace EntityStates.Chef
 {
-    class Julienne : BaseState
+    public class Julienne : BaseState
     {
-        private int returnCounter = 0;
-        private int throwCounter = 0;
-        private int frameCounter = 0;
-        private float stabcount;
-        //private HurtBox victim;
+        public static GameObject projectilePrefab;
+        public static float damageCoefficient = 1.2f;
 
-        private ChildLocator childLocator;
-        //private HuntressTracker tracker;
+        public static float fireInterval = 0.08f;
+        private float stopwatch = fireInterval;
+        private int stabcount;
 
         public override void OnEnter()
         {
             base.OnEnter();
 
-            stabcount = 10 * attackSpeedStat;
-            //tracker = base.characterBody.GetComponent<HuntressTracker>();
+            stabcount = (int)(10f * attackSpeedStat);
 
             childLocator = base.GetModelChildLocator();
-
-            CoomerangProjectile.Returned += setReturned;
+            rightShoulder = childLocator.FindChild("RightShoulder");
 
             base.StartAimMode(2f, false);
 
@@ -39,72 +34,66 @@ namespace EntityStates.Chef
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-
-            //victim = tracker.GetTrackingTarget();
-
-            if (returnCounter > stabcount)// || !victim)
+            if (stabcount > 0)
+            {
+                stopwatch += Time.fixedDeltaTime;
+                if (stopwatch > fireInterval)
+                {
+                    stopwatch -= fireInterval;
+                    stabcount--;
+                    Throw();
+                }
+            }
+            else
             {
                 this.outer.SetNextStateToMain();
                 return;
             }
-
-            if (frameCounter % 5 == 0 && throwCounter <= stabcount)
-            {
-                Throw();
-            }
         }
-
 
         private void Throw()
         {
+            Util.PlaySound("Play_ChefMod_Cleaver_Throw", base.gameObject);
+            if (!knifeThrown)
+            {
+                knifeThrown = true;
+                rightShoulder.gameObject.SetActive(false);
+            }
             if (base.isAuthority)
             {
                 Ray aimRay = base.GetAimRay();
-                Vector3 right = new Vector3(aimRay.direction.z, 0, -1 * aimRay.direction.x).normalized;
-
-                Vector3 shoulderPos = childLocator.FindChild("RightShoulder").position;
-                //Vector3 difference = victim.transform.position - shoulderPos;
-
                 FireProjectileInfo info = new FireProjectileInfo()
                 {
-                    projectilePrefab = chefPlugin.knifePrefab,
-                    position = shoulderPos,
+                    projectilePrefab = Julienne.projectilePrefab,
+                    position = rightShoulder.position,
                     rotation = Util.QuaternionSafeLookRotation(aimRay.direction), //Util.QuaternionSafeLookRotation(difference),
                     owner = base.gameObject,
-                    damage = base.characterBody.damage * 0.90f,
-                    force = (1.5f + base.attackSpeedStat) * 3f,
+                    damage = this.damageStat * Slice.damageCoefficient,
+                    force = (1.5f + this.attackSpeedStat) * 3f,
                     crit = base.RollCrit(),
                     damageColorIndex = DamageColorIndex.Default,
                     //target = victim.gameObject,
                     speedOverride = 160f,
                     fuseOverride = -1f
                 };
-
-                childLocator.FindChild("RightShoulder").gameObject.SetActive(false);
-
                 ProjectileManager.instance.FireProjectile(info);
-
-                Util.PlaySound("CleaverThrow", base.gameObject);
             }
         }
 
+
         public override void OnExit()
         {
-            childLocator.FindChild("RightShoulder").gameObject.SetActive(true);
-            CoomerangProjectile.Returned -= setReturned;
+            rightShoulder.gameObject.SetActive(true);
             base.PlayAnimation("Gesture, Override", "AltPrimaryEnd");
-
             base.OnExit();
         }
-
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.PrioritySkill;
+            return InterruptPriority.Skill;
         }
 
-        private void setReturned()
-        {
-            returnCounter++;
-        }
+        private bool knifeThrown = false;
+        private Transform rightShoulder;
+        private ChildLocator childLocator;
     }
 }

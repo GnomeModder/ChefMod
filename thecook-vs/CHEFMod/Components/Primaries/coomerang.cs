@@ -10,6 +10,7 @@ using EntityStates.ArtifactShell;
 using EntityStates.Chef;
 using System.Collections.Generic;
 using EntityStates.Engi.EngiWeapon;
+using UnityEngineInternal;
 
 namespace ChefMod
 {
@@ -19,7 +20,9 @@ namespace ChefMod
 	{
 		public static event Action CleaverCreated;
 
+		public bool isKnife = false;
 		private bool resetTargets = false;
+		private bool hasFired = false;
 
 		// Token: 0x060025A2 RID: 9634 RVA: 0x0009C7B0 File Offset: 0x0009A9B0
 		private void Awake()
@@ -27,11 +30,6 @@ namespace ChefMod
 			this.rigidbody = base.GetComponent<Rigidbody>();
 			this.projectileController = base.GetComponent<ProjectileController>();
 			this.projectileDamage = base.GetComponent<ProjectileDamage>();
-			this.lineRenderer = base.GetComponent<LineRenderer>();
-			if (this.projectileController && this.projectileController.owner)
-			{
-				this.ownerTransform = this.projectileController.owner.transform;
-			}
 			this.maxFlyStopwatch = this.charge * this.distanceMultiplier;
 		}
 
@@ -43,18 +41,12 @@ namespace ChefMod
 			{
 				num = 1f;
 			}
-			//Vector3 localScale = new Vector3(num * base.transform.localScale.x, num * base.transform.localScale.y, num * base.transform.localScale.z);
-			//Debug.Log(localScale);
-			//base.transform.localScale = localScale;
-			//base.gameObject.GetComponent<ProjectileController>().ghostPrefab.transform.localScale = localScale;
-			//base.GetComponent<ProjectileDotZone>().damageCoefficient *= num;
 
-			if (target)
+			if (isKnife)
 			{
 				this.travelSpeed *= projectileDamage.force;
 				reelDistance *= projectileDamage.force;
 				this.gameObject.layer = LayerIndex.projectile.intVal;
-				this.lineRenderer.enabled = true;
 			}
 
 			startTime = Time.fixedTime;
@@ -67,7 +59,7 @@ namespace ChefMod
 		}
 
 		// Token: 0x060025A4 RID: 9636 RVA: 0x0009C8CC File Offset: 0x0009AACC
-		public void OnProjectileImpact(ProjectileImpactInfo impactInfo) //this never triggers because the boomerang is set to never be solid
+		public void OnProjectileImpact(ProjectileImpactInfo impactInfo) //This only triggers on the knife
 		{
 			if (!this.canHitWorld || !NetworkServer.active)
 			{
@@ -79,48 +71,40 @@ namespace ChefMod
 			{
 				unityEvent.Invoke();
 			}
-			/*if (impactInfo.collider)
-            {
-				HurtBox hb = impactInfo.collider.GetComponent<HurtBox>();
-				if (hb && hb.healthComponent)
+
+			if (!hasFired)
+			{
+				hasFired = true;
+				this.gameObject.layer = LayerIndex.noCollision.intVal;
+				
+				if (impactInfo.collider)
                 {
-					if (!(hb.healthComponent.body && hb.healthComponent.body.baseNameToken == "OilBeetle"))
+					var hurtbox = impactInfo.collider.GetComponent<HurtBox>();
+					if (hurtbox && hurtbox.healthComponent)
 					{
-						Debug.Log(hb.healthComponent.body.baseNameToken);
+						var projdamg = this.gameObject.GetComponent<ProjectileDamage>();
+						var teamfilt = this.gameObject.GetComponent<TeamFilter>();
+
+						new BlastAttack
+						{
+							attacker = projectileController.owner,
+							crit = projdamg.crit,
+							baseDamage = projdamg.damage,
+							damageColorIndex = projdamg.damageColorIndex,
+							damageType = projdamg.damageType,
+							inflictor = this.gameObject,
+							position = impactInfo.estimatedPointOfImpact,
+							attackerFiltering = AttackerFiltering.NeverHit,
+							falloffModel = BlastAttack.FalloffModel.None,
+							procCoefficient = 1f,
+							teamIndex = teamfilt.teamIndex,
+							radius = 0.5f
+						}.Fire();
 						EffectManager.SimpleImpactEffect(this.impactSpark, impactInfo.estimatedPointOfImpact, -base.transform.forward, true);
 					}
-					return;
-                }
-			}*/
-
-			/*if (target) this.gameObject.layer = LayerIndex.noCollision.intVal;
-			if (target && !hasfired && impactInfo.collider)
-			{
-				var hurtbox = impactInfo.collider.GetComponent<HurtBox>();
-				if (hurtbox && hurtbox.healthComponent)
-				{
-					var projdamg = this.gameObject.GetComponent<ProjectileDamage>();
-					var teamfilt = this.gameObject.GetComponent<TeamFilter>();
-
-					new BlastAttack
-					{
-						attacker = projectileController.owner,
-						crit = projdamg.crit,
-						baseDamage = projdamg.damage,
-						damageColorIndex = projdamg.damageColorIndex,
-						damageType = projdamg.damageType,
-						inflictor = this.gameObject,
-						position = impactInfo.estimatedPointOfImpact,
-						attackerFiltering = AttackerFiltering.NeverHit,
-						falloffModel = BlastAttack.FalloffModel.None,
-						procCoefficient = 1f,
-						teamIndex = teamfilt.teamIndex,
-						radius = 0.2f
-					}.Fire();
-
-					hasfired = true;
 				}
-			}*/
+				
+			}
 		}
 
 		// Token: 0x060025A5 RID: 9637 RVA: 0x0009C91C File Offset: 0x0009AB1C
@@ -131,26 +115,11 @@ namespace ChefMod
 			return vector.magnitude <= reelDistance;
 		}
 
-		public void Update()
-		{
-			if (NetworkServer.active)
-			{
-				if (this.lineRenderer.enabled)
-				{
-					this.lineRenderer.SetPositions(new Vector3[2] { this.transform.position, shoulder.position });
-				}
-			}
-		}
-
 		// Token: 0x060025A6 RID: 9638 RVA: 0x0009C968 File Offset: 0x0009AB68
 		public void FixedUpdate()
 		{
 			if (NetworkServer.active)
 			{
-				if (!this.setScale)
-				{
-					this.setScale = true;
-				}
 				if (!this.projectileController.owner)
 				{
 					UnityEngine.Object.Destroy(base.gameObject);
@@ -178,7 +147,7 @@ namespace ChefMod
 							if (!resetTargets)
 							{
 								resetTargets = true;
-								ProjectileOverlapAttack poa = base.gameObject.GetComponent<ProjectileOverlapAttack>();
+								ProjectileOverlapAttack poa = base.GetComponent<ProjectileOverlapAttack>();
 								if (poa)
 								{
 									poa.ResetOverlapAttack();
@@ -190,7 +159,7 @@ namespace ChefMod
 							this.rigidbody.velocity = Vector3.Lerp(this.travelSpeed * base.transform.forward, this.travelSpeed * a, num);
 							if (num >= 1f)
 							{
-								if (target) this.gameObject.layer = LayerIndex.noCollision.intVal;
+								if (isKnife) this.gameObject.layer = LayerIndex.noCollision.intVal;
 
 								this.coomerangState = (int)CoomerangProjectile.CoomerangState.FlyBack;
 								UnityEvent unityEvent = this.onFlyBack;
@@ -218,7 +187,6 @@ namespace ChefMod
 										Action action = Returned;
 										action();
 									}
-									this.lineRenderer.enabled = false;
 									UnityEngine.Object.Destroy(base.gameObject);
 								}
 							}
@@ -228,7 +196,7 @@ namespace ChefMod
 						return;
 				}
 
-				if (followRet)
+				/*if (followRet)
 				{
 					Ray aimRay = fieldComponent.aimRay;
 					Vector3 position = transform.position - fieldComponent.characterBody.corePosition - 2 * Vector3.up;
@@ -238,7 +206,7 @@ namespace ChefMod
 					component2 = component2.normalized * -1f * Vector3.Angle(position, aimRay.direction);
 					float timefactor = Mathf.Max(2f * (Time.fixedTime - startTime), 1);
 					this.rigidbody.velocity += component2 / timefactor;
-				}
+				}*/
 			}
 		}
 
@@ -253,18 +221,12 @@ namespace ChefMod
 		}
 
 
-		public bool followRet = false;
+		public bool followRet = true;	//was false
 		public FieldComponent fieldComponent;
 		private float startTime;
 
-		//private Transform target = null;
-		public bool target = false;
 		public static event Action Returned;
 		private float reelDistance = 3;
-
-		private LineRenderer lineRenderer;
-		public Transform shoulder;
-		//private List<Vector3> relativePoints = new List<Vector3>()
 
 		// Token: 0x04002055 RID: 8277
 		public float travelSpeed = 40f;
@@ -281,9 +243,6 @@ namespace ChefMod
 		// Token: 0x04002059 RID: 8281
 		public GameObject impactSpark;
 
-		// Token: 0x0400205A RID: 8282
-		public GameObject crosshairPrefab;
-
 		// Token: 0x0400205B RID: 8283
 		public bool canHitCharacters;
 
@@ -296,9 +255,6 @@ namespace ChefMod
 		// Token: 0x0400205E RID: 8286
 		[SyncVar]
 		private int coomerangState;
-
-		// Token: 0x0400205F RID: 8287
-		private Transform ownerTransform;
 
 		// Token: 0x04002060 RID: 8288
 		private ProjectileDamage projectileDamage;
@@ -320,9 +276,6 @@ namespace ChefMod
 
 		// Token: 0x04002066 RID: 8294
 		public UnityEvent onFlyBack;
-
-		// Token: 0x04002067 RID: 8295
-		private bool setScale;
 
 		// Token: 0x02000603 RID: 1539
 		public enum CoomerangState

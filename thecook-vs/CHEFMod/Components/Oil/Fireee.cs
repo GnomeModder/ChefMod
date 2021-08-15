@@ -40,6 +40,8 @@ namespace ChefMod
 
         private Rigidbody rig;
 
+        public static GameObject oilFirePrefab;
+        public static GameObject oilGroundPrefab;
         private static List<HurtBox> hurtBoxBuffer = new List<HurtBox>();
         private static SphereSearch sphereSearch = new SphereSearch();
         public static GameObject ExplosionEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/ImpactEffects/IgniteExplosionVFX");
@@ -122,7 +124,7 @@ namespace ChefMod
                 //oilPrefab.transform.rotation = this.transform.rotation * ninety * floorRotation;
                 Quaternion randy = new Quaternion(0, 1, 0, UnityEngine.Random.Range(0, 360f));
                 Destroy(oilPrefab);
-                oilPrefab = Instantiate(chefPlugin.oilfab, this.transform.position - Vector3.up, randy);
+                oilPrefab = Instantiate(oilGroundPrefab, this.transform.position - Vector3.up, randy);
                 if (edging) ignate();
                 checkforhomies();
             }
@@ -173,7 +175,7 @@ namespace ChefMod
 
             //Destroy(oilPrefab);
             //firePrefab = goku("Fyre");
-            firePrefab = Instantiate(chefPlugin.firefab, this.transform.position - Vector3.up, Quaternion.identity);
+            firePrefab = Instantiate(oilFirePrefab, this.transform.position - Vector3.up, Quaternion.identity);
 
             hitmyhomiesup();
 

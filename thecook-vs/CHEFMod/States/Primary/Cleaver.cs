@@ -9,6 +9,7 @@ namespace EntityStates.Chef
 {
     class Cleaver : BaseSkillState
     {
+        public static GameObject projectilePrefab;
         public static float damageCoefficient = 1.5f;
         public float baseDuration = 0.5f;
         public float throwTime = 0.38f;
@@ -54,12 +55,12 @@ namespace EntityStates.Chef
                 Ray aimRay = base.GetAimRay();
                 Vector3 right = new Vector3(aimRay.direction.z, 0, -1 * aimRay.direction.x).normalized;
 
-                var coom = chefPlugin.cleaverPrefab.GetComponent<CoomerangProjectile>();
+                /*var coom = projectilePrefab.GetComponent<CoomerangProjectile>();
                 coom.fieldComponent = characterBody.GetComponent<FieldComponent>();
-                coom.followRet = true;
+                coom.followRet = true;*/
 
                 FireProjectileInfo info = new FireProjectileInfo() {
-                    projectilePrefab = ChefMod.chefPlugin.cleaverPrefab,
+                    projectilePrefab = projectilePrefab,
                     position = aimRay.origin + 1.5f * aimRay.direction + 1.5f * Vector3.up + 2 * right,
                     rotation = Util.QuaternionSafeLookRotation(aimRay.direction),// * Quaternion.FromToRotation(Vector3.left, Vector3.up),
                     owner = base.gameObject,

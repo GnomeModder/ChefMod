@@ -1,95 +1,54 @@
 ﻿using System;
-using EntityStates;
+using System.Collections.Generic;
+using System.Text;
+using ChefMod.Components;
 using RoR2;
-using UnityEngine;
 using RoR2.Projectile;
-using ChefMod;
+using UnityEngine;
 
 namespace EntityStates.Chef
 {
-    class Slice : BaseSkillState
+    public class Slice : BaseState
     {
-        private bool hasThrown;
-        private bool hasReturned = false;
-        //private HurtBox victim;
+        public static GameObject projectilePrefab;
+        public static float damageCoefficient = 1.3f;
+        public bool returned = false;
+        public bool knifeThrown = false;
+        public KnifeHandler knifeHandler;
+        private Transform rightShoulder;
 
         private ChildLocator childLocator;
-        //private HuntressTracker tracker;
 
         public override void OnEnter()
         {
             base.OnEnter();
-
+            knifeHandler = base.GetComponent<KnifeHandler>();
             //tracker = base.characterBody.GetComponent<HuntressTracker>();
             //victim = tracker.GetTrackingTarget();
-
             childLocator = base.GetModelChildLocator();
-
-            CoomerangProjectile.Returned += setReturned;
-
+            rightShoulder = childLocator.FindChild("RightShoulder");
             base.StartAimMode(2f, false);
-
             base.PlayAnimation("Gesture, Override", "AltPrimary");
+            ThrowKnife();
         }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-
-            if (hasReturned) // || !victim)
-            {
-                this.outer.SetNextStateToMain();
-                return;
-            }
-
-            if (!hasThrown)
-            {
-                hasThrown = true;
-                Throw();
-            }
-        }
-
-
-        private void Throw()
-        {
             if (base.isAuthority)
             {
-                Ray aimRay = base.GetAimRay();
-                Vector3 right = new Vector3(aimRay.direction.z, 0, -1 * aimRay.direction.x).normalized;
-
-                Vector3 shoulderPos = childLocator.FindChild("RightShoulder").position;
-                //Vector3 difference = victim.transform.position - shoulderPos;
-                chefPlugin.knifePrefab.GetComponent<CoomerangProjectile>().shoulder = childLocator.FindChild("RightShoulder");
-
-                FireProjectileInfo info = new FireProjectileInfo()
+                if (knifeThrown && !knifeHandler.knifeThrown)
                 {
-                    projectilePrefab = chefPlugin.knifePrefab,
-                    position = shoulderPos + aimRay.direction,
-                    rotation = Util.QuaternionSafeLookRotation(aimRay.direction), //Util.QuaternionSafeLookRotation(difference),
-                    owner = base.gameObject,
-                    damage = base.characterBody.damage,// * 0.90f,
-                    force = (1.5f + base.attackSpeedStat) * 1.5f,
-                    crit = base.RollCrit(),
-                    damageColorIndex = DamageColorIndex.Default,
-                    //target = victim.gameObject,
-                    speedOverride = 160f,
-                    fuseOverride = -1f
-                };
-
-                childLocator.FindChild("RightShoulder").gameObject.SetActive(false);
-
-                ProjectileManager.instance.FireProjectile(info);
-
-                Util.PlaySound("Play_ChefMod_Cleaver_Throw", base.gameObject);
+                    this.outer.SetNextStateToMain();
+                    return;
+                }
             }
         }
 
         public override void OnExit()
         {
-            childLocator.FindChild("RightShoulder").gameObject.SetActive(true);
-            CoomerangProjectile.Returned -= setReturned;
+            rightShoulder.gameObject.SetActive(true);
             base.PlayAnimation("Gesture, Override", "AltPrimaryEnd");
-
             base.OnExit();
         }
 
@@ -98,9 +57,32 @@ namespace EntityStates.Chef
             return InterruptPriority.Skill;
         }
 
-        private void setReturned()
+        private void ThrowKnife()
         {
-            hasReturned = true;
+            Util.PlaySound("Play_ChefMod_Cleaver_Throw", base.gameObject);
+            rightShoulder.gameObject.SetActive(false);
+            if (base.isAuthority)
+            {
+                knifeHandler.ThrowKnife();
+                knifeThrown = true;
+                Ray aimRay = base.GetAimRay();
+
+                FireProjectileInfo info = new FireProjectileInfo()
+                {
+                    projectilePrefab = Slice.projectilePrefab,
+                    position = rightShoulder.position,
+                    rotation = Util.QuaternionSafeLookRotation(aimRay.direction), //Util.QuaternionSafeLookRotation(difference),
+                    owner = base.gameObject,
+                    damage = this.damageStat * Slice.damageCoefficient,
+                    force = (1.5f + this.attackSpeedStat) * 1.5f,
+                    crit = base.RollCrit(),
+                    damageColorIndex = DamageColorIndex.Default,
+                    //target = victim.gameObject,
+                    speedOverride = 160f,
+                    fuseOverride = -1f
+                };
+                ProjectileManager.instance.FireProjectile(info);
+            }
         }
     }
 }

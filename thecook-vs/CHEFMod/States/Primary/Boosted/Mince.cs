@@ -29,13 +29,13 @@ namespace EntityStates.Chef
 
         private void Throw() {
             if (base.isAuthority) {
-                var coom = chefPlugin.cleaverPrefab.GetComponent<CoomerangProjectile>();
+                /*var coom = Cleaver.projectilePrefab.GetComponent<CoomerangProjectile>();
                 coom.fieldComponent = characterBody.GetComponent<FieldComponent>();
-                coom.followRet = false;
+                coom.followRet = false;*/
 
 
                 FireProjectileInfo info = new FireProjectileInfo() {
-                    projectilePrefab = ChefMod.chefPlugin.cleaverPrefab,
+                    projectilePrefab = Cleaver.projectilePrefab,
                     position = characterBody.corePosition,
                     owner = base.gameObject,
                     //damage = base.characterBody.damage * (4f / (chefPlugin.minceHorizontolIntensity.Value + intensity)),

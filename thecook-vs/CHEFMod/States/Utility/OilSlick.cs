@@ -11,6 +11,7 @@ namespace EntityStates.Chef
 		public static float baseDuration = 1.5f;
 		private float duration;
 		public float speedMultiplier = 2f;
+		public static GameObject projectilePrefab;
 		//private float radius = 3f;
 
 		private Vector3 idealDirection;
@@ -112,7 +113,7 @@ namespace EntityStates.Chef
 
 					FireProjectileInfo info = new FireProjectileInfo()
 					{
-						projectilePrefab = ChefMod.chefPlugin.oilPrefab,
+						projectilePrefab = projectilePrefab,
 						position = characterBody.corePosition,
 						rotation = Quaternion.identity,
 						owner = base.gameObject,

@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
+using ChefMod.Components;
 using ChefMod.Hooks;
 using EntityStates;
 using EntityStates.Chef;
@@ -38,11 +39,6 @@ namespace ChefMod
     {
         public GameObject chefPrefab;
         public static CharacterMaster invaderMaster;
-        public static GameObject cleaverPrefab;
-        public static GameObject knifePrefab;
-        public static GameObject oilPrefab;
-        public static GameObject oilfab;
-        public static GameObject firefab;
         public static GameObject foirballPrefab;
         public static GameObject flamballPrefab;
         public static GameObject drippingPrefab;
@@ -147,11 +143,13 @@ namespace ChefMod
             LanguageAPI.Add("CHEF_ALT_SPECIAL_NAME", "Buffet");
             LanguageAPI.Add("CHEF_ALT_SPECIAL_DESCRIPTION", "Remove secondary cooldown for yourself and nearby allies");
 
-            //WiP alts
             LanguageAPI.Add("CHEF_ALTPRIMARY_NAME", "Slice");
-            LanguageAPI.Add("CHEF_ALTPRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Stab a customer for <style=cIsDamage>100% damage</style>. <style=cIsHealth>BROKEN IN MULTIPLAYER</style>");
+            LanguageAPI.Add("CHEF_ALTPRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Stab a customer for <style=cIsDamage>130% damage</style>.");
             LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_NAME", "Julienne");
             LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Stab a customer <style=cIsDamage>many times</style>.");
+
+            //WiP alts
+
             LanguageAPI.Add("CHEF_ALTSECONDARY_NAME", "Sautee");
             LanguageAPI.Add("CHEF_ALTSECONDARY_DESCRIPTION", "Launch small enemies in the air, dealing 500% damage on landing and igniting nearby enemies. Agile");
             LanguageAPI.Add("CHEF_BOOSTED_ALTSECONDARY_NAME", "Fry");
@@ -193,18 +191,6 @@ namespace ChefMod
             chefSear = ReserveDamageType();
             chefFireballOnHit = ReserveDamageType();
 
-            On.RoR2.GlobalEventManager.OnTeamLevelUp += (orig, team) =>
-            {
-                if (team != TeamIndex.Neutral)
-                {
-                    orig(team);
-                    return;
-                }
-                var hack = oilPrefab.GetComponent<TeamComponent>();
-                hack.teamIndex = TeamIndex.Player;
-                orig(team);
-                hack.teamIndex = TeamIndex.Neutral;
-            };
             ContentManager.collectContentPackProviders += ContentManager_collectContentPackProviders;
         }
 
@@ -281,6 +267,7 @@ namespace ChefMod
             //tracker.maxTrackingAngle = 90f;
             ////tracker.indicator = ;
             //tracker.enabled = false;
+            chefPrefab.AddComponent<KnifeHandler>();    //Makes Slice work in MP
 
             var fc = chefPrefab.AddComponent<FieldComponent>();
             var meshs = chefPrefab.GetComponentsInChildren<MeshRenderer>();
@@ -752,275 +739,13 @@ namespace ChefMod
 
         private void registerProjectiles()
         {
-            GameObject cleaverGhost = Assets.chefAssetBundle.LoadAsset<GameObject>("CleaverParent").InstantiateClone("CleaverGhost", false);
-            //cleaverGhost.AddComponent<NetworkIdentity>();
-            cleaverGhost.AddComponent<ProjectileGhostController>();
-
-            GameObject knifeGhost = Assets.chefAssetBundle.LoadAsset<GameObject>("KnifeParent").InstantiateClone("KnifeGhost", false);
-            //knifeGhost.AddComponent<NetworkIdentity>();
-            knifeGhost.AddComponent<ProjectileGhostController>();
-
-            //var spin = cleaverGhost.GetComponentInChildren<MeshRenderer>().gameObject.AddComponent<Spin>();
-
-            //foreach (Component comp in cleaverGhost.GetComponents<Component>()) Debug.Log(comp.GetType().Name);
-
-            //var spin = cleaverGhost.GetComponentInChildren<MeshRenderer>().gameObject.AddComponent<RotateAroundAxis>();
-            //spin.fastRotationSpeed = 10f;
-            //spin.slowRotationSpeed = 5f;
-            //spin.rotateAroundAxis = RotateAroundAxis.RotationAxis.X;
-            //spin.SetSpeed(RotateAroundAxis.Speed.Fast);
-
-            cleaverPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/Sawmerang").InstantiateClone("CHEFCleaver", true);
-
-            GameObject cleaverImpactEffect = Resources.Load<GameObject>("Prefabs/Effects/OmniEffect/omniimpactvfx").InstantiateClone("ChefCleaverImpactEffect", false);
-            cleaverImpactEffect.GetComponent<EffectComponent>().soundName = "Play_ChefMod_Cleaver_Hit";
-            ChefContent.effectDefs.Add(new EffectDef(cleaverImpactEffect));
+            BuildProjectiles.BuildCleaver();
+            BuildProjectiles.BuildKnife();
+            BuildProjectiles.BuildOil();
 
             searBonusEffect = Resources.Load<GameObject>("Prefabs/Effects/OmniEffect/omniimpactvfx").InstantiateClone("ChefSearBonusEffect", false);
             searBonusEffect.GetComponent<EffectComponent>().soundName = "Play_bandit2_R_kill";
             ChefContent.effectDefs.Add(new EffectDef(searBonusEffect));
-
-            var lr = cleaverPrefab.AddComponent<LineRenderer>();
-            lr.textureMode = LineTextureMode.Tile;
-            lr.numCornerVertices = 4;
-            lr.enabled = false;
-            lr.startWidth *= 0.35f;
-            lr.endWidth *= 0.35f;
-            lr.alignment = LineAlignment.View;
-            lr.SetMaterials(new Material[1] { Assets.armmat }, 1);
-
-            BoomerangProjectile boo = cleaverPrefab.GetComponent<BoomerangProjectile>();
-            CoomerangProjectile cum = cleaverPrefab.AddComponent<CoomerangProjectile>();
-            cum.impactSpark = cleaverImpactEffect;
-            cum.transitionDuration = boo.transitionDuration;
-            cum.travelSpeed = boo.travelSpeed;
-            cum.charge = boo.charge;
-            cum.canHitCharacters = boo.canHitCharacters;
-            cum.canHitWorld = boo.canHitWorld; 
-            cum.distanceMultiplier = boo.distanceMultiplier;
-            Destroy(boo);
-
-            HitBox hit = cleaverPrefab.GetComponentInChildren<HitBox>();
-            hit.transform.localScale = new Vector3(hit.transform.localScale.x, 0.69f, hit.transform.localScale.z);
-
-            cleaverPrefab.transform.localScale = 7f * Vector3.one;
-            cleaverGhost.transform.localScale = cleaverPrefab.transform.localScale;
-
-            ProjectileController projcont = cleaverPrefab.GetComponent<ProjectileController>(); 
-            projcont.procCoefficient = 1f;
-            projcont.allowPrediction = false;
-
-            projcont.ghostPrefab = cleaverGhost;
-            ProjectileOverlapAttack poa = cleaverPrefab.GetComponent<ProjectileOverlapAttack>();
-            poa.impactEffect = cleaverImpactEffect;
-            poa.resetInterval = 60f;
-            poa.damageCoefficient = 1f;
-
-            Destroy(cleaverPrefab.GetComponent<ProjectileDotZone>());
-            //ProjectileDotZone pdz = cleaverPrefab.GetComponent<ProjectileDotZone>();
-            //pdz.impactEffect = effect;
-            //pdz.resetFrequency *= 0.25f;
-
-            cleaverPrefab.layer = LayerIndex.noCollision.intVal;
-
-            knifePrefab = cleaverPrefab.InstantiateClone("CHEFKnife", true);
-            //knifePrefab.AddComponent<ProjectileTargetComponent>();
-            var kum = knifePrefab.GetComponent<CoomerangProjectile>();
-            kum.target = true;
-            kum.distanceMultiplier *= 0.2f;
-            knifePrefab.layer = LayerIndex.projectile.intVal;
-
-            Destroy(knifePrefab.GetComponent<ProjectileOverlapAttack>());
-
-            var pojcont = knifePrefab.GetComponent<ProjectileController>();
-            pojcont.ghostPrefab = knifeGhost;
-            pojcont.allowPrediction = false;
-
-
-            //GameObject stunGrenadeModel = Assets.chefAssetBundle.LoadAsset<GameObject>("Cleaver").InstantiateClone("CleaverGhost", true);
-            //stunGrenadeModel.AddComponent<UnityEngine.Networking.NetworkIdentity>();
-            //stunGrenadeModel.AddComponent<ProjectileGhostController>();
-
-            //bollPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/VagrantTrackingBomb").InstantiateClone("OilPrefab");
-            //Destroy(bollPrefab.GetComponent<ProjectileSimple>());
-            //Destroy(bollPrefab.GetComponent<ProjectileDamage>());
-            //Destroy(bollPrefab.GetComponent<ProjectileImpactExplosion>());
-            //Destroy(bollPrefab.GetComponent<ProjectileDirectionalTargetFinder>());
-            //Destroy(bollPrefab.GetComponent<ProjectileTargetComponent>());
-            //Destroy(bollPrefab.GetComponent<ProjectileSteerTowardTarget>());
-            //Destroy(bollPrefab.GetComponent<AssignTeamFilterToTeamComponent>());
-            //Destroy(bollPrefab.GetComponent<TeamFilter>());
-            //bollPrefab.GetComponent<TeamFilter>().teamIndex = TeamIndex.Neutral;
-            //bollPrefab.GetComponent<HealthComponent>().dontShowHealthbar = false;
-            //bollPrefab.GetComponent<Rigidbody>().useGravity = true;
-            //bollPrefab.AddComponent<CharacterMotor>();
-            //bollPrefab.AddComponent<Fireee>();
-
-            GameObject acid = Resources.Load<GameObject>("Prefabs/CharacterBodies/commandobody").GetComponent<CharacterBody>().preferredPodPrefab;
-            oilfab = acid.GetComponentInChildren<ThreeEyedGames.Decal>().gameObject.InstantiateClone("OilCum", false);
-            var dekal = oilfab.GetComponent<ThreeEyedGames.Decal>();
-
-            //dekal.Material.SetTexture("_MainTex", Assets.chefIcon);
-            //dekal.Material.SetTexture("_Cloud1Tex", Assets.chefIcon);
-            //dekal.Material.SetTexture("_Cloud2Tex", Assets.chefIcon);
-            //dekal.Material.SetTexture("_RemapTex", Assets.chefIcon);
-            //dekal.Material.SetTexture("_NormalTex", Assets.chefIcon);
-            //dekal.Material.SetTexture("_MaskTex", Assets.chefIcon);
-
-            //decal.Material = Resources.Load<Material>("Materials/matBeetleJuice");
-            //Material acidcum = decal.Material;
-            //oilcum.mainTexture = acidcum.mainTexture;
-            //oilcum.mainTextureOffset = acidcum.mainTextureOffset;
-            //oilcum.mainTextureScale = acidcum.mainTextureScale;
-            //oilcum.shaderKeywords = acidcum.shaderKeywords;
-            //oilcum.
-            //oilcum.shader = acidcum.shader;
-            //decal.Material = oilcum;
-            oilfab.transform.localScale *= 4f;
-
-            var firetrail = Resources.Load<GameObject>("Prefabs/FireTrail");
-            Material firepart = firetrail.GetComponent<DamageTrail>().segmentPrefab.GetComponent<ParticleSystemRenderer>().material;
-
-            var chumStain = Resources.Load<GameObject>("prefabs/projectiles/LunarExploderProjectileDotZone");
-            firefab = chumStain.GetComponentInChildren<AlignToNormal>().gameObject.InstantiateClone("ChefFire", false);
-
-            DestroyOnTimer ffDT = firefab.AddComponent<DestroyOnTimer>();
-            ffDT.duration = Fireee.burnTime + 3f;
-
-            Destroy(firefab.GetComponentInChildren<TeamAreaIndicator>().gameObject);
-            var decal = firefab.GetComponentInChildren<Decal>();
-            Material fireMat = new Material(decal.Material);
-            fireMat.SetColor("_Color", Color.red);
-            decal.Material = fireMat;
-
-            var systems = firefab.GetComponentsInChildren<ParticleSystemRenderer>();
-            Destroy(systems[0].gameObject);
-            Material bluefire = new Material(systems[1].material);
-            systems[1].material = firepart;
-            systems[2].material = firepart;
-
-            firefab.GetComponentInChildren<Light>().color = Color.red;
-
-            //Debug.Log("------------------------------------------------");
-            //foreach (Component comp in firefab.GetComponentsInChildren<Component>()) Debug.Log(comp.GetType().Name);
-
-            oilPrefab = Resources.Load<GameObject>("Prefabs/CharacterBodies/BeetleCrystalBody").InstantiateClone("OilSlick", true);
-            oilPrefab.transform.localScale *= 3f;
-
-            var hc = oilPrefab.GetComponent<HealthComponent>();
-            hc.dontShowHealthbar = true;
-            //hc.godMode = true;
-
-            oilPrefab.GetComponent<CharacterBody>().baseNameToken = "OilBeetle";
-            oilPrefab.GetComponent<TeamComponent>().teamIndex = TeamIndex.Neutral;
-            oilPrefab.layer = LayerIndex.debris.intVal;
-            oilPrefab.name = "OilBeetle";
-
-            foreach (Component comp in oilPrefab.GetComponents<Component>()) if (comp.GetType().Name == "KinematicCharacterMotor")
-                {
-                    Destroy(comp);
-                }
-            Destroy(oilPrefab.GetComponent<CharacterMotor>());
-            var rig = oilPrefab.GetComponent<Rigidbody>();
-            rig.isKinematic = false;
-            rig.useGravity = true;
-            rig.freezeRotation = true;
-
-            ModelLocator modelLocator = oilPrefab.GetComponent<ModelLocator>();
-            modelLocator.modelBaseTransform.localScale *= 0.1f;
-            //foreach (HurtBox hbox in modelLocator.modelBaseTransform.gameObject.GetComponentsInChildren<HurtBox>())
-            //{
-            //    hbox.gameObject.transform.localScale *= .01f;
-            //}
-
-            var cap = oilPrefab.GetComponent<CapsuleCollider>();
-            cap.radius *= 0.6f;
-            cap.height = 0;
-            cap.material.staticFriction = 1;
-
-            Destroy(oilPrefab.GetComponent<InteractionDriver>());
-            Destroy(oilPrefab.GetComponent<InputBankTest>());
-            Destroy(oilPrefab.GetComponent<CameraTargetParams>());
-            Destroy(oilPrefab.GetComponent<EntityStateMachine>());
-            foreach (GenericSkill skill in oilPrefab.GetComponents<GenericSkill>()) Destroy(skill);
-            Destroy(oilPrefab.GetComponent<NetworkStateMachine>());
-            Destroy(oilPrefab.GetComponent<Interactor>());
-            Destroy(oilPrefab.GetComponent<EquipmentSlot>());
-            Destroy(oilPrefab.GetComponent<CharacterDeathBehavior>());
-            Destroy(oilPrefab.GetComponent<DeathRewards>());
-            Destroy(oilPrefab.GetComponent<CharacterEmoteDefinitions>());
-            Destroy(oilPrefab.GetComponent<SfxLocator>());
-
-            oilPrefab.AddComponent<Fireee>();
-            oilPrefab.AddComponent<ProjectileController>();
-            oilPrefab.AddComponent<TeamFilter>();
-            oilPrefab.AddComponent<ProjectileDamage>();
-            DestroyOnTimer oilDT = oilPrefab.AddComponent<DestroyOnTimer>();
-            oilDT.duration = Fireee.oilTime + Fireee.burnTime + 3f;
-            //oilPrefab.AddComponent<ProjectileDotZone>().enabled = false;
-
-            /*GameObject oilExplosionEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/ImpactEffects/IgniteExplosionVFX").InstantiateClone("OilExplosionVFX", false);
-            DestroyOnTimer dt = oilExplosionEffectPrefab.AddComponent<DestroyOnTimer>();
-            dt.duration = Fireee.burnTime;
-            ChefContent.effectDefs.Add(new EffectDef(oilExplosionEffectPrefab));
-            Fireee.ExplosionEffectPrefab = oilExplosionEffectPrefab;*/
-
-            On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
-            {
-                if (victim.name == "OilBeetle(Clone)")
-                {
-                    bool flag5 = (damageInfo.damageType & DamageType.IgniteOnHit) > DamageType.Generic;
-                    bool flag6 = (damageInfo.damageType & DamageType.PercentIgniteOnHit) != DamageType.Generic;
-                    bool flag7 = false;
-                    if (damageInfo.attacker) flag7 = damageInfo.attacker.GetComponent<CharacterBody>().HasBuff(RoR2Content.Buffs.AffixRed);
-                    if (flag5 || flag6 || flag7)
-                    {
-                        DotController.InflictDot(victim, damageInfo.attacker, flag6 ? DotController.DotIndex.PercentBurn : DotController.DotIndex.Burn, 4f * damageInfo.procCoefficient, 1f);
-                    }
-                    damageInfo.procCoefficient = 0f;
-                }
-
-                orig(self, damageInfo, victim);
-            };
-
-            //var ups = segfab.GetComponent<ParticleSystem>();
-            //var man = ups.main;
-            //man.loop = true;
-            //man.duration *= 10f;
-            //man.simulationSpeed *= 5f;
-            //man.startSizeMultiplier *= 5f;
-            //segfab.transform.localScale = new Vector3(10, 100, 10);
-            //var em = ups.emission;
-            //em.enabled = true;
-            //var x = em.rateOverTime; 
-            //x.curveMultiplier *= 100f;
-
-            //fireMat = segfab.GetComponent<LineRenderer>().sharedMaterial;
-            //On.RoR2.Orbs.LightningOrb.PickNextTarget += (orig, self, position) =>
-            //{
-            //    HurtBox output = orig(self, position);
-
-            //    while (output)
-            //    {
-            //        Chat.AddMessage("1");
-            //        RoR2.HealthComponent healthComponent = output.healthComponent;
-            //        if (healthComponent)
-            //        {
-            //            Fireee fire = healthComponent.body.GetComponent<Fireee>();
-            //            if (!fire)
-            //            {
-            //                break;
-            //            }
-            //        }
-            //        output = self.PickNextTarget(position);
-            //        Chat.AddMessage("2");
-            //    }
-
-            //    return output;
-            //};
-
-            //oilMaster = Resources.Load<GameObject>("Prefabs/CharacterMasters/BeetleCrystalMaster").InstantiateClone("OilMaster", true);
-            //var mister = oilMaster.GetComponent<CharacterMaster>().bodyPrefab = oilPrefab;
 
             var beegFire = Resources.Load<GameObject>("Prefabs/ProjectileGhosts/FireballGhost").InstantiateClone("FoirBallGhost", true);
             beegFire.AddComponent<NetworkIdentity>();
@@ -1060,9 +785,6 @@ namespace ChefMod
             bspie.blastProcCoefficient = 0.4f;
 
             ChefContent.projectilePrefabs.Add(OilExplosion.boostedSearProjectilePrefab);
-            ChefContent.projectilePrefabs.Add(cleaverPrefab);
-            ChefContent.projectilePrefabs.Add(knifePrefab);
-            ChefContent.projectilePrefabs.Add(oilPrefab);
             ChefContent.projectilePrefabs.Add(foirballPrefab);
             ChefContent.projectilePrefabs.Add(flamballPrefab);
             ChefContent.projectilePrefabs.Add(drippingPrefab);

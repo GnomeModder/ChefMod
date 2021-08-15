@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{AEC65CE6-0E30-4B42-8784-8FBD00F871E1}" SchemaVersion="89">
+	<Events>
+		<WorkUnit Name="Default Work Unit" ID="{AEC65CE6-0E30-4B42-8784-8FBD00F871E1}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Play_ChefMod_Cleaver_Throw" ID="{A48E123E-74E9-4369-AB76-534B44B5897B}">
+					<ChildrenList>
+						<Action Name="" ID="{4436B28A-5A18-42D1-B998-E64E48CE9D90}" ShortID="586700620">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="cleaver" ID="{847861B5-11A3-48EE-A235-A6ECBED752ED}" WorkUnitID="{B6C92F1E-73BE-488A-89AE-D7DF922E17DF}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_ChefMod_Cleaver_Hit" ID="{62776B56-BB34-4AC6-8BC0-022FD7720330}">
+					<ChildrenList>
+						<Action Name="" ID="{798AFB96-FFA6-44E3-93AC-09122D10F1A7}" ShortID="579549712">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="cleaver hit" ID="{D4C1AF2A-6020-4D3B-A8BA-F780326CC92B}" WorkUnitID="{B6C92F1E-73BE-488A-89AE-D7DF922E17DF}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_ChefMod_Ding" ID="{0AC0C936-6D86-4294-B92B-D66D285BA832}">
+					<ChildrenList>
+						<Action Name="" ID="{68E4F6D4-FB63-4E8B-AB39-1AB2B8F2FD73}" ShortID="654696166">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="ding" ID="{23B2B3C0-9C64-4AC6-B301-053C21903199}" WorkUnitID="{B6C92F1E-73BE-488A-89AE-D7DF922E17DF}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_ChefMod_Special" ID="{EE6ED634-26E8-4A91-B132-37B13AE34585}">
+					<ChildrenList>
+						<Action Name="" ID="{5B8F23D5-3027-44FF-B7B0-E40B1600A305}" ShortID="852360070">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="special" ID="{73B3FCFD-82DE-4A31-BBE4-EA698BF78EBE}" WorkUnitID="{B6C92F1E-73BE-488A-89AE-D7DF922E17DF}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_ChefMod_Sear" ID="{FD371A06-0703-4992-8600-035363BEF8AB}">
+					<ChildrenList>
+						<Action Name="" ID="{1B05ADA2-E567-4697-9632-E24F0AB0ED37}" ShortID="31023251">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="m2 shoot" ID="{DAAC3005-F8D0-4ADB-BD40-7CE39D8229B3}" WorkUnitID="{B6C92F1E-73BE-488A-89AE-D7DF922E17DF}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_ChefMod_Sear2" ID="{393C08AC-15E6-4A42-BED6-68B591B7630A}">
+					<ChildrenList>
+						<Action Name="" ID="{FD91E5EC-0786-4A97-9D54-6B307B3DC1E8}" ShortID="377632548">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="m2 shoot v2" ID="{EA58BFE4-22D0-445B-8DBC-24F8AFFC02DC}" WorkUnitID="{B6C92F1E-73BE-488A-89AE-D7DF922E17DF}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

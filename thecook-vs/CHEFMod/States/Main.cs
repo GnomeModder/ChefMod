@@ -40,7 +40,6 @@ namespace EntityStates.Chef
             childLocator = base.GetModelChildLocator();
             if (skillLocator.primary.baseSkill == chefPlugin.altPrimaryDef || skillLocator.primary.baseSkill == chefPlugin.boostedAltPrimaryDef)
             {
-                if (!NetworkServer.active) skillLocator.primary.baseSkill = chefPlugin.primaryDef;
                 childLocator.FindChild("Cleaver").gameObject.SetActive(false);
                 childLocator.FindChild("Knife").gameObject.SetActive(true);
             }

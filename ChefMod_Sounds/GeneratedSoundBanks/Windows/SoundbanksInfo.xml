@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="11" SoundbankVersion="132">
+	<RootPaths>
+		<ProjectRoot>C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\</ProjectRoot>
+		<SourceFilesRoot>C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\GeneratedSoundBanks\Windows\</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<StreamedFiles/>
+	<MediaFilesNotInAnyBank/>
+	<SoundBanks>
+		<SoundBank Id="606858421" Language="SFX">
+			<ObjectPath>\SoundBanks\Default Work Unit\ChefSounds</ObjectPath>
+			<ShortName>ChefSounds</ShortName>
+			<Path>ChefSounds.bnk</Path>
+			<IncludedEvents>
+				<Event Id="3247424679" Name="Play_ChefMod_Cleaver_Hit" ObjectPath="\Events\Default Work Unit\Play_ChefMod_Cleaver_Hit"/>
+				<Event Id="153677848" Name="Play_ChefMod_Cleaver_Throw" ObjectPath="\Events\Default Work Unit\Play_ChefMod_Cleaver_Throw"/>
+				<Event Id="2470191105" Name="Play_ChefMod_Ding" ObjectPath="\Events\Default Work Unit\Play_ChefMod_Ding"/>
+				<Event Id="3403781152" Name="Play_ChefMod_Sear" ObjectPath="\Events\Default Work Unit\Play_ChefMod_Sear"/>
+				<Event Id="2166107730" Name="Play_ChefMod_Sear2" ObjectPath="\Events\Default Work Unit\Play_ChefMod_Sear2"/>
+				<Event Id="1782602262" Name="Play_ChefMod_Special" ObjectPath="\Events\Default Work Unit\Play_ChefMod_Special"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="51170853" Language="SFX">
+					<ShortName>cleaver hit.wav</ShortName>
+					<Path>SFX\cleaver hit_A1793BE9.wem</Path>
+				</File>
+				<File Id="122339750" Language="SFX">
+					<ShortName>special.wav</ShortName>
+					<Path>SFX\special_A1793BE9.wem</Path>
+				</File>
+				<File Id="315800143" Language="SFX">
+					<ShortName>sndFlamerStop.wav</ShortName>
+					<Path>SFX\sndFlamerStop_A1793BE9.wem</Path>
+				</File>
+				<File Id="725891742" Language="SFX">
+					<ShortName>cleaver.wav</ShortName>
+					<Path>SFX\cleaver_A1793BE9.wem</Path>
+				</File>
+				<File Id="993334955" Language="SFX">
+					<ShortName>wChefShoot2_1.wav</ShortName>
+					<Path>SFX\wChefShoot2_1_A1793BE9.wem</Path>
+				</File>
+				<File Id="1045069731" Language="SFX">
+					<ShortName>sndFireShotgun.wav</ShortName>
+					<Path>SFX\sndFireShotgun_A1793BE9.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+		<SoundBank Id="1355168291" Language="SFX">
+			<ObjectPath>Init</ObjectPath>
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+		</SoundBank>
+	</SoundBanks>
+</SoundBanksInfo>

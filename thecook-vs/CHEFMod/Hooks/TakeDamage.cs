@@ -51,7 +51,7 @@ namespace ChefMod.Hooks
                     {
                         if (isSear)
                         {
-                            if (damageInfo.force.magnitude > 0f && damageInfo.procCoefficient == 1f)
+                            if (damageInfo.force.magnitude > 0f && damageInfo.procCoefficient == 1f && self.body.baseNameToken != "OilBeetle")
                             {
                                 EffectManager.SimpleImpactEffect(chefPlugin.searBonusEffect, damageInfo.position, Vector3.up, true);
                             }

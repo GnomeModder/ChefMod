@@ -102,7 +102,7 @@ namespace EntityStates.Chef
 
 					FireProjectileInfo info = new FireProjectileInfo()
 					{
-						projectilePrefab = ChefMod.chefPlugin.oilPrefab,
+						projectilePrefab = OilSlick.projectilePrefab,
 						position = characterBody.corePosition,
 						rotation = Quaternion.identity,
 						owner = base.gameObject,

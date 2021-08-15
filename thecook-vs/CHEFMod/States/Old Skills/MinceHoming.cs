@@ -34,7 +34,7 @@ namespace EntityStates.Chef
                 Ray aimRay = base.GetAimRay();
                 Vector3 right = new Vector3(aimRay.direction.z, 0, -1 * aimRay.direction.x).normalized;
 
-                var coom = chefPlugin.cleaverPrefab.GetComponent<CoomerangProjectile>();
+                var coom = Cleaver.projectilePrefab.GetComponent<CoomerangProjectile>();
                 coom.fieldComponent = characterBody.GetComponent<FieldComponent>();
                 coom.followRet = false;
 
@@ -45,7 +45,7 @@ namespace EntityStates.Chef
                     direction = direction.normalized;
 
                     FireProjectileInfo info = new FireProjectileInfo() {
-                        projectilePrefab = ChefMod.chefPlugin.cleaverPrefab,
+                        projectilePrefab = Cleaver.projectilePrefab,
                         position = characterBody.corePosition + 1.5f * direction,// + 1.5f * Vector3.up + 2 * right,
                         rotation = Util.QuaternionSafeLookRotation(direction),// * Quaternion.FromToRotation(Vector3.left, Vector3.up),
                         owner = base.gameObject,
