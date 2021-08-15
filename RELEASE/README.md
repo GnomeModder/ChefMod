@@ -36,6 +36,14 @@ the mod icon was made by Destructor check out his youtube Destructor1089 for ris
 
 
 ## Changelog
+`2.0.1`
+
+- Primary projectiles are now centered.
+- Mince is now oriented with your aim direction, so there will always be some cleavers being thrown straight forwards.
+- Fixed Slice damage being lower than intended (damage increased 120% -> 130%).
+- Increased Boosted Slice stab count from 10 to 16 to make it more competitive with Boosted Dice.
+- Fixed some bugs with Second Helping and Heresy items.
+
 `2.0.0`
 
 General

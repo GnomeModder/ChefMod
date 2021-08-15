@@ -70,7 +70,7 @@ namespace EntityStates.Chef
                 FireProjectileInfo info = new FireProjectileInfo()
                 {
                     projectilePrefab = Slice.projectilePrefab,
-                    position = rightShoulder.position,
+                    position = aimRay.origin,
                     rotation = Util.QuaternionSafeLookRotation(aimRay.direction), //Util.QuaternionSafeLookRotation(difference),
                     owner = base.gameObject,
                     damage = this.damageStat * Slice.damageCoefficient,

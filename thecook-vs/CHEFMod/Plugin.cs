@@ -33,7 +33,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "2.0.0")]
+        "2.0.1")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     public class chefPlugin : BaseUnityPlugin
     {
@@ -112,7 +112,7 @@ namespace ChefMod
             //LanguageAPI.Add("KEYWORD_CHEF_BOOST_SEAR", "<style=cKeywordName>Flambe</style><style=cSub>Ricochet explosive grease balls on impact.</style>");
             LanguageAPI.Add("KEYWORD_CHEF_BOOST_SEAR", "<style=cKeywordName>Blaze</style><style=cSub>Blaze customers for <style=cIsDamage>420%</style> on high. Glazed customers take double damage and burst into flames for <style=cIsDamage>5x260% damage</style>.</style>");
             LanguageAPI.Add("KEYWORD_CHEF_BOOST_GLAZE", "<style=cKeywordName>Marinate</style><style=cSub>Leave a longer trail of oil.</style>");
-            LanguageAPI.Add("KEYWORD_CHEF_BOOST_SLICE", "<style=cKeywordName>Julienne</style><style=cSub>Stab many times.</style>");
+            LanguageAPI.Add("KEYWORD_CHEF_BOOST_SLICE", "<style=cKeywordName>Julienne</style><style=cSub>Stab 16 times. The number of stabs increases with attack speed.</style>");
 
             LanguageAPI.Add("CHEF_PRIMARY_NAME", "Dice");
             LanguageAPI.Add("CHEF_PRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Throw a cleaver towards customers for <style=cIsDamage>150% damage</style>. Boomerangs back.");
@@ -151,7 +151,7 @@ namespace ChefMod
             LanguageAPI.Add("CHEF_ALTPRIMARY_NAME", "Slice");
             LanguageAPI.Add("CHEF_ALTPRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Stab a customer for <style=cIsDamage>130% damage</style>.");
             LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_NAME", "Julienne");
-            LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Stab a customer <style=cIsDamage>many times</style>.");
+            LanguageAPI.Add("CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION", "<style=cIsUtility>Agile</style>. Stab a customer <style=cIsDamage>16 times</style>. The number of stabs increases with attack speed.");
 
             //WiP alts
 

@@ -11,7 +11,7 @@ namespace EntityStates.Chef
     public class Julienne : BaseState
     {
         public static GameObject projectilePrefab;
-        public static float damageCoefficient = 1.2f;
+        public static float damageCoefficient = 1.3f;
 
         public static float fireInterval = 0.08f;
         private float stopwatch = fireInterval;
@@ -21,7 +21,7 @@ namespace EntityStates.Chef
         {
             base.OnEnter();
 
-            stabcount = (int)(10f * attackSpeedStat);
+            stabcount = (int)(16f * attackSpeedStat);
 
             childLocator = base.GetModelChildLocator();
             rightShoulder = childLocator.FindChild("RightShoulder");
@@ -65,7 +65,7 @@ namespace EntityStates.Chef
                 FireProjectileInfo info = new FireProjectileInfo()
                 {
                     projectilePrefab = Julienne.projectilePrefab,
-                    position = rightShoulder.position,
+                    position = aimRay.origin,
                     rotation = Util.QuaternionSafeLookRotation(aimRay.direction), //Util.QuaternionSafeLookRotation(difference),
                     owner = base.gameObject,
                     damage = this.damageStat * Slice.damageCoefficient,
