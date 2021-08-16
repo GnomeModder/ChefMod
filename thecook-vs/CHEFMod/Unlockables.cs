@@ -9,6 +9,7 @@ using System.Reflection;
 using UnityEngine;
 using EntityStates.Chef;
 using ChefPlugin;
+using UnityEngine.Networking;
 
 namespace ChefMod
 {
@@ -108,7 +109,7 @@ namespace ChefMod.Achievements
             return output;
         }
 
-        private void Death(DamageReport report)
+        /*private void Death(DamageReport report)
         {
             if (report.victimMaster && report.victimMaster.name == "ChefInvader(Clone)")
             {
@@ -117,9 +118,14 @@ namespace ChefMod.Achievements
                     ChefInvasionManager.PerformInvasion(new Xoroshiro128Plus(Run.instance.seed));
                     return;
                 }
-                death = true;
+                if (!death)
+                {
+                    death = true;
+                    base.Grant();
+                }
             }
-        }
+        }*/
+
 
         private void Reset(Stage stage)
         {
@@ -128,11 +134,11 @@ namespace ChefMod.Achievements
             death = false;
         }
 
-        private void Check(Stage stage)
+        /*private void Check(Stage stage)
         {
             if (death) base.Grant();
         }
-
+        */
         private void BuffChefInvader(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
         {
             if (chefPlugin.oldChefInvader.Value && self.master && self.master.name == "ChefInvader(Clone)")
@@ -151,21 +157,39 @@ namespace ChefMod.Achievements
 
             if (chefPlugin.charUnlock.Value) base.Grant();
 
+            On.RoR2.HealthComponent.FixedUpdate += ChefDeath;
             On.RoR2.CharacterMaster.OnInventoryChanged += CheckItem;
-            GlobalEventManager.onCharacterDeathGlobal += Death;
+            //GlobalEventManager.onCharacterDeathGlobal += Death;
             Stage.onServerStageBegin += Reset;
-            Stage.onServerStageComplete += Check;
+            //Stage.onServerStageComplete += Check;
             On.RoR2.CharacterBody.RecalculateStats += BuffChefInvader;
+        }
+
+        private void ChefDeath(On.RoR2.HealthComponent.orig_FixedUpdate orig, HealthComponent self)
+        {
+            
+            if (!self.alive && self.wasAlive)
+            {
+                if (self.body && self.body.master && self.body.master.name == "ChefInvader(Clone)")
+                {
+                    if (self.body.master.inventory && self.body.master.inventory.GetItemCount(RoR2Content.Items.ExtraLife) <= 0)
+                    {
+                        base.Grant();
+                    }
+                }
+            }
+            orig(self);
         }
 
         public override void OnUninstall()
         {
             base.OnUninstall();
 
+            On.RoR2.HealthComponent.FixedUpdate -= ChefDeath;
             On.RoR2.CharacterMaster.OnInventoryChanged -= CheckItem;
-            GlobalEventManager.onCharacterDeathGlobal -= Death;
+            //GlobalEventManager.onCharacterDeathGlobal -= Death;
             Stage.onServerStageBegin -= Reset;
-            Stage.onServerStageComplete -= Check;
+            //Stage.onServerStageComplete -= Check;
             On.RoR2.CharacterBody.RecalculateStats -= BuffChefInvader;
         }
     }

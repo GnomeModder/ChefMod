@@ -9,9 +9,10 @@ namespace EntityStates.Chef
 {
     class Mince : BaseState
     {
-        public float baseDuration = 0.5f;
-        public float throwTime = 0.36f;
+        public static float baseDuration = 0.5f;
+        public static float baseThrowDelay = 0.18f;
 
+        private float throwDelay;
         private float duration;
         private bool hasThrown;
 
@@ -20,7 +21,8 @@ namespace EntityStates.Chef
 
         public override void OnEnter() {
             base.OnEnter();
-            duration = baseDuration / base.attackSpeedStat;
+            duration = baseDuration / this.attackSpeedStat;
+            throwDelay = baseThrowDelay / this.attackSpeedStat;
 
             base.PlayAnimation("Gesture, Override", "PrimaryBoosted", "PrimaryCleaver.playbackRate", duration);
 
@@ -28,12 +30,7 @@ namespace EntityStates.Chef
         }
 
         private void Throw() {
-            if (base.isAuthority) {
-                /*var coom = Cleaver.projectilePrefab.GetComponent<CoomerangProjectile>();
-                coom.fieldComponent = characterBody.GetComponent<FieldComponent>();
-                coom.followRet = false;*/
-
-
+            if (base.isAuthority){
                 FireProjectileInfo info = new FireProjectileInfo() {
                     projectilePrefab = Cleaver.projectilePrefab,
                     position = characterBody.corePosition,
@@ -68,41 +65,29 @@ namespace EntityStates.Chef
                     }
                 }
             }
-
+            hasThrown = true;
             Util.PlaySound("Play_ChefMod_Cleaver_Throw", base.gameObject);
         }
 
-        public override void FixedUpdate() 
+        public override void FixedUpdate()
         {
-
-            if (fixedAge > duration * throwTime && !hasThrown) {
-                hasThrown = true;
-                Throw();
-            }
-
             base.FixedUpdate();
-            if (base.fixedAge >= this.duration && base.isAuthority)
+            if (!hasThrown)
             {
-                this.outer.SetNextStateToMain();
-                return;
+                if (fixedAge > throwDelay)
+                {
+                    Throw();
+                }
+            }
+            else
+            {
+                if (base.isAuthority && base.fixedAge >= this.duration)
+                {
+                    this.outer.SetNextStateToMain();
+                    return;
+                }
             }
         }
-
-        public override void OnExit()
-        {
-            //skillLocator.primary.SetBaseSkill(chefPlugin.primaryDef);
-            //if (skillLocator.secondary.baseSkill == chefPlugin.boostedSecondaryDef)
-            //{
-            //    skillLocator.secondary.SetBaseSkill(chefPlugin.secondaryDef);
-            //}
-            //if (skillLocator.secondary.baseSkill == chefPlugin.boostedAltSecondaryDef)
-            //{
-            //    skillLocator.secondary.SetBaseSkill(chefPlugin.altSecondaryDef);
-            //}
-            //skillLocator.utility.SetBaseSkill(chefPlugin.utilityDef);
-            base.OnExit();
-        }
-
         public override InterruptPriority GetMinimumInterruptPriority()
         {
             return InterruptPriority.PrioritySkill;

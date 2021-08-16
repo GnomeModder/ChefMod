@@ -37,9 +37,10 @@ namespace EntityStates.Chef
             if (stabcount > 0)
             {
                 stopwatch += Time.fixedDeltaTime;
-                if (stopwatch > fireInterval)
+                float scaledFireInterval = fireInterval / this.attackSpeedStat;
+                if (stopwatch > scaledFireInterval)
                 {
-                    stopwatch -= fireInterval;
+                    stopwatch -= fireInterval / scaledFireInterval;
                     stabcount--;
                     Throw();
                 }

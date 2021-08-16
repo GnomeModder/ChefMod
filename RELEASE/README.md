@@ -5,7 +5,7 @@ CHEF is a robot cook who is capable of serving generous helpings to even the lar
 [![](https://i.imgur.com/lyhIDFe.jpeg)]()
 [![](https://i.imgur.com/eqp6HDQ.png)]()
 
-Join the discord server to share any feedback/bugs/suggestions- https://discord.gg/pKE3QCEsxG 
+If you have any feedback/suggestions, open an issue on the Github page, or join our discord at https://discord.gg/pKE3QCEsxG 
 
 ## Installation
 Drop ChefMod.dll into \BepInEx\plugins\
@@ -36,6 +36,13 @@ the mod icon was made by Destructor check out his youtube Destructor1089 for ris
 
 
 ## Changelog
+`2.0.5`
+
+- Fixed Mince breaking at high attack speeds. Let me know if issues persist.
+- Unlock achievement is now rewarded the moment you kill CHEF.
+- Unlock achievement is now synced online.
+
+
 `2.0.4`
 
 - Re-implemented old anti self-proc code alongside the new one, since removing it caused CHEF to be able to proc against oil by attacking it.
