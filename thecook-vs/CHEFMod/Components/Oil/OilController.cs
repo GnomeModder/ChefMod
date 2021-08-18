@@ -39,12 +39,10 @@ namespace ChefMod.Components
         private Rigidbody rig;
         private GameObject owner;
         private TeamIndex teamIndex;
-        private float damage;
         private bool crit;
         private GameObject oilBallInstance = null;
         private GameObject oilDecalInstance = null;
         private GameObject fireInstance = null;
-        bool oilBall = true;
 
         public void FixedUpdate()
         {
@@ -141,11 +139,11 @@ namespace ChefMod.Components
                                                 procCoefficient = procCoefficient,
                                                 procChainMask = default(ProcChainMask)
                                             };
-                                            di.AddModdedDamageType(chefPlugin.chefSear);
+                                            /*di.AddModdedDamageType(chefPlugin.chefSear);
                                             if (boosted)
                                             {
                                                 di.AddModdedDamageType(chefPlugin.chefFireballOnHit);
-                                            }
+                                            }*/
                                             NetworkingHelpers.DealDamage(di, component, true, true, false);
                                             if (!healthComponent.body.HasBuff(RoR2Content.Buffs.OnFire))
                                             {
@@ -153,12 +151,19 @@ namespace ChefMod.Components
                                             }
                                             if (healthComponent.body.HasBuff(RoR2Content.Buffs.ClayGoo))
                                             {
-                                                OilExplosion.Explode(ownerBody, healthComponent.body, this.crit, false);
+                                                foreach (CharacterBody.TimedBuff t in healthComponent.body.timedBuffs)
+                                                {
+                                                    if (t.buffIndex == RoR2Content.Buffs.ClayGoo.buffIndex && t.timer > 2f)
+                                                    {
+                                                        OilExplosion.Explode(ownerBody, healthComponent.body, this.crit, boosted);
+                                                        break;
+                                                    }
+                                                }
                                             }
                                         }
                                         else
                                         {
-                                            if (onGround && !pendingIgnite && !healthComponent.body.HasBuff(RoR2Content.Buffs.ClayGoo))
+                                            if (onGround && !pendingIgnite)// && !healthComponent.body.HasBuff(RoR2Content.Buffs.ClayGoo)
                                             {
                                                 healthComponent.body.AddTimedBuff(RoR2Content.Buffs.ClayGoo, 5f);
                                             }
@@ -176,6 +181,7 @@ namespace ChefMod.Components
         {
             Destroy(oilDecalInstance);
             Destroy(fireInstance);
+            Destroy(oilBallInstance);
         }
 
         public void Start()
@@ -209,7 +215,6 @@ namespace ChefMod.Components
 
             this.owner = projCont.owner;
             this.teamIndex = teamFilt.teamIndex;
-            this.damage = projDamg.damage;
             this.crit = projDamg.crit;
 
             if (owner)

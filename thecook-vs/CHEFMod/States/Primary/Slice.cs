@@ -11,7 +11,7 @@ namespace EntityStates.Chef
     public class Slice : BaseState
     {
         public static GameObject projectilePrefab;
-        public static float damageCoefficient = 1.3f;
+        public static float damageCoefficient = 1.2f;
         public bool returned = false;
         public bool knifeThrown = false;
         public KnifeHandler knifeHandler;

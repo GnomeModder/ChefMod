@@ -36,6 +36,13 @@ the mod icon was made by Destructor check out his youtube Destructor1089 for ris
 
 
 ## Changelog
+`2.0.7`
+
+- Reduced Slice damage from 130% to 120%.
+- Fixed a rare case where the oil balls from Glaze could linger.
+- Fixed ignited oil repeatedly triggering explosions on enemies being tethered by Mired Urn.
+	- Sear can still trigger explosions off of Mired Urn. This is intentional.
+
 `2.0.6`
 
 - Fixed Boosted Slice firing very slowly
