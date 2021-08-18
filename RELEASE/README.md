@@ -36,6 +36,10 @@ the mod icon was made by Destructor check out his youtube Destructor1089 for ris
 
 
 ## Changelog
+`2.0.6`
+
+- Fixed Boosted Slice firing very slowly
+
 `2.0.5`
 
 - Fixed Mince breaking at high attack speeds. Let me know if issues persist.

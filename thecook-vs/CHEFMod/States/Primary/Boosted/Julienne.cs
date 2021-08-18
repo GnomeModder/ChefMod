@@ -40,7 +40,7 @@ namespace EntityStates.Chef
                 float scaledFireInterval = fireInterval / this.attackSpeedStat;
                 if (stopwatch > scaledFireInterval)
                 {
-                    stopwatch -= fireInterval / scaledFireInterval;
+                    stopwatch -= scaledFireInterval;
                     stabcount--;
                     Throw();
                 }
