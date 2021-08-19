@@ -36,6 +36,10 @@ the mod icon was made by Destructor check out his youtube Destructor1089 for ris
 
 
 ## Changelog
+`2.0.8`
+
+- Fixed Mired Urn attempting to siphon health from oil pools.
+
 `2.0.7`
 
 - Reduced Slice damage from 130% to 120%.

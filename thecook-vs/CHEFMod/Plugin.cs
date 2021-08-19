@@ -33,7 +33,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "2.0.7")]
+        "2.0.8")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     public class chefPlugin : BaseUnityPlugin
     {
@@ -196,6 +196,7 @@ namespace ChefMod
             On.RoR2.HealthComponent.TakeDamage += TakeDamage.HealthComponent_TakeDamage;
             On.RoR2.GlobalEventManager.OnHitAll += OnHitAll.HitAll;
             On.RoR2.CharacterBody.Update += CharacterBody_Update.Update;
+            On.RoR2.SiphonNearbyController.SearchForTargets += FixMiredUrn.SearchForTargets;
         }
 
         public void BuildEffects()
