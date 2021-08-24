@@ -15,6 +15,7 @@ All players need the mod.
 - nonw
 
 ## To Do
+- Add config option to keep CHEF bossfight after completing the unlock.
 - Character select animation.
 - Give Sear a bigger flame.
 - Give Blaze a blue flame.
@@ -36,6 +37,12 @@ the mod icon was made by Destructor check out his youtube Destructor1089 for ris
 
 
 ## Changelog
+`2.0.9`
+
+- Clarified unlock description.
+- Increased unlock ingredient count from 10 -> 12
+- Fixed CHEF boss spawning while King's Kombat Arena is active.
+
 `2.0.8`
 
 - Fixed Mired Urn attempting to siphon health from oil pools.

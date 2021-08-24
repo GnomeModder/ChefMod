@@ -18,14 +18,16 @@ namespace ChefMod
         public static UnlockableDef chefUnlockDef;
         public static UnlockableDef sliceUnlockDef;
 
+        public static int ingredientCount = 12;
+
         public static void RegisterUnlockables()
         {
             LanguageAPI.Add("CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME", "Mise en Place");
-            LanguageAPI.Add("CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC", "Gather Ingredients");
+            LanguageAPI.Add("CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC", "Gather a dozen ingredients.");
             LanguageAPI.Add("CHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME", "Mise en Place");
 
             LanguageAPI.Add("CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME", "Full Set");
-            LanguageAPI.Add("CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC", "Have 40 cleavers in the air at once");
+            LanguageAPI.Add("CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC", "Have 40 cleavers in the air at once.");
             LanguageAPI.Add("CHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME", "Full Set");
 
             chefUnlockDef = Unlockable.AddUnlockable<Achievements.ChefAchievement>(true);
@@ -72,17 +74,17 @@ namespace ChefMod.Achievements
         {
             orig(self);
 
-            if (self && self.teamIndex == TeamIndex.Player && self.inventory)
+            if (!chefPlugin.arenaActive && self && self.teamIndex == TeamIndex.Player && self.inventory)
             {
                 int count = getFoodCount(self.inventory);
 
-                if (!warning && count > 8)
+                if (!warning && count >= Unlockables.ingredientCount - 1)
                 {
                     warning = true;
                     int choice = UnityEngine.Random.Range(0, chefwarnings.Length);
                     Chat.AddMessage(Util.GenerateColoredString("CHEF: " + chefwarnings[choice], Color.red));
                 }
-                if (warning && !death && !spawned && count > 9)
+                if (warning && !death && !spawned && count >= Unlockables.ingredientCount)
                 {
                     ChefInvasionManager.PerformInvasion(new Xoroshiro128Plus(Run.instance.seed));
                     spawned = true;

@@ -33,8 +33,9 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "2.0.8")]
+        "2.0.9")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
     public class chefPlugin : BaseUnityPlugin
     {
         public GameObject chefPrefab;
@@ -70,7 +71,8 @@ namespace ChefMod
 
         public static Color chefColor = new Color(189f / 255f, 190f / 255f, 194f / 255f);
 
-        
+        public static bool arenaPluginLoaded = false;
+        public static bool arenaActive = false;
 
         private void ContentManager_collectContentPackProviders(ContentManager.AddContentPackProviderDelegate addContentPackProvider)
         {
@@ -174,6 +176,11 @@ namespace ChefMod
 
         public void Awake()
         {
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Kingpinush.KingKombatArena"))
+            {
+                arenaPluginLoaded = true;
+            }
+
             ReadConfig();
             AddHooks();
             Unlockables.RegisterUnlockables();
@@ -197,6 +204,10 @@ namespace ChefMod
             On.RoR2.GlobalEventManager.OnHitAll += OnHitAll.HitAll;
             On.RoR2.CharacterBody.Update += CharacterBody_Update.Update;
             On.RoR2.SiphonNearbyController.SearchForTargets += FixMiredUrn.SearchForTargets;
+            if(chefPlugin.arenaPluginLoaded)
+            {
+                On.RoR2.Stage.Start += ArenaStage_Start.Stage_Start;
+            }
         }
 
         public void BuildEffects()
