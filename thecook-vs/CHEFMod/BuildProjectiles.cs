@@ -103,7 +103,6 @@ namespace ChefMod
         {
             GameObject acid = Resources.Load<GameObject>("Prefabs/CharacterBodies/commandobody").GetComponent<CharacterBody>().preferredPodPrefab;
             GameObject oilfab = acid.GetComponentInChildren<ThreeEyedGames.Decal>().gameObject.InstantiateClone("OilCum", false);
-            var dekal = oilfab.GetComponent<ThreeEyedGames.Decal>();
 
             oilfab.transform.localScale *= 4f;
 
