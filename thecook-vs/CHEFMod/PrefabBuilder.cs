@@ -275,7 +275,7 @@ public class PrefabBuilder
 
     private void  SetupCameraParams()
     {
-        camParams.cameraParams = new CharacterCameraParams();
+        camParams.cameraParams = ScriptableObject.CreateInstance<CharacterCameraParams>();
         var copy = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponent<CameraTargetParams>().cameraParams;
         camParams.cameraParams.maxPitch = copy.maxPitch;
         camParams.cameraParams.minPitch = copy.minPitch;
