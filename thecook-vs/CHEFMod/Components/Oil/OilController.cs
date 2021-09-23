@@ -21,7 +21,7 @@ namespace ChefMod.Components
         public static float damageCoefficient = 0.25f;
         public static GameObject ExplosionEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/ImpactEffects/IgniteExplosionVFX");
 
-        private float stopwatch = 0f;
+        private float stopwatch = 0f; //        [SyncVar] to go with the newly added code?
         private float damageStopwatch = 0f;
         public bool boosted = false;
         public bool pendingIgnite = false;
@@ -307,7 +307,7 @@ namespace ChefMod.Components
                                 // If there are any oil splats within 4 meters, then we'll extend their duration,
                                 // and delete ourselves by setting our stopwatch to the max duration we can.
                                 var distanceToNearbyOil = Vector3.Distance(myBody.corePosition, healthComponent.body.corePosition);
-                                if (distanceToNearbyOil <= 4f)
+                                if (distanceToNearbyOil <= 6f)
                                 {
                                     if (fire.onGround && !this.onGround)
                                     {
