@@ -292,15 +292,18 @@ namespace ChefMod.Components
                                 // Some lag can be attributed to having multiple stacking in one place, so I'm going to extend the lifetime of nearby existing ones
                                 // to cut down on the existing gameobjects in the world.
 
-                                // If there are any oil splats within 5 meters, then we'll extend their duration,
+                                // If there are any oil splats within 4 meters, then we'll extend their duration,
                                 // and delete ourselves by setting our stopwatch to the max duration we can.
                                 var distanceToNearbyOil = Vector3.Distance(myBody.corePosition, healthComponent.body.corePosition);
-                                if (distanceToNearbyOil <= 5f)
+                                if (distanceToNearbyOil <= 4f)
                                 {
-                                    fire.stopwatch = 0;
-                                    stopwatch = oilLifetime;
+                                    if (fire.onGround)
+                                    {
+                                        fire.stopwatch = 0;
+                                        stopwatch = oilLifetime;
+                                    }
 
-                                } else // If they're further than 5 meters away, then we can ignite ourselves.
+                                } else // If they're further than 4 meters away, then we can ignite ourselves.
                                 {
                                     if (fire.onFire)
                                     {
