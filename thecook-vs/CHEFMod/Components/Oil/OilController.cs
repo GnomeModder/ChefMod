@@ -297,7 +297,7 @@ namespace ChefMod.Components
                                 var distanceToNearbyOil = Vector3.Distance(myBody.corePosition, healthComponent.body.corePosition);
                                 if (distanceToNearbyOil <= 4f)
                                 {
-                                    if (fire.onGround)
+                                    if (fire.onGround && !this.onGround)
                                     {
                                         fire.stopwatch = 0;
                                         stopwatch = oilLifetime;
