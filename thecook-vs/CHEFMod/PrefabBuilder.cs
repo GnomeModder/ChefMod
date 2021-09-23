@@ -259,7 +259,7 @@ public class PrefabBuilder
         body.aimOriginTransform = aimOrigin.transform;
         body.hullClassification = HullClassification.Human;
         if (preferredPodPrefab != null) body.preferredPodPrefab = preferredPodPrefab;
-        Debug.Log("Preferred pod prefab : " + body.preferredPodPrefab.name);
+        //Debug.Log("Preferred pod prefab : " + body.preferredPodPrefab.name);
     }
 
     private void  SetupCharacterMotor()
