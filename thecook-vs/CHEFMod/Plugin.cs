@@ -44,6 +44,9 @@ namespace ChefMod
         public static GameObject flamballPrefab;
         public static GameObject drippingPrefab;
         public static GameObject searBonusEffect;
+        public static GameObject fruitPodPrefab;
+
+        public static GameObject fruitPodImpactPrefab;
 
         public static SkillDef primaryDef;
         public static SkillDef boostedPrimaryDef;
@@ -60,6 +63,7 @@ namespace ChefMod
         public static ConfigEntry<bool> altVictoryMessage;
         public static ConfigEntry<bool> charUnlock;
         public static ConfigEntry<bool> altSkill;
+        public static ConfigEntry<bool> altPodPrefab; // Remove? The custom pod prefab could be the default
 
         public static ConfigEntry<bool> oldChefInvader;
         public static ConfigEntry<bool> unlockDisablesInvasion;
@@ -172,6 +176,29 @@ namespace ChefMod
             altVictoryMessage = base.Config.Bind<bool>(new ConfigDefinition("01 - General Settings", "Alt Victory Message"), false, new ConfigDescription("Makes the victory message more in-line with the game's tone.", null, Array.Empty<object>()));
             //unlockDisablesInvasion = base.Config.Bind<bool>(new ConfigDefinition("02 - Invasion Settings", "Disable Invasion after Unlock"), true, new ConfigDescription("Disables the CHEF invasion bossfight once CHEF is unlocked.", null, Array.Empty<object>()));
             oldChefInvader = base.Config.Bind<bool>(new ConfigDefinition("02 - Invasion Settings", "Old Chef Invader"), false, new ConfigDescription("Use the old overpowered CHEF invasion bossfight.", null, Array.Empty<object>()));
+            altPodPrefab = Config.Bind(new ConfigDefinition("01 - General Settings", "Alt Pod Prefab"), true, new ConfigDescription("Makes the pod prefab more appetizing", null, Array.Empty<object>()));
+        }
+
+        public void registerPodPrefabs()
+        {
+            var robocratePrefab = Resources.Load<GameObject>("prefabs/networkedobjects/robocratepod");
+            fruitPodPrefab = robocratePrefab.InstantiateClone("chef_fruitpod");
+            var meshObject = fruitPodPrefab.transform.Find("Base/mdlRoboCrate/Base/RobotCrateMesh");
+            var randomize = meshObject.gameObject.AddComponent<RandomizeModelOnStartPod>();
+            randomize.meshFilter = meshObject.gameObject.GetComponent<MeshFilter>();
+            randomize.meshRenderer = meshObject.gameObject.GetComponent<MeshRenderer>();
+            //meshObject.transform.localScale = Vector3.one * 20f;
+
+            var impactEffect = Resources.Load<GameObject>("prefabs/effects/impacteffects/RoboCratePodGroundImpact");
+            fruitPodImpactPrefab = PrefabAPI.InstantiateClone(impactEffect, "chef_fruitpod_impact");
+            Destroy(fruitPodImpactPrefab.GetComponent<EffectComponent>());
+            foreach (Transform child in fruitPodImpactPrefab.transform.Find("Particles").transform)
+            {
+                if (child.name != "Chunks, Solid")
+                    Destroy(child.gameObject);
+            }
+            RandomizeModelOnStartPod.impactEffect = fruitPodImpactPrefab;
+            PrefabAPI.RegisterNetworkPrefab(fruitPodPrefab);
         }
 
         public void Awake()
@@ -184,6 +211,7 @@ namespace ChefMod
             ReadConfig();
             AddHooks();
             Unlockables.RegisterUnlockables();
+            registerPodPrefabs();
             registerCharacter();
             registerSkills();
             registerProjectiles();
@@ -208,6 +236,32 @@ namespace ChefMod
             {
                 On.RoR2.Stage.Start += ArenaStage_Start.Stage_Start;
             }
+            On.RoR2.Run.HandlePlayerFirstEntryAnimation += Run_HandlePlayerFirstEntryAnimation;
+        }
+
+        // REMOVE THIS HOOK ONCE THE PODPREFAB IS FIXED
+        private void Run_HandlePlayerFirstEntryAnimation(On.RoR2.Run.orig_HandlePlayerFirstEntryAnimation orig, Run self, CharacterBody body, Vector3 spawnPosition, Quaternion spawnRotation)
+        {
+            if (!NetworkServer.active)
+            {
+                Debug.LogWarning("[Server] function 'System.Void RoR2.Run::HandlePlayerFirstEntryAnimation(RoR2.CharacterBody,UnityEngine.Vector3,UnityEngine.Quaternion)' called on client");
+                return;
+            }
+            if (body.preferredPodPrefab)
+            {
+                if (body.name.ToLower().StartsWith("chef"))
+                {
+                    GameObject gg = UnityEngine.Object.Instantiate<GameObject>(fruitPodPrefab, body.transform.position, spawnRotation);
+                    gg.GetComponent<VehicleSeat>().AssignPassenger(body.gameObject);
+                    NetworkServer.Spawn(gg);
+                    return;
+                }
+                GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(body.preferredPodPrefab, body.transform.position, spawnRotation);
+                gameObject.GetComponent<VehicleSeat>().AssignPassenger(body.gameObject);
+                NetworkServer.Spawn(gameObject);
+                return;
+            }
+            body.SetBodyStateToPreferredInitialState();
         }
 
         public void BuildEffects()
@@ -269,6 +323,7 @@ namespace ChefMod
             prefabBuilder.defaultSkinIcon = Assets.defaultSkinIcon;
             prefabBuilder.masterySkinIcon = Assets.defaultSkinIcon;
             prefabBuilder.masteryAchievementUnlockable = "";
+            prefabBuilder.preferredPodPrefab = fruitPodPrefab;
             chefPrefab = prefabBuilder.CreatePrefab();
 
             //var tracker = chefPrefab.AddComponent<HuntressTracker>();
