@@ -43,6 +43,15 @@ namespace ChefMod.Components
         private GameObject oilBallInstance = null;
         private GameObject oilDecalInstance = null;
         private GameObject fireInstance = null;
+        private DestroyOnTimer destroyOnTimer;
+
+        public void RegenerateOilTimer(OilController oilController)
+        {
+            if (NetworkServer.active)
+                oilController.damageStopwatch = 0;
+            oilController.destroyOnTimer.age = 0;
+            oilController.stopwatch = 0;
+        }
 
         public void FixedUpdate()
         {
@@ -66,17 +75,18 @@ namespace ChefMod.Components
                 Destroy(oilBallInstance);
                 oilDecalInstance = Instantiate(oilDecalPrefab, this.transform.position - Vector3.up, randy);
 
-                if (NetworkServer.active)
+                if (pendingIgnite)
                 {
-                    if (pendingIgnite)
+                    // Moved NetworkServer.active check into here so that FindNearby can be called by clients
+                    if (NetworkServer.active)
                     {
                         Ignite();
                         IgniteNearby();
                     }
-                    else
-                    {
-                        FindNearby();
-                    }
+                }
+                else
+                {
+                    FindNearby();
                 }
             }
             if (onFire && onGround)
@@ -217,6 +227,8 @@ namespace ChefMod.Components
             this.teamIndex = teamFilt.teamIndex;
             this.crit = projDamg.crit;
 
+            destroyOnTimer = this.gameObject.GetComponent<DestroyOnTimer>();
+
             if (owner)
             {
                 ownerBody = owner.GetComponent<CharacterBody>();
@@ -299,7 +311,7 @@ namespace ChefMod.Components
                                 {
                                     if (fire.onGround && !this.onGround)
                                     {
-                                        fire.stopwatch = 0;
+                                        RegenerateOilTimer(fire);
                                         stopwatch = oilLifetime;
                                     }
 
