@@ -16,6 +16,9 @@ namespace EntityStates.Chef
         ChefMod.FieldComponent fieldComponent;
         ChildLocator childLocator;
         //HuntressTracker tracker;
+        public static RuntimeAnimatorController displayAnimatorController = ChefContent.survivorDefs[0].displayPrefab.GetComponentInChildren<Animator>().runtimeAnimatorController;
+        RuntimeAnimatorController cachedAnimatorController;
+
         public override void OnEnter()
         {
             base.OnEnter();
@@ -49,6 +52,8 @@ namespace EntityStates.Chef
                 childLocator.FindChild("Knife").gameObject.SetActive(false);
             }
 
+            cachedAnimatorController = modelAnimator.runtimeAnimatorController;
+
             //tracker = base.characterBody.GetComponent<HuntressTracker>();
             //if (skillLocator.primary.baseSkill == chefPlugin.altPrimaryDef || skillLocator.primary.baseSkill == chefPlugin.boostedAltPrimaryDef)
             //{
@@ -72,6 +77,25 @@ namespace EntityStates.Chef
             //this.oilTrail.active = fieldComponent.active;
 
             fieldComponent.aimRay = base.GetAimRay();
+        }
+
+        public override void HandleMovements()
+        {
+            base.HandleMovements();
+            if (!characterBody) return;
+
+            var speedMultiplier = 5; //~16 hooves?
+            if (characterBody.moveSpeed > characterBody.baseMoveSpeed * speedMultiplier)
+                if (characterBody.isSprinting)
+                {
+                    modelAnimator.runtimeAnimatorController = displayAnimatorController;
+                    modelAnimator.speed = Mathf.Max(characterBody.moveSpeed / characterBody.baseMoveSpeed * speedMultiplier / 4, 1);
+                    modelLocator.normalizeToFloor = true;
+                    return;
+                }
+            modelAnimator.runtimeAnimatorController = cachedAnimatorController;
+            modelAnimator.speed = 1;
+            modelLocator.normalizeToFloor = false;
         }
 
         public override void OnExit()
