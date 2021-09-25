@@ -51,6 +51,8 @@ public class PrefabBuilder
     public GameObject camPivot = new GameObject("CameraPivot");
     public GameObject aimOrigin = new GameObject("AimOrigin");
 
+    public GameObject preferredPodPrefab;
+
     public CustomRendererInfo[] defaultCustomRendererInfos;
     public CustomRendererInfo[] masteryCustomRendererInfos;
 
@@ -256,6 +258,8 @@ public class PrefabBuilder
         body.mainRootSpeed = 0;
         body.aimOriginTransform = aimOrigin.transform;
         body.hullClassification = HullClassification.Human;
+        if (preferredPodPrefab != null) body.preferredPodPrefab = preferredPodPrefab;
+        //Debug.Log("Preferred pod prefab : " + body.preferredPodPrefab.name);
     }
 
     private void  SetupCharacterMotor()
@@ -271,7 +275,7 @@ public class PrefabBuilder
 
     private void  SetupCameraParams()
     {
-        camParams.cameraParams = new CharacterCameraParams();
+        camParams.cameraParams = ScriptableObject.CreateInstance<CharacterCameraParams>();
         var copy = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponent<CameraTargetParams>().cameraParams;
         camParams.cameraParams.maxPitch = copy.maxPitch;
         camParams.cameraParams.minPitch = copy.minPitch;

@@ -21,7 +21,14 @@ namespace ChefMod.Components
         public static float damageCoefficient = 0.25f;
         public static GameObject ExplosionEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/ImpactEffects/IgniteExplosionVFX");
 
-        private float stopwatch = 0f;
+        [SyncVar]
+        public float damageIntervalLocal;
+        [SyncVar]
+        public int oilStacks = 1;
+        public static int maxOilStacks = 20;
+        public HashSet<GameObject> otherOilPilesAffected = new HashSet<GameObject>();
+
+        private float stopwatch = 0f; //        [SyncVar] to go with the newly added code?
         private float damageStopwatch = 0f;
         public bool boosted = false;
         public bool pendingIgnite = false;
@@ -43,6 +50,21 @@ namespace ChefMod.Components
         private GameObject oilBallInstance = null;
         private GameObject oilDecalInstance = null;
         private GameObject fireInstance = null;
+        private DestroyOnTimer destroyOnTimer;
+
+        //aka AddOilStack, etc
+        public void RegenerateOilTimer(OilController oilController)
+        {
+            if (NetworkServer.active)
+            {
+                oilController.damageStopwatch = 0;
+                if (oilController.oilStacks < maxOilStacks)
+                    oilController.oilStacks++;
+                oilController.damageIntervalLocal = OilController.damageInterval / oilController.oilStacks;
+            }
+            oilController.destroyOnTimer.age = 0;
+            oilController.stopwatch = 0;
+        }
 
         public void FixedUpdate()
         {
@@ -50,9 +72,9 @@ namespace ChefMod.Components
             if (NetworkServer.active)
             {
                 damageStopwatch += Time.fixedDeltaTime;
-                if (damageStopwatch > damageInterval)
+                if (damageStopwatch > damageIntervalLocal)
                 {
-                    damageStopwatch -= damageInterval;
+                    damageStopwatch -= damageIntervalLocal;
                     TickDamage();
                 }
                 shouldDie = (stopwatch >= oilLifetime && !onFire) || (onFire && stopwatch >= burnLifetime);
@@ -66,17 +88,18 @@ namespace ChefMod.Components
                 Destroy(oilBallInstance);
                 oilDecalInstance = Instantiate(oilDecalPrefab, this.transform.position - Vector3.up, randy);
 
-                if (NetworkServer.active)
+                if (pendingIgnite)
                 {
-                    if (pendingIgnite)
+                    // Moved NetworkServer.active check into here so that FindNearby can be called by clients
+                    if (NetworkServer.active)
                     {
                         Ignite();
                         IgniteNearby();
                     }
-                    else
-                    {
-                        FindNearby();
-                    }
+                }
+                else
+                {
+                    FindNearby();
                 }
             }
             if (onFire && onGround)
@@ -217,6 +240,9 @@ namespace ChefMod.Components
             this.teamIndex = teamFilt.teamIndex;
             this.crit = projDamg.crit;
 
+            destroyOnTimer = this.gameObject.GetComponent<DestroyOnTimer>();
+            damageIntervalLocal = (float)damageInterval;
+
             if (owner)
             {
                 ownerBody = owner.GetComponent<CharacterBody>();
@@ -273,6 +299,7 @@ namespace ChefMod.Components
         private void FindNearby()
         {
             if (onFire) return;
+
             RaycastHit[] array = Physics.SphereCastAll(myBody.corePosition, 15f, Vector3.up, 5f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
             for (int j = 0; j < array.Length; j++)
             {
@@ -286,9 +313,35 @@ namespace ChefMod.Components
                         if (healthComponent)
                         {
                             OilController fire = healthComponent.body.GetComponent<OilController>();
-                            if (fire && fire.onFire)
+                            if (fire)
                             {
-                                this.Ignite();
+                                // Some lag can be attributed to having multiple stacking in one place, so I'm going to extend the lifetime of nearby existing ones
+                                // to cut down on the existing gameobjects in the world.
+
+                                // If there are any oil splats within 4 meters, then we'll extend their duration,
+                                // and delete ourselves by setting our stopwatch to the max duration we can.
+                                // Then we increase the damage/interval of the oil splats to act as if there's more oil splats on the position
+                                var distanceToNearbyOil = Vector3.Distance(myBody.corePosition, healthComponent.body.corePosition);
+                                if (distanceToNearbyOil <= 7f)
+                                {
+                                    if (!otherOilPilesAffected.Contains(fire.gameObject))
+                                    {
+                                        if (fire.onGround && !this.onGround)
+                                        {
+                                            RegenerateOilTimer(fire);
+                                            stopwatch = oilLifetime;
+                                            otherOilPilesAffected.Add(fire.gameObject);
+                                        }
+                                    }
+
+                                } else // If they're further than 4 meters away, then we can ignite ourselves.
+                                {
+                                    if (fire.onFire)
+                                    {
+                                        this.Ignite();
+                                    }
+                                }
+
                             }
                         }
                     }
