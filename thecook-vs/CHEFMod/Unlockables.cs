@@ -74,7 +74,7 @@ namespace ChefMod.Achievements
         {
             orig(self);
 
-            if (!chefPlugin.arenaActive && self && self.teamIndex == TeamIndex.Player && self.inventory)
+            if (!ChefPlugin.arenaActive && self && self.teamIndex == TeamIndex.Player && self.inventory)
             {
                 int count = getFoodCount(self.inventory);
 
@@ -143,7 +143,7 @@ namespace ChefMod.Achievements
         */
         private void BuffChefInvader(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
         {
-            if (chefPlugin.oldChefInvader.Value && self.master && self.master.name == "ChefInvader(Clone)")
+            if (ChefPlugin.oldChefInvader.Value && self.master && self.master.name == "ChefInvader(Clone)")
             {
                 self.baseMaxHealth = 1000f;
                 self.levelMaxHealth = 500f;
@@ -157,7 +157,7 @@ namespace ChefMod.Achievements
         {
             base.OnInstall();
 
-            if (chefPlugin.charUnlock.Value) base.Grant();
+            if (ChefPlugin.charUnlock.Value) base.Grant();
 
             On.RoR2.HealthComponent.FixedUpdate += ChefDeath;
             On.RoR2.CharacterMaster.OnInventoryChanged += CheckItem;

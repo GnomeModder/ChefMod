@@ -7,6 +7,7 @@ using RoR2.Projectile;
 using UnityEngine;
 using R2API;
 using R2API.Networking;
+using System.Collections;
 
 namespace ChefMod.Components
 {
@@ -85,7 +86,9 @@ namespace ChefMod.Components
                 onGround = true;
                 rig.isKinematic = true;
                 Quaternion randy = new Quaternion(0, 1, 0, UnityEngine.Random.Range(0, 360f));
-                Destroy(oilBallInstance);
+
+                StartCoroutine(splatBall());
+
                 oilDecalInstance = Instantiate(oilDecalPrefab, this.transform.position - Vector3.up, randy);
 
                 if (pendingIgnite)
@@ -113,6 +116,15 @@ namespace ChefMod.Components
             if (shouldDie)
             {
                 Destroy(myBody.gameObject);
+            }
+        }
+
+        public IEnumerator splatBall() {
+
+            oilBallInstance.GetComponent<Animator>().Play("OilBallSplat");
+            yield return new WaitForSeconds(0.13f);
+            if (oilBallInstance) {
+                Destroy(oilBallInstance);
             }
         }
 

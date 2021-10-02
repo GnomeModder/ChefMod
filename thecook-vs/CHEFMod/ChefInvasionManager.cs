@@ -15,7 +15,7 @@ namespace ChefPlugin
     {
         public static void PerformInvasion(Xoroshiro128Plus rng)
         {
-            var master = chefPlugin.invaderMaster;
+            var master = ChefMod.ChefPlugin.invaderMaster;
             if (master) CreateNemesis(master, rng);
         }
 
@@ -70,7 +70,7 @@ namespace ChefPlugin
                     characterMaster.inventory.AddItemsFrom(arenaInventory);
                 }
 
-                if (chefPlugin.oldChefInvader.Value)
+                if (ChefMod.ChefPlugin.oldChefInvader.Value)
                 {
                     //thanks man
                     //have some bullshit boss scaling~
@@ -92,9 +92,9 @@ namespace ChefPlugin
                     //Swapping scaling to Vengeance-Like scaling and Scavenger items.
                     characterMaster.inventory.GiveItem(RoR2Content.Items.InvadingDoppelganger, 1);
                     characterMaster.inventory.GiveItem(RoR2Content.Items.UseAmbientLevel, 1);
-                    List<PickupIndex> list = Run.instance.availableTier1DropList.Where(PickupIsNonBlacklistedItem).ToList<PickupIndex>();
-                    List<PickupIndex> list2 = Run.instance.availableTier2DropList.Where(PickupIsNonBlacklistedItem).ToList<PickupIndex>();
-                    List<PickupIndex> list3 = Run.instance.availableTier3DropList.Where(PickupIsNonBlacklistedItem).ToList<PickupIndex>();
+                    List<PickupIndex> list = Run.instance.availableTier1DropList.Where(PickupIsNonBlacklistedItem).ToList();
+                    List<PickupIndex> list2 = Run.instance.availableTier2DropList.Where(PickupIsNonBlacklistedItem).ToList();
+                    List<PickupIndex> list3 = Run.instance.availableTier3DropList.Where(PickupIsNonBlacklistedItem).ToList();
                     List<PickupIndex> availableEquipmentDropList = Run.instance.availableEquipmentDropList;
                     GrantItems(characterMaster.inventory, list, 3, 9);
                     GrantItems(characterMaster.inventory, list2, 2, 4);

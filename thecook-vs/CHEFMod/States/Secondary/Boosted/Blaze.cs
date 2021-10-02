@@ -26,8 +26,8 @@ namespace EntityStates.Chef
         public override void ModifyBullet(BulletAttack ba)
         {
             ba.damage = base.damageStat * FireBlaze.damageCoefficient;
-            ba.AddModdedDamageType(chefPlugin.chefFireballOnHit);
-            ba.AddModdedDamageType(chefPlugin.chefSear);
+            ba.AddModdedDamageType(ChefMod.ChefPlugin.chefFireballOnHit);
+            ba.AddModdedDamageType(ChefMod.ChefPlugin.chefSear);
         }
     }
 }

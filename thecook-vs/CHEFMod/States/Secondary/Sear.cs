@@ -123,7 +123,7 @@ namespace EntityStates.Chef
 
         public virtual void ModifyBullet(BulletAttack ba)
         {
-            ba.AddModdedDamageType(chefPlugin.chefSear);
+            ba.AddModdedDamageType(ChefMod.ChefPlugin.chefSear);
         }
 
         public override void FixedUpdate()

@@ -12,7 +12,7 @@ namespace ChefMod.Hooks
         public static void HitAll(On.RoR2.GlobalEventManager.orig_OnHitAll orig, GlobalEventManager self, DamageInfo damageInfo, GameObject hitObject)
         {
             orig(self, damageInfo, hitObject);
-            if(damageInfo.HasModdedDamageType(chefPlugin.chefSear))
+            if(damageInfo.HasModdedDamageType(ChefPlugin.chefSear))
             {
                 RaycastHit[] array = Physics.SphereCastAll(damageInfo.position, 15f, Vector3.up, 5f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
                 for (int j = 0; j < array.Length; j++)
@@ -29,7 +29,7 @@ namespace ChefMod.Hooks
                                 OilController fire = healthComponent.body.GetComponent<OilController>();
                                 if (fire)
                                 {
-                                    if (damageInfo.HasModdedDamageType(chefPlugin.chefFireballOnHit))
+                                    if (damageInfo.HasModdedDamageType(ChefPlugin.chefFireballOnHit))
                                     {
                                         fire.boosted = true;
                                     }

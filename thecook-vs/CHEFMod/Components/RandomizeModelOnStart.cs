@@ -26,7 +26,7 @@ namespace ChefMod.Components
             { Resources.Load<GameObject>("prefabs/pickupmodels/PickupInterstellarDeskPlant"), Vector3.one * 8f }
         };
 
-        public static GameObject impactEffect = chefPlugin.fruitPodImpactPrefab;
+        public static GameObject impactEffect = ChefPlugin.fruitPodImpactPrefab;
 
         public void Start()
         {

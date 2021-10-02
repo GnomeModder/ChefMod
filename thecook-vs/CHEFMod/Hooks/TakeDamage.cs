@@ -12,8 +12,8 @@ namespace ChefMod.Hooks
         public static void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
             bool hasGoo = false;
-            bool isSear = damageInfo.HasModdedDamageType(chefPlugin.chefSear);
-            bool isBoostSear = damageInfo.HasModdedDamageType(chefPlugin.chefFireballOnHit);
+            bool isSear = damageInfo.HasModdedDamageType(ChefPlugin.chefSear);
+            bool isBoostSear = damageInfo.HasModdedDamageType(ChefPlugin.chefFireballOnHit);
             if (self.body && self.body.baseNameToken == "OilBeetle")
             {
                 damageInfo.procCoefficient = 0f;
@@ -57,7 +57,7 @@ namespace ChefMod.Hooks
                         {
                             if (damageInfo.force.magnitude > 0f && damageInfo.procCoefficient == 1f && self.body.baseNameToken != "OilBeetle")
                             {
-                                EffectManager.SimpleImpactEffect(chefPlugin.searBonusEffect, damageInfo.position, Vector3.up, true);
+                                EffectManager.SimpleImpactEffect(ChefPlugin.searBonusEffect, damageInfo.position, Vector3.up, true);
                             }
                             OilExplosion.Explode(attackerBody, self.body, damageInfo.crit, isBoostSear);
                         }

@@ -208,9 +208,9 @@ public class PrefabBuilder
     }
 
     private void  SetupModelBase() {
-        chefPlugin.Destroy(prefab.transform.Find("ModelBase").gameObject);
-        chefPlugin.Destroy(prefab.transform.Find("CameraPivot").gameObject);
-        chefPlugin.Destroy(prefab.transform.Find("AimOrigin").gameObject);
+        ChefMod.ChefPlugin.Destroy(prefab.transform.Find("ModelBase").gameObject);
+        ChefMod.ChefPlugin.Destroy(prefab.transform.Find("CameraPivot").gameObject);
+        ChefMod.ChefPlugin.Destroy(prefab.transform.Find("AimOrigin").gameObject);
 
         modelBase.transform.parent = prefab.transform;
         modelBase.transform.localPosition = new Vector3(0f, -0.81f, 0f);

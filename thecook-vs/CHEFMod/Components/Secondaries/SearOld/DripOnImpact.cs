@@ -83,7 +83,7 @@ namespace ChefMod
             for (int i = 0; i < meatballCount; i++)
             {
                 Vector3 forward2 = Quaternion.AngleAxis(num * (float)i, impactNormal) * point;
-                ProjectileManager.instance.FireProjectile(chefPlugin.drippingPrefab, impactPosition + 5f * impactNormal.normalized, Util.QuaternionSafeLookRotation(forward2), damageInfo.attacker, damageInfo.damage, meatballForce, damageInfo.crit, DamageColorIndex.Default, null, -1f);
+                ProjectileManager.instance.FireProjectile(ChefPlugin.drippingPrefab, impactPosition + 5f * impactNormal.normalized, Util.QuaternionSafeLookRotation(forward2), damageInfo.attacker, damageInfo.damage, meatballForce, damageInfo.crit, DamageColorIndex.Default, null, -1f);
             }
         }
     }

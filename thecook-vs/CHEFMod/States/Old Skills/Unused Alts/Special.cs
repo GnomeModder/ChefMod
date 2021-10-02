@@ -30,9 +30,9 @@ namespace EntityStates.Chef
                             {
                                 if (healthComponent.body.teamComponent && healthComponent.body.teamComponent.teamIndex == characterBody.teamComponent.teamIndex)
                                 {
-                                    if (!healthComponent.body.HasBuff(chefPlugin.foodBuff))
+                                    if (!healthComponent.body.HasBuff(ChefMod.ChefPlugin.foodBuff))
                                     {
-                                        healthComponent.body.AddTimedBuff(chefPlugin.foodBuff, 4f);
+                                        healthComponent.body.AddTimedBuff(ChefMod.ChefPlugin.foodBuff, 4f);
                                     }
                                 }
                             }

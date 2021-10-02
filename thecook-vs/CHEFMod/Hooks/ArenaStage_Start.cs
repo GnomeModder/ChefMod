@@ -18,7 +18,7 @@ namespace ChefMod.Hooks
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private static void SetArena()
         {
-            chefPlugin.arenaActive = KingKombatArenaMainPlugin.s_GAME_MODE_ACTIVE;
+            ChefPlugin.arenaActive = KingKombatArenaMainPlugin.s_GAME_MODE_ACTIVE;
         }
     }
 }

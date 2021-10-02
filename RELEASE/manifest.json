@@ -1,8 +1,8 @@
 {
     "name": "ChefMod",
-    "version_number": "2.0.9",
+    "version_number": "2.0.10",
     "website_url": "https://github.com/GnomeModder/ChefMod",
-    "description": "Adds CHEF from RoR1 as a survivor. V2.0 gameplay overhauled and fully multiplayer-compatible!",
+    "description": "Adds CHEF from RoR1 as a survivor. V2.0: Gameplay overhauled and fully multiplayer-compatible!",
     "dependencies": [
         "bbepis-BepInExPack-5.4.9",
 	"tristanmcpherson-R2API-3.0.52"

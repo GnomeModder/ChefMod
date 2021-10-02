@@ -37,6 +37,13 @@ the mod icon was made by Destructor check out his youtube Destructor1089 for ris
 
 
 ## Changelog
+`2.0.10`
+- small animation on oil drops coming out  
+
+Thanks to ruin (DestroyedClone) for poppin in
+- Chef's spawn pod is now more appetizing
+- Some optimizations to the oil that will hopefully reduce lag when too many oil drops are coming out
+
 `2.0.9`
 
 - Clarified unlock description.

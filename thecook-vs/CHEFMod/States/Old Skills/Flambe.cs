@@ -48,7 +48,7 @@ namespace EntityStates.Chef
                 base.StartAimMode(0.2f, false);
 
                 FireProjectileInfo info = new FireProjectileInfo() {
-                    projectilePrefab = chefPlugin.flamballPrefab,
+                    projectilePrefab = ChefMod.ChefPlugin.flamballPrefab,
                     position = aimRay.origin + 1.5f * aimRay.direction,
                     rotation = Util.QuaternionSafeLookRotation(aimRay.direction) * Quaternion.FromToRotation(Vector3.left, Vector3.up),
                     owner = base.gameObject,
