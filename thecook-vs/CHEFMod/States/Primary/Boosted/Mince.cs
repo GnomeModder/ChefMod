@@ -9,8 +9,8 @@ namespace EntityStates.Chef
 {
     class Mince : BaseState
     {
-        public static float baseDuration = 0.5f;
-        public static float baseThrowDelay = 0.18f;
+        public static float baseDuration = 0.76f;
+        public static float baseThrowDelay = 0.259f; //attack comes out .15s
 
         private float throwDelay;
         private float duration;

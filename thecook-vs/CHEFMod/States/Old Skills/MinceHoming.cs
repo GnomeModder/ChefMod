@@ -35,7 +35,6 @@ namespace EntityStates.Chef
                 Vector3 right = new Vector3(aimRay.direction.z, 0, -1 * aimRay.direction.x).normalized;
 
                 var coom = Cleaver.projectilePrefab.GetComponent<CoomerangProjectile>();
-                coom.fieldComponent = characterBody.GetComponent<FieldComponent>();
                 coom.followRet = false;
 
                 getHitList(characterBody.corePosition, 40f);

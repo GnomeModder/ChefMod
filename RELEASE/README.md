@@ -17,8 +17,6 @@ All players need the mod.
 ## To Do
 - Add config option to keep CHEF bossfight after completing the unlock.
 - Character select animation.
-- Give Sear a bigger flame.
-- Give Blaze a blue flame.
 - More alt skills.
 - Balancing. Feedback is greatly appreciated!
 
@@ -26,7 +24,7 @@ All players need the mod.
 Huge thanks to 
 - Lucid Inceptor for being my muse (made the models)
 - Papa Zach for being my longest supporter (made icons)
-- Timesweeper for being my rock (helped me implement animation)
+- Timesweeper for being my rock (helped me implement animation, and various tweaks)
 - Moffein for being there when I needed him most (helped me patch for anniversary update and did networking and the 2.0 update)
 - rob for being the father I always dreamd of (gave advice)
 - Swuff for taking care of my needs (pleasured me, and made animations)
@@ -35,14 +33,40 @@ And as always I give my undying love to iDeathHD
 oh and thank you enigma for letting me use your prefab builder it is very cool
 the mod icon was made by Destructor check out his youtube Destructor1089 for risk of rain 2 sfm
 
+Thanks to Gnome for being the big bang in an otherwise cold and empty universe. 
+Whether or not you come back to work on him, we'll be here for ya.
+
 
 ## Changelog
-`2.0.10`
-- small animation on oil drops coming out  
+`2.0.12`
+- fixed oil causing errors with MoonstormSharedUtils
+  - Why you guys want CharacterControllers to have a mesh so bad?
+- fixed sear actually going through walls. I lied in the last update. I may even still be lying here. forgiv
 
+`2.0.11`
+
+Disproportionate amount of work into oil slick moves
+  - Small animation on big blobs coming out 
+  - holy shit the little oil particles on the ass oil were comming out 400 times a second and each particle was a mesh with the default pbr texture what the fuck dude 
+    - fixed that, I presume this solves the horrible lag issue. 
+  - as well, a bunch of work on those particles from someone who actually knows particles c:, including setting it to world space so they don't follow him locally
+  - move overall should look a lot more polished. definitely be a critical fuck and tell me if it can be improved further
+
+Sear
+  - made sear's effect an actual effect that sear should have. it's pretty *hot*, haaa
+  - made boosted sear blue (kinda. colors are hard)
+  - sear now goes through walls because fuck you
+
+why did I randomly do so much on this guy wtf?
+- adjusted timing of arms on mince animation
+- brought him down to slightly less retarded size 
+ 
 Thanks to ruin (DestroyedClone) for poppin in
-- Chef's spawn pod is now more appetizing
-- Some optimizations to the oil that will hopefully reduce lag when too many oil drops are coming out
+- Chef's spawn pod is now more appetizing (configurable)
+- Oil blobs now "combine" when too close together. Will hopefully reduce lag when too many oil blobs are in one place (configurable)
+  - Do me a favor and test with this configged on and off to see how much if at all this has improved performance
+- Fast chef moving at hihg speed now uses funny animation
+
 
 `2.0.9`
 

@@ -15,6 +15,8 @@ namespace EntityStates.Chef
 		//private float radius = 3f;
 
 		private Vector3 idealDirection;
+		private ChildLocator childLocator;
+		private ParticleSystem.EmissionModule emissionator;
 		//DamageTrail oilTrail;
 
 		//ChefMod.FieldComponent trailComponent;
@@ -26,10 +28,12 @@ namespace EntityStates.Chef
 			base.OnEnter();
 
 			this.duration = baseDuration;
+			childLocator = base.GetModelChildLocator();
+			emissionator = childLocator.FindChild("OilParticles").GetComponent<ParticleSystem>().emission;
 
 			if (base.isAuthority)
 			{
-				characterBody.GetComponent<FieldComponent>().oil.SetActive(true);
+				emissionator.enabled = true;
 
 				base.gameObject.layer = LayerIndex.fakeActor.intVal;
 				base.characterMotor.Motor.RebuildCollidableLayers();
@@ -138,7 +142,7 @@ namespace EntityStates.Chef
 
 			//trailComponent.active = false;
 
-			characterBody.GetComponent<FieldComponent>().oil.SetActive(false);
+			emissionator.enabled = false;
 
 
 			base.PlayAnimation("Fullbody, Override", "UtilityEnd");
@@ -166,7 +170,7 @@ namespace EntityStates.Chef
 
 		private Vector3 GetIdealVelocity()
 		{
-			return base.characterDirection.forward * Mathf.Sqrt((base.characterBody.moveSpeed * base.characterBody.moveSpeed) + 300f); //base.characterBody.moveSpeed * this.speedMultiplier;
+			return base.characterDirection.forward * base.characterBody.moveSpeed * this.speedMultiplier;// Mathf.Pow((base.characterBody.moveSpeed * base.characterBody.moveSpeed) + 300f, 0.5f); //base.characterBody.moveSpeed * this.speedMultiplier;
 		}
 	}
 }

@@ -33,7 +33,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "2.0.10")]
+        "2.0.12")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
     public class ChefPlugin : BaseUnityPlugin
@@ -64,6 +64,7 @@ namespace ChefMod
         public static ConfigEntry<bool> charUnlock;
         public static ConfigEntry<bool> altSkill;
         public static ConfigEntry<bool> altPodPrefab;
+        public static ConfigEntry<bool> OilDropCombine;
 
         public static ConfigEntry<bool> oldChefInvader;
         public static ConfigEntry<bool> unlockDisablesInvasion;
@@ -177,6 +178,7 @@ namespace ChefMod
             //unlockDisablesInvasion = base.Config.Bind<bool>(new ConfigDefinition("02 - Invasion Settings", "Disable Invasion after Unlock"), true, new ConfigDescription("Disables the CHEF invasion bossfight once CHEF is unlocked.", null, Array.Empty<object>()));
             oldChefInvader = base.Config.Bind<bool>("02 - Invasion Settings", "Old Chef Invader", false, "Use the old overpowered CHEF invasion bossfight.");
             altPodPrefab = Config.Bind<bool>("01 - General Settings", "Alt Spawn Pod", true, "Makes the pod prefab more appetizing");
+            OilDropCombine = Config.Bind<bool>("02 - Performance", "test oil combine", true, "Combines the large oil drops from the Utilty when they're too close to each other, removing the amount of oil drops in one place, hopefully improving performance.\ndo me a favor and test games with and without this to see how much this actually improves, thanks thanks.");
         }
 
         public void registerPodPrefabs()
@@ -207,6 +209,9 @@ namespace ChefMod
             {
                 arenaPluginLoaded = true;
             }
+
+
+            gameObject.AddComponent<TestValueManager>();
 
             ReadConfig();
             AddHooks();
@@ -267,6 +272,7 @@ namespace ChefMod
         public void BuildEffects()
         {
             BuildOilChainExplosionEffect();
+            BuildBoostedSearEffect();
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
@@ -315,7 +321,7 @@ namespace ChefMod
             PrefabBuilder prefabBuilder = new PrefabBuilder();
             prefabBuilder.prefabName = "ChefBody";
             prefabBuilder.model = Assets.chefAssetBundle.LoadAsset<GameObject>("mdlCHEF");
-            prefabBuilder.model.transform.localScale *= 1.25f;
+            prefabBuilder.model.transform.localScale *= 1;// *= 1.25f;
             prefabBuilder.defaultCustomRendererInfos = new CustomRendererInfo[] {
                 new CustomRendererInfo("Chef", Assets.matChefDefault),
                 new CustomRendererInfo("Cleaver", Assets.matChefDefaultKnife),
@@ -332,11 +338,6 @@ namespace ChefMod
             ////tracker.indicator = ;
             //tracker.enabled = false;
             chefPrefab.AddComponent<KnifeHandler>();    //Makes Slice work in MP
-
-            var fc = chefPrefab.AddComponent<FieldComponent>();
-            var meshs = chefPrefab.GetComponentsInChildren<MeshRenderer>();
-            foreach (MeshRenderer mesh in meshs) { if (!mesh.enabled) fc.oil = mesh.gameObject; }
-            fc.oil.SetActive(false);
 
             GameObject gameObject = chefPrefab.GetComponent<ModelLocator>().modelBaseTransform.gameObject;
 
@@ -404,7 +405,7 @@ namespace ChefMod
             characterBody.preferredPodPrefab = Resources.Load<GameObject>("Prefabs/CharacterBodies/toolbotbody").GetComponent<CharacterBody>().preferredPodPrefab;
 
             EntityStateMachine stateMachine = characterBody.GetComponent<EntityStateMachine>();
-            stateMachine.mainStateType = new SerializableEntityStateType(typeof(EntityStates.Chef.Main));
+            stateMachine.mainStateType = new SerializableEntityStateType(typeof(EntityStates.Chef.ChefMain));
 
             SurvivorDef survivorDef = ScriptableObject.CreateInstance<SurvivorDef>();
             survivorDef.bodyPrefab = chefPrefab;
@@ -449,7 +450,7 @@ namespace ChefMod
             ChefContent.entityStates.Add(typeof(Meal));
             ChefContent.entityStates.Add(typeof(MealScepter));
 
-            ChefContent.entityStates.Add(typeof(Main));
+            ChefContent.entityStates.Add(typeof(ChefMain));
 
             primaryDef = ScriptableObject.CreateInstance<SkillDef>();
             primaryDef.activationState = new SerializableEntityStateType(typeof(Cleaver));
@@ -862,6 +863,24 @@ namespace ChefMod
             ec.applyScale = true;
             ChefContent.effectDefs.Add(new EffectDef(OilExplosion.explosionEffectPrefab));
         }
+
+        private void BuildBoostedSearEffect() {
+
+            GameObject ExplosionVFX = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFX"), "ChefBlueOmniExplosionVFX", false);
+
+
+            ParticleSystemRenderer particleRenderer = ExplosionVFX.transform.Find("Unscaled Flames").GetComponent<ParticleSystemRenderer>();
+            Material mat = new Material(particleRenderer.material);
+            mat.SetColor("_TintColor", new Color(0, 0.32f, 1));
+            particleRenderer.material = mat;
+
+            ExplosionVFX.transform.Find("Point Light").GetComponent<Light>().color = new Color(0.05f, 0.38f, 1);
+            ExplosionVFX.transform.Find("AreaIndicatorRing, Billboard").gameObject.SetActive(false);
+
+            FireBlaze.ExplosionEffectBoosted = ExplosionVFX;
+            ChefContent.effectDefs.Add(new EffectDef(FireBlaze.ExplosionEffectBoosted));
+        }
+        
 
         private void AddLore()
         {

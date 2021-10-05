@@ -30,6 +30,9 @@ namespace ChefMod.Components
 
         public void Start()
         {
+            if (!ChefPlugin.altPodPrefab.Value)
+                return;
+
             if (NetworkServer.active)
                 index = UnityEngine.Random.Range(0, keyValuePairs.Count);
 

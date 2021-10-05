@@ -150,6 +150,10 @@ public class PrefabBuilder
         SetupInteractors();
         SetupDeathBehavior();
         SetupRigidBody();
+        if (model.GetComponent<RagdollController>()) {
+            Debug.LogWarning("hope this doesn't FUCK everything");
+            UnityEngine.Object.Destroy(model.GetComponent<RagdollController>());
+        }
         SetupCollider();
         SetupKCharacterMotor();
         SetupHurtbox();
@@ -166,7 +170,7 @@ public class PrefabBuilder
 
     public GameObject createDisplayPrefab(string displayPrefab) {
         GameObject gob = Assets.chefAssetBundle.LoadAsset<GameObject>(displayPrefab);
-
+        
         CharacterModel characterModel = gob.AddComponent<CharacterModel>();
 
         characterModel.autoPopulateLightInfos = true;
@@ -213,14 +217,14 @@ public class PrefabBuilder
         ChefMod.ChefPlugin.Destroy(prefab.transform.Find("AimOrigin").gameObject);
 
         modelBase.transform.parent = prefab.transform;
-        modelBase.transform.localPosition = new Vector3(0f, -0.81f, 0f);
+        modelBase.transform.localPosition = new Vector3(0f, -0.95f, 0f);
         modelBase.transform.localRotation = Quaternion.identity;
         //modelBase.transform.localScale = Vector3.one;
     }
 
     private void  SetupCamera() {
         camPivot.transform.parent = prefab.transform;
-        camPivot.transform.localPosition = new Vector3(0f, -0.81f, 0f);
+        camPivot.transform.localPosition = new Vector3(0f, -0.95f, 0f);
         camPivot.transform.rotation = Quaternion.identity;
         camPivot.transform.localScale = Vector3.one;
     }
@@ -280,11 +284,11 @@ public class PrefabBuilder
         camParams.cameraParams.maxPitch = copy.maxPitch;
         camParams.cameraParams.minPitch = copy.minPitch;
         camParams.cameraParams.name = "CHEFcam";
-        camParams.cameraParams.pivotVerticalOffset = 1.3f * copy.pivotVerticalOffset;
-        camParams.cameraParams.standardLocalCameraPos = 1.4f * copy.standardLocalCameraPos;
         camParams.cameraParams.wallCushion = copy.wallCushion;
 
-        camParams.cameraParams.pivotVerticalOffset *= 1.3f;
+        camParams.cameraParams.pivotVerticalOffset = 1.4f;// * 1.3f;
+        camParams.cameraParams.standardLocalCameraPos = new Vector3(0,0,-11);// * 1.4f;
+
         camParams.cameraPivotTransform = null;
         camParams.aimMode = CameraTargetParams.AimType.Standard;
         camParams.recoil = Vector2.zero;
@@ -412,6 +416,9 @@ public class PrefabBuilder
         footstep.enableFootstepDust = true;
         footstep.footstepDustPrefab = Resources.Load<GameObject>("Prefabs/GenericFootstepDust");
     }
+
+    
+
     //RagdollController ragdoll = model.GetComponent<RagdollController>();
     //TODO
     //ragdoll.bones = null;

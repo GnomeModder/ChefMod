@@ -88,8 +88,8 @@ namespace ChefMod.Components
                 Quaternion randy = new Quaternion(0, 1, 0, UnityEngine.Random.Range(0, 360f));
 
                 StartCoroutine(splatBall());
-
                 oilDecalInstance = Instantiate(oilDecalPrefab, this.transform.position - Vector3.up, randy);
+                oilDecalInstance.transform.localScale *= TestValueManager.bloob;// 0.7f;
 
                 if (pendingIgnite)
                 {
@@ -281,10 +281,10 @@ namespace ChefMod.Components
 
         private void IgniteNearby()
         {
-            RaycastHit[] array = Physics.SphereCastAll(myBody.corePosition, 15f, Vector3.up, 15f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
+            Collider[] array = Physics.OverlapSphere(myBody.corePosition, 15f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
             for (int j = 0; j < array.Length; j++)
             {
-                Collider collider = array[j].collider;
+                Collider collider = array[j];
                 if (collider.gameObject)
                 {
                     RoR2.HurtBox component = collider.GetComponent<RoR2.HurtBox>();
@@ -310,12 +310,16 @@ namespace ChefMod.Components
 
         private void FindNearby()
         {
-            if (onFire) return;
+            if (!ChefPlugin.OilDropCombine.Value)
+                return;
+            
+            if (onFire)
+                return;
 
-            RaycastHit[] array = Physics.SphereCastAll(myBody.corePosition, 15f, Vector3.up, 5f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
+            Collider[] array = Physics.OverlapSphere(myBody.corePosition, 15f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
             for (int j = 0; j < array.Length; j++)
             {
-                Collider collider = array[j].collider;
+                Collider collider = array[j];
                 if (collider.gameObject)
                 {
                     RoR2.HurtBox component = collider.GetComponent<RoR2.HurtBox>();
@@ -334,13 +338,15 @@ namespace ChefMod.Components
                                 // and delete ourselves by setting our stopwatch to the max duration we can.
                                 // Then we increase the damage/interval of the oil splats to act as if there's more oil splats on the position
                                 var distanceToNearbyOil = Vector3.Distance(myBody.corePosition, healthComponent.body.corePosition);
-                                if (distanceToNearbyOil <= 7f)
+                                if (distanceToNearbyOil <= 5f)
                                 {
                                     if (!otherOilPilesAffected.Contains(fire.gameObject))
                                     {
                                         if (fire.onGround && !this.onGround)
                                         {
                                             RegenerateOilTimer(fire);
+
+                                            Debug.LogWarning("combining oils");
                                             stopwatch = oilLifetime;
                                             otherOilPilesAffected.Add(fire.gameObject);
                                         }

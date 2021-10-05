@@ -9,11 +9,10 @@ using UnityEngine.Networking;
 
 namespace EntityStates.Chef
 {
-    public class Main : GenericCharacterMain
+    public class ChefMain : GenericCharacterMain
     {
         //public ChefMod.Trail oilTrail;
         //public float radius = 3f;
-        ChefMod.FieldComponent fieldComponent;
         ChildLocator childLocator;
         //HuntressTracker tracker;
         public static RuntimeAnimatorController displayAnimatorController = ChefContent.survivorDefs[0].displayPrefab.GetComponentInChildren<Animator>().runtimeAnimatorController;
@@ -37,8 +36,8 @@ namespace EntityStates.Chef
             //this.oilTrail.lineRenderer = damageTrail.lineRenderer;
             //this.oilTrail.segmentPrefab = damageTrail.segmentPrefab;
 
-            fieldComponent = base.characterBody.GetComponent<ChefMod.FieldComponent>();
-            fieldComponent.characterBody = base.characterBody;
+            //fieldComponent = base.characterBody.GetComponent<ChefMod.FieldComponent>();
+            //fieldComponent.characterBody = base.characterBody;
 
             childLocator = base.GetModelChildLocator();
             if (skillLocator.primary.baseSkill == ChefMod.ChefPlugin.altPrimaryDef || skillLocator.primary.baseSkill == ChefMod.ChefPlugin.boostedAltPrimaryDef)
@@ -76,7 +75,7 @@ namespace EntityStates.Chef
             //this.oilTrail.damagePerSecond = base.characterBody.damage * 1.5f;
             //this.oilTrail.active = fieldComponent.active;
 
-            fieldComponent.aimRay = base.GetAimRay();
+            //fieldComponent.aimRay = base.GetAimRay();
         }
 
         public override void HandleMovements()

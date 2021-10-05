@@ -10,6 +10,7 @@ namespace EntityStates.Chef
 {
     public class PrepSear : BaseState
     {
+
         public override void OnEnter()
         {
             base.OnEnter();
@@ -54,8 +55,16 @@ namespace EntityStates.Chef
         public bool specialBoosted = false;
     }
 
-    public class FireSear : BaseState
-    {
+    public class FireSear : BaseState {
+
+        public static float blastEffectRadius = 2;
+        public static float blastSpacing;
+        public static GameObject ExplosionEffectPrefab = Resources.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFX");
+
+        protected virtual GameObject explosion {
+            get => ExplosionEffectPrefab;
+        }
+
         public virtual void PlaySound()
         {
             Util.PlaySound("Play_Chefmod_Sear", base.gameObject);
@@ -66,36 +75,50 @@ namespace EntityStates.Chef
             base.OnEnter();
 
             this.duration = FireSear.baseDuration / this.attackSpeedStat;
-            base.AddRecoil(-3f * FireSear.recoilAmplitude, -4f * FireSear.recoilAmplitude, -0.5f * FireSear.recoilAmplitude, 0.5f * FireSear.recoilAmplitude);
+            base.AddRecoil(-3f * FireSear.recoilAmplitude, -5f * FireSear.recoilAmplitude, -0.5f * FireSear.recoilAmplitude, 0.5f * FireSear.recoilAmplitude);
 
             PlaySound();
 
-            if (!flamethrowerEffectPrefab)
-            {
-                Mage.Weapon.Flamethrower flameEffect = new Mage.Weapon.Flamethrower();
-                flamethrowerEffectPrefab = flameEffect.flamethrowerEffectPrefab;
+            //if (!flamethrowerEffectPrefab)
+            //{
+            //    Mage.Weapon.Flamethrower flameEffect = new Mage.Weapon.Flamethrower();
+            //    flamethrowerEffectPrefab = flameEffect.flamethrowerEffectPrefab;
+            //}
+
+            //this.childLocator = base.GetModelChildLocator();
+            //if (this.childLocator)
+            //{
+            //    Transform transform2 = this.childLocator.FindChild("Body");
+            //    if (transform2)
+            //    {
+            //        this.flamethrowerTransform = UnityEngine.Object.Instantiate<GameObject>(flamethrowerEffectPrefab, transform2).transform;
+            //        if (this.flamethrowerTransform)
+            //        {
+            //            this.flamethrowerTransform.localPosition += flameEffectOffset;
+            //            this.flamethrowerTransform.localScale = flameScale;
+            //            this.flamethrowerTransform.GetComponent<ScaleParticleSystemDuration>().newDuration = duration*0.25f;
+            //        }
+            //    }
+            //}
+
+            Ray aimRay = base.GetAimRay();
+
+            EffectData effectData = new EffectData();
+            effectData.scale = 2.9f;
+
+            for (float f = 0; f <= 48;) {
+                //start spacing little in front of him
+                f += blastEffectRadius + blastSpacing;
+
+                Vector3 point = aimRay.origin + aimRay.direction * f;
+                effectData.origin = point;
+                EffectManager.SpawnEffect(explosion, effectData, false);
             }
-            this.childLocator = base.GetModelChildLocator();
-            if (this.childLocator)
-            {
-                Transform transform2 = this.childLocator.FindChild("Body");
-                if (transform2)
-                {
-                    this.flamethrowerTransform = UnityEngine.Object.Instantiate<GameObject>(flamethrowerEffectPrefab, transform2).transform;
-                    if (this.flamethrowerTransform)
-                    {
-                        this.flamethrowerTransform.localPosition += flameEffectOffset;
-                        this.flamethrowerTransform.localScale = flameScale;
-                        this.flamethrowerTransform.GetComponent<ScaleParticleSystemDuration>().newDuration = duration*0.25f;
-                    }
-                }
-            }
+
             if (base.isAuthority)
             {
-                Ray aimRay = base.GetAimRay();
                 base.StartAimMode(aimRay, 2f, false);
-                BulletAttack ba = new BulletAttack
-                {
+                BulletAttack ba = new BulletAttack {
                     owner = base.gameObject,
                     weapon = base.gameObject,
                     origin = aimRay.origin,
@@ -114,7 +137,9 @@ namespace EntityStates.Chef
                     radius = 2f,
                     smartCollision = true,
                     maxDistance = 48f,
-                    stopperMask = LayerIndex.world.mask
+                    stopperMask = LayerIndex.world.collisionMask,
+                    hitMask = LayerIndex.CommonMasks.bullet,
+                    queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
                 };
                 ModifyBullet(ba);
                 ba.Fire();

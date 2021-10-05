@@ -11,8 +11,8 @@ namespace EntityStates.Chef
     {
         public static GameObject projectilePrefab;
         public static float damageCoefficient = 1.5f;
-        public float baseDuration = 0.5f;
-        public float throwTime = 0.38f;
+        public float baseDuration = 0.52f;
+        public float throwTime = 0.38f; //attack comes out .1976s
 
         private float duration;
         private bool hasThrown;

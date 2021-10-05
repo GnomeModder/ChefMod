@@ -222,7 +222,6 @@ namespace ChefMod
 
 
 		public bool followRet = true;	//was false
-		public FieldComponent fieldComponent;
 		private float startTime;
 
 		public static event Action Returned;

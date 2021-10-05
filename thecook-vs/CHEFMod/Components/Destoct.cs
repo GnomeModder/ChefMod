@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace ChefMod
-{
+namespace ChefMod {
+
     public class Destroct : NetworkBehaviour
     {
         public DamageInfo damageInfo;

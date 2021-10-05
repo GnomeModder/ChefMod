@@ -14,6 +14,8 @@ namespace EntityStates.Chef
 		//private float radius = 3f;
 
 		private Vector3 idealDirection;
+		private ChildLocator childLocator;
+		private ParticleSystem.EmissionModule emissionator;
 		//DamageTrail oilTrail;
 
 		//ChefMod.FieldComponent trailComponent;
@@ -25,10 +27,11 @@ namespace EntityStates.Chef
 			base.OnEnter();
 
 			this.duration = baseDuration;
+			childLocator = base.GetModelChildLocator();
+			emissionator = childLocator.FindChild("OilParticles").GetComponent<ParticleSystem>().emission;
 
-			if (base.isAuthority)
-			{
-				characterBody.GetComponent<FieldComponent>().oil.SetActive(true);
+			if (base.isAuthority) {
+				emissionator.enabled = true;
 
 				base.gameObject.layer = LayerIndex.fakeActor.intVal;
 				base.characterMotor.Motor.RebuildCollidableLayers();
@@ -140,7 +143,7 @@ namespace EntityStates.Chef
 
 			//trailComponent.active = false;
 
-			characterBody.GetComponent<FieldComponent>().oil.SetActive(false);
+			emissionator.enabled = false;
 
 			base.PlayAnimation("Fullbody, Override", "UtilityEnd");
 
@@ -151,7 +154,7 @@ namespace EntityStates.Chef
 		{
 			return InterruptPriority.PrioritySkill;
 		}
-
+		
 		private void UpdateDirection()
 		{
 			if (base.inputBank)
