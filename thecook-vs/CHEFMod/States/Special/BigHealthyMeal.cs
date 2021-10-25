@@ -21,19 +21,22 @@ namespace EntityStates.Chef
         {
             public int stock;
             public float stopwatch;
-            public SkillStatus(int st, float sw)
+            public SkillStatus(int stock, float stopwatch)
             {
-                this.stock = st;
-                this.stopwatch = sw;
+                this.stock = stock;
+                this.stopwatch = stopwatch;
             }
         }
 
         public override void OnEnter()
         {
+            GetModelChildLocator().FindChild("Hat").localScale = Vector3.one * 1.4f;
+
             if (playSound)
             {
                 Util.PlaySound("Play_ChefMod_Special", base.gameObject);
             }
+
             if (base.isAuthority)
             {
                 if (skillLocator.primary.baseSkill == ChefMod.ChefPlugin.primaryDef)
@@ -93,8 +96,10 @@ namespace EntityStates.Chef
             this.outer.SetNextStateToMain();
         }
 
-        public override void OnExit()
+        public override void OnExit() 
         {
+            GetModelChildLocator().FindChild("Hat").localScale = Vector3.one * 1f;
+
             if (base.isAuthority)
             {
                 if (boostPrimary != 0)
@@ -130,6 +135,7 @@ namespace EntityStates.Chef
                     base.skillLocator.utility.rechargeStopwatch = utilityStatus.stopwatch;
                 }
             }
+
             base.OnExit();
         }
 

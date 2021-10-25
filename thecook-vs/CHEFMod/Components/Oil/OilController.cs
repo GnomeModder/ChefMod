@@ -229,6 +229,7 @@ namespace ChefMod.Components
             }
             myBody.healthComponent.godMode = true;
             myBody.baseMaxHealth = 99999999f;
+            myBody.bodyFlags = CharacterBody.BodyFlags.Masterless;
 
             var direction = this.transform.root.GetComponentInChildren<CharacterDirection>();
             foreach (var thisItem in direction.modelAnimator.GetComponentsInChildren<SkinnedMeshRenderer>())

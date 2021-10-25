@@ -1,0 +1,7 @@
+>icon
+>manifest
+>dll
+ - tested n shit
+ - version
+ - run the game once with patcher
+>readme

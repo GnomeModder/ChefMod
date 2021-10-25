@@ -38,7 +38,19 @@ Whether or not you come back to work on him, we'll be here for ya.
 
 
 ## Changelog
+
+`2.0.13`
+
+ - ran the patcher I didn't realize I needed to do, which should fix networking issues on oil and knife moves
+ - horrible lagging error spam when using oil still exists with other mods. 
+   - If this is happening to your modpack, I would be incredibly grateful if you could disable your mods half at a time to narrow down which mod(s) installed are having this incompat.
+ - having solidified that the error spam is the cause (not multiple oils or the particle system), I've put ruin's oil combining code behind config, until it's definite that it's an improvement
+   - again, definitely test to see if this does improve or fix any framerate issues with the oil. I would be eternally grateful.
+ - that said, set oil characterbodies to masterless which solves a few cross-mod errors
+ - as a little bright side, made hat grow when using R. little effect and/or small transition shall definitely follow at some point c:
+
 `2.0.12`
+
 - fixed oil causing errors with MoonstormSharedUtils
   - Why you guys want CharacterControllers to have a mesh so bad?
 - fixed sear actually going through walls. I lied in the last update. I may even still be lying here. forgiv
@@ -66,7 +78,6 @@ Thanks to ruin (DestroyedClone) for poppin in
 - Oil blobs now "combine" when too close together. Will hopefully reduce lag when too many oil blobs are in one place (configurable)
   - Do me a favor and test with this configged on and off to see how much if at all this has improved performance
 - Fast chef moving at hihg speed now uses funny animation
-
 
 `2.0.9`
 

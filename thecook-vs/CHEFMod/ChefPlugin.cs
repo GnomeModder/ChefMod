@@ -178,7 +178,7 @@ namespace ChefMod
             //unlockDisablesInvasion = base.Config.Bind<bool>(new ConfigDefinition("02 - Invasion Settings", "Disable Invasion after Unlock"), true, new ConfigDescription("Disables the CHEF invasion bossfight once CHEF is unlocked.", null, Array.Empty<object>()));
             oldChefInvader = base.Config.Bind<bool>("02 - Invasion Settings", "Old Chef Invader", false, "Use the old overpowered CHEF invasion bossfight.");
             altPodPrefab = Config.Bind<bool>("01 - General Settings", "Alt Spawn Pod", true, "Makes the pod prefab more appetizing");
-            OilDropCombine = Config.Bind<bool>("02 - Performance", "test oil combine", true, "Combines the large oil drops from the Utilty when they're too close to each other, removing the amount of oil drops in one place, hopefully improving performance.\ndo me a favor and test games with and without this to see how much this actually improves, thanks thanks.");
+            OilDropCombine = Config.Bind<bool>("02 - Performance", "test oil combine", false, "Combines the large oil drops from the Utilty when they're too close to each other, removing the amount of oil drops in one place, hopefully improving performance.\ndo me a favor and test games with and without this to see how much this actually improves, thanks thanks.");
         }
 
         public void registerPodPrefabs()

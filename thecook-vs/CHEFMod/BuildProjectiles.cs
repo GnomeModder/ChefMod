@@ -137,6 +137,7 @@ namespace ChefMod
             hc.dontShowHealthbar = true;
 
             oilPrefab.GetComponent<CharacterBody>().baseNameToken = "OilBeetle";
+            oilPrefab.GetComponent<CharacterBody>().bodyFlags = CharacterBody.BodyFlags.Masterless;
             oilPrefab.GetComponent<TeamComponent>().teamIndex = TeamIndex.Neutral;
             oilPrefab.layer = LayerIndex.debris.intVal;
             oilPrefab.name = "OilBeetle";
