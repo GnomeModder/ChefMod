@@ -39,6 +39,18 @@ Whether or not you come back to work on him, we'll be here for ya.
 
 ## Changelog
 
+`2.0.14`
+
+- Fully reset the Oil Combine config option. It now should be off by default.
+- Fixed Oil spamming explosions when Oil Combine is disabled.
+- Slightly reduced Oil network load.
+- Nerfed Oil.
+	- Tickrate reduced -50%
+	- Damage reduced 25% -> 15%
+	- If Oil Combine is enabled, max combined oil tickrate 20x -> 12x (untested).
+	
+*Oil was doing too much passive damage on top of CHEF's already-high DPS so its been nerfed into being more of a secondary damage skill to supplement your existing DPS. Also the Oil Combine config option was causing it to have even higher DPS than intended, so the config option has been fully reset and disabled.*
+
 `2.0.13`
 
  - ran the patcher I didn't realize I needed to do, which should fix networking issues on oil and knife moves
