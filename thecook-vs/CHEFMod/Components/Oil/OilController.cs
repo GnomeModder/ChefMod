@@ -17,16 +17,14 @@ namespace ChefMod.Components
         public static GameObject oilDecalPrefab;
         public static float oilLifetime = 30f;
         public static float burnLifetime = 10f;
-        public static float damageInterval = 0.5f;
+        public static float damageInterval = 1f;
         public static float procCoefficient = 0.2f;
-        public static float damageCoefficient = 0.25f;
+        public static float damageCoefficient = 0.15f;
         public static GameObject ExplosionEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/ImpactEffects/IgniteExplosionVFX");
 
-        [SyncVar]
         public float damageIntervalLocal;
-        [SyncVar]
         public int oilStacks = 1;
-        public static int maxOilStacks = 20;
+        public static int maxOilStacks = 12;
         public HashSet<GameObject> otherOilPilesAffected = new HashSet<GameObject>();
 
         private float stopwatch = 0f; //        [SyncVar] to go with the newly added code?
@@ -40,7 +38,7 @@ namespace ChefMod.Components
         public bool onFire = false;
 
         [SyncVar]
-        private bool shouldDie = false;        
+        private bool shouldDie = false;
 
         private CharacterBody ownerBody;
         private CharacterBody myBody;
@@ -54,6 +52,7 @@ namespace ChefMod.Components
         private DestroyOnTimer destroyOnTimer;
 
         //aka AddOilStack, etc
+        [Server]
         public void RegenerateOilTimer(OilController oilController)
         {
             if (NetworkServer.active)
@@ -62,9 +61,8 @@ namespace ChefMod.Components
                 if (oilController.oilStacks < maxOilStacks)
                     oilController.oilStacks++;
                 oilController.damageIntervalLocal = OilController.damageInterval / oilController.oilStacks;
+                this.shouldDie = true;
             }
-            oilController.destroyOnTimer.age = 0;
-            oilController.stopwatch = 0;
         }
 
         public void FixedUpdate()
@@ -91,18 +89,17 @@ namespace ChefMod.Components
                 oilDecalInstance = Instantiate(oilDecalPrefab, this.transform.position - Vector3.up, randy);
                 oilDecalInstance.transform.localScale *= TestValueManager.bloob;// 0.7f;
 
-                if (pendingIgnite)
+                if (NetworkServer.active)
                 {
-                    // Moved NetworkServer.active check into here so that FindNearby can be called by clients
-                    if (NetworkServer.active)
+                    if (pendingIgnite)
                     {
                         Ignite();
                         IgniteNearby();
                     }
-                }
-                else
-                {
-                    FindNearby();
+                    else
+                    {
+                        FindNearby();
+                    }
                 }
             }
             if (onFire && onGround)
@@ -119,11 +116,13 @@ namespace ChefMod.Components
             }
         }
 
-        public IEnumerator splatBall() {
+        public IEnumerator splatBall()
+        {
 
             oilBallInstance.GetComponent<Animator>().Play("OilBallSplat");
             yield return new WaitForSeconds(0.13f);
-            if (oilBallInstance) {
+            if (oilBallInstance)
+            {
                 Destroy(oilBallInstance);
             }
         }
@@ -261,9 +260,10 @@ namespace ChefMod.Components
                 ownerBody = owner.GetComponent<CharacterBody>();
             }
 
-            FindNearby();
+            if (NetworkServer.active) FindNearby();
         }
 
+        [Server]
         public void Ignite()
         {
             if (NetworkServer.active && !onFire)
@@ -280,6 +280,7 @@ namespace ChefMod.Components
             }
         }
 
+        [Server]
         private void IgniteNearby()
         {
             Collider[] array = Physics.OverlapSphere(myBody.corePosition, 15f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
@@ -309,11 +310,9 @@ namespace ChefMod.Components
             }
         }
 
+        [Server]
         private void FindNearby()
         {
-            if (!ChefPlugin.OilDropCombine.Value)
-                return;
-            
             if (onFire)
                 return;
 
@@ -338,8 +337,7 @@ namespace ChefMod.Components
                                 // If there are any oil splats within 4 meters, then we'll extend their duration,
                                 // and delete ourselves by setting our stopwatch to the max duration we can.
                                 // Then we increase the damage/interval of the oil splats to act as if there's more oil splats on the position
-                                var distanceToNearbyOil = Vector3.Distance(myBody.corePosition, healthComponent.body.corePosition);
-                                if (distanceToNearbyOil <= 5f)
+                                if (ChefPlugin.OilDropCombine.Value && (myBody.corePosition - healthComponent.body.corePosition).sqrMagnitude <= 25f)
                                 {
                                     if (!otherOilPilesAffected.Contains(fire.gameObject))
                                     {
@@ -347,13 +345,14 @@ namespace ChefMod.Components
                                         {
                                             RegenerateOilTimer(fire);
 
-                                            Debug.LogWarning("combining oils");
+                                            //Debug.LogWarning("combining oils");
                                             stopwatch = oilLifetime;
                                             otherOilPilesAffected.Add(fire.gameObject);
                                         }
                                     }
 
-                                } else // If they're further than 4 meters away, then we can ignite ourselves.
+                                }
+                                else // If they're further than 4 meters away, then we can ignite ourselves.
                                 {
                                     if (fire.onFire)
                                     {
