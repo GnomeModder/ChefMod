@@ -39,6 +39,9 @@ Whether or not you come back to work on him, we'll be here for ya.
 
 ## Changelog
 
+`2.0.15`
+- Added alt lore when the alt victory message config option is enabled. (Credits to Lyrical Endymion)
+
 `2.0.14`
 
 - Fully reset the Oil Combine config option. It now should be off by default.
