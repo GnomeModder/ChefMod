@@ -66,11 +66,11 @@ namespace EntityStates.Chef
         {
             base.Update();
 
-            //if (Input.GetKeyDown(KeyCode.K))
-            //{
-            //    //for (int i = 0; i < 10; i++) characterBody.master.inventory.GiveItem(RoR2Content.Items.Syringe);
-            //    characterBody.inventory.GiveItem(RoR2Content.Items.Bandolier);
-            //}
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                //for (int i = 0; i < 10; i++) characterBody.master.inventory.GiveItem(RoR2Content.Items.Syringe);
+                characterBody.inventory.GiveItem(RoR2Content.Items.FireRing);
+            }
 
             //this.oilTrail.damagePerSecond = base.characterBody.damage * 1.5f;
             //this.oilTrail.active = fieldComponent.active;

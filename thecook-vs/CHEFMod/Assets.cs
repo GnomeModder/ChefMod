@@ -9,13 +9,13 @@ namespace ChefMod
     {
         public static AssetBundle chefAssetBundle = LoadAssetBundle(Properties.Resources.chef);
 
-        public static Texture chefIcon = chefAssetBundle.LoadAsset<Texture>("cheficon");
+        public static Texture chefIcon = chefAssetBundle.LoadAsset<Texture>("drill2");
         public static Sprite chefIconSprite = chefAssetBundle.LoadAsset<Sprite>("unlockicon");
-        public static Sprite chefDiceIcon = chefAssetBundle.LoadAsset<Sprite>("chef_primary");
+        public static Sprite chefDiceIcon = chefAssetBundle.LoadAsset<Sprite>("miner_skill_1_2");
         public static Sprite chefMinceIcon = chefAssetBundle.LoadAsset<Sprite>("chef_primary_boosted");
         public static Sprite chefSliceIcon = chefAssetBundle.LoadAsset<Sprite>("chef_alt_primary");
         public static Sprite chefJulienneIcon = chefAssetBundle.LoadAsset<Sprite>("chef_alt_primary_boosted");
-        public static Sprite chefSearIcon = chefAssetBundle.LoadAsset<Sprite>("chef_secondary");
+        public static Sprite chefSearIcon = chefAssetBundle.LoadAsset<Sprite>("miner_skill_2_1");
         public static Sprite chefFlambeIcon = chefAssetBundle.LoadAsset<Sprite>("chef_secondary_boosted");
         public static Sprite chefSauteeIcon = chefAssetBundle.LoadAsset<Sprite>("chef_alt_secondary");
         public static Sprite chefFryIcon = chefAssetBundle.LoadAsset<Sprite>("chef_alt_secondary_boosted");

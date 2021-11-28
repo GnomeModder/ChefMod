@@ -4,6 +4,7 @@ using ChefMod.Components;
 using ChefMod.Hooks;
 using EntityStates;
 using EntityStates.Chef;
+using EntityStates.Toolbot;
 using R2API;
 using R2API.Networking;
 using R2API.Utils;
@@ -396,8 +397,8 @@ namespace ChefMod
             characterBody.baseMoveSpeed = 7f;
             characterBody.levelMoveSpeed = 0f;
             characterBody.baseAttackSpeed = 1f;
-            characterBody.name = "CHEF";
-            characterBody.baseNameToken = "CHEF_NAME";
+            characterBody.name = "Nemminer";
+            characterBody.baseNameToken = "Nemminer";
             characterBody.subtitleNameToken = "CHEF_SUBTITLE";
             characterBody.portraitIcon = Assets.chefIcon;
             characterBody.bodyColor = chefColor;
@@ -425,7 +426,7 @@ namespace ChefMod
 
         private void registerSkills()
         {
-            ChefContent.entityStates.Add(typeof(Cleaver));
+            ChefContent.entityStates.Add(typeof(Drill));
             ChefContent.entityStates.Add(typeof(MinceHoming));
             ChefContent.entityStates.Add(typeof(Mince));
 
@@ -435,7 +436,7 @@ namespace ChefMod
             ChefContent.entityStates.Add(typeof(SearOld));
             ChefContent.entityStates.Add(typeof(Flambe));
 
-            ChefContent.entityStates.Add(typeof(PrepSear));
+            ChefContent.entityStates.Add(typeof(Thrust));
             ChefContent.entityStates.Add(typeof(FireSear));
 
             ChefContent.entityStates.Add(typeof(PrepBlaze));
@@ -444,17 +445,17 @@ namespace ChefMod
             ChefContent.entityStates.Add(typeof(Fry));
             ChefContent.entityStates.Add(typeof(Roast));
 
-            ChefContent.entityStates.Add(typeof(OilSlick));
+            ChefContent.entityStates.Add(typeof(Pound));
             ChefContent.entityStates.Add(typeof(Marinate));
 
             ChefContent.entityStates.Add(typeof(Special));
-            ChefContent.entityStates.Add(typeof(Meal));
+            ChefContent.entityStates.Add(typeof(Rail));
             ChefContent.entityStates.Add(typeof(MealScepter));
 
             ChefContent.entityStates.Add(typeof(ChefMain));
 
             primaryDef = ScriptableObject.CreateInstance<SkillDef>();
-            primaryDef.activationState = new SerializableEntityStateType(typeof(Cleaver));
+            primaryDef.activationState = new SerializableEntityStateType(typeof(Drill));
             primaryDef.activationStateMachineName = "Weapon";
             primaryDef.baseMaxStock = 1;
             primaryDef.baseRechargeInterval = 0f;
@@ -469,9 +470,9 @@ namespace ChefMod
             primaryDef.requiredStock = 1;
             primaryDef.stockToConsume = 1;
             primaryDef.icon = Assets.chefDiceIcon;
-            primaryDef.skillDescriptionToken = "CHEF_PRIMARY_DESCRIPTION";
+            primaryDef.skillDescriptionToken = "Sawblade but scales iwth speed kinda";
             primaryDef.skillName = "Primary";
-            primaryDef.skillNameToken = "CHEF_PRIMARY_NAME";
+            primaryDef.skillNameToken = "Drill";
             primaryDef.keywordTokens = new string[] { "KEYWORD_AGILE", "KEYWORD_CHEF_BOOST_DICE" };
             ChefContent.skillDefs.Add(primaryDef);
 
@@ -543,7 +544,7 @@ namespace ChefMod
             ChefContent.skillDefs.Add(boostedAltPrimaryDef);
 
             secondaryDef = ScriptableObject.CreateInstance<SkillDef>();
-            secondaryDef.activationState = new SerializableEntityStateType(typeof(PrepSear));
+            secondaryDef.activationState = new SerializableEntityStateType(typeof(Thrust));
             secondaryDef.activationStateMachineName = "Weapon";
             secondaryDef.baseMaxStock = 1;
             secondaryDef.baseRechargeInterval = 4f;
@@ -558,9 +559,9 @@ namespace ChefMod
             secondaryDef.requiredStock = 1;
             secondaryDef.stockToConsume = 1;
             secondaryDef.icon = Assets.chefSearIcon;
-            secondaryDef.skillDescriptionToken = "CHEF_SECONDARY_DESCRIPTION";
+            secondaryDef.skillDescriptionToken = "Explode get tossed. no slow at end so can stack real hard if you hold it";
             secondaryDef.skillName = "Secondary";
-            secondaryDef.skillNameToken = "CHEF_SECONDARY_NAME";
+            secondaryDef.skillNameToken = "Thrust";
             secondaryDef.keywordTokens = new string[] { "KEYWORD_CHEF_BOOST_SEAR" };
             ChefContent.skillDefs.Add(secondaryDef);
 
@@ -628,10 +629,10 @@ namespace ChefMod
             ChefContent.skillDefs.Add(boostedAltSecondaryDef);
 
             utilityDef = ScriptableObject.CreateInstance<SkillDef>();
-            utilityDef.activationState = new SerializableEntityStateType(typeof(OilSlick));
+            utilityDef.activationState = new SerializableEntityStateType(typeof(Pound));
             utilityDef.activationStateMachineName = "Weapon";
             utilityDef.baseMaxStock = 1;
-            utilityDef.baseRechargeInterval = 7f;
+            utilityDef.baseRechargeInterval = 5f;
             utilityDef.beginSkillCooldownOnSkillEnd = true;
             utilityDef.canceledFromSprinting = false;
             utilityDef.fullRestockOnAssign = true;
@@ -643,9 +644,9 @@ namespace ChefMod
             utilityDef.requiredStock = 1;
             utilityDef.stockToConsume = 1;
             utilityDef.icon = Assets.chefGlazeIcon;
-            utilityDef.skillDescriptionToken = "CHEF_UTILITY_DESCRIPTION";
+            utilityDef.skillDescriptionToken = "hurt grounded, ground flying. feet hurt most. speed (and height) makes it stronger.";
             utilityDef.skillName = "Utility";
-            utilityDef.skillNameToken = "CHEF_UTILITY_NAME";
+            utilityDef.skillNameToken = "Pound";
             utilityDef.keywordTokens = new string[] { "KEYWORD_CHEF_BOOST_GLAZE" };
             ChefContent.skillDefs.Add(utilityDef);
 
@@ -673,7 +674,7 @@ namespace ChefMod
             
 
             var specialDef = ScriptableObject.CreateInstance<SkillDef>();
-            specialDef.activationState = new SerializableEntityStateType(typeof(Meal));
+            specialDef.activationState = new SerializableEntityStateType(typeof(Rail));
             specialDef.activationStateMachineName = "MealPrep";
             specialDef.baseMaxStock = 1;
             specialDef.baseRechargeInterval = 12f;
@@ -688,9 +689,9 @@ namespace ChefMod
             specialDef.requiredStock = 1;
             specialDef.stockToConsume = 1;
             specialDef.icon = Assets.chefBHMIcon;
-            specialDef.skillDescriptionToken = "CHEF_SPECIAL_DESCRIPTION";
+            specialDef.skillDescriptionToken = "nyeaaaauuuuuuuuuurrrrrrrahhhhBOOOM. you can use other skills but utility stops it";
             specialDef.skillName = "Special";
-            specialDef.skillNameToken = "CHEF_SPECIAL_NAME";
+            specialDef.skillNameToken = "Rail";
             ChefContent.skillDefs.Add(specialDef);
 
             var specialScepterDef = ScriptableObject.CreateInstance<SkillDef>();
