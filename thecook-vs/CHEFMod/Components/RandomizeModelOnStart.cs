@@ -66,7 +66,7 @@ namespace ChefMod.Components
             }
             Debug.Log("15");
             com.SetMaterials(new List<Material>() { meshRenderer.material });*/
-            Debug.Log("16");
+            //Debug.Log("16");
         }
     }
 }
