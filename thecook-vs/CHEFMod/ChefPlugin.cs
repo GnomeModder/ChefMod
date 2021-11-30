@@ -19,6 +19,7 @@ using ThreeEyedGames;
 using UnityEngine;
 using UnityEngine.Networking;
 using static R2API.DamageAPI;
+using System.Linq;
 
 namespace ChefMod
 {
@@ -241,6 +242,59 @@ namespace ChefMod
             if(ChefPlugin.arenaPluginLoaded)
             {
                 On.RoR2.Stage.Start += ArenaStage_Start.Stage_Start;
+            }
+            Inventory.onServerItemGiven += Inventory_onServerItemGiven;
+            //EquipmentSlot.onServerEquipmentActivated += EquipmentSlot_onServerEquipmentActivated;
+        }
+
+        public static ItemDef[] itemDefs = new ItemDef[]
+        {
+            RoR2Content.Items.FlatHealth,
+            RoR2Content.Items.Mushroom,
+            RoR2Content.Items.HealWhileSafe,
+            RoR2Content.Items.Squid,
+            RoR2Content.Items.NovaOnLowHealth,
+            RoR2Content.Items.Seed,
+            RoR2Content.Items.TPHealingNova,
+            RoR2Content.Items.Clover,
+            RoR2Content.Items.Plant,
+            RoR2Content.Items.IncreaseHealing,
+            RoR2Content.Items.Hoof,
+            RoR2Content.Items.SprintBonus
+        };
+        string[] responses = new string[]
+        {
+                "Mmm... savoureux !",
+                "J'en veux encore !",
+                "Délicieux.",
+                "Pas mal.",
+                "Hey... c'est plutôt bon.",
+                "Savoureux.",
+                "C'est bon."
+        };
+
+        private void Inventory_onServerItemGiven(Inventory inventory, ItemIndex itemIndex, int amount)
+        {
+            string[] responsesEigo = new string[]
+            {
+                "Mmm.. Tasty!",
+                "I want some more!",
+                "Delicious.",
+                "Not bad.",
+                "Hey.. that's pretty good.",
+                "Tasty.",
+                "That's good."
+            };
+
+            if (inventory.GetComponent<CharacterMaster>().GetBody()?.baseNameToken == "CHEF_NAME")
+            {
+                if (itemDefs.Contains(ItemCatalog.GetItemDef(itemIndex)))
+                {
+                    int choice = UnityEngine.Random.Range(0, responses.Length);
+                    var charMaster = inventory.GetComponent<CharacterMaster>();
+                    var prefix = charMaster.GetBody().GetUserName().IsNullOrWhiteSpace() ? "CHEF:" : $"{charMaster.GetBody().GetUserName()} (CHEF):";
+                    Chat.AddMessage($"{prefix} {responses[choice]}");
+                }
             }
         }
 
