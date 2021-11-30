@@ -1,0 +1,21 @@
+{
+	strings:
+	{
+	"CHEF_PREFIX_CHAT": "CHEF: {1}",
+	"CHEF_PREFIX_PLAYER_CHAT": "{0} (CHEF): {1}",
+	
+	"CHEF_EAT_RESPONSE_0": "Mmm... savoureux !",
+	"CHEF_EAT_RESPONSE_1": "J'en veux encore !",
+	"CHEF_EAT_RESPONSE_2": "Délicieux.",
+	"CHEF_EAT_RESPONSE_3": "Pas mal.",
+	"CHEF_EAT_RESPONSE_4": "Hey... c'est plutôt bon.",
+	"CHEF_EAT_RESPONSE_5": "Savoureux",
+	"CHEF_EAT_RESPONSE_6": "C'est bon.",
+	
+	"CHEF_WARNING_0" : "JE PEUX LE SENTIR",
+	"CHEF_WARNING_1" : "JE VIENS À VOUS BIENTÔT",
+	"CHEF_WARNING_2" : "MON FOUR PRÉCHAUFFE",
+	"CHEF_WARNING_3" : "VOUS M'AVEZ AROUSÉ",
+	"CHEF_WARNING_4" : "LE DÎNER EST TOUJOURS À L'HEURE",
+	}
+}
