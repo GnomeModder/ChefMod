@@ -2,6 +2,11 @@
 using RoR2;
 using System;
 using UnityEngine;
+using RoR2.ContentManagement;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Path = System.IO.Path;
 
 namespace ChefMod
 {
@@ -34,6 +39,14 @@ namespace ChefMod
         public static UInt32 unloadingID = LoadSoundBank(ChefMod.Properties.Resources.ChefSounds);
 
         private static Material commandoMat;
+
+        internal static string AssemblyDir
+        {
+            get
+            {
+                return Path.GetDirectoryName(ChefPlugin.pluginInfo.Location);
+            }
+        }
 
         static AssetBundle LoadAssetBundle(Byte[] resourceBytes)
         {
