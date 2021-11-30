@@ -242,32 +242,6 @@ namespace ChefMod
             {
                 On.RoR2.Stage.Start += ArenaStage_Start.Stage_Start;
             }
-            On.RoR2.Run.HandlePlayerFirstEntryAnimation += Run_HandlePlayerFirstEntryAnimation;
-        }
-
-        // REMOVE THIS HOOK ONCE THE PODPREFAB IS FIXED
-        private void Run_HandlePlayerFirstEntryAnimation(On.RoR2.Run.orig_HandlePlayerFirstEntryAnimation orig, Run self, CharacterBody body, Vector3 spawnPosition, Quaternion spawnRotation)
-        {
-            if (!NetworkServer.active)
-            {
-                Debug.LogWarning("[Server] function 'System.Void RoR2.Run::HandlePlayerFirstEntryAnimation(RoR2.CharacterBody,UnityEngine.Vector3,UnityEngine.Quaternion)' called on client");
-                return;
-            }
-            if (body.preferredPodPrefab)
-            {
-                if (body.name.ToLower().StartsWith("chef"))
-                {
-                    GameObject gg = UnityEngine.Object.Instantiate<GameObject>(fruitPodPrefab, body.transform.position, spawnRotation);
-                    gg.GetComponent<VehicleSeat>().AssignPassenger(body.gameObject);
-                    NetworkServer.Spawn(gg);
-                    return;
-                }
-                GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(body.preferredPodPrefab, body.transform.position, spawnRotation);
-                gameObject.GetComponent<VehicleSeat>().AssignPassenger(body.gameObject);
-                NetworkServer.Spawn(gameObject);
-                return;
-            }
-            body.SetBodyStateToPreferredInitialState();
         }
 
         public void BuildEffects()
@@ -402,8 +376,6 @@ namespace ChefMod
             characterBody.portraitIcon = Assets.chefIcon;
             characterBody.bodyColor = chefColor;
             characterBody.bodyFlags = CharacterBody.BodyFlags.ImmuneToExecutes | CharacterBody.BodyFlags.Mechanical;
-
-            characterBody.preferredPodPrefab = Resources.Load<GameObject>("Prefabs/CharacterBodies/toolbotbody").GetComponent<CharacterBody>().preferredPodPrefab;
 
             EntityStateMachine stateMachine = characterBody.GetComponent<EntityStateMachine>();
             stateMachine.mainStateType = new SerializableEntityStateType(typeof(EntityStates.Chef.ChefMain));
