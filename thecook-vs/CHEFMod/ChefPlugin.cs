@@ -237,7 +237,7 @@ namespace ChefMod
 
         private void Inventory_onServerItemGiven(Inventory inventory, ItemIndex itemIndex, int amount)
         {
-            if (inventory.GetComponent<CharacterMaster>().GetBody()?.baseNameToken == "CHEF_NAME")
+            if (inventory.GetComponent<CharacterMaster>()?.GetBody()?.baseNameToken == "CHEF_NAME")
             {
                 if (itemDefs.Contains(ItemCatalog.GetItemDef(itemIndex)))
                 {
@@ -253,7 +253,7 @@ namespace ChefMod
                         prefix = charMaster.GetBody().GetUserName();
                         formatToken = "CHEF_PREFIX_PLAYER_CHAT";
                     }
-                    var output = string.Format(formatToken, prefix, responses[choice]);
+                    var output = Language.GetStringFormatted(formatToken, prefix, Language.GetString(responses[choice])); ;
                     Chat.AddMessage(output);
                 }
             }
