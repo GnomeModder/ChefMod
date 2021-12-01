@@ -56,17 +56,17 @@ namespace ChefMod.Components
             com.material = meshRenderer.material;
             /*try
             {
-                Debug.Log("14a");
+                ChefPlugin.logger.LogMessage("15a");
                 com.SetMeshes(new Mesh[] { meshFilter.sharedMesh });
             }
             catch
             {
-                Debug.Log("14b");
+                ChefPlugin.logger.LogMessage("14b");
                 com.mesh = chosenGameObject.GetComponentInChildren<MeshFilter>().sharedMesh;
             }
-            Debug.Log("15");
+            ChefPlugin.logger.LogMessage("15");
             com.SetMaterials(new List<Material>() { meshRenderer.material });*/
-            //Debug.Log("16");
+            //ChefPlugin.logger.LogMessage("16");
         }
     }
 }

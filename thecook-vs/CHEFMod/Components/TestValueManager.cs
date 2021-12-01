@@ -57,7 +57,7 @@ namespace ChefMod {
         }
 
         private float setTestValue(float value, string print) {
-            Debug.LogWarning($"{print}: {value}");
+            ChefMod.ChefPlugin.logger.LogWarning($"{print}: {value}");
             return value;
         }
     }

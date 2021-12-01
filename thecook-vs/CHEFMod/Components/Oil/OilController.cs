@@ -345,7 +345,7 @@ namespace ChefMod.Components
                                         {
                                             RegenerateOilTimer(fire);
 
-                                            //Debug.LogWarning("combining oils");
+                                            // ChefPlugin.logger.LogWarning("combining oils");
                                             stopwatch = oilLifetime;
                                             otherOilPilesAffected.Add(fire.gameObject);
                                         }

@@ -96,7 +96,7 @@ public class PrefabBuilder
     {
         if (prefabName == "")
         {
-            Debug.LogWarning("Prefab name has not been set.");
+            ChefMod.ChefPlugin.logger.LogWarning("Prefab name has not been set.");
             prefabName = "RandomAssSurvivorBody";
         }
 
@@ -109,7 +109,7 @@ public class PrefabBuilder
 
         if (!model)
         {
-            Debug.LogError("Character model has not been loaded, returning null. " + prefabName + " will not function properly.");
+            ChefMod.ChefPlugin.logger.LogError("Character model has not been loaded, returning null. " + prefabName + " will not function properly.");
             return null;
         }
 
@@ -151,7 +151,7 @@ public class PrefabBuilder
         SetupDeathBehavior();
         SetupRigidBody();
         if (model.GetComponent<RagdollController>()) {
-            Debug.LogWarning("hope this doesn't FUCK everything");
+            ChefMod.ChefPlugin.logger.LogWarning("hope this doesn't FUCK everything");
             UnityEngine.Object.Destroy(model.GetComponent<RagdollController>());
         }
         SetupCollider();
@@ -263,7 +263,7 @@ public class PrefabBuilder
         body.aimOriginTransform = aimOrigin.transform;
         body.hullClassification = HullClassification.Human;
         if (preferredPodPrefab != null) body.preferredPodPrefab = preferredPodPrefab;
-        //Debug.Log("Preferred pod prefab : " + body.preferredPodPrefab.name);
+        //ChefMod.ChefPlugin.logger.LogMessage("Preferred pod prefab : " + body.preferredPodPrefab.name);
     }
 
     private void  SetupCharacterMotor()
@@ -516,11 +516,11 @@ public class PrefabBuilder
         if (bodyObject)
         {
             //BodyCatalog.getAdditionalEntries += list => list.Add(bodyObject);
-            //Debug.Log("Registered body " + bodyObject.name + " to the body catalog!");
+            //ChefMod.ChefPlugin.logger.LogMessage("Registered body " + bodyObject.name + " to the body catalog!");
             ChefContent.bodyPrefabs.Add(bodyObject);
             return true;
         }
-        Debug.LogError("FATAL ERROR:" + bodyObject.name + " failed to register to the body catalog!");
+        ChefMod.ChefPlugin.logger.LogError("FATAL ERROR:" + bodyObject.name + " failed to register to the body catalog!");
         return false;
     }
 }

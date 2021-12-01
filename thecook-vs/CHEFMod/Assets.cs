@@ -75,7 +75,7 @@ namespace ChefMod
             Material mat = UnityEngine.Object.Instantiate<Material>(commandoMat);
             Material tempMat = chefAssetBundle.LoadAsset<Material>(materialName);
             if (!tempMat) {
-                Debug.LogError($"couldn't get material {materialName}");
+                ChefPlugin.logger.LogError($"couldn't get material {materialName}");
                 return commandoMat;
             }
 
