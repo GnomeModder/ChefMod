@@ -1,4 +1,4 @@
-﻿using NS_KingKombatArena;
+﻿//using NS_KingKombatArena;
 using System;
 using RoR2;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ChefMod.Hooks
 {
-    public class ArenaStage_Start
+    /*public class ArenaStage_Start
     {
         public static void Stage_Start(On.RoR2.Stage.orig_Start orig, Stage self)
         {
@@ -20,5 +20,5 @@ namespace ChefMod.Hooks
         {
             ChefPlugin.arenaActive = KingKombatArenaMainPlugin.s_GAME_MODE_ACTIVE;
         }
-    }
+    }*/
 }

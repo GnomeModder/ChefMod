@@ -22,7 +22,7 @@ namespace EntityStates.Chef
         {
             base.OnEnter();
 
-            //GameObject fireTrail = new GameObject(); //UnityEngine.Object.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/FireTrail"), this.transform);
+            //GameObject fireTrail = new GameObject(); //UnityEngine.Object.Instantiate<GameObject>(LegacyResourcesAPI.Load<GameObject>("Prefabs/FireTrail"), this.transform);
             //fireTrail.AddComponent<Trail>();
             //this.oilTrail = fireTrail.GetComponent<ChefMod.Trail>();
             //this.oilTrail.transform.position = base.characterBody.footPosition;
@@ -119,10 +119,10 @@ namespace EntityStates.Chef
                 blastAttack.baseForce = 300f;
                 blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
                 blastAttack.damageType = DamageType.Generic;
-                blastAttack.attackerFiltering = AttackerFiltering.NeverHit;
+                blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
                 BlastAttack.Result result = blastAttack.Fire();
 
-                GameObject effect = Resources.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFX");
+                GameObject effect = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFX");
                 EffectData effectData = new EffectData
                 {
                     scale = 15f,

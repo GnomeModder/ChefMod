@@ -22,7 +22,7 @@ namespace ChefMod.Hooks
             {
                 if (self.body)
                 {
-                    if (self.body.HasBuff(RoR2Content.Buffs.ClayGoo))
+                    if (self.body.HasBuff(ChefPlugin.oilBuff))
                     {
                         hasGoo = true;
                         damageInfo.damage *= 2f;
@@ -51,7 +51,7 @@ namespace ChefMod.Hooks
                 if (attackerBody)   // && attackerBody.bodyIndex == BodyCatalog.FindBodyIndex("ChefBody")
                 {
                     //Does an additional check just in case the target did not have goo before but became goo'd after taking damage.
-                    if (self.body && (hasGoo || self.body.HasBuff(RoR2Content.Buffs.ClayGoo))) // || self.body.HasBuff(RoR2Content.Buffs.OnFire)
+                    if (self.body && (hasGoo || self.body.HasBuff(ChefPlugin.oilBuff))) // || self.body.HasBuff(RoR2Content.Buffs.OnFire)
                     {
                         if (isSear)
                         {

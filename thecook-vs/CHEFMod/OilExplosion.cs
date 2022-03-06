@@ -24,7 +24,7 @@ namespace ChefMod
                 {
                     return;
                 }
-                victimBody.ClearTimedBuffs(RoR2Content.Buffs.ClayGoo);
+                victimBody.ClearTimedBuffs(ChefPlugin.oilBuff);
                 //Debug.Log("Triggering chain explosion with radius " + 10f * Mathf.Max(1f, victimBody.radius));
 
                 float radius = 10f * Mathf.Max(1f, victimBody ? victimBody.radius : 1f) * (boosted ? 1.5f : 1f);

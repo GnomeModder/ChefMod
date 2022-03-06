@@ -100,7 +100,7 @@ public class PrefabBuilder
             prefabName = "RandomAssSurvivorBody";
         }
 
-        prefab = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody"), prefabName, true);
+        prefab = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody"), prefabName, true);
         prefab.GetComponent<NetworkIdentity>().localPlayerAuthority = true;
 
         SetupModelBase();
@@ -280,7 +280,7 @@ public class PrefabBuilder
     private void  SetupCameraParams()
     {
         camParams.cameraParams = ScriptableObject.CreateInstance<CharacterCameraParams>();
-        var copy = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponent<CameraTargetParams>().cameraParams;
+        var copy = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponent<CameraTargetParams>().cameraParams;
         camParams.cameraParams.maxPitch = copy.maxPitch;
         camParams.cameraParams.minPitch = copy.minPitch;
         camParams.cameraParams.name = "CHEFcam";
@@ -414,7 +414,7 @@ public class PrefabBuilder
         footstep.baseFootstepString = "Play_player_footstep";
         footstep.sprintFootstepOverrideString = "";
         footstep.enableFootstepDust = true;
-        footstep.footstepDustPrefab = Resources.Load<GameObject>("Prefabs/GenericFootstepDust");
+        footstep.footstepDustPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/GenericFootstepDust");
     }
 
     
@@ -473,7 +473,7 @@ public class PrefabBuilder
             ProjectileGhostReplacements = Array.Empty<SkinDef.ProjectileGhostReplacement>()
         };
 
-        Material commandoMat = Resources.Load<GameObject>("Prefabs/CharacterBodies/BrotherGlassBody").GetComponentInChildren<CharacterModel>().baseRendererInfos[0].defaultMaterial;
+        Material commandoMat = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/BrotherGlassBody").GetComponentInChildren<CharacterModel>().baseRendererInfos[0].defaultMaterial;
 
         CharacterModel.RendererInfo[] rendererInfos = skinDefInfo.RendererInfos;
         CharacterModel.RendererInfo[] array = new CharacterModel.RendererInfo[rendererInfos.Length];

@@ -4,6 +4,8 @@ using ChefMod.Components;
 using ChefMod.Hooks;
 using EntityStates;
 using EntityStates.Chef;
+using Mono.Cecil.Cil;
+using MonoMod.Cil;
 using R2API;
 using R2API.Networking;
 using R2API.Utils;
@@ -15,7 +17,6 @@ using RoR2.Skills;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using ThreeEyedGames;
 using UnityEngine;
 using UnityEngine.Networking;
 using static R2API.DamageAPI;
@@ -28,6 +29,7 @@ namespace ChefMod
     [R2APISubmoduleDependency("SoundAPI")]
     [R2APISubmoduleDependency("AssetAPI")]
     [R2APISubmoduleDependency("DamageAPI")]
+    [R2APISubmoduleDependency("RecalculateStatsAPI")]
     [R2APISubmoduleDependency(nameof(NetworkingAPI))]
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin(
@@ -73,6 +75,7 @@ namespace ChefMod
         public static ModdedDamageType chefFireballOnHit;
 
         public static BuffDef foodBuff;
+        public static BuffDef oilBuff;
 
         public static Color chefColor = new Color(189f / 255f, 190f / 255f, 194f / 255f);
 
@@ -185,7 +188,7 @@ namespace ChefMod
 
         public void registerPodPrefabs()
         {
-            GameObject robocratePrefab = Resources.Load<GameObject>("prefabs/networkedobjects/robocratepod");
+            GameObject robocratePrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/networkedobjects/robocratepod");
             fruitPodPrefab = robocratePrefab.InstantiateClone("chef_fruitpod");
             Transform meshObject = fruitPodPrefab.transform.Find("Base/mdlRoboCrate/Base/RobotCrateMesh");
             RandomizeModelOnStartPod randomize = meshObject.gameObject.AddComponent<RandomizeModelOnStartPod>();
@@ -193,7 +196,7 @@ namespace ChefMod
             randomize.meshRenderer = meshObject.gameObject.GetComponent<MeshRenderer>();
             //meshObject.transform.localScale = Vector3.one * 20f;
 
-            GameObject impactEffect = Resources.Load<GameObject>("prefabs/effects/impacteffects/RoboCratePodGroundImpact");
+            GameObject impactEffect = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/RoboCratePodGroundImpact");
             fruitPodImpactPrefab = PrefabAPI.InstantiateClone(impactEffect, "chef_fruitpod_impact");
             Destroy(fruitPodImpactPrefab.GetComponent<EffectComponent>());
             foreach (Transform child in fruitPodImpactPrefab.transform.Find("Particles").transform)
@@ -240,7 +243,7 @@ namespace ChefMod
             On.RoR2.SiphonNearbyController.SearchForTargets += FixMiredUrn.SearchForTargets;
             if(ChefPlugin.arenaPluginLoaded)
             {
-                On.RoR2.Stage.Start += ArenaStage_Start.Stage_Start;
+                //On.RoR2.Stage.Start += ArenaStage_Start.Stage_Start;
             }
             On.RoR2.Run.HandlePlayerFirstEntryAnimation += Run_HandlePlayerFirstEntryAnimation;
         }
@@ -286,7 +289,7 @@ namespace ChefMod
         {
             foodBuff = ScriptableObject.CreateInstance<BuffDef>();
             foodBuff.name = "Mustard";
-            foodBuff.iconSprite = Resources.Load<Sprite>("Textures/BuffIcons/texBuffBleedingIcon");
+            foodBuff.iconSprite = LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffBleedingIcon");
             foodBuff.buffColor = Color.yellow;
             foodBuff.canStack = false;
             foodBuff.isDebuff = false;
@@ -304,6 +307,39 @@ namespace ChefMod
                 }
             };
 
+            BuffDef clayGooDef = LegacyResourcesAPI.Load<BuffDef>("buffdefs/claygoo");
+
+            oilBuff = ScriptableObject.CreateInstance<BuffDef>();
+            oilBuff.name = "ChefOil";
+            oilBuff.iconSprite = clayGooDef.iconSprite;
+            oilBuff.buffColor = clayGooDef.buffColor;
+            oilBuff.canStack = false;
+            oilBuff.isDebuff = true;
+            ChefContent.buffDefs.Add(oilBuff);
+
+            //Steal Buff visuals for oil
+            IL.RoR2.CharacterModel.UpdateOverlays += (il) =>
+            {
+                ILCursor c = new ILCursor(il);
+                c.GotoNext(
+                     x => x.MatchLdsfld(typeof(RoR2Content.Buffs), "ClayGoo")
+                    );
+                c.Index += 2;
+                c.Emit(OpCodes.Ldarg_0);
+                c.EmitDelegate<Func<bool, CharacterModel, bool>>((hasBuff, self) =>
+                {
+                    return hasBuff || self.body.HasBuff(oilBuff);
+                });
+            };
+
+            R2API.RecalculateStatsAPI.GetStatCoefficients += (CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args) =>
+            {
+                if (sender.HasBuff(oilBuff))
+                {
+                    args.moveSpeedReductionMultAdd += 0.5f;
+                }
+            };
+
             //On.RoR2.GenericSkill.CalculateFinalRechargeInterval += (orig, self) =>
             //{
             //    if (self.characterBody.HasBuff(foodBuffIndex) && self.characterBody.skillLocator.secondary == self)
@@ -317,7 +353,7 @@ namespace ChefMod
         private void registerCharacter()
         {
             //Load your base character body, from somewhere in the game.
-            //chefPrefab = Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").InstantiateClone("ChefBody");
+            //chefPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").InstantiateClone("ChefBody");
 
             PrefabBuilder prefabBuilder = new PrefabBuilder();
             prefabBuilder.prefabName = "ChefBody";
@@ -403,7 +439,7 @@ namespace ChefMod
             characterBody.bodyColor = chefColor;
             characterBody.bodyFlags = CharacterBody.BodyFlags.ImmuneToExecutes | CharacterBody.BodyFlags.Mechanical;
 
-            characterBody.preferredPodPrefab = Resources.Load<GameObject>("Prefabs/CharacterBodies/toolbotbody").GetComponent<CharacterBody>().preferredPodPrefab;
+            characterBody.preferredPodPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/toolbotbody").GetComponent<CharacterBody>().preferredPodPrefab;
 
             EntityStateMachine stateMachine = characterBody.GetComponent<EntityStateMachine>();
             stateMachine.mainStateType = new SerializableEntityStateType(typeof(EntityStates.Chef.ChefMain));
@@ -809,11 +845,11 @@ namespace ChefMod
             BuildProjectiles.BuildKnife();
             BuildProjectiles.BuildOil();
 
-            searBonusEffect = Resources.Load<GameObject>("Prefabs/Effects/OmniEffect/omniimpactvfx").InstantiateClone("ChefSearBonusEffect", false);
+            searBonusEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/omniimpactvfx").InstantiateClone("ChefSearBonusEffect", false);
             searBonusEffect.GetComponent<EffectComponent>().soundName = "Play_bandit2_R_kill";
             ChefContent.effectDefs.Add(new EffectDef(searBonusEffect));
 
-            var beegFire = Resources.Load<GameObject>("Prefabs/ProjectileGhosts/FireballGhost").InstantiateClone("FoirBallGhost", true);
+            var beegFire = LegacyResourcesAPI.Load<GameObject>("Prefabs/ProjectileGhosts/FireballGhost").InstantiateClone("FoirBallGhost", true);
             beegFire.AddComponent<NetworkIdentity>();
             beegFire.transform.localScale *= 4f;
 
@@ -821,14 +857,14 @@ namespace ChefMod
             //bbFire.GetComponentInChildren<ParticleSystemRenderer>().material.SetColor("_Color", Color.blue);
             //bbFire.GetComponentInChildren<Light>().color = Color.blue;
 
-            foirballPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/Fireball").InstantiateClone("FoirBall", true);
+            foirballPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/Fireball").InstantiateClone("FoirBall", true);
             foirballPrefab.transform.localScale *= 2f;
             var coq = foirballPrefab.GetComponent<ProjectileController>();
             coq.ghostPrefab = beegFire;
             foirballPrefab.GetComponent<ProjectileDamage>().damageType = DamageType.IgniteOnHit;
             foirballPrefab.AddComponent<LightOnImpact>();
 
-            flamballPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/Fireball").InstantiateClone("FlamBall", true);
+            flamballPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/Fireball").InstantiateClone("FlamBall", true);
             flamballPrefab.transform.localScale *= 2f;
             var cock = flamballPrefab.GetComponent<ProjectileController>();
             cock.ghostPrefab = beegFire;
@@ -837,11 +873,11 @@ namespace ChefMod
             //flamballPrefab.AddComponent<LightOnImpact>();
             flamballPrefab.AddComponent<EsplodeOnImpact>();
 
-            drippingPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/MagmaOrbProjectile").InstantiateClone("Dripping", true);
+            drippingPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/MagmaOrbProjectile").InstantiateClone("Dripping", true);
             //drippingPrefab.AddComponent<LightOnImpact>();
             drippingPrefab.AddComponent<EsplodeOnImpact>();
 
-            OilExplosion.boostedSearProjectilePrefab = Resources.Load<GameObject>("Prefabs/Projectiles/MagmaOrbProjectile").InstantiateClone("BoostedSearProjectile", true);
+            OilExplosion.boostedSearProjectilePrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/MagmaOrbProjectile").InstantiateClone("BoostedSearProjectile", true);
             ProjectileDamage bspd = OilExplosion.boostedSearProjectilePrefab.GetComponent<ProjectileDamage>();
             bspd.damageType = DamageType.Stun1s | DamageType.IgniteOnHit;
             ModdedDamageTypeHolderComponent mdthc = OilExplosion.boostedSearProjectilePrefab.AddComponent<ModdedDamageTypeHolderComponent>();
@@ -858,7 +894,7 @@ namespace ChefMod
 
         private void BuildOilChainExplosionEffect()
         {
-            OilExplosion.explosionEffectPrefab = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfx"), "ChefOilChainExplosion", false);
+            OilExplosion.explosionEffectPrefab = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/omniimpactvfx"), "ChefOilChainExplosion", false);
             EffectComponent ec = OilExplosion.explosionEffectPrefab.GetComponent<EffectComponent>();
             ec.soundName = "Play_engi_M2_explo";
             ec.applyScale = true;
@@ -867,7 +903,7 @@ namespace ChefMod
 
         private void BuildBoostedSearEffect() {
 
-            GameObject ExplosionVFX = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFX"), "ChefBlueOmniExplosionVFX", false);
+            GameObject ExplosionVFX = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFX"), "ChefBlueOmniExplosionVFX", false);
 
 
             ParticleSystemRenderer particleRenderer = ExplosionVFX.transform.Find("Unscaled Flames").GetComponent<ParticleSystemRenderer>();
@@ -884,7 +920,7 @@ namespace ChefMod
 
         private void BuildChefAI()
         {
-            invaderMaster = Resources.Load<GameObject>("Prefabs/CharacterMasters/MercMonsterMaster").InstantiateClone("ChefInvader", true).GetComponent<CharacterMaster>();
+            invaderMaster = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterMasters/MercMonsterMaster").InstantiateClone("ChefInvader", true).GetComponent<CharacterMaster>();
             invaderMaster.bodyPrefab = chefPrefab;
             invaderMaster.name = "ChefInvader";
 

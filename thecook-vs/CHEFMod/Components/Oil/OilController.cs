@@ -20,7 +20,7 @@ namespace ChefMod.Components
         public static float damageInterval = 1f;
         public static float procCoefficient = 0.2f;
         public static float damageCoefficient = 0.15f;
-        public static GameObject ExplosionEffectPrefab = Resources.Load<GameObject>("Prefabs/Effects/ImpactEffects/IgniteExplosionVFX");
+        public static GameObject ExplosionEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/IgniteExplosionVFX");
 
         public float damageIntervalLocal;
         public int oilStacks = 1;
@@ -183,11 +183,11 @@ namespace ChefMod.Components
                                             {
                                                 DotController.InflictDot(healthComponent.gameObject, owner, DotController.DotIndex.Burn);
                                             }
-                                            if (healthComponent.body.HasBuff(RoR2Content.Buffs.ClayGoo))
+                                            if (healthComponent.body.HasBuff(ChefPlugin.oilBuff))
                                             {
                                                 foreach (CharacterBody.TimedBuff t in healthComponent.body.timedBuffs)
                                                 {
-                                                    if (t.buffIndex == RoR2Content.Buffs.ClayGoo.buffIndex && t.timer > 2f)
+                                                    if (t.buffIndex == ChefPlugin.oilBuff.buffIndex)
                                                     {
                                                         OilExplosion.Explode(ownerBody, healthComponent.body, this.crit, boosted);
                                                         break;
@@ -197,9 +197,9 @@ namespace ChefMod.Components
                                         }
                                         else
                                         {
-                                            if (onGround && !pendingIgnite)// && !healthComponent.body.HasBuff(RoR2Content.Buffs.ClayGoo)
+                                            if (onGround && !pendingIgnite)
                                             {
-                                                healthComponent.body.AddTimedBuff(RoR2Content.Buffs.ClayGoo, 5f);
+                                                healthComponent.body.AddTimedBuff(ChefPlugin.oilBuff, 5f);
                                             }
                                         }
                                     }

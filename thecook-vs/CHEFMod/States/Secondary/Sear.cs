@@ -59,7 +59,7 @@ namespace EntityStates.Chef
 
         public static float blastEffectRadius = 2;
         public static float blastSpacing;
-        public static GameObject ExplosionEffectPrefab = Resources.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFX");
+        public static GameObject ExplosionEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFX");
 
         protected virtual GameObject explosion {
             get => ExplosionEffectPrefab;
@@ -183,7 +183,7 @@ namespace EntityStates.Chef
         {
             return InterruptPriority.PrioritySkill;
         }
-        public static GameObject hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/missileexplosionvfx");
+        public static GameObject hitEffectPrefab = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/missileexplosionvfx");
         public static float damageCoefficient = 2.6f;
         public static float force = 2400f;
         public static int bulletCount;

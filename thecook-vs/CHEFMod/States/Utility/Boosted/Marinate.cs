@@ -45,7 +45,7 @@ namespace EntityStates.Chef
 
 				//trailComponent = base.characterBody.GetComponent<ChefMod.FieldComponent>();
 				//trailComponent.active = true;
-				//this.oilTrail = UnityEngine.Object.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/FireTrail"), this.transform).GetComponent<DamageTrail>();
+				//this.oilTrail = UnityEngine.Object.Instantiate<GameObject>(LegacyResourcesAPI.Load<GameObject>("Prefabs/FireTrail"), this.transform).GetComponent<DamageTrail>();
 				//this.oilTrail.transform.position = base.characterBody.footPosition;
 				//this.oilTrail.owner = base.gameObject;
 				//this.oilTrail.radius *= this.radius;

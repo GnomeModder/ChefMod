@@ -20,10 +20,10 @@ namespace ChefMod.Components
 
         public static Dictionary<GameObject, Vector3> keyValuePairs = new Dictionary<GameObject, Vector3>()
         {
-            { Resources.Load<GameObject>("prefabs/pickupmodels/PickupFruit"), Vector3.one * 20f },
-            { Resources.Load<GameObject>("prefabs/pickupmodels/PickupSteak"), Vector3.one * 10f },
-            //Resources.Load<GameObject>("prefabs/pickupmodels/PickupMushroom"), //bungus errors?
-            { Resources.Load<GameObject>("prefabs/pickupmodels/PickupInterstellarDeskPlant"), Vector3.one * 8f }
+            { LegacyResourcesAPI.Load<GameObject>("prefabs/pickupmodels/PickupFruit"), Vector3.one * 20f },
+            { LegacyResourcesAPI.Load<GameObject>("prefabs/pickupmodels/PickupSteak"), Vector3.one * 10f },
+            //LegacyResourcesAPI.Load<GameObject>("prefabs/pickupmodels/PickupMushroom"), //bungus errors?
+            { LegacyResourcesAPI.Load<GameObject>("prefabs/pickupmodels/PickupInterstellarDeskPlant"), Vector3.one * 8f }
         };
 
         public static GameObject impactEffect = ChefPlugin.fruitPodImpactPrefab;

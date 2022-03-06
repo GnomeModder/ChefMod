@@ -7,7 +7,6 @@ using RoR2.Projectile;
 using R2API;
 using EntityStates.Chef;
 using ChefMod.Components;
-using ThreeEyedGames;
 
 namespace ChefMod
 {
@@ -17,8 +16,8 @@ namespace ChefMod
         {
             GameObject cleaverGhost = Assets.chefAssetBundle.LoadAsset<GameObject>("CleaverParent").InstantiateClone("CleaverGhost", false);
             cleaverGhost.AddComponent<ProjectileGhostController>();
-            GameObject cleaverPrefab = Resources.Load<GameObject>("Prefabs/Projectiles/Sawmerang").InstantiateClone("CHEFCleaver", true);
-            GameObject cleaverImpactEffect = Resources.Load<GameObject>("Prefabs/Effects/OmniEffect/omniimpactvfx").InstantiateClone("ChefCleaverImpactEffect", false);
+            GameObject cleaverPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/Sawmerang").InstantiateClone("CHEFCleaver", true);
+            GameObject cleaverImpactEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/omniimpactvfx").InstantiateClone("ChefCleaverImpactEffect", false);
             cleaverImpactEffect.GetComponent<EffectComponent>().soundName = "Play_ChefMod_Cleaver_Hit";
             ChefContent.effectDefs.Add(new EffectDef(cleaverImpactEffect));
 
@@ -101,23 +100,23 @@ namespace ChefMod
 
         public static void BuildOil()
         {
-            GameObject acid = Resources.Load<GameObject>("Prefabs/CharacterBodies/commandobody").GetComponent<CharacterBody>().preferredPodPrefab;
+            GameObject acid = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/commandobody").GetComponent<CharacterBody>().preferredPodPrefab;
             GameObject oilfab = acid.GetComponentInChildren<ThreeEyedGames.Decal>().gameObject.InstantiateClone("OilCum", false);
             var dekal = oilfab.GetComponent<ThreeEyedGames.Decal>();
 
             oilfab.transform.localScale *= 4f;
 
-            var firetrail = Resources.Load<GameObject>("Prefabs/FireTrail");
+            var firetrail = LegacyResourcesAPI.Load<GameObject>("Prefabs/FireTrail");
             Material firepart = firetrail.GetComponent<DamageTrail>().segmentPrefab.GetComponent<ParticleSystemRenderer>().material;
 
-            var chumStain = Resources.Load<GameObject>("prefabs/projectiles/LunarExploderProjectileDotZone");
+            var chumStain = LegacyResourcesAPI.Load<GameObject>("prefabs/projectiles/LunarExploderProjectileDotZone");
             GameObject firefab = chumStain.GetComponentInChildren<AlignToNormal>().gameObject.InstantiateClone("ChefFire", false);
 
             DestroyOnTimer ffDT = firefab.AddComponent<DestroyOnTimer>();
             ffDT.duration = OilController.burnLifetime + 3f;
 
             UnityEngine.Object.Destroy(firefab.GetComponentInChildren<TeamAreaIndicator>().gameObject);
-            var decal = firefab.GetComponentInChildren<Decal>();
+            var decal = firefab.GetComponentInChildren<ThreeEyedGames.Decal>();
             Material fireMat = new Material(decal.Material);
             fireMat.SetColor("_Color", Color.red);
             decal.Material = fireMat;
@@ -130,7 +129,7 @@ namespace ChefMod
 
             firefab.GetComponentInChildren<Light>().color = Color.red;
 
-            GameObject oilPrefab = Resources.Load<GameObject>("Prefabs/CharacterBodies/BeetleCrystalBody").InstantiateClone("OilSlick", true);
+            GameObject oilPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/BeetleCrystalBody").InstantiateClone("OilSlick", true);
             oilPrefab.transform.localScale *= 3f;
 
             var hc = oilPrefab.GetComponent<HealthComponent>();
