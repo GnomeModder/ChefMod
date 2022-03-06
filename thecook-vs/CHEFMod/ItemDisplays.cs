@@ -1678,7 +1678,8 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
+            //ded
+            /*list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
             {
                 keyAsset = RoR2Content.Items.CooldownOnCrit,
                 displayRuleGroup = new DisplayRuleGroup
@@ -1697,7 +1698,7 @@ namespace ChefMod
                         }
                     }
                 }
-            });
+            });*/
 
             list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
             {
@@ -2066,7 +2067,8 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
+            //ded
+            /*list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
             {
                 keyAsset = RoR2Content.Items.Incubator,
                 displayRuleGroup = new DisplayRuleGroup
@@ -2085,7 +2087,7 @@ namespace ChefMod
                         }
                     }
                 }
-            });
+            });*/
 
             list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
             {

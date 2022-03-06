@@ -34,7 +34,7 @@ namespace ChefMod
                 BlastAttack blastAttack = new BlastAttack
                 {
                     attacker = damageInfo.attacker,
-                    attackerFiltering = AttackerFiltering.NeverHit,
+                    attackerFiltering = AttackerFiltering.NeverHitSelf,
                     baseDamage = damageInfo.damage,
                     baseForce = 5f,
                     crit = damageInfo.crit,

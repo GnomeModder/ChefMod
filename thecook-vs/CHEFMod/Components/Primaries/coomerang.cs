@@ -94,7 +94,7 @@ namespace ChefMod
 							damageType = projdamg.damageType,
 							inflictor = this.gameObject,
 							position = impactInfo.estimatedPointOfImpact,
-							attackerFiltering = AttackerFiltering.NeverHit,
+							attackerFiltering = AttackerFiltering.NeverHitSelf,
 							falloffModel = BlastAttack.FalloffModel.None,
 							procCoefficient = 1f,
 							teamIndex = teamfilt.teamIndex,

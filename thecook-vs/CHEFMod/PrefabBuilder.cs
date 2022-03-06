@@ -281,18 +281,18 @@ public class PrefabBuilder
     {
         camParams.cameraParams = ScriptableObject.CreateInstance<CharacterCameraParams>();
         var copy = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponent<CameraTargetParams>().cameraParams;
-        camParams.cameraParams.maxPitch = copy.maxPitch;
-        camParams.cameraParams.minPitch = copy.minPitch;
-        camParams.cameraParams.name = "CHEFcam";
-        camParams.cameraParams.wallCushion = copy.wallCushion;
 
-        camParams.cameraParams.pivotVerticalOffset = 1.4f;// * 1.3f;
-        camParams.cameraParams.standardLocalCameraPos = new Vector3(0,0,-11);// * 1.4f;
+        camParams.cameraParams.data.pivotVerticalOffset = 1.4f;
+        camParams.cameraParams.name = "CHEFcam";
+        camParams.cameraParams.data.maxPitch = copy.data.maxPitch;
+        camParams.cameraParams.data.minPitch = copy.data.minPitch;
+        camParams.cameraParams.data.wallCushion = copy.data.wallCushion;
+        camParams.cameraParams.data.idealLocalCameraPos = new Vector3(0, 0, -11);
 
         camParams.cameraPivotTransform = null;
-        camParams.aimMode = CameraTargetParams.AimType.Standard;
+        //camParams.aimMode = CameraTargetParams.AimType.Standard;
         camParams.recoil = Vector2.zero;
-        camParams.idealLocalCameraPos = Vector3.zero;
+        //camParams.idealLocalCameraPos = Vector3.zero;
         camParams.dontRaycastToPivot = false;
     }
 

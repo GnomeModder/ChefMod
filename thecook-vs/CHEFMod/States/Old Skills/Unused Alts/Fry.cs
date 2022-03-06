@@ -60,7 +60,7 @@ namespace EntityStates.Chef
                 blastAttack.baseForce = 3f;
                 blastAttack.teamIndex = TeamComponent.GetObjectTeam(blastAttack.attacker);
                 blastAttack.damageType = DamageType.Stun1s;
-                blastAttack.attackerFiltering = AttackerFiltering.NeverHit;
+                blastAttack.attackerFiltering = AttackerFiltering.NeverHitSelf;
                 //blastAttack.Fire();
 
                 //Vector3 horizontal = new Vector3(aimRay.direction.x, 0, aimRay.direction.z);

@@ -54,7 +54,7 @@ namespace ChefMod
                     baseForce = 0f,
                     teamIndex = attackerBody.teamComponent.teamIndex,
                     damageType = DamageType.Stun1s | DamageType.IgniteOnHit,
-                    attackerFiltering = AttackerFiltering.NeverHit
+                    attackerFiltering = AttackerFiltering.NeverHitSelf
                 }.Fire();
 
                 EffectManager.SpawnEffect(explosionEffectPrefab, new EffectData

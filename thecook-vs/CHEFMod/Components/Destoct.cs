@@ -29,7 +29,7 @@ namespace ChefMod {
             checkAttack = new BlastAttack
             {
                 attacker = damageInfo.attacker,
-                attackerFiltering = AttackerFiltering.NeverHit,
+                attackerFiltering = AttackerFiltering.NeverHitSelf,
                 baseDamage = 0f,
                 baseForce = 0f,
                 crit = false,
@@ -65,7 +65,7 @@ namespace ChefMod {
                 BlastAttack blastAttack = new BlastAttack
                 {
                     attacker = damageInfo.attacker,
-                    attackerFiltering = AttackerFiltering.NeverHit,
+                    attackerFiltering = AttackerFiltering.NeverHitSelf,
                     baseDamage = 3f * damageInfo.damage,
                     baseForce = 5f,
                     crit = damageInfo.crit,
