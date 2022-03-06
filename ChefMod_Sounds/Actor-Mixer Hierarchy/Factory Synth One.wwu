@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WwiseDocument Type="WorkUnit" ID="{D9329DB3-E4D7-45AA-BD40-6EB28C6C4D39}" SchemaVersion="89">
+<WwiseDocument Type="WorkUnit" ID="{D9329DB3-E4D7-45AA-BD40-6EB28C6C4D39}" SchemaVersion="97">
 	<AudioObjects>
 		<WorkUnit Name="Factory Synth One" ID="{D9329DB3-E4D7-45AA-BD40-6EB28C6C4D39}" PersistMode="Standalone">
 			<ChildrenList>
@@ -11,10 +11,10 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -105,10 +105,10 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -200,10 +200,10 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -295,10 +295,10 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -393,7 +393,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{84DA2ACF-4911-4BA7-987A-C75151AFFD7C}">
@@ -444,7 +444,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -537,7 +537,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{84DA2ACF-4911-4BA7-987A-C75151AFFD7C}">
@@ -588,7 +588,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -720,10 +720,10 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -816,10 +816,10 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -950,10 +950,10 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -1048,10 +1048,10 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -1146,10 +1146,10 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -1283,10 +1283,10 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -1446,10 +1446,10 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -1616,10 +1616,10 @@ Content provided by Vincent Gagnon
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -1746,7 +1746,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{A98F423C-EC97-49D8-8698-445CE91F24B7}">
@@ -1769,7 +1769,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -1936,7 +1936,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{4802B2EA-6509-49B5-9A9D-96A566855A05}">
@@ -2025,7 +2025,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -2120,7 +2120,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{84DA2ACF-4911-4BA7-987A-C75151AFFD7C}">
@@ -2171,7 +2171,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -2266,7 +2266,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{A98F423C-EC97-49D8-8698-445CE91F24B7}">
@@ -2289,7 +2289,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -2381,7 +2381,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{87647CCF-6C02-444E-BD2B-218B649CF174}">
@@ -2435,7 +2435,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -2568,7 +2568,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{A98F423C-EC97-49D8-8698-445CE91F24B7}">
@@ -2591,7 +2591,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -2744,7 +2744,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{99F80B38-1C45-42CE-9BCD-E94F3885DCAA}">
@@ -2766,7 +2766,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -2931,7 +2931,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{99F80B38-1C45-42CE-9BCD-E94F3885DCAA}">
@@ -2953,7 +2953,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -3380,7 +3380,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{A98F423C-EC97-49D8-8698-445CE91F24B7}">
@@ -3403,7 +3403,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -3795,7 +3795,7 @@ Content provided by Vincent Gagnon
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{84DA2ACF-4911-4BA7-987A-C75151AFFD7C}">
@@ -3846,7 +3846,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -4017,7 +4017,7 @@ Content provided by Vincent Gagnon
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{84DA2ACF-4911-4BA7-987A-C75151AFFD7C}">
@@ -4068,7 +4068,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -4234,7 +4234,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{84DA2ACF-4911-4BA7-987A-C75151AFFD7C}">
@@ -4335,7 +4335,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -4534,7 +4534,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{87647CCF-6C02-444E-BD2B-218B649CF174}">
@@ -4587,7 +4587,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -4720,7 +4720,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{87647CCF-6C02-444E-BD2B-218B649CF174}">
@@ -4885,7 +4885,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -5093,7 +5093,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{84DA2ACF-4911-4BA7-987A-C75151AFFD7C}">
@@ -5145,7 +5145,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -5341,7 +5341,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{84DA2ACF-4911-4BA7-987A-C75151AFFD7C}">
@@ -5393,7 +5393,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -5689,10 +5689,10 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -5824,10 +5824,10 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -6032,10 +6032,10 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -6206,10 +6206,10 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -6492,10 +6492,10 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -6665,7 +6665,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{42D64342-8C0F-4A1A-AF5A-8D4F58BED9B6}">
@@ -6717,7 +6717,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -7106,7 +7106,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{68FF5646-E051-4031-BE1A-513C3B1173F8}">
@@ -7237,7 +7237,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -7336,10 +7336,10 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -7468,10 +7468,10 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -7561,7 +7561,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{EFD1AD33-87EB-4D22-8B4D-873C54BA5444}">
@@ -7579,7 +7579,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -7747,10 +7747,10 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -7840,7 +7840,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{ECA4CEEF-728F-410A-8315-4E14C12FBAED}">
@@ -7892,7 +7892,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -7986,7 +7986,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{1BC374A9-F37D-40BB-B1D5-038CC22B144E}">
@@ -8037,7 +8037,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -8129,10 +8129,10 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -8300,7 +8300,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{92BB5E5A-22D3-4AE5-B802-32D05BA8EE65}">
@@ -8352,7 +8352,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -8521,7 +8521,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{ECA4CEEF-728F-410A-8315-4E14C12FBAED}">
@@ -8573,7 +8573,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -8666,7 +8666,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{544C7185-D35B-41F6-8D67-6D3CD05F48F5}">
@@ -8718,7 +8718,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -8812,7 +8812,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{3C4F6810-E137-40B2-B285-0903430B3B05}">
@@ -8864,7 +8864,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -8956,7 +8956,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{84DA2ACF-4911-4BA7-987A-C75151AFFD7C}">
@@ -9008,7 +9008,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -9100,10 +9100,10 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -9273,7 +9273,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{84DA2ACF-4911-4BA7-987A-C75151AFFD7C}">
@@ -9325,7 +9325,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -9419,7 +9419,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{634A1FBA-5225-43B5-9BCA-5712D7BF8A73}">
@@ -9471,7 +9471,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -9637,7 +9637,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{84DA2ACF-4911-4BA7-987A-C75151AFFD7C}">
@@ -9688,7 +9688,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -9780,7 +9780,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{9F4EB010-1FD7-41E1-B78E-5AF8A4CAD082}">
@@ -9831,7 +9831,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -10000,7 +10000,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{9F4EB010-1FD7-41E1-B78E-5AF8A4CAD082}">
@@ -10051,7 +10051,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -10255,7 +10255,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{3C4F6810-E137-40B2-B285-0903430B3B05}">
@@ -10307,7 +10307,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -10403,7 +10403,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{D6F3B260-59C6-4128-B808-6E091D91A739}">
@@ -10457,7 +10457,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -10548,7 +10548,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{BFE70315-D680-420E-A7C5-4C5001B99340}">
@@ -10675,7 +10675,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -10767,7 +10767,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{BB4433CB-EF2F-440B-A0EB-81FAE9B2FC72}">
@@ -10822,7 +10822,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -10917,7 +10917,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{84DA2ACF-4911-4BA7-987A-C75151AFFD7C}">
@@ -10968,7 +10968,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -11062,7 +11062,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{84DA2ACF-4911-4BA7-987A-C75151AFFD7C}">
@@ -11113,7 +11113,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -11205,7 +11205,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{E3C05A98-43F2-42ED-8383-F76CD129EA5B}">
@@ -11257,7 +11257,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -11353,7 +11353,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{F1AC0072-AA82-4B65-87DA-CA10FD9AD2BB}">
@@ -11405,7 +11405,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -11500,7 +11500,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{D6F3B260-59C6-4128-B808-6E091D91A739}">
@@ -11554,7 +11554,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -11615,7 +11615,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{BB4433CB-EF2F-440B-A0EB-81FAE9B2FC72}">
@@ -11670,7 +11670,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -11766,7 +11766,7 @@ Content provided by Vincent Gagnon
 © 2014 Vincent Gagnon</Comment>
 							<ReferenceList>
 								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5B0BAF55-8081-407B-A6DC-5F94091C8113}"/>
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
 								</Reference>
 								<Reference Name="Effect0">
 									<Custom CreatedFrom="{B854A884-0051-4EEF-A8C4-0F2D1C1F9C07}">
@@ -11781,7 +11781,7 @@ Content provided by Vincent Gagnon
 									</Custom>
 								</Reference>
 								<Reference Name="OutputBus">
-									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{EC40B9D3-86D8-41C6-A75A-A40369084F59}"/>
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>

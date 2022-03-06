@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WwiseDocument Type="WorkUnit" ID="{B6C92F1E-73BE-488A-89AE-D7DF922E17DF}" SchemaVersion="89">
+<WwiseDocument Type="WorkUnit" ID="{B6C92F1E-73BE-488A-89AE-D7DF922E17DF}" SchemaVersion="97">
 	<AudioObjects>
 		<WorkUnit Name="Default Work Unit" ID="{B6C92F1E-73BE-488A-89AE-D7DF922E17DF}" PersistMode="Standalone">
 			<ChildrenList>
@@ -104,9 +104,12 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="cleaver hit" ID="{31869B9C-8E14-42F2-B980-0B39F85A98AD}" ShortID="51170853">
+												<AudioFileSource Name="cleaver hit" ID="{31869B9C-8E14-42F2-B980-0B39F85A98AD}">
 													<Language>SFX</Language>
 													<AudioFile>cleaver hit.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="51170853"/>
+													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
@@ -135,9 +138,12 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="cleaver" ID="{030B6B40-DBC2-4165-B64F-24127D109FFB}" ShortID="725891742">
+												<AudioFileSource Name="cleaver" ID="{030B6B40-DBC2-4165-B64F-24127D109FFB}">
 													<Language>SFX</Language>
 													<AudioFile>cleaver.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="725891742"/>
+													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
@@ -161,9 +167,12 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="special" ID="{F05EF685-DE7D-4E02-9850-DD167F5730E3}" ShortID="122339750">
+												<AudioFileSource Name="special" ID="{F05EF685-DE7D-4E02-9850-DD167F5730E3}">
 													<Language>SFX</Language>
 													<AudioFile>special.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="122339750"/>
+													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
@@ -187,12 +196,12 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="wChefShoot2_1" ID="{D532C9D8-A7A3-47FE-8622-4D726CF30AC4}" ShortID="550169420">
+												<AudioFileSource Name="wChefShoot2_1" ID="{D532C9D8-A7A3-47FE-8622-4D726CF30AC4}">
 													<Language>SFX</Language>
 													<AudioFile>wChefShoot2_1.wav</AudioFile>
-													<ConvertedFileIDList>
-														<File ID="993334955"/>
-													</ConvertedFileIDList>
+													<MediaIDList>
+														<MediaID ID="993334955"/>
+													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
@@ -216,9 +225,12 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="sndFlamerStop" ID="{86272099-F525-41DC-B66D-4E026EFE39D6}" ShortID="315800143">
+												<AudioFileSource Name="sndFlamerStop" ID="{86272099-F525-41DC-B66D-4E026EFE39D6}">
 													<Language>SFX</Language>
 													<AudioFile>sndFlamerStop.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="315800143"/>
+													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
@@ -242,9 +254,12 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="sndFireShotgun" ID="{BCDA05E9-B318-4717-993E-3C9517A49EBC}" ShortID="1045069731">
+												<AudioFileSource Name="sndFireShotgun" ID="{BCDA05E9-B318-4717-993E-3C9517A49EBC}">
 													<Language>SFX</Language>
 													<AudioFile>sndFireShotgun.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1045069731"/>
+													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
@@ -268,9 +283,12 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="Fireball" ID="{F4593372-BD42-4A46-9826-5F4FD9516222}" ShortID="875711283">
+												<AudioFileSource Name="Fireball" ID="{F4593372-BD42-4A46-9826-5F4FD9516222}">
 													<Language>SFX</Language>
 													<AudioFile>Fireball.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="875711283"/>
+													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>

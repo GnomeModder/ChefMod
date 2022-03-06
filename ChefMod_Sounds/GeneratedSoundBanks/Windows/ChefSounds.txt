@@ -10,10 +10,10 @@ Game Parameter	ID	Name			Wwise Object Path	Notes
 	3673881719	Volume_SFX			\Default Work Unit\Volume_SFX	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	51170853	cleaver hit	C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\.cache\Windows\SFX\cleaver hit_A1793BE9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Attack Mixer\cleaver hit		7462
-	122339750	special	C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\.cache\Windows\SFX\special_A1793BE9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Attack Mixer\special		18188
-	315800143	m2 shoot	C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\.cache\Windows\SFX\sndFlamerStop_A1793BE9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Attack Mixer\m2 shoot		3938
-	725891742	cleaver	C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\.cache\Windows\SFX\cleaver_A1793BE9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Attack Mixer\cleaver		5361
-	993334955	ding	C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\.cache\Windows\SFX\wChefShoot2_1_A1793BE9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Attack Mixer\ding		6344
-	1045069731	m2 shoot v2	C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\.cache\Windows\SFX\sndFireShotgun_A1793BE9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Attack Mixer\m2 shoot v2		8658
+	51170853	cleaver hit	C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\.cache\Windows\SFX\cleaver hit_0D5756A9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Attack Mixer\cleaver hit		7502
+	122339750	special	C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\.cache\Windows\SFX\special_0D5756A9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Attack Mixer\special		18190
+	315800143	m2 shoot	C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\.cache\Windows\SFX\sndFlamerStop_0D5756A9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Attack Mixer\m2 shoot		3977
+	725891742	cleaver	C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\.cache\Windows\SFX\cleaver_0D5756A9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Attack Mixer\cleaver		5376
+	993334955	ding	C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\.cache\Windows\SFX\wChefShoot2_1_0D5756A9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Attack Mixer\ding		6343
+	1045069731	m2 shoot v2	C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\.cache\Windows\SFX\sndFireShotgun_0D5756A9.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Attack Mixer\m2 shoot v2		8727
 

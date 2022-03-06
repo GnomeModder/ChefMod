@@ -31,7 +31,7 @@ namespace ChefMod
         public static Material matChefDefault = CreateMaterial("matChefDefault");
         public static Material matChefDefaultKnife = CreateMaterial("matChefDefaultKnife");
 
-        public static UInt32 unloadingID = LoadSoundBank(ChefMod.Properties.Resources.ChefSounds);
+        //public static UInt32 unloadingID = LoadSoundBank(ChefMod.Properties.Resources.ChefSounds);
 
         private static Material commandoMat;
 
@@ -46,14 +46,14 @@ namespace ChefMod
             return bundle;
         }
 
-        static UInt32 LoadSoundBank(Byte[] resourceBytes)
+        /*static UInt32 LoadSoundBank(Byte[] resourceBytes)
         {
             //Check to make sure that the byte array supplied is not null, and throw an appropriate exception if they are.
             if (resourceBytes == null) throw new ArgumentNullException(nameof(resourceBytes));
 
             //Register the soundbank and return the ID
             return SoundAPI.SoundBanks.Add(resourceBytes);
-        }
+        }*/
 
 
         public static Material CreateMaterial(string materialName, float emission, Color emissionColor, float normalStrength) {

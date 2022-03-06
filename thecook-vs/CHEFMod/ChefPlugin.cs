@@ -16,6 +16,8 @@ using RoR2.Projectile;
 using RoR2.Skills;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -35,7 +37,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "2.0.15")]
+        "2.0.16")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
     public class ChefPlugin : BaseUnityPlugin
@@ -215,6 +217,14 @@ namespace ChefMod
                 arenaPluginLoaded = true;
             }
 
+            //TODO: Commented out old sound loading code. I duplicated the ChefSounds.bnk from the resources folder and put it in the CHEFMod folder. Someone should clean this bit up later.
+            Debug.Log(Assembly.GetExecutingAssembly().GetManifestResourceNames());
+            using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("ChefMod.ChefSounds.bnk"))
+            {
+                byte[] array = new byte[manifestResourceStream2.Length];
+                manifestResourceStream2.Read(array, 0, array.Length);
+                SoundAPI.SoundBanks.Add(array);
+            }
 
             gameObject.AddComponent<TestValueManager>();
 

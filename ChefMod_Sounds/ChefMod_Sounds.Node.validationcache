@@ -1,44 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ValidationCache Version="1" SchemaVersion="89">
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Actor-Mixer Hierarchy\Default Work Unit.wwu" DateLow="1628974318" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Actor-Mixer Hierarchy\Factory Motion.wwu" DateLow="1628882816" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Actor-Mixer Hierarchy\Factory SoundSeed Air Objects.wwu" DateLow="1608429806" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Actor-Mixer Hierarchy\Factory Synth One.wwu" DateLow="1608429649" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Attenuations\Default Work Unit.wwu" DateLow="1628882933" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Audio Devices\Default Work Unit.wwu" DateLow="1628882816" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\ChefMod_Sounds.Node.wsettings" DateLow="1628974357" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\ChefMod_Sounds.wproj" DateLow="1628880318" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Control Surface Sessions\Default Work Unit.wwu" DateLow="1628880318" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Conversion Settings\Default Work Unit.wwu" DateLow="1628891050" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Conversion Settings\Factory Conversion Settings.wwu" DateLow="1608429649" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Dynamic Dialogue\Default Work Unit.wwu" DateLow="1628880318" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Effects\Default Work Unit.wwu" DateLow="1628880318" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Effects\Factory Auro Headphone.wwu" DateLow="1608429823" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Effects\Factory Effects.wwu" DateLow="1608429649" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Effects\Factory iZotope Box Modeler.wwu" DateLow="1628882816" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Effects\Factory iZotope Delay.wwu" DateLow="1608429835" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Effects\Factory iZotope Dynamics.wwu" DateLow="1608429835" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Effects\Factory iZotope Filters.wwu" DateLow="1608429835" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Effects\Factory iZotope Hybrid Reverb Effects.wwu" DateLow="1608429835" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Effects\Factory iZotope Multiband Distortion.wwu" DateLow="1608429835" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Effects\Factory iZotope Singleband Distortion.wwu" DateLow="1608429835" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Effects\Factory McDSP Effects.wwu" DateLow="1608429846" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Events\Default Work Unit.wwu" DateLow="1628927776" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Game Parameters\Default Work Unit.wwu" DateLow="1628882816" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Game Parameters\Factory Motion.wwu" DateLow="1608429649" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Game Parameters\Factory SoundSeed Air Game Syncs.wwu" DateLow="1608429806" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Interactive Music Hierarchy\Default Work Unit.wwu" DateLow="1628880318" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Master-Mixer Hierarchy\Default Work Unit.wwu" DateLow="1628882816" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Mixing Sessions\Default Work Unit.wwu" DateLow="1628880318" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Modulators\Default Work Unit.wwu" DateLow="1628880318" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Presets\Default Work Unit.wwu" DateLow="1628880318" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Queries\Default Work Unit.wwu" DateLow="1628880318" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Queries\Factory Queries.wwu" DateLow="1608429649" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\SoundBanks\Default Work Unit.wwu" DateLow="1628927544" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Soundcaster Sessions\Default Work Unit.wwu" DateLow="1628880318" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\States\Default Work Unit.wwu" DateLow="1628880318" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Switches\Default Work Unit.wwu" DateLow="1628880318" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Triggers\Default Work Unit.wwu" DateLow="1628880318" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Virtual Acoustics\Default Work Unit.wwu" DateLow="1628880318" DateHigh="0"/>
-	<ValidationCacheItem File="C:\Users\Node\Documents\WwiseProjects\ChefMod_Sounds\Virtual Acoustics\Factory Reflect Acoustic Textures.wwu" DateLow="1608429801" DateHigh="0"/>
+<ValidationCache Version="1" SchemaVersion="97">
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Virtual Acoustics\Factory Reflect Acoustic Textures.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Virtual Acoustics\Default Work Unit.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Triggers\Default Work Unit.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Switches\Default Work Unit.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\States\Default Work Unit.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Soundcaster Sessions\Default Work Unit.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\SoundBanks\Default Work Unit.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Queries\Factory Queries.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Queries\Default Work Unit.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Presets\Factory Spatial Audio.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Presets\Factory Reflect.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Presets\Default Work Unit.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Modulators\Default Work Unit.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Mixing Sessions\Default Work Unit.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Master-Mixer Hierarchy\Default Work Unit.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Interactive Music Hierarchy\Default Work Unit.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Game Parameters\Factory SoundSeed Air Game Syncs.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Game Parameters\Factory Motion.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Game Parameters\Default Work Unit.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Events\Default Work Unit.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Effects\Factory Reflect.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Effects\Factory McDSP Effects.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Effects\Factory iZotope Singleband Distortion.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Effects\Factory iZotope Multiband Distortion.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Effects\Factory iZotope Hybrid Reverb Effects.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Effects\Factory iZotope Filters.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Effects\Factory iZotope Dynamics.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Effects\Factory iZotope Delay.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Effects\Factory iZotope Box Modeler.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Effects\Factory Effects.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Effects\Factory Auro Headphone.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Effects\Default Work Unit.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Dynamic Dialogue\Default Work Unit.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Conversion Settings\Factory Conversion Settings.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Conversion Settings\Default Work Unit.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Control Surface Sessions\Default Work Unit.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\ChefMod_Sounds.wproj" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\ChefMod_Sounds.Node.wsettings" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Audio Devices\Default Work Unit.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Attenuations\Default Work Unit.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Actor-Mixer Hierarchy\Factory Synth One.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Actor-Mixer Hierarchy\Factory SoundSeed Air Objects.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Actor-Mixer Hierarchy\Factory Motion.wwu" DateLow="1646574701" DateHigh="0"/>
+	<ValidationCacheItem File="C:\Users\Node\RoR2 Mods\ChefMod\ChefMod_Sounds\Actor-Mixer Hierarchy\Default Work Unit.wwu" DateLow="1646574701" DateHigh="0"/>
 </ValidationCache>

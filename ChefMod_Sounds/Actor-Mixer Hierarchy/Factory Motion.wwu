@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WwiseDocument Type="WorkUnit" ID="{45F59F79-DD77-478C-8337-3F8F3FFF3B84}" SchemaVersion="89">
+<WwiseDocument Type="WorkUnit" ID="{45F59F79-DD77-478C-8337-3F8F3FFF3B84}" SchemaVersion="97">
 	<AudioObjects>
 		<WorkUnit Name="Factory Motion" ID="{45F59F79-DD77-478C-8337-3F8F3FFF3B84}" PersistMode="Standalone">
 			<ChildrenList>
@@ -451,7 +451,7 @@
 																						<Flags>0</Flags>
 																					</Point>
 																					<Point>
-																						<XPos>7.46436609152288E-02</XPos>
+																						<XPos>0.0746436609152288</XPos>
 																						<YPos>0</YPos>
 																						<Flags>0</Flags>
 																					</Point>
@@ -1576,7 +1576,7 @@
 																			</Point>
 																			<Point>
 																				<XPos>0.5</XPos>
-																				<YPos>2.76999999999994E-03</YPos>
+																				<YPos>0.00276999999999994</YPos>
 																				<Flags>0</Flags>
 																			</Point>
 																			<Point>
@@ -1681,7 +1681,7 @@
 																			</Point>
 																			<Point>
 																				<XPos>0.5</XPos>
-																				<YPos>2.76999999999994E-03</YPos>
+																				<YPos>0.00276999999999994</YPos>
 																				<Flags>0</Flags>
 																			</Point>
 																			<Point>
@@ -1786,7 +1786,7 @@
 																			</Point>
 																			<Point>
 																				<XPos>0.5</XPos>
-																				<YPos>2.76999999999994E-03</YPos>
+																				<YPos>0.00276999999999994</YPos>
 																				<Flags>0</Flags>
 																			</Point>
 																			<Point>
@@ -3578,7 +3578,7 @@
 																				<Flags>5</Flags>
 																			</Point>
 																			<Point>
-																				<XPos>4.65116279069767E-02</XPos>
+																				<XPos>0.0465116279069767</XPos>
 																				<YPos>0.988847194485602</YPos>
 																				<Flags>0</Flags>
 																			</Point>
@@ -3658,7 +3658,7 @@
 																			</Point>
 																			<Point>
 																				<XPos>0.358381502890173</XPos>
-																				<YPos>2.47643704838975E-03</YPos>
+																				<YPos>0.00247643704838975</YPos>
 																				<Flags>0</Flags>
 																			</Point>
 																			<Point>
@@ -3703,7 +3703,7 @@
 																				<Flags>0</Flags>
 																			</Point>
 																			<Point>
-																				<XPos>4.65116279069767E-02</XPos>
+																				<XPos>0.0465116279069767</XPos>
 																				<YPos>0.988847194485602</YPos>
 																				<Flags>0</Flags>
 																			</Point>
@@ -4101,7 +4101,7 @@
 																			</Point>
 																			<Point>
 																				<XPos>0.49873417721519</XPos>
-																				<YPos>2.31417721518978E-03</YPos>
+																				<YPos>0.00231417721518978</YPos>
 																				<Flags>0</Flags>
 																			</Point>
 																			<Point>
@@ -6601,7 +6601,7 @@
 																				<Flags>5</Flags>
 																			</Point>
 																			<Point>
-																				<XPos>7.63740185581727E-02</XPos>
+																				<XPos>0.0763740185581727</XPos>
 																				<YPos>0</YPos>
 																				<Flags>0</Flags>
 																			</Point>
@@ -6637,7 +6637,7 @@
 																				<Flags>5</Flags>
 																			</Point>
 																			<Point>
-																				<XPos>7.63740185581727E-02</XPos>
+																				<XPos>0.0763740185581727</XPos>
 																				<YPos>0</YPos>
 																				<Flags>0</Flags>
 																			</Point>
@@ -7335,7 +7335,7 @@
 																				<Flags>0</Flags>
 																			</Point>
 																			<Point>
-																				<XPos>9.90247561890472E-02</XPos>
+																				<XPos>0.0990247561890472</XPos>
 																				<YPos>0</YPos>
 																				<Flags>0</Flags>
 																			</Point>
@@ -7541,7 +7541,7 @@
 																			</Point>
 																			<Point>
 																				<XPos>0.162790697674419</XPos>
-																				<YPos>5.74894089123739E-02</YPos>
+																				<YPos>0.0574894089123739</YPos>
 																				<Flags>0</Flags>
 																			</Point>
 																			<Point>
@@ -8168,7 +8168,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																			</Point>
 																			<Point>
 																				<XPos>0.15</XPos>
-																				<YPos>-2.77000000000005E-03</YPos>
+																				<YPos>-0.00277000000000005</YPos>
 																				<Flags>0</Flags>
 																			</Point>
 																			<Point>
@@ -11358,7 +11358,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>4.5</XPos>
-																		<YPos>8.31000000000004E-03</YPos>
+																		<YPos>0.00831000000000004</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -15585,7 +15585,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>1.21518987341772</XPos>
-																		<YPos>1.40836091772152E-02</YPos>
+																		<YPos>0.0140836091772152</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -15640,7 +15640,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>6.39240506329114</XPos>
-																		<YPos>9.82701432803775E-02</YPos>
+																		<YPos>0.0982701432803775</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -15765,7 +15765,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>0.417721518987342</XPos>
-																		<YPos>8.16115536461374E-02</YPos>
+																		<YPos>0.0816115536461374</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -15785,7 +15785,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>1.41772151898734</XPos>
-																		<YPos>2.8805503523028E-03</YPos>
+																		<YPos>0.0028805503523028</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -15800,7 +15800,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>2.45569620253165</XPos>
-																		<YPos>5.14310503143723E-03</YPos>
+																		<YPos>0.00514310503143723</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -15820,12 +15820,12 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>2.94936708860759</XPos>
-																		<YPos>4.8065595679707E-03</YPos>
+																		<YPos>0.0048065595679707</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
 																		<XPos>3.40506329113924</XPos>
-																		<YPos>4.49590221707852E-03</YPos>
+																		<YPos>0.00449590221707852</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -15845,12 +15845,12 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>3.73417721518988</XPos>
-																		<YPos>4.2715385747675E-03</YPos>
+																		<YPos>0.0042715385747675</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
 																		<XPos>4.13924050632911</XPos>
-																		<YPos>3.99539870730778E-03</YPos>
+																		<YPos>0.00399539870730778</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -15865,7 +15865,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>4.63291139240506</XPos>
-																		<YPos>3.65885324384125E-03</YPos>
+																		<YPos>0.00365885324384125</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -15875,7 +15875,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>5.24590163934426</XPos>
-																		<YPos>3.24096535015477E-03</YPos>
+																		<YPos>0.00324096535015477</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -15890,7 +15890,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>5.95628415300546</XPos>
-																		<YPos>2.75668317139601E-03</YPos>
+																		<YPos>0.00275668317139601</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -15905,7 +15905,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>7.3224043715847</XPos>
-																		<YPos>1.82537128916763E-03</YPos>
+																		<YPos>0.00182537128916763</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -15925,7 +15925,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>8.28779599271403</XPos>
-																		<YPos>1.16724422572624E-03</YPos>
+																		<YPos>0.00116724422572624</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -15935,7 +15935,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>9.03460837887068</XPos>
-																		<YPos>6.58127063441391E-04</YPos>
+																		<YPos>0.000658127063441391</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -16110,12 +16110,12 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>2.2152</XPos>
-																		<YPos>8.31000000000004E-03</YPos>
+																		<YPos>0.00831000000000004</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
 																		<XPos>2.44534412955465</XPos>
-																		<YPos>3.63815430687153E-02</YPos>
+																		<YPos>0.0363815430687153</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -16125,12 +16125,12 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>2.59919028340081</XPos>
-																		<YPos>5.51467357416958E-02</YPos>
+																		<YPos>0.0551467357416958</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
 																		<XPos>2.76923076923077</XPos>
-																		<YPos>7.58872118539375E-02</YPos>
+																		<YPos>0.0758872118539375</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -16220,7 +16220,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>5.2911</XPos>
-																		<YPos>3.32399999999999E-02</YPos>
+																		<YPos>0.0332399999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -16260,7 +16260,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>6.39240506329114</XPos>
-																		<YPos>9.82701432803774E-02</YPos>
+																		<YPos>0.0982701432803774</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -16524,7 +16524,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>1.06072874493927</XPos>
-																		<YPos>8.00780791730894E-02</YPos>
+																		<YPos>0.0800780791730894</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -16534,7 +16534,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>1.32793522267206</XPos>
-																		<YPos>8.83881251301617E-02</YPos>
+																		<YPos>0.0883881251301617</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -16554,7 +16554,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>1.58704453441295</XPos>
-																		<YPos>9.64463515127773E-02</YPos>
+																		<YPos>0.0964463515127773</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17004,7 +17004,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>0.6234875</XPos>
-																		<YPos>6.64800000000001E-02</YPos>
+																		<YPos>0.0664800000000001</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17019,22 +17019,22 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>0.916225</XPos>
-																		<YPos>6.64800000000001E-02</YPos>
+																		<YPos>0.0664800000000001</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
 																		<XPos>1.06072874493927</XPos>
-																		<YPos>8.00780791730893E-02</YPos>
+																		<YPos>0.0800780791730893</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
 																		<XPos>1.3266875</XPos>
-																		<YPos>2.77000000000001E-02</YPos>
+																		<YPos>0.0277000000000001</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
 																		<XPos>1.32793522267206</XPos>
-																		<YPos>8.83881251301617E-02</YPos>
+																		<YPos>0.0883881251301617</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17054,7 +17054,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>1.58704453441295</XPos>
-																		<YPos>9.64463515127774E-02</YPos>
+																		<YPos>0.0964463515127774</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17089,12 +17089,12 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>2.36437246963562</XPos>
-																		<YPos>1.92567870836391E-02</YPos>
+																		<YPos>0.0192567870836391</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
 																		<XPos>2.371225</XPos>
-																		<YPos>1.38499999999999E-02</YPos>
+																		<YPos>0.0138499999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17144,7 +17144,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>3.417</XPos>
-																		<YPos>6.64800000000001E-02</YPos>
+																		<YPos>0.0664800000000001</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17204,7 +17204,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>4.6895125</XPos>
-																		<YPos>5.81700000000001E-02</YPos>
+																		<YPos>0.0581700000000001</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17239,7 +17239,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>5.635625</XPos>
-																		<YPos>3.60100000000001E-02</YPos>
+																		<YPos>0.0360100000000001</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17284,12 +17284,12 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>6.793525</XPos>
-																		<YPos>7.55699999999999E-02</YPos>
+																		<YPos>0.0755699999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
 																		<XPos>7.4008125</XPos>
-																		<YPos>4.43199999999999E-02</YPos>
+																		<YPos>0.0443199999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17314,7 +17314,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>8.2659625</XPos>
-																		<YPos>5.81700000000001E-02</YPos>
+																		<YPos>0.0581700000000001</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17364,7 +17364,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>9.197125</XPos>
-																		<YPos>4.43199999999999E-02</YPos>
+																		<YPos>0.0443199999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17394,7 +17394,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>9.6910625</XPos>
-																		<YPos>7.47899999999999E-02</YPos>
+																		<YPos>0.0747899999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17404,7 +17404,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>9.797575</XPos>
-																		<YPos>5.81700000000001E-02</YPos>
+																		<YPos>0.0581700000000001</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17484,7 +17484,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>0.226725</XPos>
-																		<YPos>5.5400000000001E-03</YPos>
+																		<YPos>0.0055400000000001</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17534,7 +17534,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>1.2968</XPos>
-																		<YPos>8.58699999999999E-02</YPos>
+																		<YPos>0.0858699999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17564,12 +17564,12 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>2.2152</XPos>
-																		<YPos>8.31000000000004E-03</YPos>
+																		<YPos>0.00831000000000004</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
 																		<XPos>2.44534412955465</XPos>
-																		<YPos>3.63815430687153E-02</YPos>
+																		<YPos>0.0363815430687153</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17579,17 +17579,17 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>2.59919028340081</XPos>
-																		<YPos>5.51467357416957E-02</YPos>
+																		<YPos>0.0551467357416957</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
 																		<XPos>2.76923076923077</XPos>
-																		<YPos>7.58872118539375E-02</YPos>
+																		<YPos>0.0758872118539375</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
 																		<XPos>2.9860875</XPos>
-																		<YPos>2.79799999999999E-02</YPos>
+																		<YPos>0.0279799999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17674,7 +17674,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>5.2911</XPos>
-																		<YPos>3.32399999999999E-02</YPos>
+																		<YPos>0.0332399999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17684,7 +17684,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>5.6032375</XPos>
-																		<YPos>6.37099999999999E-02</YPos>
+																		<YPos>0.0637099999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17714,7 +17714,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>6.39240506329114</XPos>
-																		<YPos>9.82701432803774E-02</YPos>
+																		<YPos>0.0982701432803774</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17734,7 +17734,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>7.3036375</XPos>
-																		<YPos>5.53999999999999E-02</YPos>
+																		<YPos>0.0553999999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17769,7 +17769,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>8.0162</XPos>
-																		<YPos>8.06499999999999E-02</YPos>
+																		<YPos>0.0806499999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17779,7 +17779,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>8.3307375</XPos>
-																		<YPos>3.60100000000001E-02</YPos>
+																		<YPos>0.0360100000000001</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17839,7 +17839,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>9.3360375</XPos>
-																		<YPos>6.37099999999999E-02</YPos>
+																		<YPos>0.0637099999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17849,7 +17849,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>9.55465</XPos>
-																		<YPos>3.32399999999999E-02</YPos>
+																		<YPos>0.0332399999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17859,7 +17859,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>9.65015</XPos>
-																		<YPos>4.43199999999999E-02</YPos>
+																		<YPos>0.0443199999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17940,7 +17940,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>0.226725</XPos>
-																		<YPos>5.5400000000001E-03</YPos>
+																		<YPos>0.0055400000000001</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -17990,7 +17990,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>1.2968</XPos>
-																		<YPos>8.58699999999999E-02</YPos>
+																		<YPos>0.0858699999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -18020,12 +18020,12 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>2.2152</XPos>
-																		<YPos>8.31000000000004E-03</YPos>
+																		<YPos>0.00831000000000004</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
 																		<XPos>2.44534412955465</XPos>
-																		<YPos>3.63815430687153E-02</YPos>
+																		<YPos>0.0363815430687153</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -18035,17 +18035,17 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>2.59919028340081</XPos>
-																		<YPos>5.51467357416957E-02</YPos>
+																		<YPos>0.0551467357416957</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
 																		<XPos>2.76923076923077</XPos>
-																		<YPos>7.58872118539375E-02</YPos>
+																		<YPos>0.0758872118539375</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
 																		<XPos>2.9860875</XPos>
-																		<YPos>2.79799999999999E-02</YPos>
+																		<YPos>0.0279799999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -18130,7 +18130,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>5.2911</XPos>
-																		<YPos>3.32399999999999E-02</YPos>
+																		<YPos>0.0332399999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -18140,7 +18140,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>5.6032375</XPos>
-																		<YPos>6.37099999999999E-02</YPos>
+																		<YPos>0.0637099999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -18170,7 +18170,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>6.39240506329114</XPos>
-																		<YPos>9.82701432803774E-02</YPos>
+																		<YPos>0.0982701432803774</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -18190,7 +18190,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>7.3036375</XPos>
-																		<YPos>5.53999999999999E-02</YPos>
+																		<YPos>0.0553999999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -18225,7 +18225,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>8.0162</XPos>
-																		<YPos>8.06499999999999E-02</YPos>
+																		<YPos>0.0806499999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -18235,7 +18235,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>8.3307375</XPos>
-																		<YPos>3.60100000000001E-02</YPos>
+																		<YPos>0.0360100000000001</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -18295,7 +18295,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>9.3360375</XPos>
-																		<YPos>6.37099999999999E-02</YPos>
+																		<YPos>0.0637099999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -18305,7 +18305,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>9.55465</XPos>
-																		<YPos>3.32399999999999E-02</YPos>
+																		<YPos>0.0332399999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
@@ -18315,7 +18315,7 @@ Route your music, using an user-defined aux bus, to the Wwise Motion bus. </Comm
 																	</Point>
 																	<Point>
 																		<XPos>9.65015</XPos>
-																		<YPos>4.43199999999999E-02</YPos>
+																		<YPos>0.0443199999999999</YPos>
 																		<Flags>0</Flags>
 																	</Point>
 																	<Point>
