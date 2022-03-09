@@ -135,11 +135,18 @@ namespace ChefMod
             var hc = oilPrefab.GetComponent<HealthComponent>();
             hc.dontShowHealthbar = true;
 
-            oilPrefab.GetComponent<CharacterBody>().baseNameToken = "OilBeetle";
-            oilPrefab.GetComponent<CharacterBody>().bodyFlags = CharacterBody.BodyFlags.Masterless;
+            CharacterBody oilPrefabBody = oilPrefab.GetComponent<CharacterBody>();
+            oilPrefabBody.baseNameToken = "OilBeetle";
+            oilPrefabBody.bodyFlags = CharacterBody.BodyFlags.Masterless;
             oilPrefab.GetComponent<TeamComponent>().teamIndex = TeamIndex.Neutral;
             oilPrefab.layer = LayerIndex.debris.intVal;
             oilPrefab.name = "OilBeetle";
+
+            HurtBoxGroup hbg = oilPrefab.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<HurtBoxGroup>();
+            foreach(HurtBox h in hbg.hurtBoxes)
+            {
+                h.isSniperTarget = false;
+            }
 
             foreach (Component comp in oilPrefab.GetComponents<Component>()) if (comp.GetType().Name == "KinematicCharacterMotor")
                 {

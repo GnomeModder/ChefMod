@@ -22,12 +22,14 @@ All players need the mod.
 
 ## Credits
 Huge thanks to 
+
 - Lucid Inceptor for being my muse (made the models)
 - Papa Zach for being my longest supporter (made icons)
 - Timesweeper for being my rock (helped me implement animation, and various tweaks)
 - Moffein for being there when I needed him most (helped me patch for anniversary update and did networking and the 2.0 update)
 - rob for being the father I always dreamd of (gave advice)
 - Swuff for taking care of my needs (pleasured me, and made animations)
+
 And as always I give my undying love to iDeathHD
 
 oh and thank you enigma for letting me use your prefab builder it is very cool
@@ -39,7 +41,18 @@ Whether or not you come back to work on him, we'll be here for ya.
 
 ## Changelog
 
+`2.0.17`
+
+- Removed weakpoints from Oil.
+- Added a weakpoint to CHEF.
+
+`2.0.16`
+
+- Fixed for DLC update.
+- Oil now uses its own unique buff instead of reusing ClayGoo.
+
 `2.0.15`
+
 - Added alt lore when the alt victory message config option is enabled. (Credits to Lyrical Endymion)
 
 `2.0.14`

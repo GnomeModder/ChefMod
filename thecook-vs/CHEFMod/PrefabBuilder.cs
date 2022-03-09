@@ -403,6 +403,7 @@ public class PrefabBuilder
         hb.damageModifier = HurtBox.DamageModifier.Normal;
         hb.hurtBoxGroup = hurtbox;
         hb.indexInGroup = 0;
+        hb.isSniperTarget = true;
 
         hurtbox.hurtBoxes = new HurtBox[] { hb };
         hurtbox.mainHurtBox = hb;
