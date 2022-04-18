@@ -11,33 +11,61 @@ namespace ChefMod
 {
     public static class ItemDisplays
     {
-        public static List<ItemDisplayRuleSet.KeyAssetRuleGroup> list;
-        public static List<ItemDisplayRuleSet.KeyAssetRuleGroup> list2;
-
-        public static GameObject capacitorPrefab;
-        public static GameObject gatDronePrefab;
+        public static List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplays;
 
         private static Dictionary<string, GameObject> itemDisplayPrefabs = new Dictionary<string, GameObject>();
 
-        public static void RegisterDisplays(GameObject bodyPrefab)
+        public static void PopulateDisplayPrefabs()
         {
+            ItemDisplayRuleSet itemDisplayRuleSet = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/MageBody").GetComponent<ModelLocator>().modelTransform.GetComponent<CharacterModel>().itemDisplayRuleSet;
+
+            ItemDisplayRuleSet.KeyAssetRuleGroup[] item = itemDisplayRuleSet.keyAssetRuleGroups;
+
+            for (int i = 0; i < item.Length; i++)
+            {
+                ItemDisplayRule[] rules = item[i].displayRuleGroup.rules;
+
+                if (rules == null)
+                    continue;
+
+                for (int j = 0; j < rules.Length; j++)
+                {
+                    GameObject followerPrefab = rules[j].followerPrefab;
+                    if (followerPrefab)
+                    {
+                        string name = followerPrefab.name;
+                        string key = (name != null) ? name.ToLower() : null;
+                        if (!itemDisplayPrefabs.ContainsKey(key))
+                        {
+                            itemDisplayPrefabs[key] = followerPrefab;
+                        }
+                    }
+                }
+            }
+        }
+
+        public static GameObject LoadDisplay(string name)
+        {
+            if (itemDisplayPrefabs.ContainsKey(name.ToLower()))
+            {
+                if (itemDisplayPrefabs[name.ToLower()]) return itemDisplayPrefabs[name.ToLower()];
+            }
+            return null;
+        }
+
+        public static void RegisterItemDisplays(GameObject bodyPrefab) {
+
             GameObject model = bodyPrefab.GetComponentInChildren<ModelLocator>().modelTransform.gameObject;
             CharacterModel characterModel = model.GetComponent<CharacterModel>();
 
-            PopulateDisplays();
-
             ItemDisplayRuleSet itemDisplayRuleSet = ScriptableObject.CreateInstance<ItemDisplayRuleSet>();
-
-            list = new List<ItemDisplayRuleSet.KeyAssetRuleGroup>();
-            list2 = new List<ItemDisplayRuleSet.KeyAssetRuleGroup>();
+            itemDisplays = new List<ItemDisplayRuleSet.KeyAssetRuleGroup>();
 
             //add item displays here
             #region DisplayRules
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.Jetpack,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -54,11 +82,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.GoldGat,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -75,11 +101,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.BFG,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -96,11 +120,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.CritGlasses,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -117,11 +139,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Syringe,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -138,11 +158,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Behemoth,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -159,11 +177,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Missile,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -180,11 +196,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Dagger,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -201,11 +215,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Hoof,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -222,11 +234,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.ChainLightning,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -243,11 +253,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.GhostOnKill,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -264,11 +272,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Mushroom,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -285,11 +291,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.AttackSpeedOnCrit,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -306,11 +310,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.BleedOnHit,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -348,11 +350,9 @@ namespace ChefMod
             //    }
             //});
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.WardOnLevel,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -369,11 +369,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.HealOnCrit,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -390,11 +388,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.HealWhileSafe,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -411,11 +407,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Clover,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -432,11 +426,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.BarrierOnOverHeal,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -453,11 +445,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.GoldOnHit,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -474,11 +464,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.WarCryOnMultiKill,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -495,11 +483,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.SprintArmor,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -516,11 +502,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.IceRing,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -537,11 +521,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.FireRing,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -558,11 +540,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.UtilitySkillMagazine,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -589,11 +569,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.JumpBoost,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -610,11 +588,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.ArmorReductionOnHit,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -631,11 +607,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.NearbyDamageBonus,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -652,11 +626,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.ArmorPlate,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -673,11 +645,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.CommandMissile,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -694,11 +664,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Feather,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -715,11 +683,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Crowbar,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -736,11 +702,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.FallBoots,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -767,11 +731,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.ExecuteLowHealthElite,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -809,11 +771,9 @@ namespace ChefMod
             //    }
             //});
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.EquipmentMagazine,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -830,11 +790,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.NovaOnHeal,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -861,11 +819,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Infusion,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -882,11 +838,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Medkit,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -903,11 +857,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Bandolier,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -924,11 +876,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.BounceNearby,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -945,11 +895,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.IgniteOnKill,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -966,11 +914,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.StunChanceOnHit,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -987,11 +933,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Firework,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1008,11 +952,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.LunarDagger,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1029,11 +971,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Knurl,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1050,11 +990,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.BeetleGland,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1071,11 +1009,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.SprintBonus,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1092,11 +1028,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.SecondarySkillMagazine,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1134,11 +1068,9 @@ namespace ChefMod
             //    }
             //});
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.StickyBomb,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1155,11 +1087,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.TreasureCache,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1176,11 +1106,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.BossDamageBonus,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1197,11 +1125,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.SlowOnHit,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1218,11 +1144,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.ExtraLife,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1239,11 +1163,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.KillEliteFrenzy,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1260,11 +1182,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.RepeatHeal,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1281,11 +1201,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.AutoCastEquipment,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1302,11 +1220,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.IncreaseHealing,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1333,11 +1249,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.TitanGoldDuringTP,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1354,11 +1268,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.SprintWisp,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1375,11 +1287,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.BarrierOnKill,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1396,11 +1306,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.TPHealingNova,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1417,11 +1325,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.LunarUtilityReplacement,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1438,11 +1344,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Thorns,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1489,11 +1393,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.LunarPrimaryReplacement,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1510,11 +1412,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.NovaOnLowHealth,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1531,11 +1431,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.LunarTrinket,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1552,11 +1450,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Plant,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1573,11 +1469,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Bear,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1594,11 +1488,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.DeathMark,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1615,11 +1507,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.ExplodeOnDeath,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1636,11 +1526,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Seed,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1657,11 +1545,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.SprintOutOfCombat,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1700,11 +1586,9 @@ namespace ChefMod
                 }
             });*/
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Phasing,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1721,11 +1605,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.PersonalShield,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1742,11 +1624,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.ShockNearby,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1763,11 +1643,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.ShieldOnly,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1794,11 +1672,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.AlienHead,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1815,11 +1691,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.HeadHunter,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1836,11 +1710,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.EnergizedOnEquipmentUse,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1857,11 +1729,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.FlatHealth,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1878,11 +1748,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Tooth,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1899,11 +1767,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Pearl,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1920,11 +1786,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.ShinyPearl,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1941,11 +1805,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.BonusGoldPackOnKill,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1962,11 +1824,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Squid,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -1983,11 +1843,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Icicle,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2004,11 +1862,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.Talisman,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2025,11 +1881,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.LaserTurbine,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2046,11 +1900,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.FocusConvergence,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2089,11 +1941,9 @@ namespace ChefMod
                 }
             });*/
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.FireballsOnHit,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2110,11 +1960,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.SiphonOnLowHealth,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2131,11 +1979,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.BleedOnHitAndExplode,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2152,11 +1998,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.MonstersOnShrineUse,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2173,11 +2017,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Items.RandomDamageZone,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2194,11 +2036,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.Fruit,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2215,11 +2055,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.AffixRed,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2246,11 +2084,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.AffixBlue,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2277,11 +2113,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.AffixWhite,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2298,11 +2132,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.AffixPoison,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2319,11 +2151,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.AffixHaunted,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2340,11 +2170,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.CritOnUse,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2361,11 +2189,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.DroneBackup,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2403,11 +2229,9 @@ namespace ChefMod
             //    }
             //});
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.BurnNearby,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2424,11 +2248,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.CrippleWard,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2445,11 +2267,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.QuestVolatileBattery,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2466,11 +2286,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.GainArmor,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2487,11 +2305,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.Recycle,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2508,11 +2324,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.FireBallDash,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2529,11 +2343,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.Cleanse,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2550,11 +2362,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.Tonic,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2571,11 +2381,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.Gateway,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2592,11 +2400,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.Meteor,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2613,11 +2419,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.Saw,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2634,11 +2438,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.Blackhole,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2655,11 +2457,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.Scanner,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2676,11 +2476,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.DeathProjectile,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2697,11 +2495,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.LifestealOnHit,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2718,11 +2514,9 @@ namespace ChefMod
                 }
             });
 
-            list.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
-            {
+            itemDisplays.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup {
                 keyAsset = RoR2Content.Equipment.TeamWarCry,
-                displayRuleGroup = new DisplayRuleGroup
-                {
+                displayRuleGroup = new DisplayRuleGroup {
                     rules = new ItemDisplayRule[]
                     {
                         new ItemDisplayRule
@@ -2739,46 +2533,11 @@ namespace ChefMod
                 }
             });
             #endregion
+
             //apply displays here
-
-            itemDisplayRuleSet.keyAssetRuleGroups = list.ToArray();
+            itemDisplayRuleSet.keyAssetRuleGroups = itemDisplays.ToArray();
             characterModel.itemDisplayRuleSet = itemDisplayRuleSet;
-            characterModel.itemDisplayRuleSet.GenerateRuntimeValues();
-        }
-
-        public static GameObject LoadDisplay(string name)
-        {
-            if (itemDisplayPrefabs.ContainsKey(name.ToLower()))
-            {
-                if (itemDisplayPrefabs[name.ToLower()]) return itemDisplayPrefabs[name.ToLower()];
-            }
-            return null;
-        }
-
-        private static void PopulateDisplays()
-        {
-            ItemDisplayRuleSet itemDisplayRuleSet = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponent<ModelLocator>().modelTransform.GetComponent<CharacterModel>().itemDisplayRuleSet;
-
-            ItemDisplayRuleSet.KeyAssetRuleGroup[] item = itemDisplayRuleSet.keyAssetRuleGroups;
-
-            for (int i = 0; i < item.Length; i++)
-            {
-                ItemDisplayRule[] rules = item[i].displayRuleGroup.rules;
-
-                for (int j = 0; j < rules.Length; j++)
-                {
-                    GameObject followerPrefab = rules[j].followerPrefab;
-                    if (followerPrefab)
-                    {
-                        string name = followerPrefab.name;
-                        string key = (name != null) ? name.ToLower() : null;
-                        if (!itemDisplayPrefabs.ContainsKey(key))
-                        {
-                            itemDisplayPrefabs[key] = followerPrefab;
-                        }
-                    }
-                }
-            }
+            itemDisplayRuleSet.GenerateRuntimeValues();
         }
     }
 }

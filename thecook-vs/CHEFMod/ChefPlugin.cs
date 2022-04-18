@@ -17,6 +17,7 @@ using RoR2.Skills;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -83,16 +84,6 @@ namespace ChefMod
 
         public static bool arenaPluginLoaded = false;
         public static bool arenaActive = false;
-
-        private void ContentManager_collectContentPackProviders(ContentManager.AddContentPackProviderDelegate addContentPackProvider)
-        {
-            addContentPackProvider(new ChefContent());
-        }
-
-        public void Start()
-        {
-            ItemDisplays.RegisterDisplays(chefPrefab);
-        }
 
         public void RegisterLanguageTokens()
         {
@@ -231,6 +222,7 @@ namespace ChefMod
             ReadConfig();
             AddHooks();
             Unlockables.RegisterUnlockables();
+            ItemDisplays.PopulateDisplayPrefabs();
             registerPodPrefabs();
             registerCharacter();
             registerSkills();
@@ -245,6 +237,10 @@ namespace ChefMod
             ContentManager.collectContentPackProviders += ContentManager_collectContentPackProviders;
         }
 
+        private void ContentManager_collectContentPackProviders(ContentManager.AddContentPackProviderDelegate addContentPackProvider) {
+            addContentPackProvider(new ChefContent());
+        }
+
         public void AddHooks()
         {
             On.RoR2.HealthComponent.TakeDamage += TakeDamage.HealthComponent_TakeDamage;
@@ -256,9 +252,16 @@ namespace ChefMod
                 //On.RoR2.Stage.Start += ArenaStage_Start.Stage_Start;
             }
             On.RoR2.Run.HandlePlayerFirstEntryAnimation += Run_HandlePlayerFirstEntryAnimation;
+
+            RoR2.RoR2Application.onLoad += LateSetup;
+        }
+
+        private void LateSetup() {
+            ItemDisplays.RegisterItemDisplays(chefPrefab);
         }
 
         // REMOVE THIS HOOK ONCE THE PODPREFAB IS FIXED
+        //  uh when
         private void Run_HandlePlayerFirstEntryAnimation(On.RoR2.Run.orig_HandlePlayerFirstEntryAnimation orig, Run self, CharacterBody body, Vector3 spawnPosition, Quaternion spawnRotation)
         {
             if (!NetworkServer.active)
@@ -425,6 +428,11 @@ namespace ChefMod
             mealMachine.customName = "MealPrep";
             mealMachine.initialStateType = new SerializableEntityStateType(typeof(EntityStates.BaseBodyAttachmentState));
             mealMachine.mainStateType = new SerializableEntityStateType(typeof(EntityStates.BaseBodyAttachmentState));
+
+            //mealMachine wasn't in the networkstatemachine, but no one's noticed
+            //idk if adding it now solves any problems or fuck it it actually introduces some
+            NetworkStateMachine networkStateMachine = chefPrefab.GetComponent<NetworkStateMachine>();
+            networkStateMachine.stateMachines = networkStateMachine.stateMachines.Concat(new EntityStateMachine[] { mealMachine }).ToArray();
 
             //BodyCatalog.getAdditionalEntries += delegate (List<GameObject> list)
             //{
