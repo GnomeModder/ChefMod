@@ -1,4 +1,5 @@
-﻿using R2API;
+﻿using ChefMod.Modules;
+using R2API;
 using RoR2;
 using System;
 using UnityEngine;
@@ -55,38 +56,21 @@ namespace ChefMod
             return SoundAPI.SoundBanks.Add(resourceBytes);
         }*/
 
-
+        #region materials(old)
+        private const string obsolete = "use `Materials.CreateMaterial` instead, or use the extension `Material.SetHotpooMaterial` directly on a material";
+        [Obsolete(obsolete)]
+        public static Material CreateMaterial(string materialName) => Assets.CreateMaterial(materialName, 0f);
+        [Obsolete(obsolete)]
+        public static Material CreateMaterial(string materialName, float emission) => Assets.CreateMaterial(materialName, emission, Color.white);
+        [Obsolete(obsolete)]
+        public static Material CreateMaterial(string materialName, float emission, Color emissionColor) => Assets.CreateMaterial(materialName, emission, emissionColor, 0f);
+        [Obsolete(obsolete)]
         public static Material CreateMaterial(string materialName, float emission, Color emissionColor, float normalStrength) {
-            if (!commandoMat) commandoMat = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").GetComponentInChildren<CharacterModel>().baseRendererInfos[0].defaultMaterial;
-
-            Material mat = UnityEngine.Object.Instantiate<Material>(commandoMat);
-            Material tempMat = chefAssetBundle.LoadAsset<Material>(materialName);
-            if (!tempMat) {
-                Debug.LogError($"couldn't get material {materialName}");
-                return commandoMat;
-            }
-
-            mat.name = materialName;
-            mat.SetColor("_Color", tempMat.GetColor("_Color"));
-            mat.SetTexture("_MainTex", tempMat.GetTexture("_MainTex"));
-            mat.SetColor("_EmColor", emissionColor);
-            mat.SetFloat("_EmPower", emission);
-            mat.SetTexture("_EmTex", tempMat.GetTexture("_EmissionMap"));
-            mat.SetFloat("_NormalStrength", normalStrength);
-
-            return mat;
+            return Materials.CreateHotpooMaterial(materialName)
+                            .MakeUnique()
+                            .SetEmission(emission, emissionColor)
+                            .SetNormal(normalStrength);
         }
-
-        public static Material CreateMaterial(string materialName) {
-            return CreateMaterial(materialName, 0f);
-        }
-
-        public static Material CreateMaterial(string materialName, float emission) {
-            return CreateMaterial(materialName, emission, Color.black);
-        }
-
-        public static Material CreateMaterial(string materialName, float emission, Color emissionColor) {
-            return CreateMaterial(materialName, emission, emissionColor, 0f);
-        }
+        #endregion materials(old)
     }
 }

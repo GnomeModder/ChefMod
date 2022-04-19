@@ -3,5 +3,5 @@
 >dll
  - tested n shit
  - version
- - run the game once with patcher
+ - no patcher needed (weave.bat is in place now)
 >readme

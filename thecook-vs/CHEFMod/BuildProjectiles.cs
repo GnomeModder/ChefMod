@@ -7,6 +7,7 @@ using RoR2.Projectile;
 using R2API;
 using EntityStates.Chef;
 using ChefMod.Components;
+using ChefMod.Modules;
 
 namespace ChefMod
 {
@@ -16,6 +17,10 @@ namespace ChefMod
         {
             GameObject cleaverGhost = Assets.chefAssetBundle.LoadAsset<GameObject>("CleaverParent").InstantiateClone("CleaverGhost", false);
             cleaverGhost.AddComponent<ProjectileGhostController>();
+            foreach (Renderer renderer in cleaverGhost.GetComponentsInChildren<Renderer>()) {
+                renderer.material.SetHotpooMaterial();
+            }
+
             GameObject cleaverPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/Sawmerang").InstantiateClone("CHEFCleaver", true);
             GameObject cleaverImpactEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/omniimpactvfx").InstantiateClone("ChefCleaverImpactEffect", false);
             cleaverImpactEffect.GetComponent<EffectComponent>().soundName = "Play_ChefMod_Cleaver_Hit";
@@ -59,6 +64,9 @@ namespace ChefMod
         {
             GameObject knifeGhost = Assets.chefAssetBundle.LoadAsset<GameObject>("KnifeParent").InstantiateClone("KnifeGhost", false);
             knifeGhost.AddComponent<ProjectileGhostController>();
+            foreach (Renderer renderer in knifeGhost.GetComponentsInChildren<Renderer>()) {
+                renderer.material.SetHotpooMaterial();
+            }
 
             GameObject knifePrefab = Cleaver.projectilePrefab.InstantiateClone("CHEFKnife", true);
             //knifePrefab.AddComponent<ProjectileTargetComponent>();
