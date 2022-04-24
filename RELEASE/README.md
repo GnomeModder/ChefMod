@@ -41,6 +41,9 @@ Whether or not you come back to work on him, we'll be here for ya.
 
 ## Changelog
 
+`2.0.19`
+ - moved unlockable code to r2api, fixing achievement issue with recent update  
+
 `2.0.18`
  - fixed item displays
  - added proper hopoo shaders to cleaver and knife projectiles
