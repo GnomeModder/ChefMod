@@ -41,6 +41,11 @@ Whether or not you come back to work on him, we'll be here for ya.
 
 ## Changelog
 
+`2.0.20`
+
+- Fixed missing UnlockableAPI dependency.
+- ClassicItems Scepter support?
+
 `2.0.19`
  - moved unlockable code to r2api, fixing achievement issue with recent update  
 
