@@ -33,14 +33,16 @@ namespace ChefMod
     [R2APISubmoduleDependency("AssetAPI")]
     [R2APISubmoduleDependency("DamageAPI")]
     [R2APISubmoduleDependency("RecalculateStatsAPI")]
+    [R2APISubmoduleDependency("UnlockableAPI")]
     [R2APISubmoduleDependency(nameof(NetworkingAPI))]
     [BepInDependency("com.bepis.r2api")]
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "2.0.19")]
+        "2.0.20")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.ThinkInvisible.ClassicItems", BepInDependency.DependencyFlags.SoftDependency)]
     public class ChefPlugin : BaseUnityPlugin
     {
         public GameObject chefPrefab;
@@ -64,6 +66,7 @@ namespace ChefMod
         public static SkillDef utilityDef;
         public static SkillDef boostedUtilityDef;
         public static SkillDef mealScepterDef;
+        public static SkillDef specialDef;
 
         public static ConfigEntry<bool> altVictoryMessage;
         public static ConfigEntry<bool> charUnlock;
@@ -296,6 +299,12 @@ namespace ChefMod
         private void SetupScepter()
         {
             AncientScepter.AncientScepterItem.instance.RegisterScepterSkill(mealScepterDef, chefPrefab.name, SkillSlot.Special, 0);
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void SetupScepterClassic()
+        {
+            ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(mealScepterDef, "ChefBody", SkillSlot.Special, specialDef);
         }
 
         private void registerBuff()
@@ -726,7 +735,7 @@ namespace ChefMod
 
             
 
-            var specialDef = ScriptableObject.CreateInstance<SkillDef>();
+            specialDef = ScriptableObject.CreateInstance<SkillDef>();
             specialDef.activationState = new SerializableEntityStateType(typeof(Meal));
             specialDef.activationStateMachineName = "MealPrep";
             specialDef.baseMaxStock = 1;
@@ -771,6 +780,10 @@ namespace ChefMod
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter"))
             {
                 SetupScepter();
+            }
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.ThinkInvisible.ClassicItems"))
+            {
+                SetupScepterClassic();
             }
 
             var altSpecialDef = ScriptableObject.CreateInstance<SkillDef>();

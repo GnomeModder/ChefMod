@@ -37,6 +37,9 @@
     <Reference Include="BepInEx.Preloader">
       <HintPath>libs\BepInEx\BepInEx.Preloader.dll</HintPath>
     </Reference>
+    <Reference Include="ClassicItems">
+      <HintPath>libs\SoftDependencies\ClassicItems.dll</HintPath>
+    </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Runtime">
       <HintPath>libs\com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
     </Reference>
@@ -96,6 +99,9 @@
     </Reference>
     <Reference Include="SimpleJSON">
       <HintPath>libs\SimpleJSON.dll</HintPath>
+    </Reference>
+    <Reference Include="TILER2">
+      <HintPath>libs\SoftDependencies\TILER2.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Addressables">
       <HintPath>libs\Unity.Addressables.dll</HintPath>
