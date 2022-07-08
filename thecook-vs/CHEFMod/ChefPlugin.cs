@@ -39,7 +39,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "2.0.21")]
+        "2.0.22")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.ThinkInvisible.ClassicItems", BepInDependency.DependencyFlags.SoftDependency)]
@@ -196,7 +196,7 @@ namespace ChefMod
             //meshObject.transform.localScale = Vector3.one * 20f;
 
             GameObject impactEffect = LegacyResourcesAPI.Load<GameObject>("prefabs/effects/impacteffects/RoboCratePodGroundImpact");
-            fruitPodImpactPrefab = PrefabAPI.InstantiateClone(impactEffect, "chef_fruitpod_impact");
+            fruitPodImpactPrefab = PrefabAPI.InstantiateClone(impactEffect, "chef_fruitpod_impact", false);
             Destroy(fruitPodImpactPrefab.GetComponent<EffectComponent>());
             foreach (Transform child in fruitPodImpactPrefab.transform.Find("Particles").transform)
             {
