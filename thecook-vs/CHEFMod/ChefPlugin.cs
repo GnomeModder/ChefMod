@@ -39,12 +39,15 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "2.0.20")]
+        "2.0.21")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.ThinkInvisible.ClassicItems", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("HIFU.Inferno", BepInDependency.DependencyFlags.SoftDependency)]
     public class ChefPlugin : BaseUnityPlugin
     {
+        public static bool infernoPluginLoaded = false;
+
         public GameObject chefPrefab;
         public static CharacterMaster invaderMaster;
         public static GameObject foirballPrefab;
@@ -206,6 +209,7 @@ namespace ChefMod
 
         public void Awake()
         {
+            infernoPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("HIFU.Inferno");
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Kingpinush.KingKombatArena"))
             {
                 arenaPluginLoaded = true;

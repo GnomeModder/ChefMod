@@ -108,6 +108,25 @@ namespace ChefMod.Achievements
             output += inventory.GetItemCount(RoR2Content.Items.IncreaseHealing);
             output += inventory.GetItemCount(RoR2Content.Items.Hoof);
             output += inventory.GetItemCount(RoR2Content.Items.SprintBonus);
+            output += inventory.GetItemCount(RoR2Content.Items.ParentEgg);
+            output += inventory.GetItemCount(RoR2Content.Items.BeetleGland);
+            output += inventory.GetItemCount(RoR2Content.Items.LunarPrimaryReplacement);
+            output += inventory.GetItemCount(RoR2Content.Items.LunarSecondaryReplacement);
+            output += inventory.GetItemCount(RoR2Content.Items.LunarUtilityReplacement);
+            output += inventory.GetItemCount(RoR2Content.Items.LunarSpecialReplacement);
+            output += inventory.GetItemCount(DLC1Content.Items.AttackSpeedAndMoveSpeed);
+            output += inventory.GetItemCount(DLC1Content.Items.HealingPotion);
+            output += inventory.GetItemCount(DLC1Content.Items.HealingPotionConsumed);
+            output += inventory.GetItemCount(DLC1Content.Items.PermanentDebuffOnHit);
+            output += inventory.GetItemCount(DLC1Content.Items.RandomEquipmentTrigger);
+            output += inventory.GetItemCount(DLC1Content.Items.MushroomVoid);
+            output += inventory.GetItemCount(DLC1Content.Items.BearVoid);
+            output += inventory.GetItemCount(DLC1Content.Items.SlowOnHitVoid);
+            output += inventory.GetItemCount(DLC1Content.Items.MissileVoid);
+            output += inventory.GetItemCount(DLC1Content.Items.ExtraLifeVoid);
+            output += inventory.GetItemCount(DLC1Content.Items.BleedOnHitVoid);
+            output += inventory.GetItemCount(DLC1Content.Items.CloverVoid);
+            output += inventory.GetItemCount(DLC1Content.Items.VoidMegaCrabItem);
             if (inventory.GetEquipmentIndex() == RoR2Content.Equipment.Fruit.equipmentIndex) output += 2;
             return output;
         }
