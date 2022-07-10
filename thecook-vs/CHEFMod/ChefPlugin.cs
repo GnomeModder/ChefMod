@@ -39,7 +39,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "2.0.22")]
+        "2.1.0")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.ThinkInvisible.ClassicItems", BepInDependency.DependencyFlags.SoftDependency)]
@@ -124,7 +124,7 @@ namespace ChefMod
 
             LanguageAPI.Add("KEYWORD_CHEF_BOOST_DICE", "<style=cKeywordName>Mince</style><style=cSub>Throw 16 cleavers in a sphere for <style=cIsDamage>16x150% damage</style>.</style>");
             //LanguageAPI.Add("KEYWORD_CHEF_BOOST_SEAR", "<style=cKeywordName>Flambe</style><style=cSub>Ricochet explosive grease balls on impact.</style>");
-            LanguageAPI.Add("KEYWORD_CHEF_BOOST_SEAR", "<style=cKeywordName>Blaze</style><style=cSub>Blaze customers for <style=cIsDamage>420%</style> on high. Glazed customers take double damage and burst into flames for <style=cIsDamage>5x260% damage</style>.</style>");
+            LanguageAPI.Add("KEYWORD_CHEF_BOOST_SEAR", "<style=cKeywordName>Blaze</style><style=cSub>Blaze customers for <style=cIsDamage>420%</style> on high. Glazed customers take double damage and burst into flames for <style=cIsDamage>5x240% damage</style>.</style>");
             LanguageAPI.Add("KEYWORD_CHEF_BOOST_GLAZE", "<style=cKeywordName>Marinate</style><style=cSub>Leave a longer trail of oil.</style>");
             LanguageAPI.Add("KEYWORD_CHEF_BOOST_SLICE", "<style=cKeywordName>Julienne</style><style=cSub>Stab 16 times. The number of stabs increases with attack speed.</style>");
 
@@ -698,7 +698,7 @@ namespace ChefMod
             utilityDef.activationState = new SerializableEntityStateType(typeof(OilSlick));
             utilityDef.activationStateMachineName = "Weapon";
             utilityDef.baseMaxStock = 1;
-            utilityDef.baseRechargeInterval = 7f;
+            utilityDef.baseRechargeInterval = 10f;
             utilityDef.beginSkillCooldownOnSkillEnd = true;
             utilityDef.canceledFromSprinting = false;
             utilityDef.fullRestockOnAssign = true;

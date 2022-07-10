@@ -41,6 +41,24 @@ Whether or not you come back to work on him, we'll be here for ya.
 
 ## Changelog
 
+`2.1.0`
+
+*Trying to bring CHEF more in line with the rest of the cast.*
+
+- Boosted Sear
+	- Reduced fireball damage from 260% -> 240%
+	- Reduced fireball count from 6 -> 5
+
+- Glaze
+	- Increased cooldown from 7s -> 10s
+	- Reduced oil burn duration from 10s -> 8s
+	- Reduced oil expiration time from 30s -> 20s
+	- Reduced tickrate from 1 -> 1.5
+	- Every tick now deals ignite damage.
+	- Now interacts with Ignition Tank.
+	
+	*SotV ignite changes simply make ignite a +50% damage bonus, which is why it got enabled on every tick.*
+
 `2.0.22`
 
 - Fixed a console error related to CHEF's pod.

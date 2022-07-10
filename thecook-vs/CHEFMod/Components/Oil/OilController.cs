@@ -15,9 +15,9 @@ namespace ChefMod.Components
     {
         public static GameObject firePrefab;
         public static GameObject oilDecalPrefab;
-        public static float oilLifetime = 30f;
-        public static float burnLifetime = 10f;
-        public static float damageInterval = 1f;
+        public static float oilLifetime = 20f;
+        public static float burnLifetime = 8f;
+        public static float damageInterval = 1.5f;
         public static float procCoefficient = 0.2f;
         public static float damageCoefficient = 0.15f;
         public static GameObject ExplosionEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/IgniteExplosionVFX");
@@ -168,7 +168,7 @@ namespace ChefMod.Components
                                                 crit = this.crit,
                                                 damage = damage,
                                                 damageColorIndex = DamageColorIndex.Default,
-                                                damageType = DamageType.Generic,
+                                                damageType = DamageType.IgniteOnHit,
                                                 force = Vector3.zero,
                                                 procCoefficient = procCoefficient,
                                                 procChainMask = default(ProcChainMask)
@@ -179,10 +179,6 @@ namespace ChefMod.Components
                                                 di.AddModdedDamageType(chefPlugin.chefFireballOnHit);
                                             }*/
                                             NetworkingHelpers.DealDamage(di, component, true, true, false);
-                                            if (!healthComponent.body.HasBuff(RoR2Content.Buffs.OnFire))
-                                            {
-                                                DotController.InflictDot(healthComponent.gameObject, owner, DotController.DotIndex.Burn);
-                                            }
                                             if (healthComponent.body.HasBuff(ChefPlugin.oilBuff))
                                             {
                                                 foreach (CharacterBody.TimedBuff t in healthComponent.body.timedBuffs)
