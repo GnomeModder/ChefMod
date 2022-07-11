@@ -27,7 +27,7 @@ namespace ChefMod.Components
         public static int maxOilStacks = 12;
         public HashSet<GameObject> otherOilPilesAffected = new HashSet<GameObject>();
 
-        private float stopwatch = 0f; //        [SyncVar] to go with the newly added code?
+        private float stopwatch = 0f;
         private float damageStopwatch = 0f;
         public bool boosted = false;
         public bool pendingIgnite = false;

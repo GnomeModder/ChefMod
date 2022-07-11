@@ -194,7 +194,7 @@ namespace ChefMod
             oilPrefab.AddComponent<TeamFilter>();
             oilPrefab.AddComponent<ProjectileDamage>();
             DestroyOnTimer oilDT = oilPrefab.AddComponent<DestroyOnTimer>();
-            oilDT.duration = OilController.damageInterval + OilController.burnLifetime + 3f;
+            oilDT.duration = OilController.oilLifetime + OilController.burnLifetime + 3f;
 
             ChefContent.projectilePrefabs.Add(oilPrefab);
             ChefContent.bodyPrefabs.Add(oilPrefab);
