@@ -11,6 +11,7 @@ namespace EntityStates.Chef
     {
         public static float baseDuration = 0.76f;
         public static float baseThrowDelay = 0.259f; //attack comes out .15s
+        public static float damageCoefficient = 1.2f;
 
         private float throwDelay;
         private float duration;
@@ -31,14 +32,15 @@ namespace EntityStates.Chef
 
         private void Throw() {
             if (base.isAuthority){
+                bool isCrit = base.RollCrit();
                 FireProjectileInfo info = new FireProjectileInfo() {
                     projectilePrefab = Cleaver.projectilePrefab,
                     position = characterBody.corePosition,
                     owner = base.gameObject,
                     //damage = base.characterBody.damage * (4f / (chefPlugin.minceHorizontolIntensity.Value + intensity)),
-                    damage = base.damageStat * Cleaver.damageCoefficient,
+                    damage = base.damageStat * Mince.damageCoefficient,
                     force = 50f,
-                    crit = base.RollCrit(),
+                    crit = isCrit,
                     damageColorIndex = DamageColorIndex.Default,
                     target = null,
                     speedOverride = 16f,

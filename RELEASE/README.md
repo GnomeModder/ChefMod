@@ -8,7 +8,7 @@ CHEF is a robot cook who is capable of serving generous helpings to even the lar
 If you have any feedback/suggestions, open an issue on the Github page, or join our discord at https://discord.gg/pKE3QCEsxG 
 
 ## Installation
-Drop ChefMod.dll into \BepInEx\plugins\
+Drop the Gnome-ChefMod folder into \BepInEx\plugins\
 All players need the mod.
 
 ## Known Issues
@@ -43,7 +43,15 @@ Whether or not you come back to work on him, we'll be here for ya.
 
 `2.1.0`
 
-*Trying to bring CHEF more in line with the rest of the cast.*
+*Trying to bring CHEF more in line with the rest of the cast. Send feedback about how these changes feel, it will really help!*
+
+- Now uses an external language file. Contact me if you want to do a translation!
+
+- Boosted Cleave
+	- Reduced damage from 16x150% -> 16x120%
+	- Now rolls crits once for all cleavers, rather than rolling for each individual cleaver.
+	
+	*Being able to deal 4800% damage in a single use was a bit excessive. New total damage is 3840%, greater than skills with a similar cooldown like Captain's Orbital Probes, but less reliable due to needing to be at close range and needing to hit twice with the boomerangs.*
 
 - Boosted Sear
 	- Reduced fireball damage from 260% -> 240%
@@ -53,11 +61,12 @@ Whether or not you come back to work on him, we'll be here for ya.
 	- Increased cooldown from 7s -> 10s
 	- Reduced oil burn duration from 10s -> 8s
 	- Reduced oil expiration time from 30s -> 20s
-	- Reduced tickrate from 1 -> 1.5
+	- Increased oil tick damage from 15% -> 30%
+	- Slowed down tickrate from 1s -> 1.5s
 	- Every tick now deals ignite damage.
 	- Now interacts with Ignition Tank.
 	
-	*SotV ignite changes simply make ignite a +50% damage bonus, which is why it got enabled on every tick.*
+	*Glaze was overshadowing all of CHEF's other skills, and the fire pools could be infinitely maintained without much thought. With the new numbers, CHEF can no longer simply keep a fire pool burning by holding down shift, but he can set up big chain reactions and extend his fire duration a decent amount if he manages his cooldowns well.*
 
 `2.0.22`
 

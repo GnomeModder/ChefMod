@@ -19,7 +19,7 @@ namespace ChefMod.Components
         public static float burnLifetime = 8f;
         public static float damageInterval = 1.5f;
         public static float procCoefficient = 0.2f;
-        public static float damageCoefficient = 0.15f;
+        public static float damageCoefficient = 0.3f;
         public static GameObject ExplosionEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/IgniteExplosionVFX");
 
         public float damageIntervalLocal;
@@ -76,7 +76,7 @@ namespace ChefMod.Components
                     damageStopwatch -= damageIntervalLocal;
                     TickDamage();
                 }
-                shouldDie = (stopwatch >= oilLifetime && !onFire) || (onFire && stopwatch >= burnLifetime);
+                shouldDie = (!onFire && stopwatch >= oilLifetime) || (onFire && stopwatch >= burnLifetime);
             }
 
             if (!onGround && rig.velocity.magnitude < 1f)
