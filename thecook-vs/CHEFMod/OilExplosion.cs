@@ -38,7 +38,7 @@ namespace ChefMod
                     {
                         Vector3 forward2 = Quaternion.AngleAxis(num * (float)i, Vector3.up) * point;
                         ProjectileManager.instance.FireProjectile(ChefPlugin.drippingPrefab, position + 5f * Vector3.up, Util.QuaternionSafeLookRotation(forward2),
-                            attackerBody.gameObject, attackerBody.damage * 2.4f, 0f, crit, DamageColorIndex.Default, null, -1f);
+                            attackerBody.gameObject, attackerBody.damage * 2f, 0f, crit, DamageColorIndex.Default, null, -1f);
                     }
                 }
 

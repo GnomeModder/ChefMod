@@ -43,7 +43,7 @@ Whether or not you come back to work on him, we'll be here for ya.
 
 `2.1.0`
 
-*Trying to bring CHEF more in line with the rest of the cast. Send feedback about how these changes feel, it will really help!*
+*Trying to bring CHEF more in line with the rest of the cast. At the same time, some bugs related to Oil/Sear were fixed, so that'll affect his balance greatly so I'm not sure what to expect. Send feedback about how these changes feel, it will really help!*
 
 - Now uses an external language file. Contact me if you want to do a translation!
 
@@ -52,16 +52,25 @@ Whether or not you come back to work on him, we'll be here for ya.
 	- Now rolls crits once for all cleavers, rather than rolling for each individual cleaver.
 	
 	*Being able to deal 4800% damage in a single use was a bit excessive. New total damage is 3840%, greater than skills with a similar cooldown like Captain's Orbital Probes, but less reliable due to needing to be at close range and needing to hit twice with the boomerangs.*
+	
+- Sear
+	- Added self-knockback when used midair.
+	- Fixed ignited oil not triggering chain explosions on oiled enemies.
+	
+	*The oil fix is pretty major with regards to this skill's power level. Needs testing and feedback.*
 
 - Boosted Sear
-	- Reduced fireball damage from 260% -> 240%
+	- Reduced fireball damage from 260% -> 200%
 	- Reduced fireball count from 6 -> 5
+	- Fixed oil ignited by Boosted Sear not launching fireballs when hitting oiled enemies.
 
 - Glaze
 	- Increased cooldown from 7s -> 10s
-	- Reduced oil burn duration from 10s -> 8s
-	- Reduced oil expiration time from 30s -> 20s
-	- Increased oil tick damage from 15% -> 30%
+	- Fixed ignited oil not resetting its lifetime due to an earlier update.
+	- Increased oil lifetime from 10s -> 20s
+		- An earlier update broke oil lifetime and made it 10s instead of 30s
+	- Reduced burn duration from 10s -> 8s
+	- Increased oil tick damage from 15% -> 20%
 	- Slowed down tickrate from 1s -> 1.5s
 	- Every tick now deals ignite damage.
 	- Now interacts with Ignition Tank.

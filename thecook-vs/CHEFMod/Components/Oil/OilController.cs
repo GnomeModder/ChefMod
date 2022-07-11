@@ -19,7 +19,7 @@ namespace ChefMod.Components
         public static float burnLifetime = 8f;
         public static float damageInterval = 1.5f;
         public static float procCoefficient = 0.2f;
-        public static float damageCoefficient = 0.3f;
+        public static float damageCoefficient = 0.2f;
         public static GameObject ExplosionEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/IgniteExplosionVFX");
 
         public float damageIntervalLocal;
@@ -173,11 +173,11 @@ namespace ChefMod.Components
                                                 procCoefficient = procCoefficient,
                                                 procChainMask = default(ProcChainMask)
                                             };
-                                            /*di.AddModdedDamageType(chefPlugin.chefSear);
+                                            di.AddModdedDamageType(ChefMod.ChefPlugin.chefSear);
                                             if (boosted)
                                             {
-                                                di.AddModdedDamageType(chefPlugin.chefFireballOnHit);
-                                            }*/
+                                                di.AddModdedDamageType(ChefMod.ChefPlugin.chefFireballOnHit);
+                                            }
                                             NetworkingHelpers.DealDamage(di, component, true, true, false);
                                             if (healthComponent.body.HasBuff(ChefPlugin.oilBuff))
                                             {

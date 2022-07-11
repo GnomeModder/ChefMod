@@ -143,6 +143,11 @@ namespace EntityStates.Chef
                 };
                 ModifyBullet(ba);
                 ba.Fire();
+
+                if (base.characterBody && base.characterMotor)
+                {
+                    base.characterBody.characterMotor.ApplyForce(-2000f * aimRay.direction, true, false);
+                }
             }
         }
 
