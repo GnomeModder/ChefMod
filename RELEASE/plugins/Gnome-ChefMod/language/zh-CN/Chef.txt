@@ -1,0 +1,38 @@
+{
+	strings:
+	{
+	"CHEF_NAME" : "厨师",
+	"CHEF_SUBTITLE" : "烹饪",
+	"CHEF_DESCRIPTION" : "厨师是一个烹饪机器人，即使有再多的顾客也能提供足够的食物。<style=cSub>\n\n< ! > 菜刀可以在对怪物造成2段伤害。\n\n< ! > 使用洒油并配合点火可以大范围点燃敌人。\n\n< ! > 洒油的同时也会给自身加速。\n\n< ! > 通过大厨强化技能，是你的主要输出手段。</style>",
+	
+	"KEYWORD_CHEF_BOOST_DICE" : "<style=cKeywordName>剁碎</style><style=cSub>以360度扔出16把菜刀，造成<style=cIsDamage>16x150%伤害</style>。</style>",
+	"KEYWORD_CHEF_BOOST_SEAR" : "<style=cKeywordName>蓝火</style><style=cSub>点燃敌人，最高造成<style=cIsDamage>420%</style>伤害。上油的敌人受到双倍伤害并燃烧，造成<style=cIsDamage>5x260%伤害</style>。</style>",
+	"KEYWORD_CHEF_BOOST_GLAZE" : "<style=cKeywordName>原油</style><style=cSub>洒出更多的油。</style>",
+	"KEYWORD_CHEF_BOOST_SLICE" : "<style=cKeywordName>扎心</style><style=cSub>刺击16次，攻击速度越快刺的越多。</style>",
+	
+	"CHEF_PRIMARY_NAME" : "菜刀",
+	"CHEF_PRIMARY_DESCRIPTION" : "<style=cIsUtility>灵巧</style>。向敌人扔出菜刀，造成<style=cIsDamage>150%伤害</style>。回旋刀。",
+	"CHEF_BOOSTED_PRIMARY_NAME" : "剁碎",
+	"CHEF_BOOSTED_PRIMARY_DESCRIPTION" : "<style=cIsUtility>灵巧</style>。以360度扔出16把菜刀，造成<style=cIsDamage>16x150%伤害</style>。回旋刀。",
+	
+	"CHEF_SECONDARY_NAME" : "点火",
+	"CHEF_SECONDARY_DESCRIPTION" : "<style=cIsDamage>点燃</style>敌人，造成<style=cIsDamage>260%伤害</style>，直到两面金黄，<style=cIsDamage>击退敌人</style>。<style=cIsUtility>上油的敌人</style>受到<style=cIsDamage>双倍伤害</style>并燃烧。",
+	"CHEF_BOOSTED_SECONDARY_NAME" : "蓝火",
+	"CHEF_BOOSTED_SECONDARY_DESCRIPTION" : "<style=cIsDamage>点燃</style>敌人，最高造成<style=cIsDamage>420%</style>伤害。<style=cIsUtility>上油的敌人</style>受到<style=cIsDamage>双倍伤害</style>并燃烧，造成<style=cIsDamage>5x260%伤害</style>。",
+	
+	"CHEF_UTILITY_NAME" : "洒油",
+	"CHEF_UTILITY_DESCRIPTION" : "洒出油，<style=cIsUtility>减速敌人</style>。当<style=cIsUtility>上油</style>的敌人被<style=cIsDamage>点火</style>时，造成<style=cIsDamage>78%伤害</style>。",
+	"CHEF_BOOSTED_UTILITY_NAME" : "原油",
+	"CHEF_BOOSTED_UTILITY_DESCRIPTION" : "洒出更多的油，<style=cIsUtility>减速敌人</style>。当<style=cIsUtility>上油</style>的敌人被<style=cIsDamage>点火</style>时，造成<style=cIsDamage>78%伤害</style>。",
+	
+	"CHEF_SPECIAL_NAME" : "大厨",
+	"CHEF_SPECIAL_DESCRIPTION" : "准备一顿健康大餐，<style=cIsUtility>强化其他技能</style>。",
+	"CHEF_SPECIAL_SCEPTER_NAME" : "美味盛宴",
+	"CHEF_SPECIAL_SCEPTER_DESCRIPTION" : "准备一顿米其林大餐，<style=cIsUtility>强化其他技能2次</style>。",
+	
+	"CHEF_ALTPRIMARY_NAME" : "餐刀",
+	"CHEF_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>灵巧</style>。刺击，造成<style=cIsDamage>120%伤害</style>。",
+	"CHEF_BOOSTED_ALTPRIMARY_NAME" : "扎心",
+	"CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>灵巧</style>。刺击<style=cIsDamage>16次</style>，攻击速度越快刺的越多。"
+	}
+}

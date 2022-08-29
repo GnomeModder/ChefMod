@@ -40,7 +40,7 @@ namespace ChefMod.Components
 		public void OnDestroy()
         {
 			this.lineRenderer.enabled = false;
-			if (notifyKnifeHandler && knifeHandler)
+			if (notifyKnifeHandler && knifeHandler && NetworkServer.active)
             {
 				knifeHandler.ReturnKnife();
             }

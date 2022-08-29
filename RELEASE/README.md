@@ -41,6 +41,14 @@ Whether or not you come back to work on him, we'll be here for ya.
 
 ## Changelog
 
+`2.1.2`
+
+- Fixed a minor console spam related to using the Knife alt in multiplayer.
+
+`2.1.1`
+
+- Added CN translation (Thanks Edge-R!)
+
 `2.1.0`
 
 *Trying to bring CHEF more in line with the rest of the cast. At the same time, some bugs related to Oil/Sear were fixed, so that'll affect his balance greatly so I'm not sure what to expect. Send feedback about how these changes feel, it will really help!*
