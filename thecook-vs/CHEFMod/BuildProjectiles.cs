@@ -26,16 +26,17 @@ namespace ChefMod
             cleaverImpactEffect.GetComponent<EffectComponent>().soundName = "Play_ChefMod_Cleaver_Hit";
             ChefContent.effectDefs.Add(new EffectDef(cleaverImpactEffect));
 
-            BoomerangProjectile boo = cleaverPrefab.GetComponent<BoomerangProjectile>();
             CoomerangProjectile cum = cleaverPrefab.AddComponent<CoomerangProjectile>();
             cum.impactSpark = cleaverImpactEffect;
-            cum.transitionDuration = boo.transitionDuration;
-            cum.travelSpeed = boo.travelSpeed;
-            cum.charge = boo.charge;
-            cum.canHitCharacters = boo.canHitCharacters;
-            cum.canHitWorld = boo.canHitWorld;
-            cum.distanceMultiplier = boo.distanceMultiplier;
-            UnityEngine.Object.Destroy(boo);
+
+            cum.transitionDuration = 1f;
+            cum.travelSpeed = 80f;  //60f sawmerang
+            cum.charge = 1;
+            cum.canHitCharacters = false;
+            cum.canHitWorld = true;
+
+            cum.distanceMultiplier = 0.6f;
+            UnityEngine.Object.Destroy(cleaverPrefab.GetComponent<BoomerangProjectile>());
 
             HitBox hit = cleaverPrefab.GetComponentInChildren<HitBox>();
             hit.transform.localScale = new Vector3(hit.transform.localScale.x, 0.69f, hit.transform.localScale.z);
