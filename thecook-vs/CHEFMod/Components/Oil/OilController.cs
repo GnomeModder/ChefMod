@@ -327,6 +327,8 @@ namespace ChefMod.Components
                             OilController fire = healthComponent.body.GetComponent<OilController>();
                             if (fire)
                             {
+                                //Oil Combine was untested and buggy, and ended up reverting various oil behaviors that actually worked before. Already fixed most of the bugs it caused in some previous updates, but I'm disabling it completely for good measure.
+                                /*
                                 // Some lag can be attributed to having multiple stacking in one place, so I'm going to extend the lifetime of nearby existing ones
                                 // to cut down on the existing gameobjects in the world.
 
@@ -354,8 +356,12 @@ namespace ChefMod.Components
                                     {
                                         this.Ignite();
                                     }
-                                }
+                                }*/
 
+                                if (fire.onFire)
+                                {
+                                    this.Ignite();
+                                }
                             }
                         }
                     }

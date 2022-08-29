@@ -41,6 +41,21 @@ Whether or not you come back to work on him, we'll be here for ya.
 
 ## Changelog
 
+`2.1.3`
+
+- Dice
+	- Increased projectile speed from 60 -> 80
+	- Reduced return delay from 1s -> 0.33s
+	
+*Trying to make this feel more responsive.*
+
+- Slice
+	- Increased projectile speed from 60 -> 80
+	- Reduced return delay from 1s -> 0.33s
+	
+- Glaze
+	- Removed the Oil Combine (disabled by default) config option due to being buggy. The main cause of lag in earlier versions was the oil particle effects being overly detailed, and now that Glaze's cooldown is longer due to the earlier update, Oil Combine isn't really needed anymore.
+
 `2.1.2`
 
 - Fixed a minor console spam related to using the Knife alt in multiplayer.

@@ -29,7 +29,7 @@ namespace ChefMod
             CoomerangProjectile cum = cleaverPrefab.AddComponent<CoomerangProjectile>();
             cum.impactSpark = cleaverImpactEffect;
 
-            cum.transitionDuration = 1f;
+            cum.transitionDuration = 0.33f;  //1f sawmerang
             cum.travelSpeed = 80f;  //60f sawmerang
             cum.charge = 1;
             cum.canHitCharacters = false;
@@ -73,7 +73,7 @@ namespace ChefMod
             //knifePrefab.AddComponent<ProjectileTargetComponent>();
             var kum = knifePrefab.GetComponent<CoomerangProjectile>();
             kum.isKnife = true;
-            kum.distanceMultiplier *= 0.2f;
+            kum.distanceMultiplier = 0.12f; //0.6f * 0.2f
             knifePrefab.layer = LayerIndex.projectile.intVal;
 
             UnityEngine.Object.Destroy(knifePrefab.GetComponent<ProjectileOverlapAttack>());
