@@ -56,6 +56,7 @@ namespace ChefMod
             lr.endWidth = 0.16f;
             lr.alignment = LineAlignment.View;
             lr.SetMaterials(new Material[1] { Assets.cleaverTrailMat }, 1);
+            lr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 
             ProjectileController projcont = cleaverPrefab.GetComponent<ProjectileController>();
             projcont.procCoefficient = 1f;
@@ -105,10 +106,11 @@ namespace ChefMod
             lr.textureMode = LineTextureMode.Tile;
             lr.numCornerVertices = 4;
             lr.enabled = false;
-            lr.startWidth = 0.35f;
-            lr.endWidth = 0.35f;
+            lr.startWidth = 0.3f;
+            lr.endWidth = 0.3f;
             lr.alignment = LineAlignment.View;
             lr.SetMaterials(new Material[1] { Assets.armmat }, 1);
+            lr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
 
             knifePrefab.transform.localScale = 7f * Vector3.one;
             knifeGhost.transform.localScale = knifePrefab.transform.localScale;
