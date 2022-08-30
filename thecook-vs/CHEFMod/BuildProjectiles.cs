@@ -106,8 +106,8 @@ namespace ChefMod
             lr.textureMode = LineTextureMode.Tile;
             lr.numCornerVertices = 4;
             lr.enabled = false;
-            lr.startWidth = 0.3f;
-            lr.endWidth = 0.3f;
+            lr.startWidth = 0.2f;
+            lr.endWidth = 0.2f;
             lr.alignment = LineAlignment.View;
             lr.SetMaterials(new Material[1] { Assets.armmat }, 1);
             lr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
