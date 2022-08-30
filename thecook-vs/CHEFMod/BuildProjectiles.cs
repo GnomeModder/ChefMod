@@ -44,6 +44,19 @@ namespace ChefMod
             cleaverPrefab.transform.localScale = 7f * Vector3.one;
             cleaverGhost.transform.localScale = cleaverPrefab.transform.localScale;
 
+            //Handles trail visuals.
+            CleaverLineRenderController clrc = cleaverPrefab.AddComponent<CleaverLineRenderController>();
+
+            LineRenderer lr = cleaverPrefab.AddComponent<LineRenderer>();
+            lr.textureMode = LineTextureMode.Tile;
+            lr.numCornerVertices = 4;
+            lr.enabled = false;
+
+            lr.startWidth = 0.16f;
+            lr.endWidth = 0.16f;
+            lr.alignment = LineAlignment.View;
+            lr.SetMaterials(new Material[1] { Assets.cleaverTrailMat }, 1);
+
             ProjectileController projcont = cleaverPrefab.GetComponent<ProjectileController>();
             projcont.procCoefficient = 1f;
             projcont.allowPrediction = false;
@@ -83,13 +96,17 @@ namespace ChefMod
             pojcont.allowPrediction = false;
 
             //This handles the visuals for the arm.
+            //Use a different thing to handle Knives
+            UnityEngine.Object.Destroy(knifePrefab.GetComponent<CleaverLineRenderController>());
             knifePrefab.AddComponent<KnifeProjectileController>();
-            var lr = knifePrefab.AddComponent<LineRenderer>();
+
+            //Already AddComponent LineRenderer in previous step
+            LineRenderer lr = knifePrefab.GetComponent<LineRenderer>();
             lr.textureMode = LineTextureMode.Tile;
             lr.numCornerVertices = 4;
             lr.enabled = false;
-            lr.startWidth *= 0.35f;
-            lr.endWidth *= 0.35f;
+            lr.startWidth = 0.35f;
+            lr.endWidth = 0.35f;
             lr.alignment = LineAlignment.View;
             lr.SetMaterials(new Material[1] { Assets.armmat }, 1);
 

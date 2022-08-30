@@ -11,6 +11,7 @@ namespace ChefMod.Components
     {
         public bool knifeThrown { get; private set; }
         public Transform shoulder;
+        public Transform cleaverOrigin;
 
         public void Awake()
         {
@@ -26,6 +27,7 @@ namespace ChefMod.Components
                 childLocator = ml.modelTransform.GetComponent<ChildLocator>();
             }
             shoulder = childLocator.FindChild("RightShoulder");
+            cleaverOrigin = childLocator.FindChild("Body");
         }
 
         //Client sets knife thrown state to true, then notifies other players.

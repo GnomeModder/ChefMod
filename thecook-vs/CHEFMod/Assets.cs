@@ -26,6 +26,7 @@ namespace ChefMod
         public static Sprite chefBHMScepterIcon = chefAssetBundle.LoadAsset<Sprite>("chef_special_scepter");
         public static Sprite chefBuffetIcon = chefAssetBundle.LoadAsset<Sprite>("chef_alt_special");
         public static Material armmat = chefAssetBundle.LoadAsset<Material>("matArm");
+        public static Material cleaverTrailMat = chefAssetBundle.LoadAsset<Material>("matCleaverLine");
 
         public static Sprite defaultSkinIcon = LoadoutAPI.CreateSkinIcon(new Color(210f / 255f, 210f / 255f, 210f / 255f), new Color(150f / 255f, 74f / 255f, 77f / 255f), new Color(98f / 255f, 128 / 255f, 131f / 255f), new Color(27f / 255f, 45f / 255f, 45f / 255f));
 

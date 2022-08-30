@@ -41,6 +41,11 @@ Whether or not you come back to work on him, we'll be here for ya.
 
 ## Changelog
 
+`2.1.4`
+
+- Dice
+	- Cleavers now have line trails like in RoR1.
+
 `2.1.3`
 
 - Dice
