@@ -52,8 +52,8 @@ namespace ChefMod
             lr.numCornerVertices = 4;
             lr.enabled = false;
 
-            lr.startWidth = 0.16f;
-            lr.endWidth = 0.16f;
+            lr.startWidth = 0.12f;
+            lr.endWidth = 0.12f;
             lr.alignment = LineAlignment.View;
             lr.SetMaterials(new Material[1] { Assets.cleaverTrailMat }, 1);
             lr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
@@ -87,7 +87,7 @@ namespace ChefMod
             //knifePrefab.AddComponent<ProjectileTargetComponent>();
             var kum = knifePrefab.GetComponent<CoomerangProjectile>();
             kum.isKnife = true;
-            kum.distanceMultiplier = 0.12f; //0.6f * 0.2f
+            kum.distanceMultiplier = 0.08f; //0.6f * 0.2f
             knifePrefab.layer = LayerIndex.projectile.intVal;
 
             UnityEngine.Object.Destroy(knifePrefab.GetComponent<ProjectileOverlapAttack>());

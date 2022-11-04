@@ -39,11 +39,12 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "2.1.4")]
+        "2.1.5")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.ThinkInvisible.ClassicItems", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("HIFU.Inferno", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
     public class ChefPlugin : BaseUnityPlugin
     {
         public static bool infernoPluginLoaded = false;
@@ -91,13 +92,26 @@ namespace ChefMod
         public static bool arenaPluginLoaded = false;
         public static bool arenaActive = false;
 
+        public static bool riskOfOptionsLoaded = false;
+
+        public static ConfigEntry<bool> enableCleaverTrails;
+
         public void ReadConfig()
         {
+            enableCleaverTrails = base.Config.Bind<bool>("01 - General Settings", "Enable Cleaver Trails", true, "Cleavers have a line trail like in RoR1.");
             charUnlock = base.Config.Bind<bool>("01 - General Settings", "Auto Unlock", false, "Automatically unlocks Chef");
             altVictoryMessage = base.Config.Bind<bool>("01 - General Settings", "Alt Victory Message", false, "Makes the victory message and lore more in-line with the game's tone.");
             //unlockDisablesInvasion = base.Config.Bind<bool>(new ConfigDefinition("02 - Invasion Settings", "Disable Invasion after Unlock"), true, new ConfigDescription("Disables the CHEF invasion bossfight once CHEF is unlocked.", null, Array.Empty<object>()));
             oldChefInvader = base.Config.Bind<bool>("02 - Invasion Settings", "Old Chef Invader", false, "Use the old overpowered CHEF invasion bossfight.");
             altPodPrefab = Config.Bind<bool>("01 - General Settings", "Alt Spawn Pod", true, "Makes the pod prefab more appetizing");
+
+            if (riskOfOptionsLoaded) RiskOfOptionsCompat();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void RiskOfOptionsCompat()
+        {
+            RiskOfOptions.ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(enableCleaverTrails));
         }
 
         public void registerPodPrefabs()
@@ -126,6 +140,7 @@ namespace ChefMod
         {
             pluginInfo = Info;
             infernoPluginLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("HIFU.Inferno");
+            riskOfOptionsLoaded = BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rune580.riskofoptions");
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.Kingpinush.KingKombatArena"))
             {
                 arenaPluginLoaded = true;

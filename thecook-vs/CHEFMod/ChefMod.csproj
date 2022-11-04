@@ -94,6 +94,9 @@
     <Reference Include="R2API">
       <HintPath>libs\R2API\R2API.dll</HintPath>
     </Reference>
+    <Reference Include="RiskOfOptions">
+      <HintPath>libs\SoftDependencies\RiskOfOptions.dll</HintPath>
+    </Reference>
     <Reference Include="RoR2">
       <HintPath>libs\RoR2.dll</HintPath>
     </Reference>

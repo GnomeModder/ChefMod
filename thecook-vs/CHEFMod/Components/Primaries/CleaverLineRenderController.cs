@@ -33,7 +33,7 @@ namespace ChefMod.Components
 					lineOrigin = knifeHandler.cleaverOrigin;
 				}
 
-				this.lineRenderer.enabled = true;
+				if (ChefPlugin.enableCleaverTrails.Value) this.lineRenderer.enabled = true;
 			}
 			else
             {

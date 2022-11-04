@@ -41,6 +41,13 @@ Whether or not you come back to work on him, we'll be here for ya.
 
 ## Changelog
 
+`2.1.5`
+
+- Reduced Cleaver trail width from 0.16 -> 0.08
+- Added option to disable Cleaver trails.
+	- Can be changed in-game if Risk of Options is installed.
+
+
 `2.1.4`
 
 - Dice
