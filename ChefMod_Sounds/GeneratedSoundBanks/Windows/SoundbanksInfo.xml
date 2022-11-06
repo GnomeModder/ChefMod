@@ -11,7 +11,7 @@
 	<StreamedFiles/>
 	<MediaFilesNotInAnyBank/>
 	<SoundBanks>
-		<SoundBank Id="606858421" Language="SFX" Hash="2826478863">
+		<SoundBank Id="606858421" Language="SFX" Hash="2756782163">
 			<ObjectPath>\SoundBanks\Default Work Unit\ChefSounds</ObjectPath>
 			<ShortName>ChefSounds</ShortName>
 			<Path>ChefSounds.bnk</Path>
@@ -53,6 +53,14 @@
 						<File Id="1045069731" Language="SFX">
 							<ShortName>sndFireShotgun.wav</ShortName>
 							<Path>SFX\sndFireShotgun_0D5756A9.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1243018861" Name="Play_ChefMod_SearBonus" ObjectPath="\Events\Default Work Unit\Play_ChefMod_SearBonus">
+					<IncludedMemoryFiles>
+						<File Id="428239354" Language="SFX">
+							<ShortName>sndBurn.wav</ShortName>
+							<Path>SFX\sndBurn_3F75BDB9.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>

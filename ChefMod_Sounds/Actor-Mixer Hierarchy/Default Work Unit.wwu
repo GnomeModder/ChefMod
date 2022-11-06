@@ -295,6 +295,46 @@
 												<ActiveSource Name="Fireball" ID="{F4593372-BD42-4A46-9826-5F4FD9516222}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
+										<Sound Name="sndBurn" ID="{FFE9F269-815C-4A56-B1DE-0C2254362B10}" ShortID="146554864">
+											<PropertyList>
+												<Property Name="Pitch" Type="int32">
+													<ValueList>
+														<Value>-420</Value>
+													</ValueList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>-3</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="sndBurn" ID="{F57A9E0D-2996-4A47-9EFB-675E5A2453F1}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+														<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+														<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+														<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>sndBurn.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="428239354"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="sndBurn" ID="{F57A9E0D-2996-4A47-9EFB-675E5A2453F1}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
 									</ChildrenList>
 								</ActorMixer>
 							</ChildrenList>

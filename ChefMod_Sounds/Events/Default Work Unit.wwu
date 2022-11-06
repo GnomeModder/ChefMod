@@ -87,6 +87,20 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_ChefMod_SearBonus" ID="{59F24AE2-80E4-4B5A-9F6E-9091C85C8C06}">
+					<ChildrenList>
+						<Action Name="" ID="{4A4EA536-CD8C-4210-A71C-E4FFE61B3B46}" ShortID="773363787">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="sndBurn" ID="{FFE9F269-815C-4A56-B1DE-0C2254362B10}" WorkUnitID="{B6C92F1E-73BE-488A-89AE-D7DF922E17DF}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

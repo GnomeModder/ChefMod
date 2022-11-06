@@ -6,6 +6,7 @@
 				<Property Name="AudioFilesImporter\Path" Type="string" Value="C:\Users\Node\Desktop\GMExtract_v1.1\Projects\Chef"/>
 				<Property Name="Event Action List\{0AC0C936-6D86-4294-B92B-D66D285BA832}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{393C08AC-15E6-4A42-BED6-68B591B7630A}\x64_Expand States" Type="string" Value=""/>
+				<Property Name="Event Action List\{59F24AE2-80E4-4B5A-9F6E-9091C85C8C06}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{62776B56-BB34-4AC6-8BC0-022FD7720330}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{A48E123E-74E9-4369-AB76-534B44B5897B}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{EE6ED634-26E8-4A91-B132-37B13AE34585}\x64_Expand States" Type="string" Value=""/>

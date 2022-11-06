@@ -39,7 +39,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "2.1.5")]
+        "2.2.0")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.ThinkInvisible.ClassicItems", BepInDependency.DependencyFlags.SoftDependency)]
@@ -812,7 +812,7 @@ namespace ChefMod
             BuildProjectiles.BuildOil();
 
             searBonusEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/omniimpactvfx").InstantiateClone("ChefSearBonusEffect", false);
-            searBonusEffect.GetComponent<EffectComponent>().soundName = "Play_bandit2_R_kill";
+            searBonusEffect.GetComponent<EffectComponent>().soundName = "Play_ChefMod_SearBonus";
             ChefContent.effectDefs.Add(new EffectDef(searBonusEffect));
 
             var beegFire = LegacyResourcesAPI.Load<GameObject>("Prefabs/ProjectileGhosts/FireballGhost").InstantiateClone("FoirBallGhost", true);
