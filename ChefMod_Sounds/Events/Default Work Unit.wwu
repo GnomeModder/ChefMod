@@ -87,15 +87,43 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="Play_ChefMod_SearBonus" ID="{59F24AE2-80E4-4B5A-9F6E-9091C85C8C06}">
+				<Event Name="Play_ChefMod_Pan_Hit" ID="{C2C4D3B7-AB7E-4EAD-8C39-0A8DBD4987A7}">
 					<ChildrenList>
-						<Action Name="" ID="{4A4EA536-CD8C-4210-A71C-E4FFE61B3B46}" ShortID="773363787">
+						<Action Name="" ID="{F04E15AC-9AAC-4D11-9C55-3EE17A85D171}" ShortID="994422584">
 							<PropertyList>
 								<Property Name="ActionType" Type="int16" Value="1"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="sndBurn" ID="{FFE9F269-815C-4A56-B1DE-0C2254362B10}" WorkUnitID="{B6C92F1E-73BE-488A-89AE-D7DF922E17DF}"/>
+									<ObjectRef Name="Pan Hit" ID="{A2F59EC0-5305-4B86-A5D1-0F52499DBF68}" WorkUnitID="{B6C92F1E-73BE-488A-89AE-D7DF922E17DF}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_ChefMod_Pan_Swing" ID="{0D490A07-9DFE-48CA-AF0F-CC650A2FCA62}">
+					<ChildrenList>
+						<Action Name="" ID="{5A27545F-6B8F-44EB-B863-FC4537E6201B}" ShortID="1038084531">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="melee_swing" ID="{80832463-6FA9-45DD-AE1F-CD57BDD66F2E}" WorkUnitID="{B6C92F1E-73BE-488A-89AE-D7DF922E17DF}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_ChefMod_Ignite" ID="{21884B49-7B59-4672-BE72-CBDA03A2EEA9}">
+					<ChildrenList>
+						<Action Name="" ID="{9B2A8CAE-926E-4B02-865F-DE368D11E0BC}" ShortID="833909513">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="1"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="ignite" ID="{F825698E-CD6B-47E6-BD4D-9CFA17D3979A}" WorkUnitID="{B6C92F1E-73BE-488A-89AE-D7DF922E17DF}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>

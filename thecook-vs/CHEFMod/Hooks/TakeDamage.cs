@@ -26,6 +26,7 @@ namespace ChefMod.Hooks
                     {
                         hasGoo = true;
                         damageInfo.damage *= 2f;
+                        if (damageInfo.damageColorIndex == DamageColorIndex.Default) damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
                     }
 
                     //Scale force to match mass

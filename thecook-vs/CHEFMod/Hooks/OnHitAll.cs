@@ -14,10 +14,10 @@ namespace ChefMod.Hooks
             orig(self, damageInfo, hitObject);
             if(damageInfo.HasModdedDamageType(ChefPlugin.chefSear))
             {
-                RaycastHit[] array = Physics.SphereCastAll(damageInfo.position, 15f, Vector3.up, 5f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
+                Collider[] array = Physics.OverlapSphere(damageInfo.position, OilController.chainIgniteDistance, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
                 for (int j = 0; j < array.Length; j++)
                 {
-                    Collider collider = array[j].collider;
+                    Collider collider = array[j];
                     if (collider.gameObject)
                     {
                         RoR2.HurtBox component = collider.GetComponent<RoR2.HurtBox>();

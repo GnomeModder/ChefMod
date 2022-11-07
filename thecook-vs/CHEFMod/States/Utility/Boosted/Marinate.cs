@@ -2,17 +2,21 @@
 using EntityStates;
 using RoR2;
 using RoR2.Projectile;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace EntityStates.Chef
 {
 	public class Marinate : BaseState
 	{
+		public static float buffOverlapDuration = 0.1f;
 		public static float baseDuration = 1.5f;
 		private float duration;
 		public float speedMultiplier = 2f;
 		//private float radius = 3f;
 
+		private float buffOverlapStopwatch;
 		private Vector3 idealDirection;
 		private ChildLocator childLocator;
 		private ParticleSystem.EmissionModule emissionator;
@@ -116,6 +120,34 @@ namespace EntityStates.Chef
 					ProjectileManager.instance.FireProjectile(info);
 				}
 				counter++;
+			}
+
+			if (NetworkServer.active)
+            {
+				buffOverlapStopwatch += Time.fixedDeltaTime;
+				if (buffOverlapStopwatch >= OilSlick.buffOverlapDuration)
+				{
+					buffOverlapStopwatch -= OilSlick.buffOverlapDuration;
+					ApplyOilServer();
+				}
+			}
+		}
+
+		private void ApplyOilServer()
+		{
+			List<HealthComponent> hcList = new List<HealthComponent>();
+			Collider[] array = Physics.OverlapSphere(base.transform.position, 12f, LayerIndex.entityPrecise.mask);
+			for (int i = 0; i < array.Length; i++)
+			{
+				HurtBox hurtBox = array[i].GetComponent<HurtBox>();
+				if (hurtBox && hurtBox.healthComponent && !hcList.Contains(hurtBox.healthComponent))
+				{
+					hcList.Add(hurtBox.healthComponent);
+					if (hurtBox.healthComponent.body.teamComponent && hurtBox.healthComponent.body.teamComponent.teamIndex != base.GetTeam())
+					{
+						hurtBox.healthComponent.body.AddTimedBuff(ChefMod.ChefPlugin.oilBuff, 4f);
+					}
+				}
 			}
 		}
 

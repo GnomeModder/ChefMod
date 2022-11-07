@@ -13,13 +13,14 @@ namespace ChefMod.Components
 {
     public class OilController : NetworkBehaviour
     {
+        public static float chainIgniteDistance = 20f;
         public static GameObject firePrefab;
         public static GameObject oilDecalPrefab;
         public static float oilLifetime = 20f;
         public static float burnLifetime = 8f;
-        public static float damageInterval = 1.5f;
+        public static float damageInterval = 0.5f;
         public static float procCoefficient = 0.2f;
-        public static float damageCoefficient = 0.2f;
+        public static float damageCoefficient = 0.1f;
         public static GameObject ExplosionEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/IgniteExplosionVFX");
 
         public float damageIntervalLocal;
@@ -93,8 +94,8 @@ namespace ChefMod.Components
                 {
                     if (pendingIgnite)
                     {
-                        Ignite();
-                        IgniteNearby();
+                        Ignite(this.damageStopwatch);
+                        IgniteNearby(this.damageStopwatch);
                     }
                     else
                     {
@@ -262,6 +263,12 @@ namespace ChefMod.Components
         [Server]
         public void Ignite()
         {
+            Ignite(this.damageStopwatch);
+        }
+
+        [Server]
+        public void Ignite(float damageStopwatch)
+        {
             if (NetworkServer.active && !onFire)
             {
                 if (!onGround)
@@ -271,15 +278,16 @@ namespace ChefMod.Components
                 }
                 onFire = true;
                 stopwatch = 0f;
+                this.damageStopwatch = damageStopwatch;
                 Explode();
-                IgniteNearby();
+                IgniteNearby(damageStopwatch);
             }
         }
 
         [Server]
-        private void IgniteNearby()
+        private void IgniteNearby(float damageStopwatch)
         {
-            Collider[] array = Physics.OverlapSphere(myBody.corePosition, 15f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
+            Collider[] array = Physics.OverlapSphere(myBody.corePosition, OilController.chainIgniteDistance, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);
             for (int j = 0; j < array.Length; j++)
             {
                 Collider collider = array[j];
@@ -298,7 +306,7 @@ namespace ChefMod.Components
                                 {
                                     fire.boosted = true;
                                 }
-                                fire.Ignite();
+                                fire.Ignite(damageStopwatch);
                             }
                         }
                     }
@@ -360,7 +368,7 @@ namespace ChefMod.Components
 
                                 if (fire.onFire)
                                 {
-                                    this.Ignite();
+                                    this.Ignite(this.damageStopwatch);
                                 }
                             }
                         }

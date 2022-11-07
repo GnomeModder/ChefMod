@@ -295,16 +295,179 @@
 												<ActiveSource Name="Fireball" ID="{F4593372-BD42-4A46-9826-5F4FD9516222}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
-										<Sound Name="sndBurn" ID="{FFE9F269-815C-4A56-B1DE-0C2254362B10}" ShortID="146554864">
+										<RandomSequenceContainer Name="Pan Hit" ID="{A2F59EC0-5305-4B86-A5D1-0F52499DBF68}" ShortID="464791272">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<Sound Name="melee_frying_pan_01" ID="{1B71F997-AAAD-4C49-B4A2-AD837131C395}" ShortID="790840691">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-10</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="attack attenuation" ID="{15F506C1-FF3B-41CF-BDF7-E76948D744EA}" WorkUnitID="{94740096-A43B-4C82-AAAA-46E6EFC821F1}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="melee_frying_pan_01" ID="{D20BE13C-600D-4848-B2AC-D923903F8351}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>melee_frying_pan_01.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="678412364"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="melee_frying_pan_01" ID="{D20BE13C-600D-4848-B2AC-D923903F8351}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="melee_frying_pan_03" ID="{1B1D5801-2028-4DDF-8D55-128FA490DC31}" ShortID="403550315">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-10</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="attack attenuation" ID="{15F506C1-FF3B-41CF-BDF7-E76948D744EA}" WorkUnitID="{94740096-A43B-4C82-AAAA-46E6EFC821F1}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="melee_frying_pan_03" ID="{52ECB3B2-7309-425E-B530-E732D8BACC75}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>melee_frying_pan_03.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="718331457"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="melee_frying_pan_03" ID="{52ECB3B2-7309-425E-B530-E732D8BACC75}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="melee_frying_pan_02" ID="{DBD99C9D-456D-42AD-B494-8227AEAB52C6}" ShortID="979149412">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-10</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="attack attenuation" ID="{15F506C1-FF3B-41CF-BDF7-E76948D744EA}" WorkUnitID="{94740096-A43B-4C82-AAAA-46E6EFC821F1}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="melee_frying_pan_02" ID="{115E1AA1-7C5C-4BE7-B7C8-DE824E2A7DCF}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>melee_frying_pan_02.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="319548143"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="melee_frying_pan_02" ID="{115E1AA1-7C5C-4BE7-B7C8-DE824E2A7DCF}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+												<Sound Name="melee_frying_pan_04" ID="{96F50355-FCFB-4F49-A6D1-F267E0BA146C}" ShortID="1066119337">
+													<PropertyList>
+														<Property Name="3DSpatialization" Type="int16" Value="1"/>
+														<Property Name="Volume" Type="Real64">
+															<ValueList>
+																<Value>-10</Value>
+															</ValueList>
+														</Property>
+													</PropertyList>
+													<ReferenceList>
+														<Reference Name="Attenuation">
+															<ObjectRef Name="attack attenuation" ID="{15F506C1-FF3B-41CF-BDF7-E76948D744EA}" WorkUnitID="{94740096-A43B-4C82-AAAA-46E6EFC821F1}"/>
+														</Reference>
+														<Reference Name="Conversion">
+															<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
+														</Reference>
+														<Reference Name="OutputBus">
+															<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
+														</Reference>
+													</ReferenceList>
+													<ChildrenList>
+														<AudioFileSource Name="melee_frying_pan_04" ID="{5267D480-1346-4BFA-8C06-82248395A1D7}">
+															<PropertyList>
+																<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+																<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+															</PropertyList>
+															<Language>SFX</Language>
+															<AudioFile>melee_frying_pan_04.wav</AudioFile>
+															<MediaIDList>
+																<MediaID ID="784836550"/>
+															</MediaIDList>
+														</AudioFileSource>
+													</ChildrenList>
+													<ActiveSourceList>
+														<ActiveSource Name="melee_frying_pan_04" ID="{5267D480-1346-4BFA-8C06-82248395A1D7}" Platform="Linked"/>
+													</ActiveSourceList>
+												</Sound>
+											</ChildrenList>
+										</RandomSequenceContainer>
+										<Sound Name="melee_swing" ID="{80832463-6FA9-45DD-AE1F-CD57BDD66F2E}" ShortID="1009026930">
 											<PropertyList>
-												<Property Name="Pitch" Type="int32">
-													<ValueList>
-														<Value>-420</Value>
-													</ValueList>
-												</Property>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
-														<Value>-3</Value>
+														<Value>-2</Value>
 													</ValueList>
 												</Property>
 											</PropertyList>
@@ -317,7 +480,7 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="sndBurn" ID="{F57A9E0D-2996-4A47-9EFB-675E5A2453F1}">
+												<AudioFileSource Name="melee_swing" ID="{D96437BA-8A23-4987-9792-E564A491CAB8}">
 													<PropertyList>
 														<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
 														<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
@@ -325,14 +488,42 @@
 														<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
 													</PropertyList>
 													<Language>SFX</Language>
-													<AudioFile>sndBurn.wav</AudioFile>
+													<AudioFile>melee_swing.wav</AudioFile>
 													<MediaIDList>
-														<MediaID ID="428239354"/>
+														<MediaID ID="418367924"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="sndBurn" ID="{F57A9E0D-2996-4A47-9EFB-675E5A2453F1}" Platform="Linked"/>
+												<ActiveSource Name="melee_swing" ID="{D96437BA-8A23-4987-9792-E564A491CAB8}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="ignite" ID="{F825698E-CD6B-47E6-BD4D-9CFA17D3979A}" ShortID="799764829">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{4A3BF0A5-DE07-469F-9761-B9CD5AD36DA2}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{9859B40B-868C-4AAA-8554-51574ACA32EC}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="ignite" ID="{253CBB65-2B07-4274-8EEB-81FC66BBFC80}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="-0.001"/>
+														<Property Name="LoopEnd" Type="Real64" Value="-0.001"/>
+														<Property Name="TrimBegin" Type="Real64" Value="-0.001"/>
+														<Property Name="TrimEnd" Type="Real64" Value="-0.001"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>ignite.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="314227281"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="ignite" ID="{253CBB65-2B07-4274-8EEB-81FC66BBFC80}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>

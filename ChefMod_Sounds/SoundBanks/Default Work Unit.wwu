@@ -11,7 +11,6 @@
 						<ObjectRef Name="Play_ChefMod_Sear2" ID="{393C08AC-15E6-4A42-BED6-68B591B7630A}" WorkUnitID="{AEC65CE6-0E30-4B42-8784-8FBD00F871E1}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Play_ChefMod_Special" ID="{EE6ED634-26E8-4A91-B132-37B13AE34585}" WorkUnitID="{AEC65CE6-0E30-4B42-8784-8FBD00F871E1}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Play_ChefMod_Cleaver_Hit" ID="{62776B56-BB34-4AC6-8BC0-022FD7720330}" WorkUnitID="{AEC65CE6-0E30-4B42-8784-8FBD00F871E1}" Origin="Manual" Filter="7"/>
-						<ObjectRef Name="Play_ChefMod_SearBonus" ID="{59F24AE2-80E4-4B5A-9F6E-9091C85C8C06}" WorkUnitID="{AEC65CE6-0E30-4B42-8784-8FBD00F871E1}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>

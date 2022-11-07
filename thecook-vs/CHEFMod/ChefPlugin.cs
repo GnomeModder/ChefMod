@@ -164,7 +164,7 @@ namespace ChefMod
             registerPodPrefabs();
             registerCharacter();
             registerSkills();
-            registerProjectiles();
+            RegisterProjectiles();
             registerBuff();
             LanguageTokens.RegisterLanguageTokens();
             BuildEffects();
@@ -805,14 +805,14 @@ namespace ChefMod
             skillLocator.passiveSkill.enabled = false;
         }
 
-        private void registerProjectiles()
+        private void RegisterProjectiles()
         {
             BuildProjectiles.BuildCleaver();
             BuildProjectiles.BuildKnife();
             BuildProjectiles.BuildOil();
 
             searBonusEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/omniimpactvfx").InstantiateClone("ChefSearBonusEffect", false);
-            searBonusEffect.GetComponent<EffectComponent>().soundName = "Play_ChefMod_SearBonus";
+            searBonusEffect.GetComponent<EffectComponent>().soundName = "Play_ChefMod_Ignite";
             ChefContent.effectDefs.Add(new EffectDef(searBonusEffect));
 
             var beegFire = LegacyResourcesAPI.Load<GameObject>("Prefabs/ProjectileGhosts/FireballGhost").InstantiateClone("FoirBallGhost", true);
