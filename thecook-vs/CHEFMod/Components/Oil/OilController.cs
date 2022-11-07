@@ -19,7 +19,7 @@ namespace ChefMod.Components
         public static float oilLifetime = 20f;
         public static float burnLifetime = 8f;
         public static float damageInterval = 0.5f;
-        public static float procCoefficient = 0.2f;
+        public static float procCoefficient = 0.1f;
         public static float damageCoefficient = 0.1f;
         public static GameObject ExplosionEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/IgniteExplosionVFX");
 

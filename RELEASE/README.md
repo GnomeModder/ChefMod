@@ -41,7 +41,7 @@ Whether or not you come back to work on him, we'll be here for ya.
 
 ## Changelog
 
-`2.2.0`
+`2.1.6`
 
 - Sear
 	- No longer uses Bandit2's killsound.
@@ -56,9 +56,10 @@ Whether or not you come back to work on him, we'll be here for ya.
 	- Chain ignite distance from 15m -> 20m
 	- Increased damage tick frequency from 0.66/s -> 2/s
 	- Reduced damage per tick from 20% -> 10%
+	- Reduced proc coefficient from 0.2 -> 0.1
 	- Ignited oil pools now tick damage at the same time.
 	
-	*Reverted oil damage nerfs from an earlier update since the extra cooldown on Glaze is enough to keep it in check. The change at the bottom is mainly for feel, so you get a better idea on how often the oil pools are ticking damage.*
+	*Tick frequency changes from earlier updates made oil damage feel unresponsive/unpredictable. These changes should help make oil's damage behavior much clearer.*
 	
 
 `2.1.5`

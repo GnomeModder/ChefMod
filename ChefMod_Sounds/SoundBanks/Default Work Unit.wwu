@@ -7,6 +7,7 @@
 					<ObjectInclusionList>
 						<ObjectRef Name="Play_ChefMod_Ding" ID="{0AC0C936-6D86-4294-B92B-D66D285BA832}" WorkUnitID="{AEC65CE6-0E30-4B42-8784-8FBD00F871E1}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Play_ChefMod_Cleaver_Throw" ID="{A48E123E-74E9-4369-AB76-534B44B5897B}" WorkUnitID="{AEC65CE6-0E30-4B42-8784-8FBD00F871E1}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Play_ChefMod_Ignite" ID="{21884B49-7B59-4672-BE72-CBDA03A2EEA9}" WorkUnitID="{AEC65CE6-0E30-4B42-8784-8FBD00F871E1}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Play_ChefMod_Sear" ID="{FD371A06-0703-4992-8600-035363BEF8AB}" WorkUnitID="{AEC65CE6-0E30-4B42-8784-8FBD00F871E1}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Play_ChefMod_Sear2" ID="{393C08AC-15E6-4A42-BED6-68B591B7630A}" WorkUnitID="{AEC65CE6-0E30-4B42-8784-8FBD00F871E1}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Play_ChefMod_Special" ID="{EE6ED634-26E8-4A91-B132-37B13AE34585}" WorkUnitID="{AEC65CE6-0E30-4B42-8784-8FBD00F871E1}" Origin="Manual" Filter="7"/>

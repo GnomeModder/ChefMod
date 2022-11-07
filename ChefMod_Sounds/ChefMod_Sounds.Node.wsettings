@@ -6,6 +6,7 @@
 				<Property Name="AudioFilesImporter\Path" Type="string" Value="C:\Users\Node\Desktop\GMExtract_v1.1\Projects\Chef"/>
 				<Property Name="Event Action List\{0AC0C936-6D86-4294-B92B-D66D285BA832}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{0D490A07-9DFE-48CA-AF0F-CC650A2FCA62}\x64_Expand States" Type="string" Value=""/>
+				<Property Name="Event Action List\{21884B49-7B59-4672-BE72-CBDA03A2EEA9}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{393C08AC-15E6-4A42-BED6-68B591B7630A}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{59F24AE2-80E4-4B5A-9F6E-9091C85C8C06}\x64_Expand States" Type="string" Value=""/>
 				<Property Name="Event Action List\{62776B56-BB34-4AC6-8BC0-022FD7720330}\x64_Expand States" Type="string" Value=""/>
@@ -65,7 +66,7 @@
 				<Property Name="ProjectExplorer\x64_Expanded_1_1" Type="string" Value=""/>
 				<Property Name="ProjectExplorer\x64_Expanded_20_1" Type="string" Value=""/>
 				<Property Name="ProjectExplorer\x64_Expanded_21_1" Type="string" Value=""/>
-				<Property Name="ProjectExplorer\x64_Expanded_2_1" Type="string" Value="XGXqICTAbkKofutPC6TOIsK0zFBTIV5Gvhl4sxfEwgweL8m2vnOKSImu19+SLhff6TstsejAjE2GOtAXr8L/cg=="/>
+				<Property Name="ProjectExplorer\x64_Expanded_2_1" Type="string" Value="XGXqICTAbkKofutPC6TOIsK0zFBTIV5Gvhl4sxfEwgweL8m2vnOKSImu19+SLhffwJ71ogVThkul0Q9SSZ2/aOk7LbHowIxNhjrQF6/C/3I="/>
 				<Property Name="ProjectExplorer\x64_Expanded_3_1" Type="string" Value=""/>
 				<Property Name="ProjectExplorer\x64_Expanded_4_1" Type="string" Value=""/>
 				<Property Name="ProjectExplorer\x64_Expanded_5_1" Type="string" Value=""/>
