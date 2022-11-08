@@ -39,7 +39,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "2.1.7")]
+        "2.1.8")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.ThinkInvisible.ClassicItems", BepInDependency.DependencyFlags.SoftDependency)]
@@ -416,7 +416,7 @@ namespace ChefMod
             survivorDef.mainEndingEscapeFailureFlavorToken = "CHEF_OUTRO_FAILURE";
             survivorDef.desiredSortPosition = 99f;
             survivorDef.unlockableDef = Unlockables.chefUnlockDef;
-            survivorDef.cachedName = survivorDef.displayNameToken;
+            survivorDef.cachedName = "CHEF";
 
             ChefContent.survivorDefs.Add(survivorDef);
             BuildChefAI();
