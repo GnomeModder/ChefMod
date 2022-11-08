@@ -41,6 +41,10 @@ Whether or not you come back to work on him, we'll be here for ya.
 
 ## Changelog
 
+`2.1.7`
+
+- Remembered to set CachedName field in SurvivorDef. Hopefully this will fix Eclipse progress not saving.
+
 `2.1.6`
 
 - Sear
@@ -50,7 +54,7 @@ Whether or not you come back to work on him, we'll be here for ya.
 - Glaze
 	- Now coats enemies in oil for 4s as long as CHEF passes by them while using the skill.
 	
-		*This allows him to reliably apply oil to flying enemies.*
+	*This allows him to reliably apply oil to flying enemies.*
 		
 - Oil
 	- Chain ignite distance from 15m -> 20m
