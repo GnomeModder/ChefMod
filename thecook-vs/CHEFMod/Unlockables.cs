@@ -23,14 +23,6 @@ namespace ChefMod
 
         public static void RegisterUnlockables()
         {
-            LanguageAPI.Add("CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME", "Mise en Place");
-            LanguageAPI.Add("CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC", "Gather a dozen ingredients.");
-            LanguageAPI.Add("CHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME", "Mise en Place");
-
-            LanguageAPI.Add("CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME", "Full Set");
-            LanguageAPI.Add("CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC", "Have 40 cleavers in the air at once.");
-            LanguageAPI.Add("CHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME", "Full Set");
-
             chefUnlockDef = UnlockableAPI.AddUnlockable<Achievements.ChefAchievement>();
             sliceUnlockDef = UnlockableAPI.AddUnlockable<Achievements.SliceAchievement>();
         }

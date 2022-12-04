@@ -39,7 +39,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "2.1.8")]
+        "2.1.9")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.ThinkInvisible.ClassicItems", BepInDependency.DependencyFlags.SoftDependency)]
@@ -73,7 +73,6 @@ namespace ChefMod
         public static SkillDef mealScepterDef;
         public static SkillDef specialDef;
 
-        public static ConfigEntry<bool> altVictoryMessage;
         public static ConfigEntry<bool> charUnlock;
         public static ConfigEntry<bool> altSkill;
         public static ConfigEntry<bool> altPodPrefab;
@@ -100,7 +99,6 @@ namespace ChefMod
         {
             enableCleaverTrails = base.Config.Bind<bool>("01 - General Settings", "Enable Cleaver Trails", true, "Cleavers have a line trail like in RoR1.");
             charUnlock = base.Config.Bind<bool>("01 - General Settings", "Auto Unlock", false, "Automatically unlocks Chef");
-            altVictoryMessage = base.Config.Bind<bool>("01 - General Settings", "Alt Victory Message", false, "Makes the victory message and lore more in-line with the game's tone.");
             //unlockDisablesInvasion = base.Config.Bind<bool>(new ConfigDefinition("02 - Invasion Settings", "Disable Invasion after Unlock"), true, new ConfigDescription("Disables the CHEF invasion bossfight once CHEF is unlocked.", null, Array.Empty<object>()));
             oldChefInvader = base.Config.Bind<bool>("02 - Invasion Settings", "Old Chef Invader", false, "Use the old overpowered CHEF invasion bossfight.");
             altPodPrefab = Config.Bind<bool>("01 - General Settings", "Alt Spawn Pod", true, "Makes the pod prefab more appetizing");

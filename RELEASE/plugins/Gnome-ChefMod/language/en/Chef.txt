@@ -33,6 +33,15 @@
 	"CHEF_ALTPRIMARY_NAME" : "Slice",
 	"CHEF_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Stab a customer for <style=cIsDamage>120% damage</style>.",
 	"CHEF_BOOSTED_ALTPRIMARY_NAME" : "Julienne",
-	"CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Stab a customer <style=cIsDamage>16 times</style>. The number of stabs increases with attack speed."
+	"CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Stab a customer <style=cIsDamage>16 times</style>. The number of stabs increases with attack speed.",
+	
+	"CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME" : "Mise en Place",
+	"CHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME" : "Mise en Place",
+	"CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC" : "Gather a dozen ingredients.",
+	
+	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME" : "CHEF: Full Set",
+	"CHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME" : "CHEF: Full Set",
+	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC" : "Have 40 cleavers in the air at once."
+	
 	}
 }
