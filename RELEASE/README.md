@@ -41,6 +41,10 @@ Whether or not you come back to work on him, we'll be here for ya.
 
 ## Changelog
 
+`2.1.9`
+
+- Removed LanguageAPI dependency. ALL laguage tokens are now handled via the language file.
+
 `2.1.8`
 
 - Updated CachedName to be the same as what's listed on ModdedCharacterEclipseFix.
