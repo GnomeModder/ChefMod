@@ -31,11 +31,10 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.assetbundlebrowser": {
-      "version": "1.7.0",
+      "version": "file:AssetBundles-Browser-master",
       "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.unity.com"
+      "source": "embedded",
+      "dependencies": {}
     },
     "com.unity.collab-proxy": {
       "version": "1.2.16",

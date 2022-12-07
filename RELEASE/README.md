@@ -42,6 +42,10 @@ Whether or not you come back to work on him, we'll be here for ya.
 
 ## Changelog
 
+`2.2.1`
+
+- Made Cleaver in character select anim bigger (like how it is in-game).
+
 `2.2.0`
 
 - Added character select anim (thanks SOM!)
