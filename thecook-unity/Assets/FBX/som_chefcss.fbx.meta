@@ -1,0 +1,246 @@
+fileFormatVersion: 2
+guid: 93446dd6292fb8b4c9e65e642e7419f7
+ModelImporter:
+  serializedVersion: 19301
+  internalIDToNameTable:
+  - first:
+      74: 6616351591508092666
+    second: Light|ChefCSAnim.001
+  - first:
+      74: -7220776061186758172
+    second: Light|CleaverArmature|CleaverArmature|ChefAction|CleaverArmature|Chef
+  - first:
+      74: -7919712904436403270
+    second: ChefArmature|ChefArmature|ChefArmature|AirIdle|ChefArmature|AirIdle
+  - first:
+      74: 4292666568860737414
+    second: ChefArmature|ChefArmature|ChefArmature|Backpedal - Also just mirrored
+      this f
+  - first:
+      74: 7315906437531407093
+    second: ChefArmature|ChefArmature|ChefArmature|ChefAction|ChefArmature|ChefAction
+  - first:
+      74: 319067283780004243
+    second: ChefArmature|ChefArmature|ChefArmature|CleaverAction|ChefArmature|CleaverAct
+  - first:
+      74: -2480891210154713595
+    second: ChefArmature|ChefArmature|ChefArmature|Cube.001Action|ChefArmature|Cube.001A
+  - first:
+      74: 3318769519644225880
+    second: ChefArmature|ChefArmature|ChefArmature|CubeAction|ChefArmature|CubeAction
+  - first:
+      74: 2109128947884164946
+    second: ChefArmature|ChefArmature|ChefArmature|Hitstun|ChefArmature|Hitstun
+  - first:
+      74: -5848628844454712177
+    second: ChefArmature|ChefArmature|ChefArmature|IdleTest.001|ChefArmature|IdleTest.00
+  - first:
+      74: 3554474688514550247
+    second: ChefArmature|ChefArmature|ChefArmature|IdleTest3|ChefArmature|IdleTest3
+  - first:
+      74: 4792422771399552873
+    second: ChefArmature|ChefArmature|ChefArmature|IdleTest|ChefArmature|IdleTest
+  - first:
+      74: 5179837572442962402
+    second: ChefArmature|ChefArmature|ChefArmature|Idle|ChefArmature|Idle
+  - first:
+      74: -7900375640929816665
+    second: ChefArmature|ChefArmature|ChefArmature|Jump|ChefArmature|Jump
+  - first:
+      74: -5939802796123976256
+    second: ChefArmature|ChefArmature|ChefArmature|Landing|ChefArmature|Landing
+  - first:
+      74: -2619860685191726164
+    second: ChefArmature|ChefArmature|ChefArmature|Pose|ChefArmature|Pose
+  - first:
+      74: 6381525215497191938
+    second: ChefArmature|ChefArmature|ChefArmature|Primary|ChefArmature|Primary
+  - first:
+      74: 3900845132558348904
+    second: ChefArmature|ChefArmature|ChefArmature|SecondaryBoosted|ChefArmature|Seconda
+  - first:
+      74: -7380480832220495631
+    second: ChefArmature|ChefArmature|ChefArmature|Secondary|ChefArmature|Secondary
+  - first:
+      74: -6384107471509371461
+    second: ChefArmature|ChefArmature|ChefArmature|Special|ChefArmature|Special
+  - first:
+      74: 2577805098478756428
+    second: ChefArmature|ChefArmature|ChefArmature|SprintAllFours|ChefArmature|SprintAll
+  - first:
+      74: -5421683227179975578
+    second: ChefArmature|ChefArmature|ChefArmature|Sprint|ChefArmature|Sprint
+  - first:
+      74: -492730762339230611
+    second: ChefArmature|ChefArmature|ChefArmature|StrafeL - I just mirroed StrafeR
+      :/|C
+  - first:
+      74: 7734921002609981806
+    second: ChefArmature|ChefArmature|ChefArmature|StrafeR.001|ChefArmature|StrafeR.001
+  - first:
+      74: 3609471162374275319
+    second: ChefArmature|ChefArmature|ChefArmature|StrafeR|ChefArmature|StrafeR
+  - first:
+      74: -5072890006033745219
+    second: ChefArmature|ChefArmature|ChefArmature|UtilityStart|ChefArmature|UtilityStar
+  - first:
+      74: 2324223241087229774
+    second: ChefArmature|ChefArmature|ChefArmature|Utility|ChefArmature|Utility
+  - first:
+      74: 1756913512834659529
+    second: ChefArmature|ChefArmature|ChefArmature|Walk|ChefArmature|Walk
+  - first:
+      74: -1572308346373181389
+    second: ChefArmature|ChefCSAnim.001
+  - first:
+      74: -3418003918263429311
+    second: ChefArmature|ChefCSLoop
+  - first:
+      74: 1942957220051569739
+    second: ChefArmature|CleaverArmature|CleaverArmature|ChefAction|CleaverArmature|Chef
+  - first:
+      74: -8470401100783323508
+    second: ChefArmature|CleaverCSLoop
+  - first:
+      74: 7020637547104732224
+    second: CleaverArmature|ChefCSAnim.001
+  - first:
+      74: -4145509073780338420
+    second: CleaverArmature|CleaverArmature|CleaverArmature|ChefAction|CleaverArmature|Chef
+  - first:
+      74: -6643440596282067939
+    second: CleaverArmature|CleaverArmature|CleaverArmature|CleaverAction|CleaverArmature|C
+  - first:
+      74: -7497472584099981261
+    second: CleaverArmature|CleaverArmature|CleaverArmature|Cube.001Action|CleaverArmature|
+  - first:
+      74: -6768962755990790785
+    second: CleaverArmature|CleaverArmature|CleaverArmature|CubeAction|CleaverArmature|Cube
+  - first:
+      74: -5966823155499486759
+    second: CleaverArmature|CleaverArmature|CleaverArmature|Pose|CleaverArmature|Pose
+  - first:
+      74: -6405676401743390244
+    second: CleaverArmature|CleaverCS
+  - first:
+      74: 5500539941951358330
+    second: CleaverArmature|CleaverCS.001
+  - first:
+      74: 3780894096793121554
+    second: CleaverArmature|CleaverCSLoop
+  - first:
+      74: 7099615945631834390
+    second: Armature|Armature|Armature|ArmatureAction.001|Armature|ArmatureAction.00
+  - first:
+      74: -8945339376133757154
+    second: Armature|Armature|Armature|ChefAction|Armature|ChefAction
+  - first:
+      74: -1039691066674676081
+    second: Armature|Armature|Armature|CleaverAction|Armature|CleaverAction
+  - first:
+      74: -1609689146508738502
+    second: Armature|Armature|Armature|Cube.001Action|Armature|Cube.001Action
+  - first:
+      74: -6749383019841486393
+    second: Armature|Armature|Armature|CubeAction|Armature|CubeAction
+  - first:
+      74: 6701680172646575851
+    second: Armature|Armature|Armature|Pose|Armature|Pose
+  - first:
+      74: 3935979393851653686
+    second: Armature|ChefCSLoop
+  - first:
+      74: -1064136710735717958
+    second: Armature|CleaverArmature|CleaverArmature|ChefAction|CleaverArmature|Chef
+  externalObjects: {}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

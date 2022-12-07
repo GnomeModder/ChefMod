@@ -39,7 +39,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "2.1.9")]
+        "2.2.0")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.ThinkInvisible.ClassicItems", BepInDependency.DependencyFlags.SoftDependency)]
@@ -407,7 +407,7 @@ namespace ChefMod
             SurvivorDef survivorDef = ScriptableObject.CreateInstance<SurvivorDef>();
             survivorDef.bodyPrefab = chefPrefab;
             survivorDef.descriptionToken = "CHEF_DESCRIPTION";
-            survivorDef.displayPrefab = prefabBuilder.createDisplayPrefab("chefDisplay2");
+            survivorDef.displayPrefab = prefabBuilder.createDisplayPrefab("chefDisplay");
             survivorDef.primaryColor = chefColor;
             survivorDef.displayNameToken = "CHEF_NAME";
             survivorDef.outroFlavorToken = "CHEF_OUTRO_FLAVOR";
