@@ -29,6 +29,7 @@ Huge thanks to
 - Moffein for being there when I needed him most (helped me patch for anniversary update and did networking and the 2.0 update)
 - rob for being the father I always dreamd of (gave advice)
 - Swuff for taking care of my needs (pleasured me, and made animations)
+- SOM for the CSS anim.
 
 And as always I give my undying love to iDeathHD
 
@@ -40,6 +41,11 @@ Whether or not you come back to work on him, we'll be here for ya.
 
 
 ## Changelog
+
+`2.2.0`
+
+- Added character select anim (thanks SOM!)
+	- Old one can be enabled in the config.
 
 `2.1.9`
 

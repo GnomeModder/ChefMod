@@ -94,14 +94,15 @@ namespace ChefMod
         public static bool riskOfOptionsLoaded = false;
 
         public static ConfigEntry<bool> enableCleaverTrails;
+        public static bool useCursedDisplay = false;
 
         public void ReadConfig()
         {
             enableCleaverTrails = base.Config.Bind<bool>("01 - General Settings", "Enable Cleaver Trails", true, "Cleavers have a line trail like in RoR1.");
             charUnlock = base.Config.Bind<bool>("01 - General Settings", "Auto Unlock", false, "Automatically unlocks Chef");
-            //unlockDisablesInvasion = base.Config.Bind<bool>(new ConfigDefinition("02 - Invasion Settings", "Disable Invasion after Unlock"), true, new ConfigDescription("Disables the CHEF invasion bossfight once CHEF is unlocked.", null, Array.Empty<object>()));
-            oldChefInvader = base.Config.Bind<bool>("02 - Invasion Settings", "Old Chef Invader", false, "Use the old overpowered CHEF invasion bossfight.");
+            charUnlock = base.Config.Bind<bool>("01 - General Settings", "Cursed Character Select Anim", false, "Does what it says.");
             altPodPrefab = Config.Bind<bool>("01 - General Settings", "Alt Spawn Pod", true, "Makes the pod prefab more appetizing");
+            oldChefInvader = base.Config.Bind<bool>("02 - Invasion Settings", "Old Chef Invader", false, "Use the old overpowered CHEF invasion bossfight.");
 
             if (riskOfOptionsLoaded) RiskOfOptionsCompat();
         }
@@ -407,7 +408,15 @@ namespace ChefMod
             SurvivorDef survivorDef = ScriptableObject.CreateInstance<SurvivorDef>();
             survivorDef.bodyPrefab = chefPrefab;
             survivorDef.descriptionToken = "CHEF_DESCRIPTION";
-            survivorDef.displayPrefab = prefabBuilder.createDisplayPrefab("chefDisplay");
+            if (!useCursedDisplay)
+            {
+                survivorDef.displayPrefab = prefabBuilder.createDisplayPrefab("chefDisplay2");
+                survivorDef.displayPrefab.AddComponent<DisplayMenuSoundComponent>();
+            }
+            else
+            {
+                survivorDef.displayPrefab = prefabBuilder.createDisplayPrefab("chefDisplay");
+            }
             survivorDef.primaryColor = chefColor;
             survivorDef.displayNameToken = "CHEF_NAME";
             survivorDef.outroFlavorToken = "CHEF_OUTRO_FLAVOR";
