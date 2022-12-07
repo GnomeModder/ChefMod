@@ -407,7 +407,7 @@ namespace ChefMod
             SurvivorDef survivorDef = ScriptableObject.CreateInstance<SurvivorDef>();
             survivorDef.bodyPrefab = chefPrefab;
             survivorDef.descriptionToken = "CHEF_DESCRIPTION";
-            survivorDef.displayPrefab = prefabBuilder.createDisplayPrefab("CHEFDisplay");
+            survivorDef.displayPrefab = prefabBuilder.createDisplayPrefab("chefDisplay2");
             survivorDef.primaryColor = chefColor;
             survivorDef.displayNameToken = "CHEF_NAME";
             survivorDef.outroFlavorToken = "CHEF_OUTRO_FLAVOR";
