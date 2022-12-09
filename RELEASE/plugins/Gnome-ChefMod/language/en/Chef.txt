@@ -41,7 +41,7 @@
 	
 	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME" : "CHEF: Full Set",
 	"CHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME" : "CHEF: Full Set",
-	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC" : "Have 40 cleavers in the air at once."
+	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC" : "Have 40 cleavers in the air at once.",
 	
 	"CHEF_OUTRO_FLAVOR" : "..and so it left, new ingredients in hand.",
 	"CHEF_OUTRO_FAILURE" : "..and so it vanished, entirely forgetting its original purpose.",
