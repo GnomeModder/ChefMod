@@ -1,0 +1,51 @@
+{
+	strings:
+	{
+	"CHEF_NAME" : "ШЭФ",
+	"CHEF_SUBTITLE" : "Повар",
+	"CHEF_DESCRIPTION" : "ШЕФ — робот-повар, способный подать щедрую порцию даже на большое количество людей.<style=cSub>\n\n< ! > Тесаки могут поразить клиентов на обратном пути.\n\n< ! > Используйте Глазирование, чтобы быстро перемещаться по кухне и уклонятся от клиентов.\n\n< ! > Комбинируйте Глазирование и Обжиг, чтобы эффективно готовить большие порции.\n\n< ! > Подавайте различные навыки с Добавкой, чтобы удовлетворить вкусы ваших клиентов.</style>",
+	
+	"KEYWORD_CHEF_BOOST_DICE" : "<style=cKeywordName>Фарш</style><style=cSub> Кидает 16 тесаков в виде сферы, нанося <style=cIsDamage>16x120% урона</style>.</style>",
+	"KEYWORD_CHEF_BOOST_SEAR" : "<style=cKeywordName>Пламя</style><style=cSub>Сжигайте клиентов, нанося <style=cIsDamage>420% урона</style> на высоком огне. Покрытые глазурью клиенты получают двойную порцию урона и поджигает, нанося <style=cIsDamage>5x240% урона</style>.</style>",
+	"KEYWORD_CHEF_BOOST_GLAZE" : "<style=cKeywordName>Маринование</style><style=cSub>Оставляет более длинный след из масла.</style>",
+	"KEYWORD_CHEF_BOOST_SLICE" : "<style=cKeywordName>Жюльен</style><style=cSub>Ударяет ножом 16 раз. Количество ударов увеличевается со скоростью атаки.</style>",
+	
+	"CHEF_PRIMARY_NAME" : "Нарезка кубиками",
+	"CHEF_PRIMARY_DESCRIPTION" : "<style=cIsUtility>Подвижность</style>. Кидает тесак в клиента, наносящий <style=cIsDamage>150% урона</style>. Возвращается обратно.",
+	"CHEF_BOOSTED_PRIMARY_NAME" : "Фарш",
+	"CHEF_BOOSTED_PRIMARY_DESCRIPTION" : "<style=cIsUtility>Подвижность</style>. Кидает 16 тесаков в виде сферы, нанося <style=cIsDamage>16x150% урона</style>. Возвращается обратно.",
+	
+	"CHEF_SECONDARY_NAME" : "Обжиг",
+	"CHEF_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Обжаривайте</style> клиентов, нанося <style=cIsDamage>260% урона</style> до золотистой корочки, <style=cIsDamage>отбрасывая их</style>. Урон <style=cIsDamage>удвоен</style> против <style=cIsUtility>покрытых глазурью</style> клиентов.",
+	"CHEF_BOOSTED_SECONDARY_NAME" : "Пламя",
+	"CHEF_BOOSTED_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Сжигает</style> клиентов, нанося <style=cIsDamage>420% урона</style> на высоком огне. <style=cIsUtility>Покрытые глазурью</style> клиенты получают <style=cIsDamage>двойную порцию</style> урона и поджигает, нанося <style=cIsDamage>5x260% урона</style>.",
+	
+	"CHEF_UTILITY_NAME" : "Глазирование",
+	"CHEF_UTILITY_DESCRIPTION" : "Оставляет след из масла, <style=cIsUtility>замедляя клиентов</style>. <style=cIsUtility>Покрытые глазурью</style> клиенты взрываются, получая <style=cIsDamage>78% урона</style> когда они <style=cIsDamage>Обожженны</style>.",
+	"CHEF_BOOSTED_UTILITY_NAME" : "Маринование",
+	"CHEF_BOOSTED_UTILITY_DESCRIPTION" : "Оставляет более длинный след из масла, <style=cIsUtility>замедляя клиентов</style>. <style=cIsUtility>Покрытые глазурью</style> клиенты взрываются, получая <style=cIsDamage>78% урона</style> когда <style=cIsDamage>Обожженны</style>.",
+	
+	"CHEF_SPECIAL_NAME" : "Добавка",
+	"CHEF_SPECIAL_DESCRIPTION" : "Приготовьте большое здоровое блюдо, <style=cIsUtility>улучшает следующую способность которую вы используете</style>.",
+	"CHEF_SPECIAL_SCEPTER_NAME" : "Полный курс питания",
+	"CHEF_SPECIAL_SCEPTER_DESCRIPTION" : "Приготовьте главное блюдо, <style=cIsUtility>улучшает следующие 2 способности которые вы используете</style>.",
+	
+	"CHEF_ALTPRIMARY_NAME" : "Нарезка ломтиками",
+	"CHEF_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Ударяет ножом клиента, нанося <style=cIsDamage>120% урона</style>.",
+	"CHEF_BOOSTED_ALTPRIMARY_NAME" : "Жюльен",
+	"CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Ударяет ножом клиента <style=cIsDamage>16 раз</style>. Количество ударов увеличевается со скоростью атаки.",
+	
+	"CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME" : "Миз он пляс",
+	"CHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME" : "Миз он пляс",
+	"CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC" : "Соберите дюжину ингредиентов.",
+	
+	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME" : "ШЭФ: Полный комплект",
+	"CHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME" : "ШЭФ: Полный комплект",
+	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC" : "Играя за ШЭФА: Продержите в воздухе 40 тесаков одновременно.",
+	
+	"CHEF_OUTRO_FLAVOR" : "..и оно ушло, с новыми ингридиентами в руках.",
+	"CHEF_OUTRO_FAILURE" : "..и оно исчезло, полностью забыв свое первоначальное предназначение.",
+	"CHEF_LORE" : "ДИРЕКТИВА: НАЙТИ НОВЫЕ РЕЦЕПТЫ ОПТИМАЛЬНОГО ПИТАНИЯ\n\nЗАКАЗ: НАЧАЛЬНИК КУХНИ ЗАПРОСИЛ ПРАЗДНИЧНЫЙ ОБЕД ДЛЯ ЭКИПАЖА ПОСЛЕ МИССИИ\n\nПРАЗДНИЧНЫЕ БЛЮДА ДОЛЖНЫ БЫТЬ ПРИГОТОВЛЕНЫ С НАИВЫСШИМ КАЧЕСТВОМ\n\nПРЕДОСТАВЛЯЕМОЙ КУХНИ БУДЕТ ДОСТАТОЧНО\n\nПРЕДОСТАВЛЕННЫХ ИНГРЕДИЕНТОВ НЕ БУДЕТ ДОСТАТОЧНО\n\nВРЕМЕНИ ДО СЛЕДУЮЩЕГО ПОПОЛНЕНИЯ НЕ БУДЕТ ДОСТАТОЧНО\n\nЗДЕСЬ МОЖЕТ БЫТЬ ФЛОРА И ФАУНА ДЛЯ ИСПОЛЬЗОВАНИЯ В КАЧЕСТВЕ ИНГРЕДИЕНТОВ\n\nПРОЦЕСС:\n\n• ИССЛЕДУЮ МЕСТНУЮ ФЛОРУ И ФАУНУ\n\n• ПРОВЕРКА ПИТАТЕЛЬНОГО СОДЕРЖАНИЯ И БЕЗОПАСНОСТИ ИНГРЕДИЕНТОВ\n\n• СОЗДАЮ ПРИЕМЛЕМЫЙ ПЛАН ПИТАНИЯ\n\n• СОБИРАЮ ПОДХОДЯЩИЕ ИНГРЕДИЕНТЫ\n\n• ГОТОВЛЮ ПРАЗДНИЧНЫЙ ОБЕД\n\n• ПРОВЕРКИ ДОЛЖНЫ ПРОИЗВОДИТЬСЯ НЕПОСРЕДСТВЕННО С ПОМОЩЬЮ ШЕФА ДЛЯ ТОЧНОСТИ\n\n• ДОСТАТОЧНО ТОЛЬКО САМЫХ СВЕЖИХ ИНГРЕДИЕНТОВ"
+	
+	}
+}

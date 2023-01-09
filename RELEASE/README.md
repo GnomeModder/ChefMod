@@ -39,8 +39,17 @@ the mod icon was made by Destructor check out his youtube Destructor1089 for ris
 Thanks to Gnome for being the big bang in an otherwise cold and empty universe. 
 Whether or not you come back to work on him, we'll be here for ya.
 
+## Localization Credits
+
+Chinese - JunJun_w
+Russian - Адский Шкед#8151
+
 
 ## Changelog
+
+`2.2.3`
+
+- Added Russian translation (Thanks Адский Шкед#8151!)
 
 `2.2.2`
 
@@ -121,7 +130,7 @@ Whether or not you come back to work on him, we'll be here for ya.
 
 `2.1.1`
 
-- Added CN translation (Thanks Edge-R!)
+- Added CN translation (Thanks JunJun_w!)
 
 `2.1.0`
 
