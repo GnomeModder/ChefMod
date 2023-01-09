@@ -42,14 +42,24 @@ Whether or not you come back to work on him, we'll be here for ya.
 ## Localization Credits
 
 Chinese - JunJun_w
-Russian - Адский Шкед#8151
 
+Russian - Адский Шкед
+
+Ukrainian - Damglador
 
 ## Changelog
 
+`2.2.5`
+
+- Added Ukrainian translation (Thanks Damglador!)
+
+`2.2.4`
+
+- Readme update.
+
 `2.2.3`
 
-- Added Russian translation (Thanks Адский Шкед#8151!)
+- Added Russian translation (Thanks Адский Шкед!)
 
 `2.2.2`
 
