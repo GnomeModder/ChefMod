@@ -47,7 +47,13 @@ Russian - Адский Шкед
 
 Ukrainian - Damglador
 
+Spanish - Juhnter
+
 ## Changelog
+
+`2.2.6`
+
+- Added Spanish translation (Thanks Juhnter!)
 
 `2.2.5`
 
