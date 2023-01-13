@@ -31,9 +31,9 @@
 	"CHEF_SPECIAL_SCEPTER_DESCRIPTION" : "Приготовьте главное блюдо, <style=cIsUtility>улучшает следующие 2 способности которые вы используете</style>.",
 	
 	"CHEF_ALTPRIMARY_NAME" : "Нарезка ломтиками",
-	"CHEF_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Ударяет ножом клиента, нанося <style=cIsDamage>120% урона</style>.",
+	"CHEF_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Подвижность</style>. Ударяет ножом клиента, нанося <style=cIsDamage>120% урона</style>.",
 	"CHEF_BOOSTED_ALTPRIMARY_NAME" : "Жюльен",
-	"CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Ударяет ножом клиента <style=cIsDamage>16 раз</style>. Количество ударов увеличевается со скоростью атаки.",
+	"CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Подвижность</style>. Ударяет ножом клиента <style=cIsDamage>16 раз</style>. Количество ударов увеличевается со скоростью атаки.",
 	
 	"CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME" : "Миз он пляс",
 	"CHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME" : "Миз он пляс",
@@ -41,7 +41,7 @@
 	
 	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME" : "ШЭФ: Полный комплект",
 	"CHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME" : "ШЭФ: Полный комплект",
-	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC" : "Играя за ШЭФА: Продержите в воздухе 40 тесаков одновременно.",
+	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC" : "Играя за ШЭФ: Продержите в воздухе 40 тесаков одновременно.",
 	
 	"CHEF_OUTRO_FLAVOR" : "..и оно ушло, с новыми ингридиентами в руках.",
 	"CHEF_OUTRO_FAILURE" : "..и оно исчезло, полностью забыв свое первоначальное предназначение.",

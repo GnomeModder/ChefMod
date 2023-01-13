@@ -51,6 +51,11 @@ Spanish - Juhnter
 
 ## Changelog
 
+`2.2.7`
+
+- Updated Russian translation.
+- Remembered to run UNET patcher.
+
 `2.2.6`
 
 - Added Spanish translation (Thanks Juhnter!)
