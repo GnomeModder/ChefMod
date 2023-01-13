@@ -51,6 +51,10 @@ Spanish - Juhnter
 
 ## Changelog
 
+`2.2.8`
+
+- Nevermind, turns out the patcher was already being run.
+
 `2.2.7`
 
 - Updated Russian translation.
