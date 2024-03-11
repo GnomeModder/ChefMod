@@ -1,0 +1,51 @@
+{
+	strings:
+	{
+	"CHEF_NAME" : "シェフ",
+	"CHEF_SUBTITLE" : "THE コック",
+	"CHEF_DESCRIPTION" : "シェフは大勢のお客様に気前よく料理を振る舞うことができるロボット料理人だ。<style=cSub>\n\n< ! > クレーバーが戻って来る際にお客様に当たってしまうこともあるだろう。\n\n< ! > Glaze を使って、調理場を手際よく移動してお客様との衝突を避けよう。\n\n< ! > Glaze と Sear を組み合わせたら一度に効率良く大量調理ができる。\n\n< ! > お客様の好みに合わせ Second Helping で、多彩なスキルをご提供しよう。</style>",
+	
+	"KEYWORD_CHEF_BOOST_DICE" : "<style=cKeywordName>Mince</style><style=cSub>球形に16本のクレーバーを投げて <style=cIsDamage>16x120% ダメージ</style> を与える。</style>",
+	"KEYWORD_CHEF_BOOST_SEAR" : "<style=cKeywordName>Blaze</style><style=cSub>Blaze はお客様に最大で <style=cIsDamage>420% ダメージ</style> を与え、Glazed を塗られたお客様は2倍のダメージを受け <style=cIsDamage>5x240% ダメージ</style> で炎上させる。</style>",
+	"KEYWORD_CHEF_BOOST_GLAZE" : "<style=cKeywordName>Marinate</style><style=cSub>オイルの跡をさらに長く残す。</style>",
+	"KEYWORD_CHEF_BOOST_SLICE" : "<style=cKeywordName>Julienne</style><style=cSub>16回刺す。攻撃速度によって刺す回数が増加する。</style>",
+	
+	"CHEF_PRIMARY_NAME" : "Dice",
+	"CHEF_PRIMARY_DESCRIPTION" : "<style=cIsUtility>俊敏</style>。お客様に向けてクレーバーを投げ <style=cIsDamage>150% ダメージ</style> を与える。ブーメランのように戻って来る。",
+	"CHEF_BOOSTED_PRIMARY_NAME" : "Mince",
+	"CHEF_BOOSTED_PRIMARY_DESCRIPTION" : "<style=cIsUtility>俊敏</style>。球形に16本のクレーバーを投げて <style=cIsDamage>16x150% ダメージ</style> を与える。ブーメランのように戻って来る。",
+	
+	"CHEF_SECONDARY_NAME" : "Sear",
+	"CHEF_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Sear</style> でお客様をきつね色になるまで焼き上げて <style=cIsDamage>260% ダメージ</style> を与え、<style=cIsDamage>ぶっ飛ばして遠ざける</style>。<style=cIsUtility>Glazed</style> を塗られたお客様は <style=cIsDamage>2倍</style> のダメージを受ける。",
+	"CHEF_BOOSTED_SECONDARY_NAME" : "Blaze",
+	"CHEF_BOOSTED_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Blaze</style> はお客様に最大で <style=cIsDamage>420% ダメージ</style> を与え、<style=cIsUtility>Glazed</style> を塗られたお客様は <style=cIsDamage>2倍</style> のダメージを受け <style=cIsDamage>5x260% ダメージ</style> で炎上させる。",
+	
+	"CHEF_UTILITY_NAME" : "Glaze",
+	"CHEF_UTILITY_DESCRIPTION" : "オイルの跡を残し、<style=cIsUtility>お客様を減速</style> させる。<style=cIsUtility>Glazed</style> を塗られたお客様は <style=cIsDamage>Seared</style> で爆発して <style=cIsDamage>78% ダメージ</style> を与える。",
+	"CHEF_BOOSTED_UTILITY_NAME" : "Marinate",
+	"CHEF_BOOSTED_UTILITY_DESCRIPTION" : "オイルの跡をさらに長く残し、<style=cIsUtility>お客様を減速</style> させる。<style=cIsUtility>Glazed</style> を塗られたお客様は <style=cIsDamage>Seared</style> で爆発して <style=cIsDamage>78% ダメージ</style> を与える。",
+	
+	"CHEF_SPECIAL_NAME" : "Second Helping",
+	"CHEF_SPECIAL_DESCRIPTION" : "ボリュームたっぷりのヘルシー料理を用意し、<style=cIsUtility>次に使用する能力を強化</style> する。",
+	"CHEF_SPECIAL_SCEPTER_NAME" : "Full Course Meal",
+	"CHEF_SPECIAL_SCEPTER_DESCRIPTION" : "極上の食事を用意し、<style=cIsUtility>次に使用する2つの能力を強化</style> する。",
+	
+	"CHEF_ALTPRIMARY_NAME" : "Slice",
+	"CHEF_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>俊敏</style>。お客様を刺して <style=cIsDamage>120% ダメージ</style> を与える。",
+	"CHEF_BOOSTED_ALTPRIMARY_NAME" : "Julienne",
+	"CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>俊敏</style>。 お客様を <style=cIsDamage>16回</style> 刺す。攻撃速度によって刺す回数が増加する。",
+	
+	"CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME" : "下ごしらえ",
+	"CHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME" : "下ごしらえ",
+	"CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC" : "食材を12個集める。",
+	
+	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME" : "シェフ: フルセット",
+	"CHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME" : "シェフ: フルセット",
+	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC" : "一気に空中へ40本のクレーバーを飛ばす。",
+	
+	"CHEF_OUTRO_FLAVOR" : "..そしてその場を去った、新しい食材を携えて。",
+	"CHEF_OUTRO_FAILURE" : "..そして消えてしまった、本来の目的を完全に忘れたままに。",
+	"CHEF_LORE" : "指令: 最適な栄養補給のために新しいレシピを発見する\n\n注文: キッチンリーダーが、任務終了後のクルーへのお祝いの料理を要求しました\n\nお祝いの料理は可能な限り上質なものであるべきである\n\n備え付けのキッチンで十分\n\n提供された食材だけでは不十分\n\n次回の再入荷までに時間が不足\n\n敷地内に食材として利用可能な動植物がある可能性あり\n\nプロセス:\n\n• 現地の動植物の調査\n\n• 食材の栄養素および安全性をテスト\n\n• 実行可能な献立を立案\n\n• 該当する食材を収集\n\n• お祝いの料理を調理\n\n• 正確性確保のためには、シェフ ユニットが直接検査を実行すべき\n\n• 鮮度の高い食材のみで十分"
+	
+	}
+}
