@@ -1,3 +1,11 @@
+`2.2.11`
+
+- Updated RU TL (Thanks marklecard!)
+
+`2.2.10`
+
+- Actually remembered to include new language files.
+
 `2.2.9`
 
 - Added JP TL (Thanks punch!)
