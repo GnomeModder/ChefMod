@@ -1,4 +1,4 @@
-`2.2.11`
+`2.2.11` to `2.2.12`
 
 - Updated RU TL (Thanks marklecard!)
 

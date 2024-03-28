@@ -26,9 +26,9 @@
 	"CHEF_BOOSTED_UTILITY_DESCRIPTION" : "Оставляет длинный масляной след, <style=cIsUtility>замедляя гостей</style>. <style=cIsUtility>Покрытые глазурью</style> гости взрываются, если они <style=cIsDamage>Обожженны</style>, и получают <style=cIsDamage>78% урона</style>.",
 	
 	"CHEF_SPECIAL_NAME" : "Добавка",
-	"CHEF_SPECIAL_DESCRIPTION" : "Готовит большое и полезное блюдо, <style=cIsUtility>чтобы улучшить следующую способность, которую вы используете</style>.",
+	"CHEF_SPECIAL_DESCRIPTION" : "Готовит большое и полезное блюдо, <style=cIsUtility>чтобы улучшить следующий навык, который вы используете</style>.",
 	"CHEF_SPECIAL_SCEPTER_NAME" : "Комплексный обед",
-	"CHEF_SPECIAL_SCEPTER_DESCRIPTION" : "Готовит главное блюдо, <style=cIsUtility>, чтобы улучшить следующие 2 способности, которые вы используете</style>.",
+	"CHEF_SPECIAL_SCEPTER_DESCRIPTION" : "Готовит главное блюдо, <style=cIsUtility>, чтобы улучшить следующие 2 навыка, которые вы используете</style>.",
 	
 	"CHEF_ALTPRIMARY_NAME" : "Нарезка ломтиками",
 	"CHEF_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Подвижность</style>. Бьёт гостя ножом, нанося ему <style=cIsDamage>120% урона</style>.",

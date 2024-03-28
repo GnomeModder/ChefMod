@@ -43,7 +43,7 @@ Whether or not you come back to work on him, we'll be here for ya.
 
 Chinese - JunJun_w
 
-Russian - Адский Шкед, marklecard
+Russian - Адский Шкед, Lecard
 
 Ukrainian - Damglador
 
