@@ -106,7 +106,8 @@ namespace ChefMod
             altPodPrefab = Config.Bind<bool>("01 - General Settings", "Alt Spawn Pod", true, "Makes the pod prefab more appetizing");
             oldChefInvader = base.Config.Bind<bool>("02 - Invasion Settings", "Old Chef Invader", false, "Use the old overpowered CHEF invasion bossfight.");
 
-
+            useVariant = Config.Bind<bool>("Survariants Compat", "Enable Variants", true, "Use variants if plugin is installed.");
+            swapVariant = Config.Bind<bool>("Survariants Compat", "Swap Variants", false, "Swaps variant order.");
 
             if (riskOfOptionsLoaded) RiskOfOptionsCompat();
         }
