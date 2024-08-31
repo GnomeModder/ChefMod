@@ -1,3 +1,9 @@
+`2.3.0`
+
+- Fixed for DLC2.
+	- Item displays broke.
+- Changed internal name to GnomeChefBody.
+
 `2.2.11` to `2.2.12`
 
 - Updated RU TL (Thanks marklecard!)

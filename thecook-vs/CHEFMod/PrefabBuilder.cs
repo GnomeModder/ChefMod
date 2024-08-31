@@ -169,13 +169,13 @@ public class PrefabBuilder
     }
 
     public GameObject createDisplayPrefab(string displayPrefab) {
-        GameObject gob = Assets.chefAssetBundle.LoadAsset<GameObject>(displayPrefab);
+        GameObject gob = ChefMod.Assets.chefAssetBundle.LoadAsset<GameObject>(displayPrefab);
         
         CharacterModel characterModel = gob.AddComponent<CharacterModel>();
 
         characterModel.autoPopulateLightInfos = true;
         characterModel.invisibilityCount = 0;
-        characterModel.temporaryOverlays = new List<TemporaryOverlay>();
+        characterModel.temporaryOverlays = new List<TemporaryOverlayInstance>();
 
         characterModel.baseRendererInfos = getRendererInfos(gob.GetComponent<ChildLocator>(), defaultCustomRendererInfos);
 
@@ -368,30 +368,33 @@ public class PrefabBuilder
         };
         charModel.autoPopulateLightInfos = true;
         charModel.invisibilityCount = 0;
-        charModel.temporaryOverlays = new List<TemporaryOverlay>();
+        charModel.temporaryOverlays = new List<TemporaryOverlayInstance>();
     }
 
     private void  SetupKCharacterMotor()
     {
         kMotor.CharacterController = motor;
         kMotor.Capsule = collider;
-        kMotor.Rigidbody = rigidbody;
-        kMotor.DetectDiscreteCollisions = false;
         kMotor.GroundDetectionExtraDistance = 0f;
         kMotor.MaxStepHeight = 0.2f;
         kMotor.MinRequiredStepDepth = 0.1f;
         kMotor.MaxStableSlopeAngle = 55f;
         kMotor.MaxStableDistanceFromLedge = 0.5f;
-        kMotor.PreventSnappingOnLedges = false;
         kMotor.MaxStableDenivelationAngle = 55f;
         kMotor.RigidbodyInteractionType = RigidbodyInteractionType.None;
         kMotor.PreserveAttachedRigidbodyMomentum = true;
         kMotor.HasPlanarConstraint = false;
         kMotor.PlanarConstraintAxis = Vector3.up;
         kMotor.StepHandling = StepHandlingMethod.None;
-        kMotor.LedgeHandling = true;
         kMotor.InteractiveRigidbodyHandling = true;
-        kMotor.SafeMovement = false;
+
+        //kMotor.Rigidbody = rigidbody;
+        //kMotor.DetectDiscreteCollisions = false;
+        //kMotor.PreventSnappingOnLedges = false;
+        //kMotor.SafeMovement = false;
+
+        //kMotor.LedgeHandling = true;
+        kMotor.LedgeAndDenivelationHandling = true;
     }
 
     private void  SetupHurtbox()

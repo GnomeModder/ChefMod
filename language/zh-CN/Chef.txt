@@ -1,50 +1,50 @@
 {
 	strings:
 	{
-	"CHEF_NAME" : "厨师",
-	"CHEF_SUBTITLE" : "烹饪",
-	"CHEF_DESCRIPTION" : "厨师是一个烹饪机器人，即使有再多的顾客也能提供足够的食物。<style=cSub>\n\n< ! > 菜刀可以在对怪物造成2段伤害。\n\n< ! > 使用洒油并配合点火可以大范围点燃敌人。\n\n< ! > 洒油的同时也会给自身加速。\n\n< ! > 通过大厨强化技能，是你的主要输出手段。</style>",
+	"GNOMECHEF_NAME" : "厨师",
+	"GNOMECHEF_SUBTITLE" : "烹饪",
+	"GNOMECHEF_DESCRIPTION" : "厨师是一个烹饪机器人，即使有再多的顾客也能提供足够的食物。<style=cSub>\n\n< ! > 菜刀可以在对怪物造成2段伤害。\n\n< ! > 使用洒油并配合点火可以大范围点燃敌人。\n\n< ! > 洒油的同时也会给自身加速。\n\n< ! > 通过大厨强化技能，是你的主要输出手段。</style>",
 	
-	"KEYWORD_CHEF_BOOST_DICE" : "<style=cKeywordName>剁碎</style><style=cSub>以360度扔出16把菜刀，造成<style=cIsDamage>16x150%伤害</style>。</style>",
-	"KEYWORD_CHEF_BOOST_SEAR" : "<style=cKeywordName>蓝火</style><style=cSub>点燃敌人，最高造成<style=cIsDamage>420%</style>伤害。上油的敌人受到双倍伤害并燃烧，造成<style=cIsDamage>5x260%伤害</style>。</style>",
-	"KEYWORD_CHEF_BOOST_GLAZE" : "<style=cKeywordName>原油</style><style=cSub>洒出更多的油。</style>",
-	"KEYWORD_CHEF_BOOST_SLICE" : "<style=cKeywordName>扎心</style><style=cSub>刺击16次，攻击速度越快刺的越多。</style>",
+	"KEYWORD_GNOMECHEF_BOOST_DICE" : "<style=cKeywordName>剁碎</style><style=cSub>以360度扔出16把菜刀，造成<style=cIsDamage>16x150%伤害</style>。</style>",
+	"KEYWORD_GNOMECHEF_BOOST_SEAR" : "<style=cKeywordName>蓝火</style><style=cSub>点燃敌人，最高造成<style=cIsDamage>420%</style>伤害。上油的敌人受到双倍伤害并燃烧，造成<style=cIsDamage>5x260%伤害</style>。</style>",
+	"KEYWORD_GNOMECHEF_BOOST_GLAZE" : "<style=cKeywordName>原油</style><style=cSub>洒出更多的油。</style>",
+	"KEYWORD_GNOMECHEF_BOOST_SLICE" : "<style=cKeywordName>扎心</style><style=cSub>刺击16次，攻击速度越快刺的越多。</style>",
 	
-	"CHEF_PRIMARY_NAME" : "菜刀",
-	"CHEF_PRIMARY_DESCRIPTION" : "<style=cIsUtility>灵巧</style>。向敌人扔出菜刀，造成<style=cIsDamage>150%伤害</style>。回旋刀。",
-	"CHEF_BOOSTED_PRIMARY_NAME" : "剁碎",
-	"CHEF_BOOSTED_PRIMARY_DESCRIPTION" : "<style=cIsUtility>灵巧</style>。以360度扔出16把菜刀，造成<style=cIsDamage>16x150%伤害</style>。回旋刀。",
+	"GNOMECHEF_PRIMARY_NAME" : "菜刀",
+	"GNOMECHEF_PRIMARY_DESCRIPTION" : "<style=cIsUtility>灵巧</style>。向敌人扔出菜刀，造成<style=cIsDamage>150%伤害</style>。回旋刀。",
+	"GNOMECHEF_BOOSTED_PRIMARY_NAME" : "剁碎",
+	"GNOMECHEF_BOOSTED_PRIMARY_DESCRIPTION" : "<style=cIsUtility>灵巧</style>。以360度扔出16把菜刀，造成<style=cIsDamage>16x150%伤害</style>。回旋刀。",
 	
-	"CHEF_SECONDARY_NAME" : "点火",
-	"CHEF_SECONDARY_DESCRIPTION" : "<style=cIsDamage>点燃</style>敌人，造成<style=cIsDamage>260%伤害</style>，直到两面金黄，<style=cIsDamage>击退敌人</style>。<style=cIsUtility>上油的敌人</style>受到<style=cIsDamage>双倍伤害</style>并燃烧。",
-	"CHEF_BOOSTED_SECONDARY_NAME" : "蓝火",
-	"CHEF_BOOSTED_SECONDARY_DESCRIPTION" : "<style=cIsDamage>点燃</style>敌人，最高造成<style=cIsDamage>420%</style>伤害。<style=cIsUtility>上油的敌人</style>受到<style=cIsDamage>双倍伤害</style>并燃烧，造成<style=cIsDamage>5x260%伤害</style>。",
+	"GNOMECHEF_SECONDARY_NAME" : "点火",
+	"GNOMECHEF_SECONDARY_DESCRIPTION" : "<style=cIsDamage>点燃</style>敌人，造成<style=cIsDamage>260%伤害</style>，直到两面金黄，<style=cIsDamage>击退敌人</style>。<style=cIsUtility>上油的敌人</style>受到<style=cIsDamage>双倍伤害</style>并燃烧。",
+	"GNOMECHEF_BOOSTED_SECONDARY_NAME" : "蓝火",
+	"GNOMECHEF_BOOSTED_SECONDARY_DESCRIPTION" : "<style=cIsDamage>点燃</style>敌人，最高造成<style=cIsDamage>420%</style>伤害。<style=cIsUtility>上油的敌人</style>受到<style=cIsDamage>双倍伤害</style>并燃烧，造成<style=cIsDamage>5x260%伤害</style>。",
 	
-	"CHEF_UTILITY_NAME" : "洒油",
-	"CHEF_UTILITY_DESCRIPTION" : "洒出油，<style=cIsUtility>减速敌人</style>。当<style=cIsUtility>上油</style>的敌人被<style=cIsDamage>点火</style>时，造成<style=cIsDamage>78%伤害</style>。",
-	"CHEF_BOOSTED_UTILITY_NAME" : "原油",
-	"CHEF_BOOSTED_UTILITY_DESCRIPTION" : "洒出更多的油，<style=cIsUtility>减速敌人</style>。当<style=cIsUtility>上油</style>的敌人被<style=cIsDamage>点火</style>时，造成<style=cIsDamage>78%伤害</style>。",
+	"GNOMECHEF_UTILITY_NAME" : "洒油",
+	"GNOMECHEF_UTILITY_DESCRIPTION" : "洒出油，<style=cIsUtility>减速敌人</style>。当<style=cIsUtility>上油</style>的敌人被<style=cIsDamage>点火</style>时，造成<style=cIsDamage>78%伤害</style>。",
+	"GNOMECHEF_BOOSTED_UTILITY_NAME" : "原油",
+	"GNOMECHEF_BOOSTED_UTILITY_DESCRIPTION" : "洒出更多的油，<style=cIsUtility>减速敌人</style>。当<style=cIsUtility>上油</style>的敌人被<style=cIsDamage>点火</style>时，造成<style=cIsDamage>78%伤害</style>。",
 	
-	"CHEF_SPECIAL_NAME" : "大厨",
-	"CHEF_SPECIAL_DESCRIPTION" : "准备一顿健康大餐，<style=cIsUtility>强化其他技能</style>。",
-	"CHEF_SPECIAL_SCEPTER_NAME" : "美味盛宴",
-	"CHEF_SPECIAL_SCEPTER_DESCRIPTION" : "准备一顿米其林大餐，<style=cIsUtility>强化其他技能2次</style>。",
+	"GNOMECHEF_SPECIAL_NAME" : "大厨",
+	"GNOMECHEF_SPECIAL_DESCRIPTION" : "准备一顿健康大餐，<style=cIsUtility>强化其他技能</style>。",
+	"GNOMECHEF_SPECIAL_SCEPTER_NAME" : "美味盛宴",
+	"GNOMECHEF_SPECIAL_SCEPTER_DESCRIPTION" : "准备一顿米其林大餐，<style=cIsUtility>强化其他技能2次</style>。",
 	
-	"CHEF_ALTPRIMARY_NAME" : "餐刀",
-	"CHEF_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>灵巧</style>。刺击，造成<style=cIsDamage>120%伤害</style>。",
-	"CHEF_BOOSTED_ALTPRIMARY_NAME" : "扎心",
-	"CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>灵巧</style>。刺击<style=cIsDamage>16次</style>，攻击速度越快刺的越多。",
+	"GNOMECHEF_ALTPRIMARY_NAME" : "餐刀",
+	"GNOMECHEF_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>灵巧</style>。刺击，造成<style=cIsDamage>120%伤害</style>。",
+	"GNOMECHEF_BOOSTED_ALTPRIMARY_NAME" : "扎心",
+	"GNOMECHEF_BOOSTED_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>灵巧</style>。刺击<style=cIsDamage>16次</style>，攻击速度越快刺的越多。",
 	
-	"CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME" : "Mise en Place",
-	"CHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME" : "Mise en Place",
-	"CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC" : "Gather a dozen ingredients.",
+	"GNOMECHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME" : "Mise en Place",
+	"GNOMECHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME" : "Mise en Place",
+	"GNOMECHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC" : "Gather a dozen ingredients.",
 	
-	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME" : "CHEF: Full Set",
-	"CHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME" : "CHEF: Full Set",
-	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC" : "Have 40 cleavers in the air at once.",
+	"GNOMECHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME" : "CHEF: Full Set",
+	"GNOMECHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME" : "CHEF: Full Set",
+	"GNOMECHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC" : "Have 40 cleavers in the air at once.",
 	
-	"CHEF_OUTRO_FLAVOR" : "..and so it left, new ingredients in hand.",
-	"CHEF_OUTRO_FAILURE" : "..and so it vanished, entirely forgetting its original purpose.",
-	"CHEF_LORE" : "DIRECTIVE: FIND NEW RECIPIES FOR OPTIMAL NUTRITION\n\nORDER: THE KITCHEN LEAD HAS REQUESTED A CELEBRATORY MEAL FOR THE CREW POST MISSION\n\nCELEBRATORY MEALS SHOULD BE MADE IN THE HIGHEST QUALITY POSSIBLE\n\nTHE KITCHEN PROVIDED WILL BE SUFFICIENT\n\nTHE INGREDIENTS PROVIDED WILL NOT BE SUFFICIENT\n\nTHE TIME UNTIL THE NEXT RESTOCK WILL NOT BE SUFFICIENT\n\nTHERE MAY BE FLORA AND FAUNA ON SITE TO USE AS INGREDIENTS\n\nPROCESS:\n\n• SCOUT LOCAL FLORA AND FAUNA\n\n• TEST NUTRITIONAL CONTENT AND SAFETY OF INGREDIENTS\n\n• CREATE VIABLE MEAL PLAN\n\n• COLLECT APPLICABLE INGREDIENTS\n\n• COOK CELEBRATORY MEAL\n\n• INSPECTIONS MUST OCCUR DIRECTLY WITH A CHEF UNIT FOR ACCURACY\n\n• ONLY THE FRESHEST OF INGREDIENTS WILL BE SUFFICIENT"
+	"GNOMECHEF_OUTRO_FLAVOR" : "..and so it left, new ingredients in hand.",
+	"GNOMECHEF_OUTRO_FAILURE" : "..and so it vanished, entirely forgetting its original purpose.",
+	"GNOMECHEF_LORE" : "DIRECTIVE: FIND NEW RECIPIES FOR OPTIMAL NUTRITION\n\nORDER: THE KITCHEN LEAD HAS REQUESTED A CELEBRATORY MEAL FOR THE CREW POST MISSION\n\nCELEBRATORY MEALS SHOULD BE MADE IN THE HIGHEST QUALITY POSSIBLE\n\nTHE KITCHEN PROVIDED WILL BE SUFFICIENT\n\nTHE INGREDIENTS PROVIDED WILL NOT BE SUFFICIENT\n\nTHE TIME UNTIL THE NEXT RESTOCK WILL NOT BE SUFFICIENT\n\nTHERE MAY BE FLORA AND FAUNA ON SITE TO USE AS INGREDIENTS\n\nPROCESS:\n\n• SCOUT LOCAL FLORA AND FAUNA\n\n• TEST NUTRITIONAL CONTENT AND SAFETY OF INGREDIENTS\n\n• CREATE VIABLE MEAL PLAN\n\n• COLLECT APPLICABLE INGREDIENTS\n\n• COOK CELEBRATORY MEAL\n\n• INSPECTIONS MUST OCCUR DIRECTLY WITH A CHEF UNIT FOR ACCURACY\n\n• ONLY THE FRESHEST OF INGREDIENTS WILL BE SUFFICIENT"
 	}
 }

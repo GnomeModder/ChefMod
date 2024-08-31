@@ -1,51 +1,51 @@
 {
 	strings:
 	{
-	"CHEF_NAME" : "ШЕФ",
-	"CHEF_SUBTITLE" : "Повар",
-	"CHEF_DESCRIPTION" : "ШЕФ — робот-повар, способный устроить настоящий пир на неопределённое количество персон.<style=cSub>\n\n< ! > Тесаки могут поразить гостей на обратном пути.\n\n< ! > Используйте Глазирование, чтобы быстро перемещаться по кухне и не сталкиваться с гостями.\n\n< ! > Комбинируйте Глазирование и Прожарку, чтобы эффективнее распределять ингредиенты на большие порции.\n\n< ! > Подавайте различные навыки с Добавкой, чтобы удовлетворить вкусы всех возможных гостей.</style>",
+	"GNOMECHEF_NAME" : "ШЕФ",
+	"GNOMECHEF_SUBTITLE" : "Повар",
+	"GNOMECHEF_DESCRIPTION" : "ШЕФ — робот-повар, способный устроить настоящий пир на неопределённое количество персон.<style=cSub>\n\n< ! > Тесаки могут поразить гостей на обратном пути.\n\n< ! > Используйте Глазирование, чтобы быстро перемещаться по кухне и не сталкиваться с гостями.\n\n< ! > Комбинируйте Глазирование и Прожарку, чтобы эффективнее распределять ингредиенты на большие порции.\n\n< ! > Подавайте различные навыки с Добавкой, чтобы удовлетворить вкусы всех возможных гостей.</style>",
 	
-	"KEYWORD_CHEF_BOOST_DICE" : "<style=cKeywordName>Измельчение</style><style=cSub>Кидает сферу из тесаков, нанося <style=cIsDamage>16x120% урона</style>.</style>",
-	"KEYWORD_CHEF_BOOST_SEAR" : "<style=cKeywordName>Фламбе</style><style=cSub>Сжигает гостей на большом огне, нанося им <style=cIsDamage>420% урона</style>. Покрытые глазурью гости получают двойную порцию урона и поджигаются, получая <style=cIsDamage>5x240% урона</style>.</style>",
-	"KEYWORD_CHEF_BOOST_GLAZE" : "<style=cKeywordName>Маринад</style><style=cSub>Оставляет длинный масляной след.</style>",
-	"KEYWORD_CHEF_BOOST_SLICE" : "<style=cKeywordName>Жюльен</style><style=cSub>Бьёт гостя ножом 16 раз. Количество ударов увеличивается вместе со скоростью атаки.</style>",
+	"KEYWORD_GNOMECHEF_BOOST_DICE" : "<style=cKeywordName>Измельчение</style><style=cSub>Кидает сферу из тесаков, нанося <style=cIsDamage>16x120% урона</style>.</style>",
+	"KEYWORD_GNOMECHEF_BOOST_SEAR" : "<style=cKeywordName>Фламбе</style><style=cSub>Сжигает гостей на большом огне, нанося им <style=cIsDamage>420% урона</style>. Покрытые глазурью гости получают двойную порцию урона и поджигаются, получая <style=cIsDamage>5x240% урона</style>.</style>",
+	"KEYWORD_GNOMECHEF_BOOST_GLAZE" : "<style=cKeywordName>Маринад</style><style=cSub>Оставляет длинный масляной след.</style>",
+	"KEYWORD_GNOMECHEF_BOOST_SLICE" : "<style=cKeywordName>Жюльен</style><style=cSub>Бьёт гостя ножом 16 раз. Количество ударов увеличивается вместе со скоростью атаки.</style>",
 	
-	"CHEF_PRIMARY_NAME" : "Нарезка",
-	"CHEF_PRIMARY_DESCRIPTION" : "<style=cIsUtility>Подвижность</style>. Кидает в гостя тесак, наносящий <style=cIsDamage>150% урона</style>. Тесак возвращается обратно.",
-	"CHEF_BOOSTED_PRIMARY_NAME" : "Измельчение",
-	"CHEF_BOOSTED_PRIMARY_DESCRIPTION" : "<style=cIsUtility>Подвижность</style>. Кидает сферу из тесаков, нанося <style=cIsDamage>16x150% урона</style>. Тесаки возвращаются обратно.",
+	"GNOMECHEF_PRIMARY_NAME" : "Нарезка",
+	"GNOMECHEF_PRIMARY_DESCRIPTION" : "<style=cIsUtility>Подвижность</style>. Кидает в гостя тесак, наносящий <style=cIsDamage>150% урона</style>. Тесак возвращается обратно.",
+	"GNOMECHEF_BOOSTED_PRIMARY_NAME" : "Измельчение",
+	"GNOMECHEF_BOOSTED_PRIMARY_DESCRIPTION" : "<style=cIsUtility>Подвижность</style>. Кидает сферу из тесаков, нанося <style=cIsDamage>16x150% урона</style>. Тесаки возвращаются обратно.",
 	
-	"CHEF_SECONDARY_NAME" : "Прожарка",
-	"CHEF_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Жарит</style> гостей до золотистой корочки, нанося им <style=cIsDamage>260% урона</style> и <style=cIsDamage>отбрасывая их</style>. Урон <style=cIsDamage>удваивается</style> против <style=cIsUtility>покрытых глазурью</style> гостей.",
-	"CHEF_BOOSTED_SECONDARY_NAME" : "Фламбе",
-	"CHEF_BOOSTED_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Сжигает</style> гостей на большом огне, нанося им <style=cIsDamage>420% урона</style>. <style=cIsUtility>Покрытые глазурью</style> гости получают <style=cIsDamage>двойную порцию</style> урона и поджигаются, получая <style=cIsDamage>5x260% урона</style>.",
+	"GNOMECHEF_SECONDARY_NAME" : "Прожарка",
+	"GNOMECHEF_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Жарит</style> гостей до золотистой корочки, нанося им <style=cIsDamage>260% урона</style> и <style=cIsDamage>отбрасывая их</style>. Урон <style=cIsDamage>удваивается</style> против <style=cIsUtility>покрытых глазурью</style> гостей.",
+	"GNOMECHEF_BOOSTED_SECONDARY_NAME" : "Фламбе",
+	"GNOMECHEF_BOOSTED_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Сжигает</style> гостей на большом огне, нанося им <style=cIsDamage>420% урона</style>. <style=cIsUtility>Покрытые глазурью</style> гости получают <style=cIsDamage>двойную порцию</style> урона и поджигаются, получая <style=cIsDamage>5x260% урона</style>.",
 	
-	"CHEF_UTILITY_NAME" : "Глазирование",
-	"CHEF_UTILITY_DESCRIPTION" : "Оставляет масляной след, <style=cIsUtility>замедляя гостей</style>. <style=cIsUtility>Покрытые глазурью</style> гости взрываются, если они <style=cIsDamage>Обожженны</style>, и получают <style=cIsDamage>78% урона</style>.",
-	"CHEF_BOOSTED_UTILITY_NAME" : "Маринад",
-	"CHEF_BOOSTED_UTILITY_DESCRIPTION" : "Оставляет длинный масляной след, <style=cIsUtility>замедляя гостей</style>. <style=cIsUtility>Покрытые глазурью</style> гости взрываются, если они <style=cIsDamage>Обожженны</style>, и получают <style=cIsDamage>78% урона</style>.",
+	"GNOMECHEF_UTILITY_NAME" : "Глазирование",
+	"GNOMECHEF_UTILITY_DESCRIPTION" : "Оставляет масляной след, <style=cIsUtility>замедляя гостей</style>. <style=cIsUtility>Покрытые глазурью</style> гости взрываются, если они <style=cIsDamage>Обожженны</style>, и получают <style=cIsDamage>78% урона</style>.",
+	"GNOMECHEF_BOOSTED_UTILITY_NAME" : "Маринад",
+	"GNOMECHEF_BOOSTED_UTILITY_DESCRIPTION" : "Оставляет длинный масляной след, <style=cIsUtility>замедляя гостей</style>. <style=cIsUtility>Покрытые глазурью</style> гости взрываются, если они <style=cIsDamage>Обожженны</style>, и получают <style=cIsDamage>78% урона</style>.",
 	
-	"CHEF_SPECIAL_NAME" : "Добавка",
-	"CHEF_SPECIAL_DESCRIPTION" : "Готовит большое и полезное блюдо, <style=cIsUtility>чтобы улучшить следующий навык, который вы используете</style>.",
-	"CHEF_SPECIAL_SCEPTER_NAME" : "Комплексный обед",
-	"CHEF_SPECIAL_SCEPTER_DESCRIPTION" : "Готовит главное блюдо, <style=cIsUtility>, чтобы улучшить следующие 2 навыка, которые вы используете</style>.",
+	"GNOMECHEF_SPECIAL_NAME" : "Добавка",
+	"GNOMECHEF_SPECIAL_DESCRIPTION" : "Готовит большое и полезное блюдо, <style=cIsUtility>чтобы улучшить следующий навык, который вы используете</style>.",
+	"GNOMECHEF_SPECIAL_SCEPTER_NAME" : "Комплексный обед",
+	"GNOMECHEF_SPECIAL_SCEPTER_DESCRIPTION" : "Готовит главное блюдо, <style=cIsUtility>, чтобы улучшить следующие 2 навыка, которые вы используете</style>.",
 	
-	"CHEF_ALTPRIMARY_NAME" : "Нарезка ломтиками",
-	"CHEF_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Подвижность</style>. Бьёт гостя ножом, нанося ему <style=cIsDamage>120% урона</style>.",
-	"CHEF_BOOSTED_ALTPRIMARY_NAME" : "Жюльен",
-	"CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Подвижность</style>. Бьёт гостя ножом <style=cIsDamage>16 раз</style>. Количество ударов увеличивается вместе со скоростью атаки.",
+	"GNOMECHEF_ALTPRIMARY_NAME" : "Нарезка ломтиками",
+	"GNOMECHEF_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Подвижность</style>. Бьёт гостя ножом, нанося ему <style=cIsDamage>120% урона</style>.",
+	"GNOMECHEF_BOOSTED_ALTPRIMARY_NAME" : "Жюльен",
+	"GNOMECHEF_BOOSTED_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Подвижность</style>. Бьёт гостя ножом <style=cIsDamage>16 раз</style>. Количество ударов увеличивается вместе со скоростью атаки.",
 	
-	"CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME" : "Мизанплас",
-	"CHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME" : "Мизанплас",
-	"CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC" : "Соберите дюжину ингредиентов.",
+	"GNOMECHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME" : "Мизанплас",
+	"GNOMECHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME" : "Мизанплас",
+	"GNOMECHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC" : "Соберите дюжину ингредиентов.",
 	
-	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME" : "ШЕФ: полный комплект",
-	"CHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME" : "ШЕФ: полный комплект",
-	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC" : "Играя за ШЕФа, удержите в воздухе 40 тесаков одновременно.",
+	"GNOMECHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME" : "ШЕФ: полный комплект",
+	"GNOMECHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME" : "ШЕФ: полный комплект",
+	"GNOMECHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC" : "Играя за ШЕФа, удержите в воздухе 40 тесаков одновременно.",
 	
-	"CHEF_OUTRO_FLAVOR" : "..и оно ушло, с новыми ингридиентами в руках.",
-	"CHEF_OUTRO_FAILURE" : "..и оно исчезло, полностью забыв смысл своего существования.",
-	"CHEF_LORE" : "ДИРЕКТИВА: НАЙТИ НОВЫЕ РЕЦЕПТЫ ИДЕАЛЬНОГО НАСЫЩЕНИЯ\n\nЗАКАЗ: НАЧАЛЬНИК КУХНИ ЗАПРОСИЛ ПРАЗДНИЧНЫЙ ОБЕД ДЛЯ ЭКИПАЖА В ЧЕСТЬ ЗАВЕРШЕНИЯ МИССИИ\n\nПРИГОТОВЛЕННЫЕ ПРАЗДНИЧНЫЕ БЛЮДА ДОЛЖНЫ БЫТЬ НАИВЫСШЕГО КАЧЕСТВА. \n\nОБОРУДОВАНИЯ В ПРЕДОСТАВЛЯЕМОЙ КУХНЕ БУДЕТ ДОСТАТОЧНО\n\nПРЕДОСТАВЛЕННЫХ ИНГРЕДИЕНТОВ НЕ БУДЕТ ДОСТАТОЧНО\n\nВРЕМЕНИ ДО СЛЕДУЮЩЕЙ ПОСТАВКИ НЕ БУДЕТ ДОСТАТОЧНО\n\nМЕСТНАЯ ФЛОРА И ФАУНА МОГУТ БЫТЬ ИСПОЛЬЗОВАНЫ В КАЧЕСТВЕ ИНГРЕДИЕНТОВ\n\nПРОЦЕСС:\n\n• ИССЛЕДУЮ МЕСТНЫЕ ФЛОРУ И ФАУНУ\n\n• ПРОВЕРКА ПИТАТЕЛЬНОГО СОДЕРЖАНИЯ И БЕЗОПАСНОСТИ ИНГРЕДИЕНТОВ\n\n• СОЗДАЮ ПРИЕМЛЕМЫЙ ПЛАН ПИТАНИЯ\n\n• СОБИРАЮ ПОДХОДЯЩИЕ ИНГРЕДИЕНТЫ\n\n• ГОТОВЛЮ ПРАЗДНИЧНЫЙ ОБЕД\n\n• ПРОВЕРКИ ДОЛЖНЫ ПРОИЗВОДИТЬСЯ ТОЛЬКО В ПРИСУТСТВИИ ШЕФА\n\n• МЕНЯ УДОВЛЕТВОРЯТ ТОЛЬКО САМЫЕ СВЕЖИЕ ИНГРЕДИЕНТЫ"
+	"GNOMECHEF_OUTRO_FLAVOR" : "..и оно ушло, с новыми ингридиентами в руках.",
+	"GNOMECHEF_OUTRO_FAILURE" : "..и оно исчезло, полностью забыв смысл своего существования.",
+	"GNOMECHEF_LORE" : "ДИРЕКТИВА: НАЙТИ НОВЫЕ РЕЦЕПТЫ ИДЕАЛЬНОГО НАСЫЩЕНИЯ\n\nЗАКАЗ: НАЧАЛЬНИК КУХНИ ЗАПРОСИЛ ПРАЗДНИЧНЫЙ ОБЕД ДЛЯ ЭКИПАЖА В ЧЕСТЬ ЗАВЕРШЕНИЯ МИССИИ\n\nПРИГОТОВЛЕННЫЕ ПРАЗДНИЧНЫЕ БЛЮДА ДОЛЖНЫ БЫТЬ НАИВЫСШЕГО КАЧЕСТВА. \n\nОБОРУДОВАНИЯ В ПРЕДОСТАВЛЯЕМОЙ КУХНЕ БУДЕТ ДОСТАТОЧНО\n\nПРЕДОСТАВЛЕННЫХ ИНГРЕДИЕНТОВ НЕ БУДЕТ ДОСТАТОЧНО\n\nВРЕМЕНИ ДО СЛЕДУЮЩЕЙ ПОСТАВКИ НЕ БУДЕТ ДОСТАТОЧНО\n\nМЕСТНАЯ ФЛОРА И ФАУНА МОГУТ БЫТЬ ИСПОЛЬЗОВАНЫ В КАЧЕСТВЕ ИНГРЕДИЕНТОВ\n\nПРОЦЕСС:\n\n• ИССЛЕДУЮ МЕСТНЫЕ ФЛОРУ И ФАУНУ\n\n• ПРОВЕРКА ПИТАТЕЛЬНОГО СОДЕРЖАНИЯ И БЕЗОПАСНОСТИ ИНГРЕДИЕНТОВ\n\n• СОЗДАЮ ПРИЕМЛЕМЫЙ ПЛАН ПИТАНИЯ\n\n• СОБИРАЮ ПОДХОДЯЩИЕ ИНГРЕДИЕНТЫ\n\n• ГОТОВЛЮ ПРАЗДНИЧНЫЙ ОБЕД\n\n• ПРОВЕРКИ ДОЛЖНЫ ПРОИЗВОДИТЬСЯ ТОЛЬКО В ПРИСУТСТВИИ ШЕФА\n\n• МЕНЯ УДОВЛЕТВОРЯТ ТОЛЬКО САМЫЕ СВЕЖИЕ ИНГРЕДИЕНТЫ"
 	
 	}
 }

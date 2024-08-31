@@ -7,13 +7,13 @@ using EntityStates.Chef;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using R2API;
-using R2API.Networking;
 using R2API.Utils;
 using RoR2;
 using RoR2.CharacterAI;
 using RoR2.ContentManagement;
 using RoR2.Projectile;
 using RoR2.Skills;
+using Survariants;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,25 +26,24 @@ using static R2API.DamageAPI;
 
 namespace ChefMod
 {
-    [R2APISubmoduleDependency("PrefabAPI")]
-    [R2APISubmoduleDependency("LanguageAPI")]
-    [R2APISubmoduleDependency("LoadoutAPI")]
-    [R2APISubmoduleDependency("SoundAPI")]
-    [R2APISubmoduleDependency("AssetAPI")]
-    [R2APISubmoduleDependency("DamageAPI")]
-    [R2APISubmoduleDependency("RecalculateStatsAPI")]
-    [R2APISubmoduleDependency("UnlockableAPI")]
-    [R2APISubmoduleDependency(nameof(NetworkingAPI))]
-    [BepInDependency("com.bepis.r2api")]
+    [BepInDependency(R2API.PrefabAPI.PluginGUID)]
+    [BepInDependency(R2API.LoadoutAPI.PluginGUID)]
+    [BepInDependency(R2API.RecalculateStatsAPI.PluginGUID)]
+    [BepInDependency(R2API.SoundAPI.PluginGUID)]
+    [BepInDependency(R2API.SoundAPI.PluginGUID)]
+    [BepInDependency(R2API.UnlockableAPI.PluginGUID)]
+    [BepInDependency(R2API.R2API.PluginGUID)]
+    [BepInDependency(R2API.Networking.NetworkingAPI.PluginGUID)]
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "2.2.0")]
+        "2.3.0")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.ThinkInvisible.ClassicItems", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("HIFU.Inferno", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("pseudopulse.Survariants", BepInDependency.DependencyFlags.SoftDependency)]
     public class ChefPlugin : BaseUnityPlugin
     {
         public static bool infernoPluginLoaded = false;
@@ -73,6 +72,9 @@ namespace ChefMod
         public static SkillDef mealScepterDef;
         public static SkillDef specialDef;
 
+        public static ConfigEntry<bool> useVariant;
+        public static ConfigEntry<bool> swapVariant;
+
         public static ConfigEntry<bool> charUnlock;
         public static ConfigEntry<bool> altSkill;
         public static ConfigEntry<bool> altPodPrefab;
@@ -100,9 +102,11 @@ namespace ChefMod
         {
             enableCleaverTrails = base.Config.Bind<bool>("01 - General Settings", "Enable Cleaver Trails", true, "Cleavers have a line trail like in RoR1.");
             charUnlock = base.Config.Bind<bool>("01 - General Settings", "Auto Unlock", false, "Automatically unlocks Chef");
-            charUnlock = base.Config.Bind<bool>("01 - General Settings", "Cursed Character Select Anim", false, "Does what it says.");
+            useCursedDisplay = base.Config.Bind<bool>("01 - General Settings", "Cursed Character Select Anim", false, "Does what it says.").Value;
             altPodPrefab = Config.Bind<bool>("01 - General Settings", "Alt Spawn Pod", true, "Makes the pod prefab more appetizing");
             oldChefInvader = base.Config.Bind<bool>("02 - Invasion Settings", "Old Chef Invader", false, "Use the old overpowered CHEF invasion bossfight.");
+
+
 
             if (riskOfOptionsLoaded) RiskOfOptionsCompat();
         }
@@ -195,6 +199,33 @@ namespace ChefMod
 
         private void LateSetup() {
             ItemDisplays.RegisterItemDisplays(chefPrefab);
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("pseudopulse.Survariants"))
+            {
+                SurvariantsCompatInternal();
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private void SurvariantsCompatInternal()
+        {
+            if (!useVariant.Value) return;
+            SurvivorDef official = SurvivorCatalog.GetSurvivorDef(SurvivorCatalog.GetSurvivorIndexFromBodyIndex(BodyCatalog.FindBodyIndex("ChefBody")));
+            SurvivorDef mod = SurvivorCatalog.GetSurvivorDef(SurvivorCatalog.GetSurvivorIndexFromBodyIndex(BodyCatalog.FindBodyIndex("GnomeChefBody")));
+            if (!official || !mod) return;
+
+            SurvivorDef mainSurvivor = swapVariant.Value ? mod : official;
+            SurvivorDef variantSurvivor = swapVariant.Value ? official : mod;
+
+            SurvivorVariantDef variant = ScriptableObject.CreateInstance<SurvivorVariantDef>();
+            (variant as ScriptableObject).name = variantSurvivor.cachedName;
+            variant.DisplayName = variantSurvivor.displayNameToken;
+            variant.VariantSurvivor = variantSurvivor;
+            variant.TargetSurvivor = mainSurvivor;
+            variant.RequiredUnlock = variantSurvivor.unlockableDef;
+            variant.Description = "";
+
+            variantSurvivor.hidden = true;
+            SurvivorVariantCatalog.AddSurvivorVariant(variant);
         }
 
         // REMOVE THIS HOOK ONCE THE PODPREFAB IS FIXED
@@ -208,7 +239,7 @@ namespace ChefMod
             }
             if (body.preferredPodPrefab)
             {
-                if (body.name.ToLower().StartsWith("chef"))
+                if (body.bodyIndex == BodyCatalog.FindBodyIndex("GnomeChefBody"))
                 {
                     GameObject gg = UnityEngine.Object.Instantiate<GameObject>(fruitPodPrefab, body.transform.position, spawnRotation);
                     gg.GetComponent<VehicleSeat>().AssignPassenger(body.gameObject);
@@ -238,7 +269,7 @@ namespace ChefMod
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void SetupScepterClassic()
         {
-            ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(mealScepterDef, "ChefBody", SkillSlot.Special, specialDef);
+            ThinkInvisible.ClassicItems.Scepter.instance.RegisterScepterSkill(mealScepterDef, "GnomeChefBody", SkillSlot.Special, specialDef);
         }
 
         private void registerBuff()
@@ -309,10 +340,10 @@ namespace ChefMod
         private void registerCharacter()
         {
             //Load your base character body, from somewhere in the game.
-            //chefPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").InstantiateClone("ChefBody");
+            //chefPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody").InstantiateClone("GnomeChefBody");
 
             PrefabBuilder prefabBuilder = new PrefabBuilder();
-            prefabBuilder.prefabName = "ChefBody";
+            prefabBuilder.prefabName = "GnomeChefBody";
             prefabBuilder.model = Assets.chefAssetBundle.LoadAsset<GameObject>("mdlCHEF");
             prefabBuilder.model.transform.localScale *= 1;// *= 1.25f;
             prefabBuilder.defaultCustomRendererInfos = new CustomRendererInfo[] {
@@ -393,9 +424,9 @@ namespace ChefMod
             characterBody.baseMoveSpeed = 7f;
             characterBody.levelMoveSpeed = 0f;
             characterBody.baseAttackSpeed = 1f;
-            characterBody.name = "CHEF";
-            characterBody.baseNameToken = "CHEF_NAME";
-            characterBody.subtitleNameToken = "CHEF_SUBTITLE";
+            characterBody.name = "GnomeChefBody";
+            characterBody.baseNameToken = "GNOMECHEF_NAME";
+            characterBody.subtitleNameToken = "GNOMECHEF_SUBTITLE";
             characterBody.portraitIcon = Assets.chefIcon;
             characterBody.bodyColor = chefColor;
             characterBody.bodyFlags = CharacterBody.BodyFlags.ImmuneToExecutes | CharacterBody.BodyFlags.Mechanical;
@@ -407,7 +438,7 @@ namespace ChefMod
 
             SurvivorDef survivorDef = ScriptableObject.CreateInstance<SurvivorDef>();
             survivorDef.bodyPrefab = chefPrefab;
-            survivorDef.descriptionToken = "CHEF_DESCRIPTION";
+            survivorDef.descriptionToken = "GNOMECHEF_DESCRIPTION";
             if (!useCursedDisplay)
             {
                 survivorDef.displayPrefab = prefabBuilder.createDisplayPrefab("chefDisplay2");
@@ -418,12 +449,12 @@ namespace ChefMod
                 survivorDef.displayPrefab = prefabBuilder.createDisplayPrefab("chefDisplay");
             }
             survivorDef.primaryColor = chefColor;
-            survivorDef.displayNameToken = "CHEF_NAME";
-            survivorDef.outroFlavorToken = "CHEF_OUTRO_FLAVOR";
-            survivorDef.mainEndingEscapeFailureFlavorToken = "CHEF_OUTRO_FAILURE";
+            survivorDef.displayNameToken = "GNOMECHEF_NAME";
+            survivorDef.outroFlavorToken = "GNOMECHEF_OUTRO_FLAVOR";
+            survivorDef.mainEndingEscapeFailureFlavorToken = "GNOMECHEF_OUTRO_FAILURE";
             survivorDef.desiredSortPosition = 99f;
             survivorDef.unlockableDef = Unlockables.chefUnlockDef;
-            survivorDef.cachedName = "CHEF";
+            survivorDef.cachedName = "GnomeChef";
 
             ChefContent.survivorDefs.Add(survivorDef);
             BuildChefAI();
@@ -475,10 +506,10 @@ namespace ChefMod
             primaryDef.requiredStock = 1;
             primaryDef.stockToConsume = 1;
             primaryDef.icon = Assets.chefDiceIcon;
-            primaryDef.skillDescriptionToken = "CHEF_PRIMARY_DESCRIPTION";
+            primaryDef.skillDescriptionToken = "GNOMECHEF_PRIMARY_DESCRIPTION";
             primaryDef.skillName = "Primary";
-            primaryDef.skillNameToken = "CHEF_PRIMARY_NAME";
-            primaryDef.keywordTokens = new string[] { "KEYWORD_AGILE", "KEYWORD_CHEF_BOOST_DICE" };
+            primaryDef.skillNameToken = "GNOMECHEF_PRIMARY_NAME";
+            primaryDef.keywordTokens = new string[] { "KEYWORD_AGILE", "KEYWORD_GNOMECHEF_BOOST_DICE" };
             ChefContent.skillDefs.Add(primaryDef);
 
             boostedPrimaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -499,9 +530,9 @@ namespace ChefMod
             boostedPrimaryDef.requiredStock = 1;
             boostedPrimaryDef.stockToConsume = 1;
             boostedPrimaryDef.icon = Assets.chefMinceIcon;
-            boostedPrimaryDef.skillDescriptionToken = "CHEF_BOOSTED_PRIMARY_DESCRIPTION";
+            boostedPrimaryDef.skillDescriptionToken = "GNOMECHEF_BOOSTED_PRIMARY_DESCRIPTION";
             boostedPrimaryDef.skillName = "BoostedPrimary";
-            boostedPrimaryDef.skillNameToken = "CHEF_BOOSTED_PRIMARY_NAME";
+            boostedPrimaryDef.skillNameToken = "GNOMECHEF_BOOSTED_PRIMARY_NAME";
             boostedPrimaryDef.keywordTokens = new string[] { "KEYWORD_AGILE" };
             ChefContent.skillDefs.Add(boostedPrimaryDef);
 
@@ -521,10 +552,10 @@ namespace ChefMod
             altPrimaryDef.requiredStock = 1;
             altPrimaryDef.stockToConsume = 1;
             altPrimaryDef.icon = Assets.chefSliceIcon;
-            altPrimaryDef.skillDescriptionToken = "CHEF_ALTPRIMARY_DESCRIPTION";
+            altPrimaryDef.skillDescriptionToken = "GNOMECHEF_ALTPRIMARY_DESCRIPTION";
             altPrimaryDef.skillName = "Primary";
-            altPrimaryDef.skillNameToken = "CHEF_ALTPRIMARY_NAME";
-            altPrimaryDef.keywordTokens = new string[] { "KEYWORD_AGILE","KEYWORD_CHEF_BOOST_SLICE" };
+            altPrimaryDef.skillNameToken = "GNOMECHEF_ALTPRIMARY_NAME";
+            altPrimaryDef.keywordTokens = new string[] { "KEYWORD_AGILE", "KEYWORD_GNOMECHEF_BOOST_SLICE" };
             ChefContent.skillDefs.Add(altPrimaryDef);
 
             boostedAltPrimaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -543,9 +574,9 @@ namespace ChefMod
             boostedAltPrimaryDef.requiredStock = 1;
             boostedAltPrimaryDef.stockToConsume = 1;
             boostedAltPrimaryDef.icon = Assets.chefJulienneIcon;
-            boostedAltPrimaryDef.skillDescriptionToken = "CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION";
+            boostedAltPrimaryDef.skillDescriptionToken = "GNOMECHEF_BOOSTED_ALTPRIMARY_DESCRIPTION";
             boostedAltPrimaryDef.skillName = "BoostedPrimary";
-            boostedAltPrimaryDef.skillNameToken = "CHEF_BOOSTED_ALTPRIMARY_NAME";
+            boostedAltPrimaryDef.skillNameToken = "GNOMECHEF_BOOSTED_ALTPRIMARY_NAME";
             ChefContent.skillDefs.Add(boostedAltPrimaryDef);
 
             secondaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -564,10 +595,10 @@ namespace ChefMod
             secondaryDef.requiredStock = 1;
             secondaryDef.stockToConsume = 1;
             secondaryDef.icon = Assets.chefSearIcon;
-            secondaryDef.skillDescriptionToken = "CHEF_SECONDARY_DESCRIPTION";
+            secondaryDef.skillDescriptionToken = "GNOMECHEF_SECONDARY_DESCRIPTION";
             secondaryDef.skillName = "Secondary";
-            secondaryDef.skillNameToken = "CHEF_SECONDARY_NAME";
-            secondaryDef.keywordTokens = new string[] { "KEYWORD_CHEF_BOOST_SEAR" };
+            secondaryDef.skillNameToken = "GNOMECHEF_SECONDARY_NAME";
+            secondaryDef.keywordTokens = new string[] { "KEYWORD_GNOMECHEF_BOOST_SEAR" };
             ChefContent.skillDefs.Add(secondaryDef);
 
             boostedSecondaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -586,9 +617,9 @@ namespace ChefMod
             boostedSecondaryDef.requiredStock = 1;
             boostedSecondaryDef.stockToConsume = 1;
             boostedSecondaryDef.icon = Assets.chefFlambeIcon;
-            boostedSecondaryDef.skillDescriptionToken = "CHEF_BOOSTED_SECONDARY_DESCRIPTION";
+            boostedSecondaryDef.skillDescriptionToken = "GNOMECHEF_BOOSTED_SECONDARY_DESCRIPTION";
             boostedSecondaryDef.skillName = "BoostedSecondary";
-            boostedSecondaryDef.skillNameToken = "CHEF_BOOSTED_SECONDARY_NAME";
+            boostedSecondaryDef.skillNameToken = "GNOMECHEF_BOOSTED_SECONDARY_NAME";
             ChefContent.skillDefs.Add(boostedSecondaryDef);
 
             altSecondaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -607,9 +638,9 @@ namespace ChefMod
             altSecondaryDef.requiredStock = 1;
             altSecondaryDef.stockToConsume = 1;
             altSecondaryDef.icon = Assets.chefSauteeIcon;
-            altSecondaryDef.skillDescriptionToken = "CHEF_ALTSECONDARY_DESCRIPTION";
+            altSecondaryDef.skillDescriptionToken = "GNOMECHEF_ALTSECONDARY_DESCRIPTION";
             altSecondaryDef.skillName = "AltSecondary";
-            altSecondaryDef.skillNameToken = "CHEF_ALTSECONDARY_NAME";
+            altSecondaryDef.skillNameToken = "GNOMECHEF_ALTSECONDARY_NAME";
             ChefContent.skillDefs.Add(altSecondaryDef);
 
             boostedAltSecondaryDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -628,9 +659,9 @@ namespace ChefMod
             boostedAltSecondaryDef.requiredStock = 1;
             boostedAltSecondaryDef.stockToConsume = 1;
             boostedAltSecondaryDef.icon = Assets.chefFryIcon;
-            boostedAltSecondaryDef.skillDescriptionToken = "CHEF_BOOSTED_ALTSECONDARY_DESCRIPTION";
+            boostedAltSecondaryDef.skillDescriptionToken = "GNOMECHEF_BOOSTED_ALTSECONDARY_DESCRIPTION";
             boostedAltSecondaryDef.skillName = "BoostedAltSecondary";
-            boostedAltSecondaryDef.skillNameToken = "CHEF_BOOSTED_ALTSECONDARY_NAME";
+            boostedAltSecondaryDef.skillNameToken = "GNOMECHEF_BOOSTED_ALTSECONDARY_NAME";
             ChefContent.skillDefs.Add(boostedAltSecondaryDef);
 
             utilityDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -649,10 +680,10 @@ namespace ChefMod
             utilityDef.requiredStock = 1;
             utilityDef.stockToConsume = 1;
             utilityDef.icon = Assets.chefGlazeIcon;
-            utilityDef.skillDescriptionToken = "CHEF_UTILITY_DESCRIPTION";
+            utilityDef.skillDescriptionToken = "GNOMECHEF_UTILITY_DESCRIPTION";
             utilityDef.skillName = "Utility";
-            utilityDef.skillNameToken = "CHEF_UTILITY_NAME";
-            utilityDef.keywordTokens = new string[] { "KEYWORD_CHEF_BOOST_GLAZE" };
+            utilityDef.skillNameToken = "GNOMECHEF_UTILITY_NAME";
+            utilityDef.keywordTokens = new string[] { "KEYWORD_GNOMECHEF_BOOST_GLAZE" };
             ChefContent.skillDefs.Add(utilityDef);
 
             boostedUtilityDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -671,9 +702,9 @@ namespace ChefMod
             boostedUtilityDef.requiredStock = 1;
             boostedUtilityDef.stockToConsume = 1;
             boostedUtilityDef.icon = Assets.chefMarinateIcon;
-            boostedUtilityDef.skillDescriptionToken = "CHEF_BOOSTED_UTILITY_DESCRIPTION";
+            boostedUtilityDef.skillDescriptionToken = "GNOMECHEF_BOOSTED_UTILITY_DESCRIPTION";
             boostedUtilityDef.skillName = "boostedUtilityDef";
-            boostedUtilityDef.skillNameToken = "CHEF_BOOSTED_UTILITY_NAME";
+            boostedUtilityDef.skillNameToken = "GNOMECHEF_BOOSTED_UTILITY_NAME";
             ChefContent.skillDefs.Add(boostedUtilityDef);
 
             
@@ -694,9 +725,9 @@ namespace ChefMod
             specialDef.requiredStock = 1;
             specialDef.stockToConsume = 1;
             specialDef.icon = Assets.chefBHMIcon;
-            specialDef.skillDescriptionToken = "CHEF_SPECIAL_DESCRIPTION";
+            specialDef.skillDescriptionToken = "GNOMECHEF_SPECIAL_DESCRIPTION";
             specialDef.skillName = "Special";
-            specialDef.skillNameToken = "CHEF_SPECIAL_NAME";
+            specialDef.skillNameToken = "GNOMECHEF_SPECIAL_NAME";
             ChefContent.skillDefs.Add(specialDef);
 
             var specialScepterDef = ScriptableObject.CreateInstance<SkillDef>();
@@ -715,9 +746,9 @@ namespace ChefMod
             specialScepterDef.requiredStock = 1;
             specialScepterDef.stockToConsume = 1;
             specialScepterDef.icon = Assets.chefBHMScepterIcon;
-            specialScepterDef.skillDescriptionToken = "CHEF_SPECIAL_SCEPTER_DESCRIPTION";
+            specialScepterDef.skillDescriptionToken = "GNOMECHEF_SPECIAL_SCEPTER_DESCRIPTION";
             specialScepterDef.skillName = "SpecialScepter";
-            specialScepterDef.skillNameToken = "CHEF_SPECIAL_SCEPTER_NAME";
+            specialScepterDef.skillNameToken = "GNOMECHEF_SPECIAL_SCEPTER_NAME";
             ChefContent.skillDefs.Add(specialScepterDef);
             mealScepterDef = specialScepterDef;
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.DestroyedClone.AncientScepter"))
@@ -745,9 +776,9 @@ namespace ChefMod
             altSpecialDef.requiredStock = 1;
             altSpecialDef.stockToConsume = 1;
             altSpecialDef.icon = Assets.chefBuffetIcon;
-            altSpecialDef.skillDescriptionToken = "CHEF_ALT_SPECIAL_DESCRIPTION";
+            altSpecialDef.skillDescriptionToken = "GNOMECHEF_ALT_SPECIAL_DESCRIPTION";
             altSpecialDef.skillName = "AltSpecial";
-            altSpecialDef.skillNameToken = "CHEF_ALT_SPECIAL_NAME";
+            altSpecialDef.skillNameToken = "GNOMECHEF_ALT_SPECIAL_NAME";
             ChefContent.skillDefs.Add(altSpecialDef);
 
             SkillLocator skillLocator = chefPrefab.GetComponent<SkillLocator>();

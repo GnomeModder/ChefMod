@@ -54,7 +54,7 @@ namespace ChefMod.Achievements
 
         public override BodyIndex LookUpRequiredBodyIndex()
         {
-            return BodyCatalog.FindBodyIndex("ChefBody");
+            return BodyCatalog.FindBodyIndex("GnomeChefBody");
         }
 
         private bool warning = false;
@@ -171,7 +171,7 @@ namespace ChefMod.Achievements
 
             if (ChefPlugin.charUnlock.Value) base.Grant();
 
-            On.RoR2.HealthComponent.FixedUpdate += ChefDeath;
+            On.RoR2.HealthComponent.ManagedFixedUpdate += ChefDeath;
             On.RoR2.CharacterMaster.OnInventoryChanged += CheckItem;
             //GlobalEventManager.onCharacterDeathGlobal += Death;
             Stage.onServerStageBegin += Reset;
@@ -179,9 +179,8 @@ namespace ChefMod.Achievements
             On.RoR2.CharacterBody.RecalculateStats += BuffChefInvader;
         }
 
-        private void ChefDeath(On.RoR2.HealthComponent.orig_FixedUpdate orig, HealthComponent self)
+        private void ChefDeath(On.RoR2.HealthComponent.orig_ManagedFixedUpdate orig, HealthComponent self, float deltaTime)
         {
-            
             if (!self.alive && self.wasAlive)
             {
                 if (self.body && self.body.master && self.body.master.name == "ChefInvader(Clone)")
@@ -192,14 +191,14 @@ namespace ChefMod.Achievements
                     }
                 }
             }
-            orig(self);
+            orig(self, deltaTime);
         }
 
         public override void OnUninstall()
         {
             base.OnUninstall();
 
-            On.RoR2.HealthComponent.FixedUpdate -= ChefDeath;
+            On.RoR2.HealthComponent.ManagedFixedUpdate -= ChefDeath;
             On.RoR2.CharacterMaster.OnInventoryChanged -= CheckItem;
             //GlobalEventManager.onCharacterDeathGlobal -= Death;
             Stage.onServerStageBegin -= Reset;
@@ -231,7 +230,7 @@ namespace ChefMod.Achievements
 
         public override BodyIndex LookUpRequiredBodyIndex()
         {
-            return BodyCatalog.FindBodyIndex("ChefBody");
+            return BodyCatalog.FindBodyIndex("GnomeChefBody");
         }
 
         private int cleavercount = 0;

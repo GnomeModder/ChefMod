@@ -1,51 +1,51 @@
 {
 	strings:
 	{
-	"CHEF_NAME" : "CHEF",
-	"CHEF_SUBTITLE" : "El Cocinero",
-	"CHEF_DESCRIPTION" : "CHEF es un robot cocinero capaz de servir generosas raciones incluso a las multitudes más numerosas.<style=cSub>\n\n< ! > Las cuchillas pueden golpear a los clientes en el camino de vuelta.\n\n< ! > Utiliza el Glaseado para desplazarte rápidamente por la cocina y evitar chocar con los clientes.\n\n< ! > Combina el Glaseado y el Cauterizar para cocinar eficazmente grandes lotes.\n\n< ! > Sirva diferentes habilidades con Segunda Ayuda para satisfacer los gustos de sus clientes.</style>",
+	"GNOMECHEF_NAME" : "CHEF",
+	"GNOMECHEF_SUBTITLE" : "El Cocinero",
+	"GNOMECHEF_DESCRIPTION" : "CHEF es un robot cocinero capaz de servir generosas raciones incluso a las multitudes más numerosas.<style=cSub>\n\n< ! > Las cuchillas pueden golpear a los clientes en el camino de vuelta.\n\n< ! > Utiliza el Glaseado para desplazarte rápidamente por la cocina y evitar chocar con los clientes.\n\n< ! > Combina el Glaseado y el Cauterizar para cocinar eficazmente grandes lotes.\n\n< ! > Sirva diferentes habilidades con Segunda Ayuda para satisfacer los gustos de sus clientes.</style>",
 	
-	"KEYWORD_CHEF_BOOST_DICE" : "<style=cKeywordName>Carne picada</style><style=cSub>Lanza 16 cuchillas en esfera para <style=cIsDamage>16x120% de daño</style>.</style>",
-	"KEYWORD_CHEF_BOOST_SEAR" : "<style=cKeywordName>Quema</style><style=cSub>Quema a los clientes para <style=cIsDamage>420%</style> en alto. Los clientes Glaseados reciben el doble de daño y estallan en llamas para <style=cIsDamage>5x240% de daño</style>.</style>",
-	"KEYWORD_CHEF_BOOST_GLAZE" : "<style=cKeywordName>Marinar</style><style=cSub>Deja un rastro de aceite más largo.</style>",
-	"KEYWORD_CHEF_BOOST_SLICE" : "<style=cKeywordName>Julienne</style><style=cSub>Apuñala 16 veces. El número de puñaladas aumenta con la velocidad de ataque.</style>",
+	"KEYWORD_GNOMECHEF_BOOST_DICE" : "<style=cKeywordName>Carne picada</style><style=cSub>Lanza 16 cuchillas en esfera para <style=cIsDamage>16x120% de daño</style>.</style>",
+	"KEYWORD_GNOMECHEF_BOOST_SEAR" : "<style=cKeywordName>Quema</style><style=cSub>Quema a los clientes para <style=cIsDamage>420%</style> en alto. Los clientes Glaseados reciben el doble de daño y estallan en llamas para <style=cIsDamage>5x240% de daño</style>.</style>",
+	"KEYWORD_GNOMECHEF_BOOST_GLAZE" : "<style=cKeywordName>Marinar</style><style=cSub>Deja un rastro de aceite más largo.</style>",
+	"KEYWORD_GNOMECHEF_BOOST_SLICE" : "<style=cKeywordName>Julienne</style><style=cSub>Apuñala 16 veces. El número de puñaladas aumenta con la velocidad de ataque.</style>",
 	
-	"CHEF_PRIMARY_NAME" : "Dice",
-	"CHEF_PRIMARY_DESCRIPTION" : "<style=cIsUtility>Agil</style>. Lanza una cuchilla a los clientes para <style=cIsDamage>150% de daño</style>. Boomerangs de vuelta.",
-	"CHEF_BOOSTED_PRIMARY_NAME" : "Carne picada",
-	"CHEF_BOOSTED_PRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Lanza 16 cuchillas en esfera para <style=cIsDamage>16x150% de daño</style>. Boomerangs de vuelta.",
+	"GNOMECHEF_PRIMARY_NAME" : "Dice",
+	"GNOMECHEF_PRIMARY_DESCRIPTION" : "<style=cIsUtility>Agil</style>. Lanza una cuchilla a los clientes para <style=cIsDamage>150% de daño</style>. Boomerangs de vuelta.",
+	"GNOMECHEF_BOOSTED_PRIMARY_NAME" : "Carne picada",
+	"GNOMECHEF_BOOSTED_PRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Lanza 16 cuchillas en esfera para <style=cIsDamage>16x150% de daño</style>. Boomerangs de vuelta.",
 	
-	"CHEF_SECONDARY_NAME" : "Chamuscar",
-	"CHEF_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Marchita</style> a los clientes para <style=cIsDamage>260% de daño</style> hasta que se doren, <style=cIsDamage>derribándolos</style>. El daño es <style=cIsDamage>duplicado</style> contra clientes<style=cIsUtility>Glaseados</style>.",
-	"CHEF_BOOSTED_SECONDARY_NAME" : "Blaze",
-	"CHEF_BOOSTED_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Quema</style> a los clientes para <style=cIsDamage>420%</style> en alto. Clientes <style=cIsUtility>Glaseados</style> reciben el <style=cIsDamage>doble</style> de daño y estallan en llamas para <style=cIsDamage>5x260% de daño</style>.",
+	"GNOMECHEF_SECONDARY_NAME" : "Chamuscar",
+	"GNOMECHEF_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Marchita</style> a los clientes para <style=cIsDamage>260% de daño</style> hasta que se doren, <style=cIsDamage>derribándolos</style>. El daño es <style=cIsDamage>duplicado</style> contra clientes<style=cIsUtility>Glaseados</style>.",
+	"GNOMECHEF_BOOSTED_SECONDARY_NAME" : "Blaze",
+	"GNOMECHEF_BOOSTED_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Quema</style> a los clientes para <style=cIsDamage>420%</style> en alto. Clientes <style=cIsUtility>Glaseados</style> reciben el <style=cIsDamage>doble</style> de daño y estallan en llamas para <style=cIsDamage>5x260% de daño</style>.",
 	
-	"CHEF_UTILITY_NAME" : "Glaseado",
-	"CHEF_UTILITY_DESCRIPTION" : "Deja un rastro de aceite, <style=cIsUtility>ralentizando a los clientes</style>. Clientes <style=cIsUtility>Glaseados</style> explotan para <style=cIsDamage>78% de daño</style> cuando estan <style=cIsDamage>Chamuscados</style>.",
-	"CHEF_BOOSTED_UTILITY_NAME" : "Marinar",
-	"CHEF_BOOSTED_UTILITY_DESCRIPTION" : "Deja un largo rastro de aceite, <style=cIsUtility>ralentizando a los clientes</style>. Clientes <style=cIsUtility>Glaseados</style> explotan para <style=cIsDamage>78% de daño</style> cuando estan <style=cIsDamage>Chamuscados</style>.",
+	"GNOMECHEF_UTILITY_NAME" : "Glaseado",
+	"GNOMECHEF_UTILITY_DESCRIPTION" : "Deja un rastro de aceite, <style=cIsUtility>ralentizando a los clientes</style>. Clientes <style=cIsUtility>Glaseados</style> explotan para <style=cIsDamage>78% de daño</style> cuando estan <style=cIsDamage>Chamuscados</style>.",
+	"GNOMECHEF_BOOSTED_UTILITY_NAME" : "Marinar",
+	"GNOMECHEF_BOOSTED_UTILITY_DESCRIPTION" : "Deja un largo rastro de aceite, <style=cIsUtility>ralentizando a los clientes</style>. Clientes <style=cIsUtility>Glaseados</style> explotan para <style=cIsDamage>78% de daño</style> cuando estan <style=cIsDamage>Chamuscados</style>.",
 	
-	"CHEF_SPECIAL_NAME" : "Segunda Ayuda",
-	"CHEF_SPECIAL_DESCRIPTION" : "Prepara una gran comida sana, <style=cIsUtility>potenciando la siguiente habilidad lanzada</style>.",
-	"CHEF_SPECIAL_SCEPTER_NAME" : "Menú Completo",
-	"CHEF_SPECIAL_SCEPTER_DESCRIPTION" : "Prepara una comida magistral, <style=cIsUtility>potenciando los 2 siguientes lanzamientos de habilidades</style>.",
+	"GNOMECHEF_SPECIAL_NAME" : "Segunda Ayuda",
+	"GNOMECHEF_SPECIAL_DESCRIPTION" : "Prepara una gran comida sana, <style=cIsUtility>potenciando la siguiente habilidad lanzada</style>.",
+	"GNOMECHEF_SPECIAL_SCEPTER_NAME" : "Menú Completo",
+	"GNOMECHEF_SPECIAL_SCEPTER_DESCRIPTION" : "Prepara una comida magistral, <style=cIsUtility>potenciando los 2 siguientes lanzamientos de habilidades</style>.",
 	
-	"CHEF_ALTPRIMARY_NAME" : "Corte",
-	"CHEF_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Agil</style>. Apuñala a un cliente para <style=cIsDamage>120% de daño</style>.",
-	"CHEF_BOOSTED_ALTPRIMARY_NAME" : "Julienne",
-	"CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Agil</style>. Apuñala a un cliente <style=cIsDamage>16 veces</style>. El número de apuñaladas aumenta con la velocidad de ataque.",
+	"GNOMECHEF_ALTPRIMARY_NAME" : "Corte",
+	"GNOMECHEF_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Agil</style>. Apuñala a un cliente para <style=cIsDamage>120% de daño</style>.",
+	"GNOMECHEF_BOOSTED_ALTPRIMARY_NAME" : "Julienne",
+	"GNOMECHEF_BOOSTED_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Agil</style>. Apuñala a un cliente <style=cIsDamage>16 veces</style>. El número de apuñaladas aumenta con la velocidad de ataque.",
 	
-	"CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME" : "Emplazamiento",
-	"CHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME" : "Emplazamiento",
-	"CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC" : "Reúne una docena de ingredientes.",
+	"GNOMECHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME" : "Emplazamiento",
+	"GNOMECHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME" : "Emplazamiento",
+	"GNOMECHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC" : "Reúne una docena de ingredientes.",
 	
-	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME" : "CHEF: Juego completo",
-	"CHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME" : "CHEF: Juego completo",
-	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC" : "Ten 40 cuchillas en el aire a la vez.",
+	"GNOMECHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME" : "CHEF: Juego completo",
+	"GNOMECHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME" : "CHEF: Juego completo",
+	"GNOMECHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC" : "Ten 40 cuchillas en el aire a la vez.",
 	
-	"CHEF_OUTRO_FLAVOR" : "... y se marchó, con nuevos ingredientes en la mano.",
-	"CHEF_OUTRO_FAILURE" : "... y desapareció, olvidando por completo su propósito original.",
-	"CHEF_LORE" : "DIRECTIVA: ENCONTRAR NUEVAS RECETAS PARA UNA NUTRICIÓN ÓPTIMA\n\nORDEN: EL JEFE DE COCINA HA SOLICITADO UNA COMIDA DE CELEBRACIÓN PARA LA TRIPULACIÓN DESPUÉS DE LA MISIÓN\n\nLAS COMIDAS DE CELEBRACIÓN DEBEN HACERSE CON LA MAYOR CALIDAD POSIBLE\n\nLA COCINA PROPORCIONADA SERÁ SUFICIENTE\n\nLOS INGREDIENTES PROPORCIONADOS NO SERÁN SUFICIENTES\n\nEL TIEMPO HASTA LA PRÓXIMA REPOSICIÓN NO SERÁ SUFICIENTE\n\nPUEDE HABER FLORA Y FAUNA EN EL LUGAR PARA UTILIZARLAS COMO INGREDIENTES\n\nPROCESO:\n\n• EXPLORAR LA FLORA Y FAUNA LOCALES\n\n• COMPROBAR EL CONTENIDO NUTRICIONAL Y LA SEGURIDAD DE LOS INGREDIENTES\n\n• CREAR UN PLAN DE COMIDAS VIABLE\n\n• RECOGER LOS INGREDIENTES APLICABLES\n\n• COCINAR LA COMIDA DE CELEBRACIÓN\n\n• LAS INSPECCIONES DEBEN REALIZARSE DIRECTAMENTE CON UNA UNIDAD DE CHEF PARA MAYOR PRECISIÓN\n\n• SÓLO LOS INGREDIENTES MÁS FRESCOS SERÁN SUFICIENTES"
+	"GNOMECHEF_OUTRO_FLAVOR" : "... y se marchó, con nuevos ingredientes en la mano.",
+	"GNOMECHEF_OUTRO_FAILURE" : "... y desapareció, olvidando por completo su propósito original.",
+	"GNOMECHEF_LORE" : "DIRECTIVA: ENCONTRAR NUEVAS RECETAS PARA UNA NUTRICIÓN ÓPTIMA\n\nORDEN: EL JEFE DE COCINA HA SOLICITADO UNA COMIDA DE CELEBRACIÓN PARA LA TRIPULACIÓN DESPUÉS DE LA MISIÓN\n\nLAS COMIDAS DE CELEBRACIÓN DEBEN HACERSE CON LA MAYOR CALIDAD POSIBLE\n\nLA COCINA PROPORCIONADA SERÁ SUFICIENTE\n\nLOS INGREDIENTES PROPORCIONADOS NO SERÁN SUFICIENTES\n\nEL TIEMPO HASTA LA PRÓXIMA REPOSICIÓN NO SERÁ SUFICIENTE\n\nPUEDE HABER FLORA Y FAUNA EN EL LUGAR PARA UTILIZARLAS COMO INGREDIENTES\n\nPROCESO:\n\n• EXPLORAR LA FLORA Y FAUNA LOCALES\n\n• COMPROBAR EL CONTENIDO NUTRICIONAL Y LA SEGURIDAD DE LOS INGREDIENTES\n\n• CREAR UN PLAN DE COMIDAS VIABLE\n\n• RECOGER LOS INGREDIENTES APLICABLES\n\n• COCINAR LA COMIDA DE CELEBRACIÓN\n\n• LAS INSPECCIONES DEBEN REALIZARSE DIRECTAMENTE CON UNA UNIDAD DE CHEF PARA MAYOR PRECISIÓN\n\n• SÓLO LOS INGREDIENTES MÁS FRESCOS SERÁN SUFICIENTES"
 	
 	}
 }

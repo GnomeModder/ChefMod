@@ -16,11 +16,12 @@ namespace EntityStates.Chef
         public static float fireInterval = 0.08f;
         private float stopwatch = fireInterval;
         private int stabcount;
+        private float lastUpdateTime;
 
         public override void OnEnter()
         {
             base.OnEnter();
-
+            lastUpdateTime = Time.time;
             stabcount = (int)(16f * attackSpeedStat);
 
             childLocator = base.GetModelChildLocator();
@@ -36,7 +37,8 @@ namespace EntityStates.Chef
             base.FixedUpdate();
             if (stabcount > 0)
             {
-                stopwatch += Time.fixedDeltaTime;
+                stopwatch += Time.time - lastUpdateTime;
+                lastUpdateTime = Time.time;
                 float scaledFireInterval = fireInterval / this.attackSpeedStat;
                 if (stopwatch > scaledFireInterval)
                 {

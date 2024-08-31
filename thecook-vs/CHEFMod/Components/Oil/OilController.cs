@@ -6,8 +6,8 @@ using RoR2;
 using RoR2.Projectile;
 using UnityEngine;
 using R2API;
-using R2API.Networking;
 using System.Collections;
+using R2API.Networking;
 
 namespace ChefMod.Components
 {

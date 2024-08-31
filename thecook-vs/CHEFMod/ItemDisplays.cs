@@ -54,7 +54,8 @@ namespace ChefMod
         }
 
         public static void RegisterItemDisplays(GameObject bodyPrefab) {
-
+            //Someone else fix this
+            return;
             GameObject model = bodyPrefab.GetComponentInChildren<ModelLocator>().modelTransform.gameObject;
             CharacterModel characterModel = model.GetComponent<CharacterModel>();
 

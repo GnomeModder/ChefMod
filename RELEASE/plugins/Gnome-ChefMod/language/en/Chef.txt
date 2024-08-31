@@ -1,51 +1,51 @@
 {
 	strings:
 	{
-	"CHEF_NAME" : "CHEF",
-	"CHEF_SUBTITLE" : "The Cook",
-	"CHEF_DESCRIPTION" : "CHEF is a robot cook who is capable of serving generous helpings to even the largest crowds.<style=cSub>\n\n< ! > Cleavers can hit customers on the way back.\n\n< ! > Use Glaze to get around the kitchen quickly and to avoid bumping into customers.\n\n< ! > Combine Glaze and Sear to efficiently cook large batches.\n\n< ! > Serve different skills with Second Helping to suit your customers' tastes.</style>",
+	"GNOMECHEF_NAME" : "CHEF",
+	"GNOMECHEF_SUBTITLE" : "The Cook",
+	"GNOMECHEF_DESCRIPTION" : "CHEF is a robot cook who is capable of serving generous helpings to even the largest crowds.<style=cSub>\n\n< ! > Cleavers can hit customers on the way back.\n\n< ! > Use Glaze to get around the kitchen quickly and to avoid bumping into customers.\n\n< ! > Combine Glaze and Sear to efficiently cook large batches.\n\n< ! > Serve different skills with Second Helping to suit your customers' tastes.</style>",
 	
-	"KEYWORD_CHEF_BOOST_DICE" : "<style=cKeywordName>Mince</style><style=cSub>Throw 16 cleavers in a sphere for <style=cIsDamage>16x120% damage</style>.</style>",
-	"KEYWORD_CHEF_BOOST_SEAR" : "<style=cKeywordName>Blaze</style><style=cSub>Blaze customers for <style=cIsDamage>420%</style> on high. Glazed customers take double damage and burst into flames for <style=cIsDamage>5x240% damage</style>.</style>",
-	"KEYWORD_CHEF_BOOST_GLAZE" : "<style=cKeywordName>Marinate</style><style=cSub>Leave a longer trail of oil.</style>",
-	"KEYWORD_CHEF_BOOST_SLICE" : "<style=cKeywordName>Julienne</style><style=cSub>Stab 16 times. The number of stabs increases with attack speed.</style>",
+	"KEYWORD_GNOMECHEF_BOOST_DICE" : "<style=cKeywordName>Mince</style><style=cSub>Throw 16 cleavers in a sphere for <style=cIsDamage>16x120% damage</style>.</style>",
+	"KEYWORD_GNOMECHEF_BOOST_SEAR" : "<style=cKeywordName>Blaze</style><style=cSub>Blaze customers for <style=cIsDamage>420%</style> on high. Glazed customers take double damage and burst into flames for <style=cIsDamage>5x240% damage</style>.</style>",
+	"KEYWORD_GNOMECHEF_BOOST_GLAZE" : "<style=cKeywordName>Marinate</style><style=cSub>Leave a longer trail of oil.</style>",
+	"KEYWORD_GNOMECHEF_BOOST_SLICE" : "<style=cKeywordName>Julienne</style><style=cSub>Stab 16 times. The number of stabs increases with attack speed.</style>",
 	
-	"CHEF_PRIMARY_NAME" : "Dice",
-	"CHEF_PRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Throw a cleaver towards customers for <style=cIsDamage>150% damage</style>. Boomerangs back.",
-	"CHEF_BOOSTED_PRIMARY_NAME" : "Mince",
-	"CHEF_BOOSTED_PRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Throw 16 cleavers in a sphere for <style=cIsDamage>16x150% damage</style>. Boomerangs back.",
+	"GNOMECHEF_PRIMARY_NAME" : "Dice",
+	"GNOMECHEF_PRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Throw a cleaver towards customers for <style=cIsDamage>150% damage</style>. Boomerangs back.",
+	"GNOMECHEF_BOOSTED_PRIMARY_NAME" : "Mince",
+	"GNOMECHEF_BOOSTED_PRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Throw 16 cleavers in a sphere for <style=cIsDamage>16x150% damage</style>. Boomerangs back.",
 	
-	"CHEF_SECONDARY_NAME" : "Sear",
-	"CHEF_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Sear</style> customers for <style=cIsDamage>260% damage</style> until golden brown, <style=cIsDamage>knocking them away</style>. Damage is <style=cIsDamage>doubled</style> against <style=cIsUtility>Glazed</style> customers.",
-	"CHEF_BOOSTED_SECONDARY_NAME" : "Blaze",
-	"CHEF_BOOSTED_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Blaze</style> customers for <style=cIsDamage>420%</style> on high. <style=cIsUtility>Glazed</style> customers take <style=cIsDamage>double</style> damage and burst into flames for <style=cIsDamage>5x260% damage</style>.",
+	"GNOMECHEF_SECONDARY_NAME" : "Sear",
+	"GNOMECHEF_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Sear</style> customers for <style=cIsDamage>260% damage</style> until golden brown, <style=cIsDamage>knocking them away</style>. Damage is <style=cIsDamage>doubled</style> against <style=cIsUtility>Glazed</style> customers.",
+	"GNOMECHEF_BOOSTED_SECONDARY_NAME" : "Blaze",
+	"GNOMECHEF_BOOSTED_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Blaze</style> customers for <style=cIsDamage>420%</style> on high. <style=cIsUtility>Glazed</style> customers take <style=cIsDamage>double</style> damage and burst into flames for <style=cIsDamage>5x260% damage</style>.",
 	
-	"CHEF_UTILITY_NAME" : "Glaze",
-	"CHEF_UTILITY_DESCRIPTION" : "Leave a trail of oil, <style=cIsUtility>slowing customers</style>. <style=cIsUtility>Glazed</style> customers explode for <style=cIsDamage>78% damage</style> when <style=cIsDamage>Seared</style>.",
-	"CHEF_BOOSTED_UTILITY_NAME" : "Marinate",
-	"CHEF_BOOSTED_UTILITY_DESCRIPTION" : "Leave a long trail of oil, <style=cIsUtility>slowing customers</style>. <style=cIsUtility>Glazed</style> customers explode for <style=cIsDamage>78% damage</style> when <style=cIsDamage>Seared</style>.",
+	"GNOMECHEF_UTILITY_NAME" : "Glaze",
+	"GNOMECHEF_UTILITY_DESCRIPTION" : "Leave a trail of oil, <style=cIsUtility>slowing customers</style>. <style=cIsUtility>Glazed</style> customers explode for <style=cIsDamage>78% damage</style> when <style=cIsDamage>Seared</style>.",
+	"GNOMECHEF_BOOSTED_UTILITY_NAME" : "Marinate",
+	"GNOMECHEF_BOOSTED_UTILITY_DESCRIPTION" : "Leave a long trail of oil, <style=cIsUtility>slowing customers</style>. <style=cIsUtility>Glazed</style> customers explode for <style=cIsDamage>78% damage</style> when <style=cIsDamage>Seared</style>.",
 	
-	"CHEF_SPECIAL_NAME" : "Second Helping",
-	"CHEF_SPECIAL_DESCRIPTION" : "Prepare a big healthy meal, <style=cIsUtility>boosting the next ability cast</style>.",
-	"CHEF_SPECIAL_SCEPTER_NAME" : "Full Course Meal",
-	"CHEF_SPECIAL_SCEPTER_DESCRIPTION" : "Prepare a master meal, <style=cIsUtility>boosting the next 2 ability casts</style>.",
+	"GNOMECHEF_SPECIAL_NAME" : "Second Helping",
+	"GNOMECHEF_SPECIAL_DESCRIPTION" : "Prepare a big healthy meal, <style=cIsUtility>boosting the next ability cast</style>.",
+	"GNOMECHEF_SPECIAL_SCEPTER_NAME" : "Full Course Meal",
+	"GNOMECHEF_SPECIAL_SCEPTER_DESCRIPTION" : "Prepare a master meal, <style=cIsUtility>boosting the next 2 ability casts</style>.",
 	
-	"CHEF_ALTPRIMARY_NAME" : "Slice",
-	"CHEF_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Stab a customer for <style=cIsDamage>120% damage</style>.",
-	"CHEF_BOOSTED_ALTPRIMARY_NAME" : "Julienne",
-	"CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Stab a customer <style=cIsDamage>16 times</style>. The number of stabs increases with attack speed.",
+	"GNOMECHEF_ALTPRIMARY_NAME" : "Slice",
+	"GNOMECHEF_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Stab a customer for <style=cIsDamage>120% damage</style>.",
+	"GNOMECHEF_BOOSTED_ALTPRIMARY_NAME" : "Julienne",
+	"GNOMECHEF_BOOSTED_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Stab a customer <style=cIsDamage>16 times</style>. The number of stabs increases with attack speed.",
 	
-	"CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME" : "Mise en Place",
-	"CHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME" : "Mise en Place",
-	"CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC" : "Gather a dozen ingredients.",
+	"GNOMECHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME" : "Mise en Place",
+	"GNOMECHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME" : "Mise en Place",
+	"GNOMECHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC" : "Gather a dozen ingredients.",
 	
-	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME" : "CHEF: Full Set",
-	"CHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME" : "CHEF: Full Set",
-	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC" : "Have 40 cleavers in the air at once.",
+	"GNOMECHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME" : "CHEF: Full Set",
+	"GNOMECHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME" : "CHEF: Full Set",
+	"GNOMECHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC" : "Have 40 cleavers in the air at once.",
 	
-	"CHEF_OUTRO_FLAVOR" : "..and so it left, new ingredients in hand.",
-	"CHEF_OUTRO_FAILURE" : "..and so it vanished, entirely forgetting its original purpose.",
-	"CHEF_LORE" : "DIRECTIVE: FIND NEW RECIPIES FOR OPTIMAL NUTRITION\n\nORDER: THE KITCHEN LEAD HAS REQUESTED A CELEBRATORY MEAL FOR THE CREW POST MISSION\n\nCELEBRATORY MEALS SHOULD BE MADE IN THE HIGHEST QUALITY POSSIBLE\n\nTHE KITCHEN PROVIDED WILL BE SUFFICIENT\n\nTHE INGREDIENTS PROVIDED WILL NOT BE SUFFICIENT\n\nTHE TIME UNTIL THE NEXT RESTOCK WILL NOT BE SUFFICIENT\n\nTHERE MAY BE FLORA AND FAUNA ON SITE TO USE AS INGREDIENTS\n\nPROCESS:\n\n• SCOUT LOCAL FLORA AND FAUNA\n\n• TEST NUTRITIONAL CONTENT AND SAFETY OF INGREDIENTS\n\n• CREATE VIABLE MEAL PLAN\n\n• COLLECT APPLICABLE INGREDIENTS\n\n• COOK CELEBRATORY MEAL\n\n• INSPECTIONS MUST OCCUR DIRECTLY WITH A CHEF UNIT FOR ACCURACY\n\n• ONLY THE FRESHEST OF INGREDIENTS WILL BE SUFFICIENT"
+	"GNOMECHEF_OUTRO_FLAVOR" : "..and so it left, new ingredients in hand.",
+	"GNOMECHEF_OUTRO_FAILURE" : "..and so it vanished, entirely forgetting its original purpose.",
+	"GNOMECHEF_LORE" : "DIRECTIVE: FIND NEW RECIPIES FOR OPTIMAL NUTRITION\n\nORDER: THE KITCHEN LEAD HAS REQUESTED A CELEBRATORY MEAL FOR THE CREW POST MISSION\n\nCELEBRATORY MEALS SHOULD BE MADE IN THE HIGHEST QUALITY POSSIBLE\n\nTHE KITCHEN PROVIDED WILL BE SUFFICIENT\n\nTHE INGREDIENTS PROVIDED WILL NOT BE SUFFICIENT\n\nTHE TIME UNTIL THE NEXT RESTOCK WILL NOT BE SUFFICIENT\n\nTHERE MAY BE FLORA AND FAUNA ON SITE TO USE AS INGREDIENTS\n\nPROCESS:\n\n• SCOUT LOCAL FLORA AND FAUNA\n\n• TEST NUTRITIONAL CONTENT AND SAFETY OF INGREDIENTS\n\n• CREATE VIABLE MEAL PLAN\n\n• COLLECT APPLICABLE INGREDIENTS\n\n• COOK CELEBRATORY MEAL\n\n• INSPECTIONS MUST OCCUR DIRECTLY WITH A CHEF UNIT FOR ACCURACY\n\n• ONLY THE FRESHEST OF INGREDIENTS WILL BE SUFFICIENT"
 	
 	}
 }

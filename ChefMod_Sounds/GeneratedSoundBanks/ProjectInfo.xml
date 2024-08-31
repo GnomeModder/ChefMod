@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectInfo>
+	<Project Name="ChefMod_Sounds" GUID="{2E913953-6EB0-4DA1-AA21-FC529FA2392A}" Generator="2023.1.4.8496"/>
+	<CacheRoot>../.cache</CacheRoot>
+	<Platforms>
+		<Platform Name="Windows" GUID="{D384A244-16F2-4301-9466-C9DDD2881347}" BasePlatform="Windows" BasePlatformGUID="{6E0CB257-C6C8-4C5C-8366-2740DFC441EB}" Path="Windows"/>
+	</Platforms>
+	<Languages>
+		<Language Name="English(US)" Id="684519430" GUID="{DA7B1E47-3AB9-4DA5-966D-4BC3C5953047}" Default="true" UseAsStandIn="true"/>
+	</Languages>
+	<FileHash>{62C4BE2E-29F3-4D69-ED8E-84A08D16FFC6}</FileHash>
+</ProjectInfo>

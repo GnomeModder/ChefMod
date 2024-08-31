@@ -24,12 +24,16 @@ namespace EntityStates.Chef
 
 		//ChefMod.FieldComponent trailComponent;
 
-		private int counter = 0;
+		private float lastUpdateTime;
+        private float oilSpillTimer;
+        private bool isCrit;
 
-		public override void OnEnter()
+        public override void OnEnter()
 		{
 			base.OnEnter();
-
+			isCrit = base.RollCrit();
+			oilSpillTimer = 0f;
+			lastUpdateTime = Time.time;
 			this.duration = baseDuration;
 			childLocator = base.GetModelChildLocator();
 			emissionator = childLocator.FindChild("OilParticles").GetComponent<ParticleSystem>().emission;
@@ -69,6 +73,10 @@ namespace EntityStates.Chef
 		public override void FixedUpdate()
 		{
 			base.FixedUpdate();
+
+			float deltaTime = Time.time - lastUpdateTime;
+			lastUpdateTime = Time.time;
+
 			if (base.fixedAge >= this.duration)
 			{
 				this.outer.SetNextStateToMain();
@@ -90,41 +98,40 @@ namespace EntityStates.Chef
 					base.characterDirection.moveVector = this.idealDirection;
 					if (base.characterMotor && !base.characterMotor.disableAirControlUntilCollision)
 					{
-						base.characterMotor.rootMotion += this.GetIdealVelocity() * Time.fixedDeltaTime;
+						base.characterMotor.rootMotion += this.GetIdealVelocity() * deltaTime;
 					}
 				}
 
-				//this.oilTrail.damagePerSecond = base.characterBody.damage * 1.5f;
+                //this.oilTrail.damagePerSecond = base.characterBody.damage * 1.5f;
 
-				float ratio = GetIdealVelocity().magnitude / characterBody.moveSpeed;
-				int frequency = Mathf.FloorToInt(4f * ratio);
-				if (counter % frequency == 0)
-				{
-					//GameObject obj = Object.Instantiate(ChefMod.chefPlugin.oilPrefab, characterBody.corePosition, Quaternion.identity);
+                if (oilSpillTimer <= 0f)
+                {
+                    float ratio = GetIdealVelocity().magnitude / characterBody.moveSpeed;
+                    int frequency = Mathf.FloorToInt(4f * ratio);
+                    oilSpillTimer = frequency / 60f;
 
-					//Fireee fire = obj.GetComponent<Fireee>();
-					//fire.owner = characterBody.gameObject;
-					//fire.teamIndex = characterBody.teamComponent.teamIndex;
-					//fire.damagePerFrame = characterBody.damage * 0.5f;
+                    FireProjectileInfo info = new FireProjectileInfo()
+                    {
+                        projectilePrefab = OilSlick.projectilePrefab,
+                        position = characterBody.corePosition,
+                        rotation = Quaternion.identity,
+                        owner = base.gameObject,
+                        damage = characterBody.damage * 0.25f,
+                        crit = isCrit
+                    };
 
-					FireProjectileInfo info = new FireProjectileInfo()
-					{
-						projectilePrefab = OilSlick.projectilePrefab,
-						position = characterBody.corePosition,
-						rotation = Quaternion.identity,
-						owner = base.gameObject,
-						damage = characterBody.damage * 0.25f,
-						crit = base.RollCrit()
-					};
+                    ProjectileManager.instance.FireProjectile(info);
+                }
+                else
+                {
+                    oilSpillTimer -= deltaTime;
+                }
 
-					ProjectileManager.instance.FireProjectile(info);
-				}
-				counter++;
 			}
 
 			if (NetworkServer.active)
             {
-				buffOverlapStopwatch += Time.fixedDeltaTime;
+				buffOverlapStopwatch += deltaTime;
 				if (buffOverlapStopwatch >= OilSlick.buffOverlapDuration)
 				{
 					buffOverlapStopwatch -= OilSlick.buffOverlapDuration;
