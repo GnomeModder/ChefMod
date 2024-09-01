@@ -33,23 +33,23 @@ namespace ChefMod.Achievements
 {
     internal class ChefAchievement : ModdedUnlockable
     {
-        public override string AchievementIdentifier { get; } = "CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_ID";
-        public override string UnlockableIdentifier { get; } = "CHEF_CHEFUNLOCKABLE_REWARD_ID";
-        public override string AchievementNameToken { get; } = "CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME";
+        public override string AchievementIdentifier { get; } = "GNOMECHEF_CHEFUNLOCKABLE_ACHIEVEMENT_ID";
+        public override string UnlockableIdentifier { get; } = "GNOMECHEF_CHEFUNLOCKABLE_REWARD_ID";
+        public override string AchievementNameToken { get; } = "GNOMECHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME";
         public override string PrerequisiteUnlockableIdentifier { get; } = "";
-        public override string UnlockableNameToken { get; } = "CHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME";
-        public override string AchievementDescToken { get; } = "CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC";
+        public override string UnlockableNameToken { get; } = "GNOMECHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME";
+        public override string AchievementDescToken { get; } = "GNOMECHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC";
         public override Sprite Sprite { get; } = Assets.chefIconSprite;
 
         public override Func<string> GetHowToUnlock { get; } = (() => Language.GetStringFormatted("UNLOCK_VIA_ACHIEVEMENT_FORMAT", new object[]
                             {
-                                Language.GetString("CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME"),
-                                Language.GetString("CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC")
+                                Language.GetString("GNOMECHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME"),
+                                Language.GetString("GNOMECHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC")
                             }));
         public override Func<string> GetUnlocked { get; } = (() => Language.GetStringFormatted("UNLOCKED_FORMAT", new object[]
                             {
-                                Language.GetString("CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME"),
-                                Language.GetString("CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC")
+                                Language.GetString("GNOMECHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME"),
+                                Language.GetString("GNOMECHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC")
                             }));
 
         public override BodyIndex LookUpRequiredBodyIndex()

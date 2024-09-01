@@ -1,3 +1,7 @@
+`2.3.2`
+
+- Fixed achievement strings.
+
 `2.3.1`
 
 - Fixed itemdisplays (but spams console during setup).
