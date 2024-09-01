@@ -1,3 +1,7 @@
+`2.3.3`
+
+- Actually fixed achievement strings.
+
 `2.3.2`
 
 - Fixed achievement strings.

@@ -209,23 +209,23 @@ namespace ChefMod.Achievements
 
     internal class SliceAchievement : ModdedUnlockable
     {
-        public override string AchievementIdentifier { get; } = "CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_ID";
-        public override string UnlockableIdentifier { get; } = "CHEF_SLICEUNLOCKABLE_REWARD_ID";
-        public override string AchievementNameToken { get; } = "CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME";
-        public override string PrerequisiteUnlockableIdentifier { get; } = "CHEF_CHEFUNLOCKABLE_REWARD_ID";
-        public override string UnlockableNameToken { get; } = "CHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME";
-        public override string AchievementDescToken { get; } = "CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC";
+        public override string AchievementIdentifier { get; } = "GNOMECHEF_SLICEUNLOCKABLE_ACHIEVEMENT_ID";
+        public override string UnlockableIdentifier { get; } = "GNOMECHEF_SLICEUNLOCKABLE_REWARD_ID";
+        public override string AchievementNameToken { get; } = "GNOMECHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME";
+        public override string PrerequisiteUnlockableIdentifier { get; } = "GNOMECHEF_CHEFUNLOCKABLE_REWARD_ID";
+        public override string UnlockableNameToken { get; } = "GNOMECHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME";
+        public override string AchievementDescToken { get; } = "GNOMECHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC";
         public override Sprite Sprite { get; } = Assets.chefSliceIcon;
 
         public override Func<string> GetHowToUnlock { get; } = (() => Language.GetStringFormatted("UNLOCK_VIA_ACHIEVEMENT_FORMAT", new object[]
                             {
-                                Language.GetString("CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME"),
-                                Language.GetString("CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC")
+                                Language.GetString("GNOMECHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME"),
+                                Language.GetString("GNOMECHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC")
                             }));
         public override Func<string> GetUnlocked { get; } = (() => Language.GetStringFormatted("UNLOCKED_FORMAT", new object[]
                             {
-                                Language.GetString("CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME"),
-                                Language.GetString("CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC")
+                                Language.GetString("GNOMECHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME"),
+                                Language.GetString("GNOMECHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC")
                             }));
 
         public override BodyIndex LookUpRequiredBodyIndex()
@@ -247,7 +247,7 @@ namespace ChefMod.Achievements
 
         private void check(On.RoR2.CharacterBody.orig_FixedUpdate orig, CharacterBody self)
         {
-            if (self.baseNameToken == "CHEF_NAME" && cleavercount >= 40)
+            if (self.baseNameToken == "GNOMECHEF_NAME" && cleavercount >= 40)
             {
                 base.Grant();
             }
