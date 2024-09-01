@@ -387,6 +387,7 @@ public class PrefabBuilder
         kMotor.PlanarConstraintAxis = Vector3.up;
         kMotor.StepHandling = StepHandlingMethod.None;
         kMotor.InteractiveRigidbodyHandling = true;
+        kMotor.playerCharacter = true;
 
         //kMotor.Rigidbody = rigidbody;
         //kMotor.DetectDiscreteCollisions = false;

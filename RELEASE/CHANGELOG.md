@@ -1,6 +1,11 @@
+`2.3.5`
+
+- Set CharacterMotor isPlayer flag to true.
+
 `2.3.4`
 
 - Fixed MP.
+- Actually uploaded under the right account.
 
 `2.3.3`
 
