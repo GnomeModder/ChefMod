@@ -1,3 +1,7 @@
+`2.3.4`
+
+- Fixed MP.
+
 `2.3.3`
 
 - Actually fixed achievement strings.
