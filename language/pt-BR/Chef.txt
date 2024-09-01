@@ -3,7 +3,7 @@
 	{
 	"CHEF_NAME" : "CHEF",
 	"CHEF_SUBTITLE" : "O Cozinheiro",
-	"CHEF_DESCRIPTION" : "CHEF é um robô cozinheiro que é capaz de servir porções gernerosas até mesmo para as maiores multidões.<style=cSub>\n\n< ! > Cutelos podem acertar os clientes no retorno.\n\n< ! > Use Untar para circular rapidamente pela cozinha e evitar esbarrar nos clientes.\n\n< ! > Combine Untar com Aquecer para cozinhar em larga escala.\n\n< ! > Sirva diferentes habilidades com Segunda Porção para satisfazer o gosto da sua clientela.</style>",
+	"CHEF_DESCRIPTION" : "CHEF é um robô cozinheiro capaz de servir gernerosas porções até mesmo para as maiores multidões de clientes famintos.<style=cSub>\n\n< ! > Cutelos podem acertar os clientes no retorno.\n\n< ! > Use Cristalizar para circular rapidamente pela cozinha e evitar esbarrar nos clientes.\n\n< ! > Combine Cristalizar com Chamuscar para cozinhar em larga escala.\n\n< ! > Sirva diferentes habilidades com Segunda Prato para satisfazer o gosto da sua clientela.</style>",
 	
 	"KEYWORD_CHEF_BOOST_DICE" : "<style=cKeywordName>Picar</style><style=cSub>Atire 16 cutelos em uma esfera para causar <style=cIsDamage>16x120% de dano</style>.</style>",
 	"KEYWORD_CHEF_BOOST_SEAR" : "<style=cKeywordName>Queimar</style><style=cSub>Queime os clientes para causar <style=cIsDamage>420%</style> de dano em alta temperatura. Clientes untados sofrem o dobro do dano e explodem em chamas, causando <style=cIsDamage>5x240% de dano</style>.</style>",
@@ -11,41 +11,41 @@
 	"KEYWORD_CHEF_BOOST_SLICE" : "<style=cKeywordName>Julienne</style><style=cSub>Golpeie 16 vezes. O número de golpes aumenta com a velocidade de ataque.</style>",
 	
 	"CHEF_PRIMARY_NAME" : "Cortar",
-	"CHEF_PRIMARY_DESCRIPTION" : "<style=cIsUtility>Ágil</style>. Atire um cutelo na direção de seus clientes para causar <style=cIsDamage>150% de dano</style>. Retorna como um bumerangue.",
+	"CHEF_PRIMARY_DESCRIPTION" : "<style=cIsUtility>Ágil</style>. Arremesse um cutelo contra os clientes, causando <style=cIsDamage>150% de dano</style>. Volta como bumerangue.",
 	"CHEF_BOOSTED_PRIMARY_NAME" : "Picar",
-	"CHEF_BOOSTED_PRIMARY_DESCRIPTION" : "<style=cIsUtility>Ágil</style>. Atire 16cutelos em uma esfera para causar <style=cIsDamage>16x150% de dano</style>. Retorna como um bumerangue.",
+	"CHEF_BOOSTED_PRIMARY_DESCRIPTION" : "<style=cIsUtility>Ágil</style>. Arremesse 16 cutelos em uma esfera, causando <style=cIsDamage>16x150% de dano</style>. Volta como bumerangue.",
 	
-	"CHEF_SECONDARY_NAME" : "Aquecer",
-	"CHEF_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Queime</style> os clientes para causar <style=cIsDamage>260% de dano</style> até dourar, <style=cIsDamage>empurrando-os para longe</style>. O dano é <style=cIsDamage>dobrado</style> contra clientes <style=cIsUtility>Untados</style>.",
-	"CHEF_BOOSTED_SECONDARY_NAME" : "Queimar",
-	"CHEF_BOOSTED_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Queime</style> os clientes para causar <style=cIsDamage>420%</style> de dano em alta temperatura. Clientes <style=cIsUtility>Untados</style> sofrem o <style=cIsDamage>dobro</style>do dano e explodem em chamas, causando <style=cIsDamage>5x260% de dano</style>.",
+	"CHEF_SECONDARY_NAME" : "Chamuscar",
+	"CHEF_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Cozinhe</style> os clientes, causando <style=cIsDamage>260% de dano</style> até ficarem dourados e <style=cIsDamage>os afastando</style>. O dano é <style=cIsDamage>dobrado</style> contra clientes <style=cIsUtility>Cristalizados</style>.",
+	"CHEF_BOOSTED_SECONDARY_NAME" : "Flambar",
+	"CHEF_BOOSTED_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Cozinhe</style> os clientes, causando <style=cIsDamage>420%</style> de dano ematé ficarem incinerados e os afastando. Clientes <style=cIsUtility>Cristalizados</style> sofrem o <style=cIsDamage>dobro</style> de dano e explodem em chamas, causando <style=cIsDamage>5x260% de dano</style>.",
 	
-	"CHEF_UTILITY_NAME" : "Untar",
-	"CHEF_UTILITY_DESCRIPTION" : "Deixe um rastro de óleo, <style=cIsUtility>atrasando clientes</style>. Clientes <style=cIsUtility>Untados</style> explodem, causando <style=cIsDamage>78% de dano</style> quando <style=cIsDamage>Queimados</style>.",
+	"CHEF_UTILITY_NAME" : "Cristalizar",
+	"CHEF_UTILITY_DESCRIPTION" : "Ande sobre uma onda de óleo, <style=cIsUtility>desacelerando clientes</style>. Clientes <style=cIsUtility>Cristalizados</style> explodem quando forem quando <style=cIsDamage>Chamuscados</style>, causando <style=cIsDamage>78% de dano</style>.",
 	"CHEF_BOOSTED_UTILITY_NAME" : "Marinar",
-	"CHEF_BOOSTED_UTILITY_DESCRIPTION" : "Deixe um grande rastro de óleo, <style=cIsUtility>atrasando clientes</style>. Clientes <style=cIsUtility>Untados</style> explodem, causando <style=cIsDamage>78% de dano</style> quando <style=cIsDamage>Queimados</style>.",
+	"CHEF_BOOSTED_UTILITY_DESCRIPTION" : "Ande sobre uma longa onda de óleo, <style=cIsUtility>desacelerando clientes</style>. Clientes <style=cIsUtility>Cristalizados</style> explodem quando forem quando <style=cIsDamage>Chamuscados</style>, causando <style=cIsDamage>78% de dano</style>.",
 	
-	"CHEF_SPECIAL_NAME" : "Segunda Porção",
-	"CHEF_SPECIAL_DESCRIPTION" : "Prepare uma grande refeição saudável, <style=cIsUtility>melhorando a próxima habilidade lançada</style>.",
+	"CHEF_SPECIAL_NAME" : "Segundo Prato",
+	"CHEF_SPECIAL_DESCRIPTION" : "Prepare uma refeição incrível, <style=cIsUtility>melhorando a próxima técnica usada</style>.",
 	"CHEF_SPECIAL_SCEPTER_NAME" : "Refeição Completa",
-	"CHEF_SPECIAL_SCEPTER_DESCRIPTION" : "Prepare a refeição perfeita, <style=cIsUtility>melhorando as próximas duas habilidades lançadas</style>.",
+	"CHEF_SPECIAL_SCEPTER_DESCRIPTION" : "Prepare uma refeição incrível, <style=cIsUtility>melhorando as próximas 2 técnicas usadas</style>.",
 	
 	"CHEF_ALTPRIMARY_NAME" : "Fatiar",
-	"CHEF_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Ágil</style>. Golpeie o cliente para causar <style=cIsDamage>120% de dano</style>.",
-	"CHEF_BOOSTED_ALTPRIMARY_NAME" : "Julienne",
-	"CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Ágil</style>. Golpeie o cliente <style=cIsDamage>16 vezes</style>. O número de golpes aumenta com a velocidade de ataque.",
+	"CHEF_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Ágil</style>. Estique seu braço e fatie os clientes, causando <style=cIsDamage>120% de dano</style>.",
+	"CHEF_BOOSTED_ALTPRIMARY_NAME" : "Despedaçar",
+	"CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Ágil</style>. Despedace violentamente os clientes, fatiando <style=cIsDamage>16 vezes</style>. O número de golpes aumenta com a velocidade de ataque.",
 	
 	"CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME" : "Mise en Place",
 	"CHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME" : "Mise en Place",
-	"CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC" : "Pegue doze ingredientes.",
+	"CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC" : "Colete 12 ingredientes.",
 	
 	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME" : "CHEF: Conjunto Completo",
 	"CHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME" : "CHEF: Conjunto Completo",
 	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC" : "Tenha 40 cutelos no ar de uma vez.",
 	
-	"CHEF_OUTRO_FLAVOR" : ".e assim ele se foi, com novos ingredientes em mãos.",
-	"CHEF_OUTRO_FAILURE" : "..e assim desapareceu, esquecendo totalmente de seu propósito.",
-	"CHEF_LORE" : "DIRETRIZ: ENCONTRAR NOVAS RECEITAS PARA UMA NUTRIÇÃO IDEAL\n\nPEDIDO: O CHEFE DA COZINHA SOLICITOU UMA REFEIÇÃO DE CELEBRAÇÃO PARA A EQUIPE APÓS A MISSÃO\n\n A REFEIÇÃO DE CELEBRAÇÃO DEVE SER FEITA NA MAIS ALTA QUALIDADE POSSÍVEL\n\nA COZINHA FORNECIDA SERÁ SUFICIENTE\n\nOS IGREDIENTES FORNECIDOS NÃO SERÃO SUFICIENTES\n\nO TEMPO PARA O PRÓXIMO ESTOQUE NÃO SERÁ SUFICIENTE\n\nDEVE HAVER FLORA E FAUNA NO LOCAL PARA SERVIR DE INGREDIENTES\n\nPROCESSO:\n\n• PATRULHAR A FLORA E FAUNA LOCAL\n\n• TESTE O CONTEÚDO NUTRICIONAL E A SEGURANÇA DOS INGREDIENTESS\n\n• CRIE UM PLANO PARA UMA REFEIÇÃO VIÁVEL\n\n• COLETE INGREDIENTES APLICÁVEIS\n\n• COZINHE A REFEIÇÃO DE CELEBRAÇÃO\n\n• INSPEÇÕES SÓ PODERÃO OCORRER NA PRESENÇA DIRETA DE UMA UNIDADE CHEF\n\n• APENAS OS INGREDIENTES MAIS FRESCOS SERÃO SUFICIENTES"
+	"CHEF_OUTRO_FLAVOR" : "... e assim ele se foi, com novos ingredientes em mãos.",
+	"CHEF_OUTRO_FAILURE" : "... e assim ele desapareceu, esquecendo completamente do seu propósito original.",
+	"CHEF_LORE" : "DIRETRIZ: ENCONTRAR NOVAS RECEITAS PARA UMA NUTRIÇÃO IDEAL\n\nPEDIDO: O CHEFE DA COZINHA SOLICITOU UMA REFEIÇÃO DE CELEBRAÇÃO PARA A EQUIPE APÓS A MISSÃO\n\n A REFEIÇÃO DE CELEBRAÇÃO DEVE SER FEITA NA MAIS ALTA QUALIDADE POSSÍVEL\n\nA COZINHA FORNECIDA SERÁ SUFICIENTE\n\nOS IGREDIENTES FORNECIDOS NÃO SERÃO SUFICIENTES\n\nO TEMPO PARA O PRÓXIMO ESTOQUE NÃO SERÁ SUFICIENTE\n\nDEVE HAVER FLORA E FAUNA NO LOCAL PARA SERVIR DE INGREDIENTES\n\nPROCESSO:\n\n• PATRULHAR A FLORA E FAUNA LOCAL\n\n• TESTE O CONTEÚDO NUTRICIONAL E A SEGURANÇA DOS INGREDIENTESS\n\n• CRIE UM PLANO PARA UMA REFEIÇÃO VIÁVEL\n\n• COLETE INGREDIENTES APLICÁVEIS\n\n• COZINHE A REFEIÇÃO DE CELEBRAÇÃO\n\n• INSPEÇÕES SÓ PODERÃO OCORRER NA PRESENÇA DIRETA DE UMA UNIDADE CHEF\n\n• APENAS OS INGREDIENTES MAIS FRESCOS BASTARÃO"
 	
 	}
 }
