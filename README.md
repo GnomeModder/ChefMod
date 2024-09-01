@@ -50,3 +50,7 @@ Ukrainian - Damglador
 Spanish - Juhnter
 
 Japanese - punch
+
+Portuguese - Kauzok
+
+French - StyleMyk

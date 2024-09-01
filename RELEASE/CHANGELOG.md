@@ -1,3 +1,8 @@
+`2.3.6`
+
+- Added FR TL (Thanks StyleMyk!)
+- Added PT-BR TL (Thanks Kauzok!)
+
 `2.3.5`
 
 - Set CharacterMotor isPlayer flag to true.
