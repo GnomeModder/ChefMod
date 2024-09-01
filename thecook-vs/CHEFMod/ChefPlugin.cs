@@ -4,6 +4,7 @@ using ChefMod.Components;
 using ChefMod.Hooks;
 using EntityStates;
 using EntityStates.Chef;
+using HG;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using R2API;
@@ -37,7 +38,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "2.3.0")]
+        "2.3.1")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.ThinkInvisible.ClassicItems", BepInDependency.DependencyFlags.SoftDependency)]
@@ -196,10 +197,15 @@ namespace ChefMod
             On.RoR2.Run.HandlePlayerFirstEntryAnimation += Run_HandlePlayerFirstEntryAnimation;
 
             RoR2.RoR2Application.onLoad += LateSetup;
+            RoR2.ContentManagement.ContentManager.onContentPacksAssigned += SetItemDisplays;
+        }
+
+        private void SetItemDisplays(ReadOnlyArray<ReadOnlyContentPack> array)
+        {
+            ItemDisplays.RegisterItemDisplays(chefPrefab);
         }
 
         private void LateSetup() {
-            ItemDisplays.RegisterItemDisplays(chefPrefab);
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("pseudopulse.Survariants"))
             {
                 SurvariantsCompatInternal();

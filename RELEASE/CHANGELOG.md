@@ -1,3 +1,7 @@
+`2.3.1`
+
+- Fixed itemdisplays (but spams console during setup).
+
 `2.3.0`
 
 - Fixed for DLC2.

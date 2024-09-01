@@ -54,13 +54,13 @@ namespace ChefMod
         }
 
         public static void RegisterItemDisplays(GameObject bodyPrefab) {
-            //Someone else fix this
-            return;
             GameObject model = bodyPrefab.GetComponentInChildren<ModelLocator>().modelTransform.gameObject;
             CharacterModel characterModel = model.GetComponent<CharacterModel>();
 
             ItemDisplayRuleSet itemDisplayRuleSet = ScriptableObject.CreateInstance<ItemDisplayRuleSet>();
             itemDisplays = new List<ItemDisplayRuleSet.KeyAssetRuleGroup>();
+            itemDisplayRuleSet.name = "idrsGnomeChefBody";
+            (itemDisplayRuleSet as ScriptableObject).name = "idrsGnomeChefBody";
 
             //add item displays here
             #region DisplayRules
