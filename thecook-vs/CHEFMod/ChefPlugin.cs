@@ -38,7 +38,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "2.3.5")]
+        "2.3.8")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.ThinkInvisible.ClassicItems", BepInDependency.DependencyFlags.SoftDependency)]
@@ -229,7 +229,7 @@ namespace ChefMod
             variant.VariantSurvivor = variantSurvivor;
             variant.TargetSurvivor = mainSurvivor;
             variant.RequiredUnlock = variantSurvivor.unlockableDef;
-            variant.Description = "";
+            variant.Description = "Gnome.";
 
             variantSurvivor.hidden = true;
             SurvivorVariantCatalog.AddSurvivorVariant(variant);

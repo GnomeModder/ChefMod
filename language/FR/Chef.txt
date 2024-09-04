@@ -1,51 +1,51 @@
 {
 	"strings":
 	{
-	"CHEF_NAME" : "CHEF",
-	"CHEF_SUBTITLE" : "Le Cuisinier",
-	"CHEF_DESCRIPTION" : "CHEF est un robot cuisinier capable de servir des portions généreuses même aux foules les plus nombreuses.<style=cSub>\n\n< ! > Les couperets peuvent toucher les clients lorsqu'ils reviennent.\n\n< ! > Utilisez le Glacis pour vous déplacer rapidement dans la cuisine et éviter de heurter les clients.\n\n< ! > Combinez le Glacis et le Saisissage pour cuisiner efficacement de grandes quantités.\n\n< ! > Servez différentes compétences avec l'Aide Supplémentaire pour satisfaire les goûts de vos clients.</style>",
+	"GNOMECHEF_NAME" : "CHEF",
+	"GNOMECHEF_SUBTITLE" : "Le Cuisinier",
+	"GNOMECHEF_DESCRIPTION" : "CHEF est un robot cuisinier capable de servir des portions généreuses même aux foules les plus nombreuses.<style=cSub>\n\n< ! > Les couperets peuvent toucher les clients lorsqu'ils reviennent.\n\n< ! > Utilisez le Glacis pour vous déplacer rapidement dans la cuisine et éviter de heurter les clients.\n\n< ! > Combinez le Glacis et le Saisissage pour cuisiner efficacement de grandes quantités.\n\n< ! > Servez différentes compétences avec l'Aide Supplémentaire pour satisfaire les goûts de vos clients.</style>",
 	
-	"KEYWORD_CHEF_BOOST_DICE" : "<style=cKeywordName>Émincer</style><style=cSub>Lancez 16 couperets en une sphère pour <style=cIsDamage>16x120% de dégâts</style>.</style>",
-	"KEYWORD_CHEF_BOOST_SEAR" : "<style=cKeywordName>Enflammer</style><style=cSub>Enflammez les clients pour <style=cIsDamage>420%</style> en mode élevé. Les clients huilés subissent des dégâts doubles et s'embrasent pour <style=cIsDamage>5x240%</style>.",
-	"KEYWORD_CHEF_BOOST_GLAZE" : "<style=cKeywordName>Mariner</style><style=cSub>Laissez une traînée d'huile plus longue.</style>",
-	"KEYWORD_CHEF_BOOST_SLICE" : "<style=cKeywordName>Julienne</style><style=cSub>Piquer 16 fois. Le nombre de coups augmente avec la vitesse d'attaque.</style>",
+	"KEYWORD_GNOMECHEF_BOOST_DICE" : "<style=cKeywordName>Émincer</style><style=cSub>Lancez 16 couperets en une sphère pour <style=cIsDamage>16x120% de dégâts</style>.</style>",
+	"KEYWORD_GNOMECHEF_BOOST_SEAR" : "<style=cKeywordName>Enflammer</style><style=cSub>Enflammez les clients pour <style=cIsDamage>420%</style> en mode élevé. Les clients huilés subissent des dégâts doubles et s'embrasent pour <style=cIsDamage>5x240%</style>.",
+	"KEYWORD_GNOMECHEF_BOOST_GLAZE" : "<style=cKeywordName>Mariner</style><style=cSub>Laissez une traînée d'huile plus longue.</style>",
+	"KEYWORD_GNOMECHEF_BOOST_SLICE" : "<style=cKeywordName>Julienne</style><style=cSub>Piquer 16 fois. Le nombre de coups augmente avec la vitesse d'attaque.</style>",
 	
-	"CHEF_PRIMARY_NAME" : "Découper",
-	"CHEF_PRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Lancez un couperet vers les clients pour <style=cIsDamage>150% de dégâts</style>. Reviens comme un boomerang.",
-	"CHEF_BOOSTED_PRIMARY_NAME" : "Émincer",
-	"CHEF_BOOSTED_PRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Lancez 16 couperets en une sphère pour <style=cIsDamage>16x150% de dégâts</style>. Reviennent comme des boomerangs.",
+	"GNOMECHEF_PRIMARY_NAME" : "Découper",
+	"GNOMECHEF_PRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Lancez un couperet vers les clients pour <style=cIsDamage>150% de dégâts</style>. Reviens comme un boomerang.",
+	"GNOMECHEF_BOOSTED_PRIMARY_NAME" : "Émincer",
+	"GNOMECHEF_BOOSTED_PRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Lancez 16 couperets en une sphère pour <style=cIsDamage>16x150% de dégâts</style>. Reviennent comme des boomerangs.",
 	
-	"CHEF_SECONDARY_NAME" : "Griller",
-	"CHEF_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Grillez</style> les clients pour <style=cIsDamage>260% de dégâts</style> jusqu'à ce qu'ils soient dorés, <style=cIsDamage>les repoussant</style>. Les dégâts sont <style=cIsDamage>doublés</style> contre les clients <style=cIsUtility>huilés</style>.",
-	"CHEF_BOOSTED_SECONDARY_NAME" : "Enflammer",
-	"CHEF_BOOSTED_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Enflammez</style> les clients pour <style=cIsDamage>420%</style> en mode élevé. Les clients <style=cIsUtility>huilés</style> subissent des dégâts <style=cIsDamage>doublés</style> et s'embrasent pour <style=cIsDamage>5x260%</style>.",
+	"GNOMECHEF_SECONDARY_NAME" : "Griller",
+	"GNOMECHEF_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Grillez</style> les clients pour <style=cIsDamage>260% de dégâts</style> jusqu'à ce qu'ils soient dorés, <style=cIsDamage>les repoussant</style>. Les dégâts sont <style=cIsDamage>doublés</style> contre les clients <style=cIsUtility>huilés</style>.",
+	"GNOMECHEF_BOOSTED_SECONDARY_NAME" : "Enflammer",
+	"GNOMECHEF_BOOSTED_SECONDARY_DESCRIPTION" : "<style=cIsDamage>Enflammez</style> les clients pour <style=cIsDamage>420%</style> en mode élevé. Les clients <style=cIsUtility>huilés</style> subissent des dégâts <style=cIsDamage>doublés</style> et s'embrasent pour <style=cIsDamage>5x260%</style>.",
 	
-	"CHEF_UTILITY_NAME" : "Huiler",
-	"CHEF_UTILITY_DESCRIPTION" : "Laissez une traînée d'huile, <style=cIsUtility>ralentissant les clients</style>. Les clients <style=cIsUtility>huilés</style> explosent pour <style=cIsDamage>78%</style> de dégâts lorsqu'ils sont <style=cIsDamage>grillés</style>.",
-	"CHEF_BOOSTED_UTILITY_NAME" : "Mariner",
-	"CHEF_BOOSTED_UTILITY_DESCRIPTION" : "Laissez une longue traînée d'huile, <style=cIsUtility>ralentissant les clients</style>. Les clients <style=cIsUtility>huilés</style> explosent pour <style=cIsDamage>78%</style> de dégâts lorsqu'ils sont <style=cIsDamage>grillés</style>.",
+	"GNOMECHEF_UTILITY_NAME" : "Huiler",
+	"GNOMECHEF_UTILITY_DESCRIPTION" : "Laissez une traînée d'huile, <style=cIsUtility>ralentissant les clients</style>. Les clients <style=cIsUtility>huilés</style> explosent pour <style=cIsDamage>78%</style> de dégâts lorsqu'ils sont <style=cIsDamage>grillés</style>.",
+	"GNOMECHEF_BOOSTED_UTILITY_NAME" : "Mariner",
+	"GNOMECHEF_BOOSTED_UTILITY_DESCRIPTION" : "Laissez une longue traînée d'huile, <style=cIsUtility>ralentissant les clients</style>. Les clients <style=cIsUtility>huilés</style> explosent pour <style=cIsDamage>78%</style> de dégâts lorsqu'ils sont <style=cIsDamage>grillés</style>.",
 	
-	"CHEF_SPECIAL_NAME" : "Deuxième Service",
-	"CHEF_SPECIAL_DESCRIPTION" : "Préparez un grand repas sain, <style=cIsUtility>augmentant le prochain lancer de compétence</style>.",
-	"CHEF_SPECIAL_SCEPTER_NAME" : "Repas Complet",
-	"CHEF_SPECIAL_SCEPTER_DESCRIPTION" : "Préparez un repas de chef, <style=cIsUtility>augmentant les 2 prochains lancers de compétence</style>.",
+	"GNOMECHEF_SPECIAL_NAME" : "Deuxième Service",
+	"GNOMECHEF_SPECIAL_DESCRIPTION" : "Préparez un grand repas sain, <style=cIsUtility>augmentant le prochain lancer de compétence</style>.",
+	"GNOMECHEF_SPECIAL_SCEPTER_NAME" : "Repas Complet",
+	"GNOMECHEF_SPECIAL_SCEPTER_DESCRIPTION" : "Préparez un repas de chef, <style=cIsUtility>augmentant les 2 prochains lancers de compétence</style>.",
 	
-	"CHEF_ALTPRIMARY_NAME" : "Trancher",
-	"CHEF_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Poignardez un client pour <style=cIsDamage>120% de dégâts</style>.",
-	"CHEF_BOOSTED_ALTPRIMARY_NAME" : "Julienne",
-	"CHEF_BOOSTED_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Poignardez un client <style=cIsDamage>16 fois</style>. Le nombre de coups augmente avec la vitesse d'attaque.",
+	"GNOMECHEF_ALTPRIMARY_NAME" : "Trancher",
+	"GNOMECHEF_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Poignardez un client pour <style=cIsDamage>120% de dégâts</style>.",
+	"GNOMECHEF_BOOSTED_ALTPRIMARY_NAME" : "Julienne",
+	"GNOMECHEF_BOOSTED_ALTPRIMARY_DESCRIPTION" : "<style=cIsUtility>Agile</style>. Poignardez un client <style=cIsDamage>16 fois</style>. Le nombre de coups augmente avec la vitesse d'attaque.",
 	
-	"CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME" : "Mise en Place",
-	"CHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME" : "Mise en Place",
-	"CHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC" : "Rassemblez une douzaine d'ingrédients.",
+	"GNOMECHEF_CHEFUNLOCKABLE_ACHIEVEMENT_NAME" : "Mise en Place",
+	"GNOMECHEF_CHEFUNLOCKABLE_UNLOCKABLE_NAME" : "Mise en Place",
+	"GNOMECHEF_CHEFUNLOCKABLE_ACHIEVEMENT_DESC" : "Rassemblez une douzaine d'ingrédients.",
 	
-	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME" : "CHEF : Ensemble Complet",
-	"CHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME" : "CHEF : Ensemble Complet",
-	"CHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC" : "Ayez 40 couperets en l'air en même temps.",
+	"GNOMECHEF_SLICEUNLOCKABLE_ACHIEVEMENT_NAME" : "CHEF : Ensemble Complet",
+	"GNOMECHEF_SLICEUNLOCKABLE_UNLOCKABLE_NAME" : "CHEF : Ensemble Complet",
+	"GNOMECHEF_SLICEUNLOCKABLE_ACHIEVEMENT_DESC" : "Ayez 40 couperets en l'air en même temps.",
 	
-	"CHEF_OUTRO_FLAVOR" : "...et ainsi, il partit, de nouveaux ingrédients en main.",
-	"CHEF_OUTRO_FAILURE" : "...et ainsi, il disparut, oubliant complètement son objectif initial.",
-	"CHEF_LORE" : "DIRECTIVE : TROUVER DE NOUVELLES RECETTES POUR UNE NUTRITION OPTIMALE\n\nORDRE : LE CHEF DE CUISINE A DEMANDÉ UN REPAS DE CÉLÉBRATION POUR L'ÉQUIPAGE APRÈS LA MISSION\n\nLES REPAS DE CÉLÉBRATION DEVRAIENT ÊTRE PRÉPARÉS DE LA PLUS HAUTE QUALITÉ POSSIBLE\n\nLA CUISINE FOURNIE SERA SUFFISANTE\n\nLES INGRÉDIENTS FOURNIS NE SERONT PAS SUFFISANTS\n\nLE DÉLAI JUSQU'AU PROCHAIN RÉAPPROVISIONNEMENT NE SERA PAS SUFFISANT\n\nIL PEUT Y AVOIR DE LA FLORE ET DE LA FAUNE SUR PLACE À UTILISER COMME INGRÉDIENTS\n\nPROCESSUS :\n\n• EXPLORER LA FLORE ET LA FAUNE LOCALES\n\n• TESTER LA VALEUR NUTRITIONNELLE ET LA SÉCURITÉ DES INGRÉDIENTS\n\n• CRÉER UN PLAN DE REPAS VIABLE\n\n• COLLECTER LES INGRÉDIENTS APPLICABLES\n\n• CUISINER LE REPAS DE CÉLÉBRATION\n\n• LES INSPECTIONS DOIVENT ÊTRE EFFECTUÉES DIRECTEMENT AVEC UNE UNITÉ DE CHEF POUR L'EXACTITUDE\n\n• SEULS LES INGRÉDIENTS LES PLUS FRAIS SERONT SUFFISANTS"
+	"GNOMECHEF_OUTRO_FLAVOR" : "...et ainsi, il partit, de nouveaux ingrédients en main.",
+	"GNOMECHEF_OUTRO_FAILURE" : "...et ainsi, il disparut, oubliant complètement son objectif initial.",
+	"GNOMECHEF_LORE" : "DIRECTIVE : TROUVER DE NOUVELLES RECETTES POUR UNE NUTRITION OPTIMALE\n\nORDRE : LE CHEF DE CUISINE A DEMANDÉ UN REPAS DE CÉLÉBRATION POUR L'ÉQUIPAGE APRÈS LA MISSION\n\nLES REPAS DE CÉLÉBRATION DEVRAIENT ÊTRE PRÉPARÉS DE LA PLUS HAUTE QUALITÉ POSSIBLE\n\nLA CUISINE FOURNIE SERA SUFFISANTE\n\nLES INGRÉDIENTS FOURNIS NE SERONT PAS SUFFISANTS\n\nLE DÉLAI JUSQU'AU PROCHAIN RÉAPPROVISIONNEMENT NE SERA PAS SUFFISANT\n\nIL PEUT Y AVOIR DE LA FLORE ET DE LA FAUNE SUR PLACE À UTILISER COMME INGRÉDIENTS\n\nPROCESSUS :\n\n• EXPLORER LA FLORE ET LA FAUNE LOCALES\n\n• TESTER LA VALEUR NUTRITIONNELLE ET LA SÉCURITÉ DES INGRÉDIENTS\n\n• CRÉER UN PLAN DE REPAS VIABLE\n\n• COLLECTER LES INGRÉDIENTS APPLICABLES\n\n• CUISINER LE REPAS DE CÉLÉBRATION\n\n• LES INSPECTIONS DOIVENT ÊTRE EFFECTUÉES DIRECTEMENT AVEC UNE UNITÉ DE CHEF POUR L'EXACTITUDE\n\n• SEULS LES INGRÉDIENTS LES PLUS FRAIS SERONT SUFFISANTS"
 	
 	}
 }

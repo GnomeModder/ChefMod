@@ -1,3 +1,11 @@
+`2.3.8`
+
+- Fixed Survariants compat.
+
+`2.3.7`
+
+- Fixed FR/PT-BR tl.
+
 `2.3.6`
 
 - Added FR TL (Thanks StyleMyk!)
