@@ -76,6 +76,7 @@ namespace ChefMod {
                     procCoefficient = 1f,
                     radius = 30f
                 };
+                blastAttack.damageType.damageSource = DamageSource.Secondary;
                 blastAttack.Fire();
 
                 EffectData effectData = new EffectData { origin = transform.position, scale = 10f };

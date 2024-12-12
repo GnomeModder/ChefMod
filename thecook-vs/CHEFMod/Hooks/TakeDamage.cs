@@ -4,11 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using R2API;
+using BepInEx.Configuration;
 
 namespace ChefMod.Hooks
 {
     public static class TakeDamage
     {
+        public static ConfigEntry<bool> searScaleKnockback;
         public static void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
             bool hasGoo = false;
@@ -30,18 +32,34 @@ namespace ChefMod.Hooks
                     }
 
                     //Scale force to match mass
-                    Rigidbody rb = self.body.rigidbody;
-                    if (rb)
+                    if (searScaleKnockback.Value)
                     {
-                        if (rb.mass > 100f)
+                        float mass = 100f;
+                        bool isGrounded = false;
+                        Vector3 newForce = damageInfo.force;
+                        CharacterBody body = self.body;
+                        if (body.characterMotor)
                         {
-                            //damageInfo.force *= isBoostSear ? rb.mass / 100f: Mathf.Min(rb.mass / 100f, 10f);
-                            damageInfo.force *= rb.mass / 100f;
+                            mass = body.characterMotor.mass;
+                            isGrounded = body.characterMotor.isGrounded;
+                            /*if (body.characterMotor.isGrounded)
+                            {
+                                newForce.y = Mathf.Max(newForce.y, 1200f);
+                            }*/
                         }
-                        else
+                        else if (body.rigidbody)
                         {
-                            damageInfo.force *=  100f/rb.mass;
+                            mass = body.rigidbody.mass;
                         }
+
+                        float forceMult = Mathf.Max(mass / 100f, 1f);
+                        if (body.isChampion && isGrounded)
+                        {
+                            forceMult *= 0.7f;
+                        }
+                        newForce *= forceMult;
+
+                        damageInfo.force = newForce;
                     }
                 }
             }

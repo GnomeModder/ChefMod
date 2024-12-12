@@ -1,3 +1,12 @@
+`2.3.9`
+
+- Recompiled for latest update.
+- Disabled Variants support by default due to DLC locking. (Existing config unchanged)
+- Sear
+	- Sear self-knockback can now be toggled in-game. (Client-Side)
+	- Now has the same boss knockback scaling as Enforcer and other modded characters.
+	- Added config option for Sear knockback scaling.
+
 `2.3.8`
 
 - Fixed Survariants compat.

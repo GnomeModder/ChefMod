@@ -42,7 +42,7 @@ namespace ChefMod
                     }
                 }
 
-                new BlastAttack
+                var ba = new BlastAttack
                 {
                     radius = radius,
                     procCoefficient = 0.4f,
@@ -55,7 +55,9 @@ namespace ChefMod
                     teamIndex = attackerBody.teamComponent.teamIndex,
                     damageType = DamageType.Stun1s | DamageType.IgniteOnHit,
                     attackerFiltering = AttackerFiltering.NeverHitSelf
-                }.Fire();
+                };
+                ba.damageType.damageSource = DamageSource.Utility;
+                ba.Fire();
 
                 EffectManager.SpawnEffect(explosionEffectPrefab, new EffectData
                 {

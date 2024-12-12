@@ -1,4 +1,5 @@
-﻿using ChefMod;
+﻿using BepInEx.Configuration;
+using ChefMod;
 using R2API;
 using RoR2;
 using System;
@@ -141,10 +142,11 @@ namespace EntityStates.Chef
                     hitMask = LayerIndex.CommonMasks.bullet,
                     queryTriggerInteraction = QueryTriggerInteraction.UseGlobal,
                 };
+                ba.damageType.damageSource = DamageSource.Secondary;
                 ModifyBullet(ba);
                 ba.Fire();
 
-                if (base.characterBody && base.characterMotor)
+                if (useSelfKnockback.Value && base.characterBody && base.characterMotor)
                 {
                     base.characterBody.characterMotor.ApplyForce(-2000f * aimRay.direction, true, false);
                 }
@@ -195,6 +197,8 @@ namespace EntityStates.Chef
         public static float baseDuration = 0.5f;
         public static float recoilAmplitude = 1f;
         private float duration;
+
+        public static ConfigEntry<bool> useSelfKnockback;
 
         public static float procCoefficient = 1f;
 

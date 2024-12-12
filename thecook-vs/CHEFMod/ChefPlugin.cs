@@ -38,7 +38,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "2.3.8")]
+        "2.3.9")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.ThinkInvisible.ClassicItems", BepInDependency.DependencyFlags.SoftDependency)]
@@ -83,6 +83,8 @@ namespace ChefMod
         public static ConfigEntry<bool> oldChefInvader;
         public static ConfigEntry<bool> unlockDisablesInvasion;
 
+        public static ConfigEntry<bool> scaleSearKnockback;
+
         public static ModdedDamageType chefSear;
         public static ModdedDamageType chefFireballOnHit;
 
@@ -107,8 +109,11 @@ namespace ChefMod
             altPodPrefab = Config.Bind<bool>("01 - General Settings", "Alt Spawn Pod", true, "Makes the pod prefab more appetizing");
             oldChefInvader = base.Config.Bind<bool>("02 - Invasion Settings", "Old Chef Invader", false, "Use the old overpowered CHEF invasion bossfight.");
 
-            useVariant = Config.Bind<bool>("Survariants Compat", "Enable Variants", true, "Use variants if plugin is installed.");
+            useVariant = Config.Bind<bool>("Survariants Compat", "Enable Variants", false, "Use variants if plugin is installed.");
             swapVariant = Config.Bind<bool>("Survariants Compat", "Swap Variants", false, "Swaps variant order.");
+
+            FireSear.useSelfKnockback = Config.Bind<bool>("03 - Skills", "Sear - Self Knockback", true, "Sear applies self-knockback.");
+            TakeDamage.searScaleKnockback = Config.Bind<bool>("03 - Skills", "Sear - Enemy Knockback Scaling", true, "Sear enemy knockback scales to mass.");
 
             if (riskOfOptionsLoaded) RiskOfOptionsCompat();
         }
@@ -116,7 +121,9 @@ namespace ChefMod
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private void RiskOfOptionsCompat()
         {
+            RiskOfOptions.ModSettingsManager.SetModIcon(Assets.chefAssetBundle.LoadAsset<Sprite>("modIcon"));
             RiskOfOptions.ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(enableCleaverTrails));
+            RiskOfOptions.ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(FireSear.useSelfKnockback));
         }
 
         public void registerPodPrefabs()

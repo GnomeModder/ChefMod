@@ -45,6 +45,7 @@ namespace ChefMod
                     procCoefficient = 1f,
                     radius = 1f
                 };
+                blastAttack.damageType.damageSource = DamageSource.Secondary;
                 blastAttack.Fire();
 
                 //RaycastHit[] array = Physics.SphereCastAll(characterBody.corePosition, 2f * radius, Vector3.up, 5f, RoR2.LayerIndex.entityPrecise.mask, QueryTriggerInteraction.UseGlobal);

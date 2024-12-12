@@ -37,6 +37,7 @@ namespace ChefMod
                 inflictor = this.gameObject,
                 procCoefficient = 1f
             };
+            damageInfo.damageType.damageSource = DamageSource.Secondary;
             teamIndex = controller.teamFilter.teamIndex;
         }
 

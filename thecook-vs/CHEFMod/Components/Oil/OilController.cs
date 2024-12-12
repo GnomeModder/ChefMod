@@ -174,6 +174,7 @@ namespace ChefMod.Components
                                                 procCoefficient = procCoefficient,
                                                 procChainMask = default(ProcChainMask)
                                             };
+                                            di.damageType.damageSource = DamageSource.Utility;
                                             di.AddModdedDamageType(ChefMod.ChefPlugin.chefSear);
                                             if (boosted)
                                             {

@@ -22,6 +22,9 @@ namespace ChefMod
             }
 
             GameObject cleaverPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/Sawmerang").InstantiateClone("CHEFCleaver", true);
+            ProjectileDamage pd = cleaverPrefab.GetComponent<ProjectileDamage>();
+            pd.damageType.damageSource = DamageSource.Primary;
+
             GameObject cleaverImpactEffect = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/OmniEffect/omniimpactvfx").InstantiateClone("ChefCleaverImpactEffect", false);
             cleaverImpactEffect.GetComponent<EffectComponent>().soundName = "Play_ChefMod_Cleaver_Hit";
             ChefContent.effectDefs.Add(new EffectDef(cleaverImpactEffect));
@@ -84,6 +87,8 @@ namespace ChefMod
             }
 
             GameObject knifePrefab = Cleaver.projectilePrefab.InstantiateClone("CHEFKnife", true);
+            ProjectileDamage pd = knifePrefab.GetComponent<ProjectileDamage>();
+            pd.damageType.damageSource = DamageSource.Primary;
             //knifePrefab.AddComponent<ProjectileTargetComponent>();
             var kum = knifePrefab.GetComponent<CoomerangProjectile>();
             kum.isKnife = true;
