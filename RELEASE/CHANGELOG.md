@@ -1,3 +1,7 @@
+`2.3.10`
+- fixed wrong damageapi implementation
+- fixed sawmerang item display
+
 `2.3.9`
 
 - Recompiled for latest update.

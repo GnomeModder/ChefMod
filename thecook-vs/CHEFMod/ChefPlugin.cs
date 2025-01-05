@@ -38,7 +38,7 @@ namespace ChefMod
     [BepInPlugin(
         "com.Gnome.ChefMod",
         "ChefMod",
-        "2.3.9")]
+        "2.3.10")]
     [BepInDependency("com.DestroyedClone.AncientScepter", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.ThinkInvisible.ClassicItems", BepInDependency.DependencyFlags.SoftDependency)]
@@ -169,6 +169,10 @@ namespace ChefMod
 
             gameObject.AddComponent<TestValueManager>();
 
+
+            chefSear = ReserveDamageType();
+            chefFireballOnHit = ReserveDamageType();
+
             ReadConfig();
             AddHooks();
             Unlockables.RegisterUnlockables();
@@ -180,9 +184,6 @@ namespace ChefMod
             registerBuff();
             LanguageTokens.RegisterLanguageTokens();
             BuildEffects();
-
-            chefSear = ReserveDamageType();
-            chefFireballOnHit = ReserveDamageType();
 
             ContentManager.collectContentPackProviders += ContentManager_collectContentPackProviders;
         }
@@ -899,9 +900,11 @@ namespace ChefMod
             OilExplosion.boostedSearProjectilePrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Projectiles/MagmaOrbProjectile").InstantiateClone("BoostedSearProjectile", true);
             ProjectileDamage bspd = OilExplosion.boostedSearProjectilePrefab.GetComponent<ProjectileDamage>();
             bspd.damageType = DamageType.Stun1s | DamageType.IgniteOnHit;
-            ModdedDamageTypeHolderComponent mdthc = OilExplosion.boostedSearProjectilePrefab.AddComponent<ModdedDamageTypeHolderComponent>();
-            mdthc.Add(chefSear);
-            mdthc.Add(chefFireballOnHit);
+            DamageAPI.AddModdedDamageType(ref bspd.damageType, chefSear);
+            DamageAPI.AddModdedDamageType(ref bspd.damageType, chefFireballOnHit);
+            //ModdedDamageTypeHolderComponent mdthc = OilExplosion.boostedSearProjectilePrefab.AddComponent<ModdedDamageTypeHolderComponent>();
+            //mdthc.Add(chefSear);
+            //mdthc.Add(chefFireballOnHit);
             ProjectileImpactExplosion bspie = OilExplosion.boostedSearProjectilePrefab.GetComponent<ProjectileImpactExplosion>();
             bspie.blastProcCoefficient = 0.4f;
 
@@ -923,7 +926,7 @@ namespace ChefMod
         private void BuildBoostedSearEffect() {
 
             GameObject ExplosionVFX = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("prefabs/effects/omnieffect/OmniExplosionVFX"), "ChefBlueOmniExplosionVFX", false);
-
+            
 
             ParticleSystemRenderer particleRenderer = ExplosionVFX.transform.Find("Unscaled Flames").GetComponent<ParticleSystemRenderer>();
             Material mat = new Material(particleRenderer.material);

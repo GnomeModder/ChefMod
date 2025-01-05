@@ -2428,12 +2428,13 @@ namespace ChefMod
                         new ItemDisplayRule
                         {
                             ruleType = ItemDisplayRuleType.ParentedPrefab,
-                            followerPrefab = ItemDisplays.LoadDisplay("DisplaySawmerang"),
+                            followerPrefab = ItemDisplays.LoadDisplay("DisplaySawmerangFollower"),
                             limbMask = LimbFlags.None,
                             childName = "Body",
-                            localPos = new Vector3(-0.0185F, 0.0359F, 0F),
-                            localAngles = new Vector3(0F, 90F, 0F),
-                            localScale = new Vector3(0.2F, 0.2F, 0.2F)
+                            localPos = new Vector3(-0.04306F, 0.0203F, -0.0065F),
+                            localAngles = new Vector3(272.2383F, 90.00008F, -0.00009F),
+                            localScale = new Vector3(0.00604F, 0.00604F, 0.00604F)
+
                         }
                     }
                 }
